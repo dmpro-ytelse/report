@@ -17,6 +17,8 @@ Yes, this should take a few GB of space.
 
 Follow this guide: <http://www.tug.org/texlive/windows.html>.
 
+Alternatively you could download and install MiKTeX: <http://miktex.org/download> 
+
 ### Mac
 
 TBA.
