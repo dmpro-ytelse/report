@@ -5,6 +5,14 @@ Don't worry, LaTeX is a lot less scary than it sounds :)
 Using LaTeX means that the actual content of the report is written in .tex-files, and they are compiled to a final pdf file in the end.
 To compile the report, you need to install a LaTeX distribution, such as TeXLive.
 
+## Structure
+Each section (\section{}) has its own folder.
+This folder contains a <section>.tex file, these .tex files are included in report.tex in the root folder.
+Sub-sections should have their own .tex file in the corresponding section's folder, and these .tex files should be included in the section's .tex file.
+
+If you're confused see https://github.com/EEDS10/eeds/tree/master/3/report
+
+
 ## Installation
 
 ### Ubuntu/Debian
