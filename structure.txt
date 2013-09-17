@@ -1,0 +1,40 @@
+THIS IS THE CURRENT PROPOSAL FOR THE REPORT'S STRUCTURE
+
+Front page
+	> course name
+	> group name
+	> group members' names
+
+Abstract
+
+Table of Contents
+
+Introduction
+	> Structure of this report
+	> Assignment
+		> Performance focus
+		> Requirement Specification
+
+Part 1, the designening
+
+PCB
+	> design process
+
+FPGA (Processor Design)
+	> design process
+
+I/O
+	> design process
+
+Part 2, the resultening
+
+Testing
+
+Results
+
+Discussion
+
+Conclusion
+
+Appendices
+
