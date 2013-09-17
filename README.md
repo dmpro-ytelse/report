@@ -10,6 +10,8 @@ Each section (\section{}) has its own folder.
 This folder contains a <section>.tex file, these .tex files are included in report.tex in the root folder.
 Sub-sections should have their own .tex file in the corresponding section's folder, and these .tex files should be included in the section's .tex file.
 
+headings/titles should be included in the parent file (e.g. the "introduction" heading is found in report.tex, not in introduction/introduction.tex)
+
 If you're confused see https://github.com/EEDS10/eeds/tree/master/3/report
 
 
