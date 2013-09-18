@@ -45,3 +45,9 @@ This means that we can keep each sentence on its own line.
 This is great, because it makes version control integration with git quite nice, and it also makes it easier to edit in vim, emacs, etc.
 
 Spelling mistakes suck, so use a spell checker.
+
+## Git tips
+
+Since we're all just committing to master in this repo, we can get a lot of merge commits if we are not careful.
+Merge commits make the commit log a lot more difficult to read.
+A nice way to avoid this is to do `git pull --rebase` instead of `git pull` when you're doing a pull.
