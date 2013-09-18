@@ -1,7 +1,7 @@
 \documentclass{report}
 
-\input {config}
 
+\input {config}
 
 \title{Computer Project: Tentative Title}
 \date{\today}
@@ -35,36 +35,33 @@
 
 \part{The Partening}
 
-\chapter{Hello World}
+\section{Introduction}
+	\input{introduction/introduction.tex}
 
-\section{Processor Design}
+
+\part{The Designening}
+
+\section{PCB}
+	\input{pcb/pcb.tex}
+
+\section{Processor Design (FPGA)}
 	\input{fpga/fpga.tex}
-	
-\section{Example section}
 
-This is an example section.
+\section{Input/Output}
+	\input{io/io.tex}
 
-\subsection{Example subsection}
+\part{The Resultening}
 
-This is an example subsection.
+\section{Testing}
+	\input{testing/testing.tex}
 
-\part{Multiple Chapters and Sections}
+\section{Results}
+	\input{results/results.tex}
 
-\chapter{Example Chapter}
-	
-\section{Example section}
+\section{Discussion}
+	\input{discussion/discussion.tex}
 
-This section has two scentences.
-Each sentence is on it's own line in the tex source.
-
-\section{Example section}
-
-\subsection{Example subsection}
-
-\section{Example section}
-
-\chapter{Example Chapter}
-
-\section{Example section}
+\part{Appendices}
+	\input{appendix/appendix.tex}
 
 \end{document}
