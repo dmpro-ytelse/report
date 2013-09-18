@@ -1,15 +1,11 @@
 \subsection {Design of the selection core}
-The selection core is designed as a tournament selection. The core selects an chromosome from a random position in the pool. The current best and the random selected chromosome is compared to each other in order to determine the best. After some number of the tournament rounds the best chromosome from the sub-population while be transferred to crossover step. 
+The selection core is designed as a tournament selection.
+The core selects an chromosome from a random position in the pool.
+The current best and the random selected chromosome is compared to each other in order to determine the best.
+After some number of the tournament rounds the best chromosome from the sub-population while be transferred to crossover step.
 
-The selection core is designed with efficiency in mind. The overall time spent in the genetic pipeline must be faster than the time spent to compute the ranking of the chromosomes. This is an important design restriction, due the fact that the architecture must be able to produce enough work for the fitness cores, to avoid introducing any additional bottlenecks. 
+The selection core is designed with efficiency in mind.
+The overall time spent in the genetic pipeline must be faster than the time spent to compute the ranking of the chromosomes.
+This is an important design restriction, due the fact that the architecture must be able to produce enough work for the fitness cores, to avoid introducing any additional bottlenecks.
 
 \fxnote {Need more details and better grammar later on}
-
-
-
-
-
-
-
-
-

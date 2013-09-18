@@ -1,8 +1,12 @@
 \subsection{Design of fitness core}
 
-The the design of the fitness core is highly influenced by MIPS. The core is designed as a five stage pipeline. The goal is to make it as simple as possible, and at the same time harvest efficiency by instruction level parallelism. The more advanced features like branch prediction and instruction scheduling are not taken into consideration while designing the CPU. The hazard detection schemes will be made simple. The hazard resolutions will be made in software as well as in hardware. The plan is to simply stall when we encounter any hazards in the pipeline. The assembler will handle the most obvious ones to achieve efficiency, while the hardware will simply stall when hazards are detected. 
+The the design of the fitness core is highly influenced by MIPS.
+The core is designed as a five stage pipeline.
+The goal is to make it as simple as possible, and at the same time harvest efficiency by instruction level parallelism.
+The more advanced features like branch prediction and instruction scheduling are not taken into consideration while designing the CPU.
+The hazard detection schemes will be made simple.
+The hazard resolutions will be made in software as well as in hardware.
+The plan is to simply stall when we encounter any hazards in the pipeline.
+The assembler will handle the most obvious ones to achieve efficiency, while the hardware will simply stall when hazards are detected.
 
 \fxnote {The hazard scheme may change if time}
-
-
-
