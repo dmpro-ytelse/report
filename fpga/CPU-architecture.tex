@@ -6,13 +6,13 @@ They are responsible for all the general computation involved in ranking the chr
 
 The common genetic computations (selection, crossover, and mutation) is performed by hardware accelerators designed in a pipeline.
 The fitness cores and the genetic pipeline is all connected to a single data bus.
-To avoid any memory synchronisation issues the data bus is controlled by an central arbitration unit.
-In this design, the memory controller is responsible for synchronising the memory access.
+To avoid any memory synchronization issues the data bus is controlled by an central arbitration unit.
+In this design, the memory controller is responsible for synchronizing the memory access.
 Each component that want to access memory must go through the memory controller, and request the bus.
 This introduce a potential bottleneck for memory bound problems.
 Fortunately, genetic algorithms only use a small amount of data in the ranking of the chromosomes.
 Which implies that a high number of registers in each core should be sufficient to avoid any memory spill during computation.
-In the selection core, on the other hand, need to be able to access the data bus very frequently in order maximise the throughput.
+In the selection core, on the other hand, need to be able to access the data bus very frequently in order maximize the throughput.
 Since the fitness computational bound, the data bus is more or less available for the selection core.
 This allows the genetic pipeline to compute the chromosomes required for the next step before they are required by the fitness cores. 
 
