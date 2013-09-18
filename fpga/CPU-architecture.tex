@@ -1,0 +1,9 @@
+\subsection {Proposed CPU architecture}
+
+The proposed architecture is very simple. The aim is to make it as simple as efficient a possible. The proposed architecture contains a number of four general cores which are all named fitness. They are responsible for all the general computation involving in ranking the chromosomes. The rest of the computations (selection, crossover, and mutation) is performed by hardware accelerators designed in a pipeline. These hardware accelerators will of course run in parallel, as will the fitness cores.
+
+The fitness cores are all connected to the data bus. To avoid any synchronising issues while accessing the memory. The data bus will be controlled by the an central arbitration unit. In this design, the memory controller is responsible for synchronising the memory access. Each component that want to access memory must first request the data bus. This will potentially lead to a bottleneck for memory bound problems. Fortunately, genetic algorithms only use a small amount of data. Which implies that a high number of registers in each core should be sufficient to avoid any memory spill during computation. 
+
+The selection core, on the other hand, need to be able to access the data bus very frequently. In order to maximise the throughput in the genetic pipeline it is important that this component is able to access access memory very often. This is in contrast to the fitness cores. The genetic pipeline aims to feed the fitness cores with sufficient amount data. Therefore, the genetic pipeline must be able to feed enough data to the fitness cores in each ranking computation. This is to avoid any additional bottlenecks. 
+
+This results in an architecture capable of computing genetic algorithms, as well as more general computing problems.  
