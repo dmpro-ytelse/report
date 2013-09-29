@@ -14,6 +14,19 @@ headings/titles should be included in the parent file (e.g. the "introduction" h
 
 If you're confused see https://github.com/EEDS10/eeds/tree/master/3/report
 
+## Bibtex
+### How to cite
+Simply write ~\cite[p.~%NUM]{%REF} anywhere in the report body, where %REF is the name of the reference and %NUM is the relevant page number.
+
+The tilde (~) produces a non-breakable space. 
+
+See also http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management#Citations
+
+### Adding a resource to the bibtex library
+Look at reference-library.bib. Do you see how it do?
+A list of resource types and fields is available here: http://en.wikipedia.org/wiki/Bibtex
+
+See also http://www.bibtex.org/Using/ for other bibtex related stuff.
 
 ## Installation
 
@@ -37,6 +50,14 @@ TBA.
 
 If you have a Make-compatible system (linux, mac), just do `make`.
 If not, you need to check the documentation of whatever compiler you installed.
+
+### Getting references and bibtex to work
+In order for the references and bibliography and citations and such to update properly, you have to run
+
+    pdflatex report
+    bibtex report
+    pdflatex report
+    pdflatex report
 
 ## Writing good LaTeX
 
