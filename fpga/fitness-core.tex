@@ -1,15 +1,35 @@
-\subsection{Design of fitness core}
-
-The design of the fitness core is highly influenced by MIPS.
-The core is designed as a five stage pipeline.
-The goal is to make it as simple as possible, and at the same time harvest efficiency by instruction level parallelism.
-The more advanced features like branch prediction and instruction scheduling are not taken into consideration while designing the CPU.
-The hazard detection schemes will be made simple.
-The hazard resolutions will be made in software as well as in hardware.
-The plan is to simply stall when we encounter any hazards in the pipeline.
-The assembler will handle the most obvious ones to achieve efficiency, while the hardware will simply stall when hazards are detected.
+\subsection{Design of fitness core} \label{fpga:fitness:ss:design_of_the_fitness_core}
 
 
-\subsubsection{}
+\subsubsection{Data Path} \label{fpga:fitness:sss:data_path}
+The design of the fitness core is highly influenced by MIPS. The core is designed as a five stage pipeline. The contents of the different stages in the pipeline, however, differs from the original MIPS architecture. The group decided to create a slightly different ISA that combines ideas from both MIPS and ARM. The idea was to make it as simple as possible, and at the same time harvest efficiency by instruction level parallelism. More advanced features like branch prediction and instruction scheduling are not taken into consideration while designing the data path. 
+
+Hazard and branching schemes are made simple. Hazards are resolved with the \emph{forwarding unit}, which forwards data if dependencies are detected. Branching are resolved with use of \emph{conditional} codes in each instructions. These codes specifies wether the instruction should be execute or not. 
+
+
+
+\subsubsection{Control Unit} \label{fpga:fitness:sss:control_unit}
+In order to execute different instructions classes in the data path there is need for a control unit. The responsibility of the control unit is to configure all the different components for the current CPU operation so that the desired computation will emerge from the flow of data. The control unit achieves this by setting the control signals of the relevant control signals of the relevant components to the values associated with the current instruction. Note that different instructions classes requires different use of the data path.
+
+The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction.     
+
+
+
+\subsubsection{Conditionals} \label{fpga:fitness:sss:conditionals}
+Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions every instruction carries a 4-bit conditional code. 
+
+
+\subsubsection{The ALU}\label{fpga:fitness:sss:the_alu}
+
+\subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
+
+\subsubsection{Memory Controller} \label{fpga:fitness:sss:memory_controller}
+
+\subsubsection{Genetic Pool Controller} \label{fpga:fitness:sss:genetic_pool_controller}
+
+\subsubsection {Case Study} \label{fpga:fitness:sss:case_study}
+
+
+
 
 \fxnote {The hazard scheme may change if time}

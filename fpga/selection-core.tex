@@ -1,9 +1,28 @@
-\subsection {Design of the selection core}
-The selection core is designed as a tournament selection.
-The core selects an chromosome from a random position in the pool.
-The current best and the random selected chromosome is compared to each other in order to determine the best. After some number of the tournament rounds the best chromosome from the sub-population while be transferred to crossover step.
+\subsection {Design of the selection core} \label{fpga:selection:ss:selection_core}
+
+
+The selection core is designed based on a tournament selection algorithm. It is designed to select an chromosome from a random position in the rated pool. The current best and the random selected is compared to each other with use of an comparator. The best chromosome is stored and used in the next tournament round. After some number of tournaments the current best is transferred to the crossover core. 
+
 
 The selection core is designed with efficiency in mind.
 The overall time spent in the genetic pipeline must be faster than the time spent to compute the ranking of the chromosomes. This is an important design restriction, due the fact that the architecture must be able to produce enough work for the fitness cores, to avoid introducing any additional bottlenecks.
 
-\fxnote {Need more details and better grammar later on}
+
+\subsubsection{Data Path}
+Upon the beginning of the data path design, the group wanted to determine the the components required to perform the selection. In this specific case the group decided to design a data path able to perform a tournament selection. The resulting architecture is made as simple as possible.  It is composed of \emph{flip flops}, \emph{control unit} and an \emph{comparator}. The different components are connected as seen in figure.
+
+\fxnote{Add figure of selection core}
+
+
+\subsubsection{Control Unit} \label{fpga:selection:sss:control_unit}
+In order to 
+
+
+\subsubsection {Comparator} \label{fpga:selection:sss:comparator}
+
+
+
+\subsubsection{Case study} \label{fpga:selection:sss:case_study}
+
+
+
