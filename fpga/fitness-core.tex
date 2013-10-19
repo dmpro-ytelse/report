@@ -24,18 +24,19 @@ More advanced features like branch prediction and instruction scheduling are not
 In order to execute different instructions classes in the data path there is need for a control unit. The responsibility of the control unit is to configure all the different components for the current CPU operation so that the desired computation will emerge from the flow of data. The control unit achieves this by setting the control signals of the relevant control signals of the relevant components to the values associated with the current instruction. Note that different instructions classes requires different use of the data path. Thus, combinations the control signals must accommodate the different instructions formats. 
 
 
-
 The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction.     
 
 
 
 \subsubsection{Conditionals} \label{fpga:fitness:sss:conditionals}
-Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions every instruction carries a 4-bit conditional code. 
+Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions every instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. 
 
 
 \subsubsection{The ALU}\label{fpga:fitness:sss:the_alu}
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
+There are some situations in the pipeline where the next instruction cannot execute in the following clock cycle. These events are called hazards, and occur in situations where there exist some type of dependency between the instructions in flight. There exist three types of hazards; \emph{structural} , \emph{data} and \emph{control}. 
+
 
 \subsubsection{Memory Controller} \label{fpga:fitness:sss:memory_controller}
 
