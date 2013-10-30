@@ -24,7 +24,11 @@ More advanced features like branch prediction and instruction scheduling are not
 In order to execute different instructions classes in the data path there is need for a control unit. The responsibility of the control unit is to configure all the different components for the current CPU operation so that the desired computation will emerge from the flow of data. The control unit achieves this by setting the control signals of the relevant control signals of the relevant components to the values associated with the current instruction. Note that different instructions classes requires different use of the data path. Thus, combinations the control signals must accommodate the different instructions formats. 
 
 
-The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction.     
+The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction. 
+
+\input{fpga/tbl/fitness_core_control_unit_tbl}
+
+    
 
 
 
@@ -35,7 +39,10 @@ Like ARM , the galapagos architecture use conditional codes in order to determin
 \subsubsection{The ALU}\label{fpga:fitness:sss:the_alu}
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
-There are some situations in the pipeline where the next instruction cannot execute in the following clock cycle. These events are called hazards, and occur in situations where there exist some type of dependency between the instructions in flight. There exist three types of hazards; \emph{structural} , \emph{data} and \emph{control}. 
+Since the executions of instructions overlap in the pipeline. There is need for some mechanism to handle the data dependencies that arise between the instructions. These data dependencies are known as data hazards. They occur when a planned execution of an instruction is not possible because the data required is not yet available in the register file. This particular problem can be solved in two ways, either by stalling or by forwarding. Stalling, the simplest solution, is done by simply avoid these hazards by inserting \emph{NOPs} in the pipeline. This solution works well, but are to slow for most cases. Since this processors aim to achieve high performance this solution is far from optional. A far better approach is to rely on forwarding, also known as register forwarding. In this approach the aim is to resolve the dependencies by simply forwarding values from other stages if needed. This will work in most cases, since even though the value does not yet reside in the register file, the value reside deeper in the pipeline.  
+
+
+
 
 
 \subsubsection{Memory Controller} \label{fpga:fitness:sss:memory_controller}
