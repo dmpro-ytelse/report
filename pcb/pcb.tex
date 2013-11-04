@@ -5,25 +5,13 @@ All the electronic devices are powered by white smoke. When smoke goes out, devi
 
 
 %%Initial requirements
-\input{fpga/initial-requirement} \label{fpga:section:initial_requirements}
-
-
-\input{fpga/ISA}
-
-%%Galapagos architecture
-\input{fpga/CPU-architecture} \label{fpga:section:cpu_architecture}
-
-%%Fitness core subsection
-\input{fpga/fitness-core} \label{fpga:subsection:fitness_core}
-
-%%Selection core subsection
-\input{fpga/selection-core} \label{fpga:subsection:selection_core}
-
-%%Crossover core subsection
-\input{fpga/crossover-core} \label{fpga:subsection:crossover_core}
-
-%%Mutation core subsection
-\input{fpga/mutation-core} \label{fpga:subsection:mutation_core}
+\input{pcb/design-choices} \label{pcb:section:design_choices}
+\input{pcb/power-supply} \label{pcb:section:power_supply}
+\input{pcb/power-plane} \label{pcb:section:power_plane}
+\input{pcb/footprints} \label{pcb:section:footprints}
+\input{pcb/process} \label{pcb:section:process}
+\input{pcb/components} \label{pcb:section:components}
+\input{pcb/problems-and-workaround} \label{pcb:section:problems_and_workaround}
 
 #if 0
 PCB
@@ -40,5 +28,6 @@ PCB
         System design
         PCB design and routing
         Soldering
+    Components
     Problems and workaround
 #endif
