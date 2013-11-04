@@ -1,6 +1,11 @@
 \section {Design choices}
 
 \subsection{IO devices} \label{pcb:design-choices:ss:IO_devices}
+USB
+For usb interface we chosed the micro-usb. The reason for this is that the size of the assosiated hardware is much smaller.  In the design we also made circuts to prevent unwanted effects like electrostatic discharge, and circuts to prevent the signals from picking up unwanted noice from the background or from crosstalk. Of course we also added neccessary resistances to prevent shortcircuting.
+
+SD
+We talked about using micro-sd cards, but because it was harder to find any guidlines on how to use/implement it we decided to use the normal SD interface. In the SD interface, there are several protocols used for communication. However for this project we use the mode called "SPI bus mode", which is the interface that is used by the microcontroller.  The SPI or "serial peripheral interface" is a scheme where you use a syncronized master-slave configuration or relation to communicate with the IO-devices. The goal with this choice is to have better compatibillity with the microcontroller.
 
 \subsection{Internal communication} \label{pcb:design-choices:ss:internal_communication}
 
