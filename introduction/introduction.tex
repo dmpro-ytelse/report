@@ -1,0 +1,117 @@
+
+\section{Structure of this Report}
+
+\section{Assignment}
+
+\subsection{Assignment Text\TODO{TODO: cite assignment text}}
+
+\begin{quote}
+
+\begin{center}
+TDT4295 Computer Design Project
+
+Assignment Text
+
+2013 
+\end{center}
+ 
+\textbf{Task: Construct a Multiple Program, Multiple Data}
+
+The performance increase available from harvesting Instruction Level Parallelism (ILP) from the serial instruction stream is limited because we have reached the maximum power consumption that can be handled without expensive cooling solutions.
+Consequently, there is a significant interest in single-chip parallel processor solutions.
+The processor cores in commercial multi-core chips are conventional designs and therefore reasonably complex.
+In this work, your task is to design a multiprocessor,Multiple Instruction, Multiple Data streams (MIMD).
+A processor classified MIMD include a multiple-instruction stream organizations.
+Such processors can executing different instructions, i.e. minimum 2 independent programs, on different (independent) data.
+
+The task also include that a suitable application is chosen to demonstrate the processor.
+Your processor will be implemented on an FPGA, and you are free to choose how to realize your MIMD computer architecture.
+The system should be shown to work with a suitable application.
+Studying the architecture of the Cell processor, or in general multi-core processors, can be a good starting point.
+And a final tip; Keep it simple, as simple as possible, but not simpler.
+
+Due to a large number of students this year, we will divide the work into two independent projects: a) Performance and b) Energy efficiency.
+The goal of group a) is to achieve maximum performance while group b) should try to balance performance and energy.
+The reports from both groups should include an evaluation of prototype performance and energy consumption.
+
+\textbf{Additional requirements}
+
+The unit must utilize an Energymicro micro controller and a Xilinx FPGA.
+The budget is 10.000 NOK, which must cover components and PCB production.
+The unit design must adhere to the limits set by the course staff at any given time.
+Deadlines are given in a separate time schedule.
+
+\textbf{Evaluation}
+
+The project is evaluated based on the project report and an oral presentation of the work as well as a prototype demonstration.
+One grade will be given to the group as a whole, unless there are significant variations in the amount of effort put into the project. 
+
+\end{quote}
+
+\subsection{Interpretation}
+
+
+\section{Requirements}
+
+The functional requirements for the project are listed in table \vref{table:functional-requirements}. The non-functional requirements for the project are listed in table \vref{table:non-functional-requirements}.
+
+ \subsection{Functional Requirements}
+
+ \begin{table}
+ \begin{center}
+ \begin{tabular}{| l | l | l |}
+ \hline
+ Functional Requirement & Description & Priority\\
+ \hline
+ FR1 & Some requirement. & High \\
+ FR2 & Some requirement. & Medium \\
+ \hline
+ \end{tabular}
+ \caption{Functional requirements.}
+ \label{table:functional-requirements}
+ \end{center}
+ \end{table}
+
+Something about the functional requirements here.
+
+ \subsection{Non-functional Requirements}
+
+ \begin{table}
+ \begin{center}
+ \begin{tabular}{| l | l | l |}
+ \hline
+ Non-functional Requirement & Description & Priority \\
+ \hline
+ NFR1 & Some requirement. & High \\
+ NFR2 & Some requirement. & Medium \\
+ \hline
+ \end{tabular}
+ \caption{Non-functional requirements.}
+ \label{table:non-functional-requirements}
+ \end{center}
+ \end{table}
+
+Something about the non-functional requirements here.
+
+\section{Genetic Algorithms}
+
+A genetic algorithm is a search heuristic that is very useful for finding approximate solutions to hard optimization and search problems.
+It mimics the natural process of evolution to find fit approximations in the search space.
+
+A genetic algorithm represents possible solutions to a given problem as individuals of a population.
+The individuals' fitness is calculated by a problem-specific fitness function, and fit individuals are combined together to create new individuals, mimicing the process of natural selection.
+The idea is that after simulating a number of virtual generations of individuals, the fittest individual will have survived, and provides a good approximation to the solution.
+
+\subsection{Generational Genetic Algorithms}
+
+Traditionally, genetic algorithms are implemented generationally \TODO{TODO: cite hromcovic or something}.
+That means that an entire population of individuals are rated and combined to create a completely new population, and the old population is discarded.
+
+\subsection{Continuous Genetic Algorithms}
+
+A new and better strategy is gaining traction in the literature.\TODO{TODO: find a citation for this}.
+Continuous genetic algorithms do away with the concept of discrete generations.
+Rather, it continuously selects a few individuals, processes them, and returns them (or their offspring) to the population.
+This erases the generational border, and is shown \TODO{TODO:cite our own research here, plus literature} to converge faster towards an optimal solution.
+
+The genetic algorithm used in the Barricelli computer is a continuous genetic algorithm.
