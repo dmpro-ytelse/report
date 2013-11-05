@@ -1,0 +1,3 @@
+[submodule "isa"]
+	path = isa
+	url = git@github.com:dmpro-ytelse/isa.git
