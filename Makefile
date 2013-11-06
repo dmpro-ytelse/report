@@ -6,6 +6,7 @@ all:
 	pdflatex report
 	bibtex report
 	pdflatex report
+	makeglossaries report
 	pdflatex report
 
 .PHONY: clean

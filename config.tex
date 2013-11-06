@@ -1,5 +1,6 @@
 
 %%% Packages
+\usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage[raggedright]{titlesec}
 \pagestyle{fancy}
@@ -8,10 +9,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[final]{pdfpages}
 \usepackage{varioref}
+\usepackage[nomain,acronym,xindy,toc]{glossaries}
+\makeglossaries
+\usepackage[xindy]{imakeidx}
+\makeindex
 
 \usepackage{graphicx}
-
-
 
 %%% Util commands
 \newcommand\TODO[1]{\textcolor{red}{TODO:#1}}
