@@ -2,10 +2,12 @@ This chapter aims to put this report in context.
 
 \section{MIMD Computing}
 
-MIMD, or Multiple Instruction, Multiple Data, is a class of computer architectures involving multiple autonomous computing units executing different instructions on different data.
+\Gls{barricelli}, the solution computer presented in this report, is a \Gls{MIMD} computer. \Gls{MIMD}, or Multiple Instruction, Multiple Data, is a class of computer architectures involving multiple autonomous computing units executing different instructions on different data.
 MIMD lends itself quite well to high performance computing through parallelism.
 
-\TODO{TODO: use this image http://en.wikipedia.org/wiki/File:MIMD.svg for illustration purposed (remember to atttribute)}
+\todo{write more about MIMD}
+
+\todo{use this image http://en.wikipedia.org/wiki/File:MIMD.svg for illustration purposed (remember to atttribute)}
 
 \section{Genetic Algorithms}
 
@@ -15,6 +17,87 @@ It mimics the natural process of evolution to find fit approximations in the sea
 A genetic algorithm represents possible solutions to a given problem as individuals of a population.
 The individuals' fitness is calculated by a problem-specific fitness function, and fit individuals are combined together to create new individuals, mimicing the process of natural selection.
 The idea is that after simulating a number of virtual generations of individuals, the fittest individual will have survived, and provides a good approximation to the solution.
+
+\subsection{Concepts and Definitions}
+
+To fully understand the inner workings of the \Gls{barricelli}, it is useful to become aquainted with the basic concepts of genetic algorithms.
+This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
+
+\subsubsection{Things\todo{better word for this}}
+
+\paragraph{Individual}
+
+An individual is any possible solution to a given problem.
+
+\paragraph{Population}
+
+A population is the group of all current individuals in a given experiment.
+
+\paragraph{Search Space}
+
+The search space is the set of all possible solutions to a given problem.
+
+\paragraph{Chromosome}
+
+A chromosome is a blueprint for a individual.
+
+\paragraph{Trait}
+
+A trait is a possible aspect of an individual.
+
+\paragraph{Allele}
+
+An allele is a possible setting for a trait.
+
+\paragraph{Locus}
+
+A locus is the position of a gene on a chromosome.
+
+\paragraph{Genome}
+
+A genome the collection of all chromosomes for an individual.
+
+\subsubsection{Genetic operators}
+
+\paragraph{Selection}
+
+\paragraph{Crossover}
+
+\paragraph{Mutation}
+
+\subsection{Pseudo-code for a General Genetic Algorithm}
+
+Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a general genetic algorithm.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{A population of random individuals}
+\KwResult{A quite fit individual}
+\Begin{
+    $ k \longleftarrow 0 $\;
+    $ P_k \longleftarrow $ a population of $ n $ randomly-generated individuals\;
+    Compute $fitness(i)$ for each $ i \in P_k $\;
+    \While{$ max(fitness(i) \in P_k) < threshold and k < maxIterations $}{
+        Selection:\;
+        Select $ (1 - x_i) \times n $ members of $ P_k $ and insert them into $ P_{k + 1} $\;
+
+        Crossover:\;
+        Select $ x_i \times n $ members of $ P_k $, pair them up, produce offspring, insert offspring into $ P_k $\;
+
+
+        Mutation:\;
+        Mutate $ \mu \times n $ members of $ P_{k + 1} $\;
+        Compute $ fitness(i) $ for each $ i \in P_k $\;
+        $k \longleftarrow k + 1 $
+    }
+    \Return{the fittest individual in $ P_k $}
+}
+\caption{Generic genetic algorithm}
+\label{algorithm:pseudo-code-for-ga}
+\end{algorithm}
+
+\todo{tidy}
 
 \subsection{Generational Genetic Algorithms}
 
