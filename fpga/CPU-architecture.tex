@@ -1,8 +1,7 @@
-\section {CPU Architecture}
-
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{dmpro/Sketch-2---FPGA-Architecture.png}
-\caption{FPGA Architecture}
+\todo{is there an updated version of this image anywhere?}
+\caption{Processor Architecture}
 \label{figure:fpga-architecture}
 \end{figure}
 
@@ -27,3 +26,22 @@ This allows the genetic pipeline to compute the chromosomes required for the nex
 The instructions are divided in two caches for increased performance.
 The plan is to make the instruction caches sufficiently large to contain the whole program.
 Since the instructions are read only a simple scheme will be used whenever the program needs to get instructions in those circumstances when the cache is not sufficiently big to contain all the instructions. 
+
+
+\subsection{Fitness Core} \label{fpga:fitness:ss:design_of_the_fitness_core}
+    \input{fpga/fitness-core} \label{fpga:subsection:fitness_core}
+
+\subsection {Selection Core} \label{fpga:selection:ss:selection_core}
+    \input{fpga/selection-core} \label{fpga:subsection:selection_core}
+
+\subsection{Crossover Core} \label{fpga:crossover:ss:crossover_core}
+    \input{fpga/crossover-core} \label{fpga:subsection:crossover_core}
+
+\subsection{Mutation Core}\label{fpga:mutation:ss:mutation_core}
+    \input{fpga/mutation-core} \label{fpga:subsection:mutation_core}
+
+\subsection{PRNG Module}
+    \todo{this}
+
+\subsection{Rated and Unrated Pools}
+    \todo{this}
