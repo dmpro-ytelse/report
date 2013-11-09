@@ -24,3 +24,21 @@
 \newcommand\todo[1]{\TODO{#1}}
 
 \newcommand\cn{\textcolor{red}{[citation needed]}}
+
+\newcommand\test[4]{
+    \begin{table}[h]
+    \begin{center}
+    \begin{tabular}{| l | p{7cm} |}
+    \hline
+    \textbf{Test Name} &  #1 \\
+    \hline
+    \textbf{Steps} & \begin{enumerate} #2 \end{enumerate} \\
+    \hline
+    \textbf{Expected Result} & #3 \\
+    \hline
+    \textbf{Actual Result} & #4 \\
+    \hline
+    \end{tabular}
+    \end{center}
+    \end{table}
+}
