@@ -20,11 +20,12 @@
 \chead{Barricelli}
 \rhead{Performance Group}
 \lfoot{}
-\cfoot{}
+\cfoot{\thepage}
 \rfoot{}
 
 \begin{document}
 \include{glossary}
+\pagenumbering{roman}
 
 \maketitle
 
@@ -32,8 +33,10 @@
 	\input{abstract/abstract.tex}
 \end{abstract}
 
-
 \tableofcontents
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
 
 \part{Introduction and Background}
 
