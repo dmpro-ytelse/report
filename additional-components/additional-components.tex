@@ -5,7 +5,10 @@ It is written in python.
 It is designed with a modular, object-oriented software architecture, which makes it easily extensible and modifiable.
 The assembler supports the entire \Gls{galapagos} ISA.
 
-\todo{Perhaps it also does instruction re-ordering? that would be cool.}
+The assembler does not perform any optimizations such as instruction re-ordering.
+This is because the forwarding unit in the CPU architecture resolve many of the same issues that the assembler would work around using instruction re-ordering.
+The hazards that the forwarding unit don't already perfectly handle are few enough inbetween that it is less effort to simply let the programmer manually handle these cases.
+\todo{There are cases where the forwarding unit will bubble a little, right? like use after load conflicts? Otherwise the previous paragraph needs to be re-written.}
 
 \Gls{galapagos assembler} is available in PyPi, the leading python package index.
 This means that it is easily installable for end users.
