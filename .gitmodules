@@ -4,3 +4,6 @@
 [submodule "dmpro"]
 	path = dmpro
 	url = git@github.com:dmpro-ytelse/dmpro.git
+[submodule "galapagos-assembler"]
+	path = galapagos-assembler
+	url = git@github.com:dmpro-ytelse/galapagos-assembler.git
