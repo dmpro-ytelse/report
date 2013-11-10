@@ -1,1 +1,42 @@
-rune er kjip as
+%% Put an image of the PCB here
+
+While the core running on the FPGA is the most central component on the barricelli system, it would not work without the printed circuit board connection all the components.
+Designing the PCB and soldering a working PCB is thus an important part of making the complete and functioning system.
+
+This chapter explain how the PCB was designed and made.
+It discusses how the design chioces that were made affected the product.
+The power supply, power nets, footprints and chosen components are explained in detail.
+Finally the design and production process is explained and the problems and workarounds that were used are discussed.
+
+\input{pcb/design-choices.tex} \label{pcb:section:design_choices}
+
+\input{pcb/power-supply.tex} \label{pcb:section:power_supply}
+
+\input{pcb/power-plane.tex} \label{pcb:section:power_plane}
+
+\input{pcb/footprints.tex} \label{pcb:section:footprints}
+
+\input{pcb/process.tex} \label{pcb:section:process}
+
+\input{pcb/components.tex} \label{pcb:section:components}
+
+\input{pcb/problems-and-workaround.tex} \label{pcb:section:problems_and_workaround}
+
+\#if 0
+PCB
+    Design Choices
+        IO devices
+        Internal Communication
+        External communication
+        Memory
+    Power Supply
+    Power Plane
+    Footprints
+        
+    Process
+        System design
+        PCB design and routing
+        Soldering
+    Components
+    Problems and workaround
+\#endif
