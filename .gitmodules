@@ -7,3 +7,6 @@
 [submodule "galapagos-assembler"]
 	path = galapagos-assembler
 	url = git@github.com:dmpro-ytelse/galapagos-assembler.git
+[submodule "GAS-programs"]
+	path = GAS-programs
+	url = git@github.com:dmpro-ytelse/GAS-programs.git
