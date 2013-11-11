@@ -47,16 +47,14 @@ Note that different instructions classes requires different use of the data path
 Thus, combinations the control signals must accommodate the different instructions formats.
 
 
+\input{fpga/tbl/control_unit_output_tbl}
+
+
 
 The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction.
 
 
 \input{fpga/tbl/fitness_core_control_unit_tbl}
-
-
-
-
-
 
 
 \subsubsection{The ALU}\label{fpga:fitness:sss:the_alu}
@@ -70,10 +68,6 @@ The forwarding logic is implemented by comparing register dependencies of the in
 
 
 \input{fpga/tbl/forwarding_unit_tbl}
-
-
-
-
 
 
 
