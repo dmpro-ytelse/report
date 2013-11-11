@@ -1,14 +1,14 @@
 \documentclass{report}
 
+\input{config}
 
-\input {config}
-
-\title{Computer Project: Tentative Title}
+\title{Barricelli}
 \date{\today}
 \author{Emil Taylor Bye
      \and Fedor Fadeev
      \and Sigve Sebastian Farstad
-     \and Péter Gombos Rune Holmgren
+     \and Péter Gombos
+     \and Rune Holmgren
      \and Torbjørn Langland
      \and Per Thomas Lundal
      \and Odd Magnus Trondrud
@@ -17,13 +17,15 @@
 }
 
 \lhead{Computer Project}
-\chead{Tentative Title}
+\chead{Barricelli}
 \rhead{Performance Group}
 \lfoot{}
-\cfoot{}
+\cfoot{\thepage}
 \rfoot{}
 
 \begin{document}
+\include{glossary}
+\pagenumbering{roman}
 
 \maketitle
 
@@ -31,35 +33,74 @@
 	\input{abstract/abstract.tex}
 \end{abstract}
 
+\thispagestyle{empty}
+\section*{Acknowledgements}
+A big thank you is extended to the following for invaluable help and guidance during this project:
+
+\begin{description}
+\item[Gunnar Tufte] for ...
+\item[Yaman Umuroglu] for ...
+\item[Stephano Nichele] for ...
+\item[Odd Rune S. Lykkebø] for ...
+\item[Navn Navnesen] for being a hero.
+\item[The other group] for company in the lab during the late hours of the night.
+\todo{more?}
+\end{description}
+
 \tableofcontents
+\newpage
 
-\part{The Partening}
+\listoffigures
+\listoftables
+\listofalgorithms
+\renewcommand{\lstlistlistingname}{List of Listings}
+\lstlistoflistings
 
-\section{Introduction}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\part{Introduction and Background}
+
+\chapter{Introduction}
 	\input{introduction/introduction.tex}
 
+\chapter{Background}
+	\input{background/background.tex}
 
-\part{The Designening}
+\part{Design and Implementation}
 
-\section{PCB}
-	\input{pcb/pcb.tex}
+\chapter{System Overview}
+    \input{system-overview/system-overview.tex}
 
-\section{Processor Design (FPGA)}
+\chapter{Processor Design}
 	\input{fpga/fpga.tex}
 
-\section{Input/Output}
+\chapter{PCB}
+	\input{pcb/pcb.tex}
+
+\chapter{Input/Output}
 	\input{io/io.tex}
 
-\part{The Resultening}
+\chapter{Additional Components}
+    \input{additional-components/additional-components.tex}
 
-\section{Testing}
+\part{Results and Discussion}
+
+\chapter{Tests}
 	\input{testing/testing.tex}
 
-\section{Results}
+\chapter{Results}
 	\input{results/results.tex}
 
-\section{Discussion}
+\chapter{Discussion}
 	\input{discussion/discussion.tex}
+
+\chapter{Work Process}
+	\input{work-process/work-process.tex}
+
+\chapter{Conclusion and \protect\\ Further Work}
+
+\printglossaries
 
 \part{Appendices}
 	\input{appendix/appendix.tex}

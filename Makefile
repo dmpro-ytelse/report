@@ -1,8 +1,13 @@
 .PHONY: all
 all:
-	# we need to run it twice, so the table of contents gets updated
-	pdflatex report.tex
-	pdflatex report.tex
+	git submodule init
+	git submodule update
+	cd isa && make
+	pdflatex report
+	bibtex report
+	pdflatex report
+	makeglossaries report
+	pdflatex report
 
 .PHONY: clean
 clean:

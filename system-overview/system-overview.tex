@@ -1,0 +1,73 @@
+\section{System Architecture}
+
+This section aims to provide a birds-eye overview of the system archictecture of the \Gls{barricelli} computer.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{dmpro/Sketch 1 - System Overview.png}
+\caption{System Overview}
+\label{figure:system-overview}
+\end{figure}
+
+The requirements stated\cn that the \Gls{barricelli} should use an FPGA and an micro controller as system components.
+The \Gls{barricelli}'s specialized CPU design is implemented and compiled onto an FPGA, and a micro controller is used to facilitate I/O, control and communications between the FPGA and the outside world.
+A graphical overview illustrating the system architecture can be found in figure \vref{figure:system-overview}.
+
+\section{Components}
+
+This section contains an exhaustive list of the components in figure \vref{figure:system-overview}, documenting their roles in the system architecture.
+
+\subsection{FPGA}
+
+\todo{What is it, what does it do in the system?}
+The FPGA is a Xilinx Spartan6 LX45\cn Field-Programmable Gate Array, which is a microchip which can be programmed to behave like any arbitrary intergrated circuit.
+The FPGA is programmed to contain an implementation of the custom \Gls{galapagos} CPU Architecture designed for the \Gls{barricelli} computer.
+It is connected to the SCU by a 39-bit\cn wide bus, though which the CPU can be programmed by users.
+The FPGA is connected to its own memory.
+
+\subsection{SCU}
+
+The SCU, or System Control Unit, is an energy micro micro controller \todo{version number etc} which administrates communication between the FPGA and the outside world.
+It is the SCU's job to react to user input, to program the custom CPU implemented on the FPGA and to perform other administrative duties.
+Having a separate micro controller to perform these tasks minimises the complexity of the design implemented on the FPGA, which means that more resources can be used to create a performant and clean custom CPU design.
+
+\subsection{I/O}
+
+The Barricelli has several different inputs and outputs.
+While only one input and one output are strictly needed for a functional system, multiple different types of input have been added to the design in the name of safety through redendancy.
+Having multiple communication channels between the user and the system means that even if one or more channels should fail, the system will still be operational.
+
+\subsubsection{RS232}
+
+\todo{What is it, what does it do in the system?}
+
+\subsubsection{USB}
+
+\todo{What is it, what does it do in the system?}
+
+\subsubsection{SD}
+
+\todo{What is it, what does it do in the system?}
+
+\subsubsection{LEDs}
+
+\todo{What is it, what does it do in the system?}
+
+\subsubsection{Buttons}
+
+\todo{What is it, what does it do in the system?}
+
+\subsection{Memory}
+
+The \Gls{galapagos} CPU is connected to two separate external memories, the instruction memory and the data memory, meaning that the \Gls{galapagos} architecture is a Harvard machine.
+This design choice was made because it increases the performance of the machine, since instruction memory and data memory and be accessed independantly, and in parallel. 
+
+\subsubsection{Instruction Memory}
+
+The Instruction Memory, labeled as ``INST MEM'' in figure \vref{figure:system-overview}, ...
+\todo{What is it, what does it do in the system?}
+
+\subsubsection{Data Memory}
+
+The Data Memory, labeled as ``DATA MEM'' in figure \vref{figure:system-overview}, ...
+
+\todo{What is it, what does it do in the system?}

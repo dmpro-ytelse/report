@@ -1,16 +1,64 @@
-
 %%% Packages
+\usepackage[pdftex, pdfborderstyle={/S/U/W 0}]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[raggedright]{titlesec}
 \pagestyle{fancy}
 \usepackage{xcolor}
 \usepackage[footnote, draft, silent, nomargin]{fixme}
 \usepackage[utf8]{inputenc}
-
+\usepackage[final]{pdfpages}
+\usepackage{varioref}
+\usepackage[xindy,toc]{glossaries}
+\makeglossaries
+\usepackage{listings}
+\usepackage{algorithm2e}
+\usepackage{float}
 \usepackage{graphicx}
-
-
+\usepackage{grffile}
+\usepackage[Rejne]{fncychap}
 
 %%% Util commands
-\newcommand\TODO[1]{\textcolor{red}{#1}}
+\newcommand\TODO[1]{\textcolor{red}{TODO:#1}}
+\newcommand\todo[1]{\TODO{#1}}
+
+\newcommand\cn{\textcolor{red}{[citation needed]}}
+
+\newcommand\test[4]{
+    \begin{table}[h]
+    \begin{center}
+    \begin{tabular}{| l | p{7cm} |}
+    \hline
+    \textbf{Test Name} &  #1 \\
+    \hline
+    \textbf{Steps} & \begin{enumerate} #2 \end{enumerate} \\
+    \hline
+    \textbf{Expected Result} & #3 \\
+    \hline
+    \textbf{Actual Result} & #4 \\
+    \hline
+    \end{tabular}
+    \end{center}
+    \end{table}
+}
+
+
+\lstset{
+  basicstyle=\tiny,
+  breakatwhitespace=false,
+  breaklines=false,
+  captionpos=t,
+  commentstyle=\color{green},
+  frame=single,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  numbers=left,
+  numbersep=5pt,
+  numberstyle=\tiny\color{gray},
+  rulecolor=\color{black},
+  stepnumber=1,
+  stringstyle=\color{red},
+  tabsize=4,
+  title=\lstname
+}
+
 
