@@ -1,9 +1,41 @@
+\todo{some words about the genetics accelerator}
+The Selection Core is the first of the cores in the genetics accelerator.
+It is responsible for selecting apropriate individuals from the rated pool population in the genetics pipeline and pass them on to the other cores so that they may operate on them.
+
 The selection core is designed based on a tournament selection algorithm.
-It is designed to select an chromosome from a random position in the rated pool.
-The current best and the random selected is compared to each other with use of an comparator.
+Tournament selection is a selection scheme that aims to quickly find an individual with a high score from an unsorted list in a way that does not guarantee that the selected individual is the one with the highest score.
+These goals are healthy goals for a selection algorithm to have when used in a genetic algorithm.
+
+The tournament selection-based selection algorithm is precisely described in algorithm \vref{algorithm:tournament-selection}.
+In laymans terms, it is designed to select a single individual from a random position in the rated pool.
+The current best and the random selected is compared to each other with use of a comparator.
 The best chromosome is stored and used in the next tournament round.
 After some number of tournaments the current best is transferred to the crossover core.
-The selection core is actually responsible for letting the rest of the genetic pipeline know when it can fetch the next chromosome. 
+The selection core is responsible for letting the rest of the genetic pipeline know when it can fetch the next chromosome. 
+
+\begin{figure}[H]
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{$ P = $ A pool of rated individuals, $ r = $ number of rounds in tornament (configurable, $ 0 \le r \le 31 $)}
+\KwResult{A selected individual}
+\Begin{
+    $ k \longleftarrow 0 $\;
+    $ bestIndividual \longleftarrow $ random individual from P\;
+    \While{$ k < r $}{
+        $ individual \longleftarrow $ random individual from P\;
+        \If{ $ fitness(individual) > fitness(bestIndividual) $ }{
+            $ bestIndividual \longleftarrow individual $\;
+        }
+        $ k \longleftarrow k + 1 $\;
+    }
+
+    \Return{$ bestIndividual $}\;
+}
+\caption{The tournament selection used in the selection core.}
+\label{algorithm:tournament-selection}
+\end{algorithm}
+\end{figure}
 
 The selection core is designed with efficiency in mind.
 The overall time spent in the genetic pipeline must be smaller than the time spent ranking the chromosomes.
