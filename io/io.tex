@@ -1,1 +1,37 @@
-> mfw
+\todo{Microcontroller (efm32gg990f1024) handling I/O between computer, buttons, LEDs and FPGA. Redundancy, can manage with one of SD/USB/Serial.}
+
+\section{IO Channels/hardware}
+\todo{Subsectionise, detailed about everything, including software/libraries used to facilitate communication.}
+\begin{itemize}
+    \item Data IO
+    \begin{itemize}
+        \item SD
+        \item USB
+        \item Serial
+    \end{itemize}
+    \item LEDs, buttons
+    \item Huge FPGA bus
+    \item Upload/debug connection
+\end{itemize}
+
+\section{FPGA Control}
+\todo{Direct memory access, only way of talking with FPGA. A few diagrams, timing etc.}
+
+\section{Interaction}
+\todo{Main loop, state machine (diagrams ++).}
+\subsection{Host program}
+\todo{Basically the same as above, but for the computer talking with the FPGA.}
+
+\section{Design decision}
+\begin{itemize}
+    \item Microcontroller, same as devkit
+    \item No OS
+    \item FPGA Bus, huge
+\end{itemize}
+
+\section{Issues?}
+\begin{itemize}
+    \item Not getting work done
+    \item Crystal
+    \item USB VBus
+\end{itemize}
