@@ -53,7 +53,6 @@ The control unit sets up the components based on the \emph{FUNCTION CODE} and th
 
 \input{fpga/tbl/fitness_core_control_unit_tbl}
 
-    
 
 
 
@@ -64,16 +63,18 @@ The control unit sets up the components based on the \emph{FUNCTION CODE} and th
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
 Since the executions of instructions overlap in the pipeline.
-There is need for some mechanism to handle the data dependencies that arise between the instructions.
-These data dependencies are known as data hazards.
-They occur when a planned execution of an instruction is not possible because the data required is not yet available in the register file.
-This particular problem can be solved in two ways, either by stalling or by forwarding.
-Stalling, the simplest solution, is done by simply avoid these hazards by inserting \emph{NOPs} in the pipeline.
-This solution works well, but are to slow for most cases.
-Since this processors aim to achieve high performance this solution is far from optional.
-A far better approach is to rely on forwarding, also known as register forwarding.
-In this approach the aim is to resolve the dependencies by simply forwarding values from other stages if needed.
-This will work in most cases, since even though the value does not yet reside in the register file, the value reside deeper in the pipeline.
+There is need for some mechanism to handle the data dependencies that arise between the instructions. These dependencies are known as data hazards. They occur when a planned execution of an instruction cannot happen in that cycle because some data is not yet available. This problem can be solved in two ways, either by stalling or forwarding. Stalling, the simplest solution, is done by avoiding the hazard by stalling until the data becomes available. This is accomplished by inserting \emph{NOPs} in the pipeline. Although, this method work, it is to slow in most cases. Since this processor aim to achieve high performance this solution is far from optional. A far better approach is to rely on forwarding, also known as register forwarding. In this approach the aim is to resolve the dependencies by simply forwarding internal resources from other stages in the pipeline, if needed.
+
+The forwarding logic is implemented by comparing register dependencies of the instruction in the execution stage with other instructions currently residing in the pipeline. If the forwarding unit notices register dependencies and that these instructions will write to these registers at a later time, it will assert signals that causes the data to be forwarded to the execution stage. The control signals is used in two 3-to-1 multiplexors in order to choose which source the data should arrive from. An overview of the control signals and their meaning can be seen in table \ref{tbl:fpga:forwarding_signals}.
+
+
+
+\input{fpga/tbl/forwarding_unit_tbl}
+
+
+
+
+
 
 
 \subsubsection{Conditionals} \label{fpga:fitness:sss:conditionals}

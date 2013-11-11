@@ -1,0 +1,22 @@
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| p{2.5cm} p{9cm} |}
+    \hline
+    Control signal  & Meaning \\ [0.5ex]
+    \hline 
+    forwardA=00  & The first ALU operand is from the register file\\
+    
+    forwardA=10  & The first ALU operand is from the prior ALU result\\
+    
+    forwardA=01  & The first ALU operand is either data from memory or an earlier ALU      result\\
+    
+    & \\
+    forwardB=00  & The second ALU operand is from the register file\\
+    forwardB=10  & The second ALU operand is from the prior ALU result \\
+    forwardB=01 & The second ALU operand is either data from memory or an earlier ALU result \\
+    \hline
+    \end{tabular}
+    \caption{Forwarding control signals}
+    \label{tbl:fpga:forwarding_signals}
+
+\end{table}
