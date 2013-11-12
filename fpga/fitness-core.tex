@@ -39,11 +39,16 @@ The reader may refer to their respective sections for more details.
 
 
 \subsubsection{Control Unit} \label{fpga:fitness:sss:control_unit}
-In order to execute different instructions classes in the data path there is need for a control unit.
 The responsibility of the control unit is to configure all the different components for the current CPU operation so that the desired computation will emerge from the flow of data.
 The control unit achieves this by setting the control signals of the relevant control signals of the relevant components to the values associated with the current instruction.
 Note that different instructions classes requires different use of the data path.
-Thus, combinations the control signals must accommodate the different instructions formats.
+Thus, combinations the control signals must accommodate the different instructions formats. The different instructions classes and their control can be seen in table \ref{fpga:fitness:control_unit_out_tbl}. 
+
+The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction. The \emph{FUNCTION CODE} is the 4 least significant bits of the instruction, and is responsible for determining the operation the ALU should perform. An overview of the different ALU operations can be found in table .
+
+ 
+\input{fpga/tbl/alu_function_codes_tbl}
+
 
 
 \input{fpga/tbl/control_unit_output_tbl}
@@ -52,7 +57,6 @@ Thus, combinations the control signals must accommodate the different instructio
 
 
 
-The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction.
 
 
 \input{fpga/tbl/fitness_core_control_unit_tbl}
