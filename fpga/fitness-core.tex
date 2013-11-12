@@ -44,18 +44,20 @@ The control unit achieves this by setting the control signals of the relevant co
 Note that different instructions classes requires different use of the data path.
 Thus, combinations the control signals must accommodate the different instructions formats. The different instructions classes and their control can be seen in table \ref{fpga:fitness:control_unit_out_tbl}. 
 
-The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction. The \emph{FUNCTION CODE} is the 4 least significant bits of the instruction, and is responsible for determining the operation the ALU should perform. An overview of the different ALU operations can be found in table .
+The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction. The \emph{FUNCTION CODE} is the 4 least significant bits of the instruction, and is responsible for determining the operation the ALU should perform. 
 
  
-\input{fpga/tbl/alu_function_codes_tbl}
+\input{fpga/tbl/control_unit_output_tbl}
+ 
+
 
 \input{fpga/tbl/opcode_tbl}
 
 
 
-\input{fpga/tbl/control_unit_output_tbl}
 
-\input{fpga/tbl/control_signals_meaning_tbl}
+
+
 
 
 
@@ -68,6 +70,8 @@ The control unit sets up the components based on the \emph{FUNCTION CODE} and th
 
 \subsubsection{ALU\_FUNC}
 The \emph{ALU\_FUNC} is the least four significant bits of the instruction, and is responsible for determining the type of operation the \emph{ALU} should perform. This are set according to table \ref{fpga:tbl:alu_function_codes_tbl} 
+
+\input{fpga/tbl/alu_function_codes_tbl}
 
 
 \subsubsection{ALU\_SOURCE}
@@ -156,7 +160,10 @@ that the instructions following the branch is loaded in the pipeline. If the bra
 
 \subsubsection{Genetic Pool Controller} \label{fpga:fitness:sss:genetic_pool_controller}
 
-\subsubsection{Case Study} \label{fpga:fitness:sss:case_study}
+
+
+\subsubsection{Halting the pipeline}
+
 
 
 
