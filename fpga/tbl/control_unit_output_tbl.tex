@@ -2,42 +2,48 @@
     \centering
     \begin{tabular}{| l | c | c | c |c |}
     \hline
-    Control signals   &              &          &                   \\[0.5ex]
-                      & RRR          & JUMP     &  SW   &  STG       \\
+    Control signals   &              &          &        &           \\[0.5ex]
+                      & RRR          & JUMP     &  SW    &  STG       \\
     \hline
-    ALU\_SOURCE       &              &          &       &            \\
-    IMM\_SOURCE       &              &          &       &            \\
-    REG\_STORE        &              &          &       &            \\
-    STORE\_SOURCE     &              &          &       &            \\
-    CALL              &              &          &       &            \\
-    JUMP              &              &          &       &            \\
-    GENE\_OP          &              &          &       &            \\
-    MEM\_OP           &              &          &       &            \\
-    TO\_REG           &              &          &       &            \\
+    ALU\_FUNC         & FUNC         & ADD      &  ADD   &  NA        \\ 
+    ALU\_SOURCE       &  0           & 1        &  1     &  0         \\
+    IMM\_SOURCE       &  0           & 1        &  1     &  0         \\
+    REG\_SOURCE       &  0           & 1        &  0     &  0         \\
+    STORE\_SOURCE     &  0           & 0        &  1     &  0         \\
+    CALL              &  0           & 0        &  0     &  0         \\
+    JUMP              &  0           & 1        &  0     &  0         \\
+    GENE\_OP          &  NA          & NA       &  NA    &  10        \\
+    MEM\_OP           &  NA          & NA       &  10    &  NA        \\
+    TO\_REG           &  01          & NA       &  NA    &  NA        \\
+    REG\_WRITE        &  1           & 0        &  0     &  0         \\
     \hline  
-                      & RRI          & LW       & STI   & SETG       \\
+                      & RRI          & LW       & STI    & SETG       \\
     \hline
-    ALU\_SOURCE       &              &          &       &            \\
-    IMM\_SOURCE       &              &          &       &            \\
-    REG\_STORE        &              &          &       &            \\
-    STORE\_SOURCE     &              &          &       &            \\
-    CALL              &              &          &       &            \\
-    JUMP              &              &          &       &            \\
-    GENE\_OP          &              &          &       &            \\
-    MEM\_OP           &              &          &       &            \\
-    TO\_REG           &              &          &       &            \\
+    ALU\_FUNC         & FUNC         & ADD      & FUNC   & FUNC       \\
+    ALU\_SOURCE       &  1           &  1       &  1     &  0         \\
+    IMM\_SOURCE       &  0           &  0       &  1     &  0         \\
+    REG\_SOURCE       &  0           &  0       &  0     &  0         \\
+    STORE\_SOURCE     &  0           &  0       &  0     &  0         \\
+    CALL              &  0           &  0       &  0     &  0         \\
+    JUMP              &  0           &  0       &  0     &  0         \\
+    GENE\_OP          &  NA          &  NA      &  NA    &  11        \\
+    MEM\_OP           &  NA          &  01      &  NA    &  NA        \\
+    TO\_REG           &  01          &  11      &  NA    &  NA        \\
+    REG\_WRITE        &  1           &  1       &  0     &  0         \\ 
     \hline
-                      & CALL         & LDI      & LDG   &            \\
+                      & CALL         & LDI      & LDG   &             \\
     \hline  
-    ALU\_SOURCE       &              &          &       &            \\
-    IMM\_SOURCE       &              &          &       &            \\
-    REG\_STORE        &              &          &       &            \\
-    STORE\_SOURCE     &              &          &       &            \\
-    CALL              &              &          &       &            \\
-    JUMP              &              &          &       &            \\
-    GENE\_OP          &              &          &       &            \\
-    MEM\_OP           &              &          &       &            \\
-    TO\_REG           &              &          &       &            \\   
+    ALU\_FUNC         & ADD          & ADD      &  NA   &             \\
+    ALU\_SOURCE       &  1           &  1       &  0    &             \\
+    IMM\_SOURCE       &  1           &  1       &  0    &             \\
+    REG\_SOURCE       &  1           &  0       &  0    &             \\
+    STORE\_SOURCE     &  0           &  0       &  0    &             \\
+    CALL              &  1           &  0       &  0    &             \\
+    JUMP              &  1           &  0       &  0    &             \\
+    GENE\_OP          &  NA          &  NA      &  01   &             \\
+    MEM\_OP           &  NA          &  NA      &  NA   &             \\
+    TO\_REG           &  NA          &  01      &  00   &             \\   
+    REG\_WRITE        &  0           &  1       &  1    &             \\
     \hline
     \end{tabular}
     \caption{Control unit output}
