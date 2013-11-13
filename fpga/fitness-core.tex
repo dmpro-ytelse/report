@@ -1,4 +1,4 @@
-\subsubsection{Data Path} \label{fpga:fitness:sss:data_path}
+\subsubsection{Data Path} 
 The design of the fitness core is highly influenced by the classic pipelined MIPS core design\cn.
 The core is designed as a five stage pipeline.
 The contents of the different stages in the pipeline, however, differs from the original MIPS architecture, as the CPU architecture has to accomadate for the ISA design which combines ideas from multiple exisiting architectures.
@@ -38,7 +38,7 @@ The reader may refer to their respective sections for more details.
 
 
 
-\subsubsection{Control Unit} \label{fpga:fitness:sss:control_unit}
+\subsubsection{Control Unit} 
 The responsibility of the control unit is to configure all the different components for the current CPU operation so that the desired computation will emerge from the flow of data.
 The control unit achieves this by setting the control signals of the relevant control signals of the relevant components to the values associated with the current instruction.
 Note that different instructions classes requires different use of the data path.
@@ -131,7 +131,14 @@ The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_mu
 
 
 
-\subsubsection{The ALU}\label{fpga:fitness:sss:the_alu}
+\subsubsection{The ALU}
+
+\subsubsection{Multiplication}
+Multiplication is handled as a special case in the architecture. The multiplication is designed to use two cycles in the \emph{execution stage}. This is because the multiplication is the slowest of the ALU operations, and the overall performance would be degrade if this case was treated as the longest path. To overcome this limitation, a state machine is designed in the execution stage to halt the pipeline when performing multiplication. This will make sure the multiplication operation is able to finish without needing to adjust the clock for the other arithmetic operations performed by the ALU. 
+
+\todo{fix this brain dump}
+
+
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
 Since the executions of instructions overlap in the pipeline.
@@ -146,7 +153,7 @@ The forwarding logic is implemented by comparing register dependencies of the in
 
 
 
-\subsubsection{Conditionals} \label{fpga:fitness:sss:conditionals}
+\subsubsection{Conditionals} 
 Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies      
 that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the following instructions is not supposed to be validated. To avoid this the memory stage contain a counter which keep control of how many instructions that should be invalidated. The instructions themselves are simply invalidated by changing their conditional code to yield not executed. An overview of the conditional codes can be found in table \todo{reference} in appendix \todo{reference}.
 
@@ -156,9 +163,9 @@ that the instructions following the branch is loaded in the pipeline. If the bra
 
 
 
-\subsubsection{Memory Controller} \label{fpga:fitness:sss:memory_controller}
+\subsubsection{Data Controller} 
 
-\subsubsection{Genetic Pool Controller} \label{fpga:fitness:sss:genetic_pool_controller}
+\subsubsection{Genetic Pool Controller} 
 
 
 
