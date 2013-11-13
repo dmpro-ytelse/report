@@ -166,7 +166,11 @@ that the instructions following the branch is loaded in the pipeline. If the bra
 
 
 \subsubsection{Fitness Memory Controller} 
-In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. This is controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the fitness core.
+In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. This is controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the fitness core. Since the galapagos architecture is an load/store architecture, there are two instructions that are able to work an memory, \emph{load word} and \emph{store word}. To accommodate these instructions the memory controller have two cases, one for loading and one for storing a memory word, both which requires access to the bus. The \emph{fitness memory controller} requests the bus by sending a request signal to the main \emph{Data controller}. The \emph{Data controller} either a responds to this request, immediately granting the bus with an acknowledgment, or prosponds sending acknowledgment, in case some other core is using the bus. Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. 
+
+When the bus is acquired, the \emph{fitness memory controller} puts the address on the address bus. Depending on the operation, \emph{LOAD} or \emph{STORE}, it either receives data on the input bus, or puts data on the output bus. 
+
+
 
  
 
