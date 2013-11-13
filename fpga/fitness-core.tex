@@ -85,7 +85,7 @@ The galapagos ISA have two different instruction classes (RI, RRI) that uses dif
 
 
 \subsubsection{REG\_SOURCE}
-\todo {this}
+In case of \emph{JMP} and \emph{CALL} instructions the immediate address field of the instruction is added with the address content of RD. The RD address specified in the in the instruction must be read from the register file. Normally, the register file would use the \emph{RS} and \emph{RT} part of the instructions as inputs to the register file. In the special case of \emph{RI} instructions the register file must read the RD instead of RS. This is accomplished by asserting the \emph{REG\_SOURCE} signal. This signals causes the a multiplexor to choose the \emph{RD} portion of the instruction instead of the \emph{RS} as input to the register file. This will output the content of the correct data from the register file. This is also visible in figure \todo{reference figure}   
 
 
 
@@ -133,6 +133,7 @@ The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_mu
 
 \subsubsection{The ALU}
 
+
 \subsubsection{Multiplication}
 Multiplication is handled as a special case in the architecture. The multiplication is designed to use two cycles in the \emph{execution stage}. This is because the multiplication is the slowest of the ALU operations, and the overall performance would be degrade if this case was treated as the longest path. To overcome this limitation, a state machine is designed in the execution stage to halt the pipeline when performing multiplication. This will make sure the multiplication operation is able to finish without needing to adjust the clock for the other arithmetic operations performed by the ALU. 
 
@@ -162,10 +163,19 @@ that the instructions following the branch is loaded in the pipeline. If the bra
 
 
 
+\subsubsection {Cache controller}
 
-\subsubsection{Data Controller} 
+
+\subsubsection{Data Memory Controller} 
+The galapagos architecture is MIMD architecture with shared memory. This imposes problems when more fitness cores need to access the memory simultaneously. In order to overcome this problem the access to the memory is controlled with a memory controller. The responsibility of the memory controller is granting accessing to the requesting fitness cores.  
+
+This functionality is divided into two different kind of controllers; one located in each fitness core, and one main controller responsible for the actual data memory
 
 \subsubsection{Genetic Pool Controller} 
+As with the memory, the fitness cores need to request the memory bus from a central arbitration unit. However, this unit is different compared to the \emph{data memory controller}. This controller is responsible for controlling the access to the rated and unrated pools. 
+
+
+
 
 
 
