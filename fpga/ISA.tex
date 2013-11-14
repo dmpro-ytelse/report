@@ -1,5 +1,23 @@
-The \Gls{galapagos} Instruction Set Architecture is the Instruction Set Archtecture designed for the \Gls{barricelli} computer for this project.
-The ISA is loosely based on the well-known and tested MIPS architecture\cn, but borrows inspiration from many other different sources as well.
+The \Gls{galapagos} Instruction Set Architecture is the Instruction Set Archtecture designed for the \Gls{barricelli} computer for this project. The ISA is loosely based on the well-known and tested MIPS architecture\cn, but borrows inspiration from many other different sources as well. Especially, inspirational is the the core design principles used when designing \emph{MIPS}.
+
+\begin{description}
+  \item[Design principle 1] Simplicity favours regularity~\cite[p.~79]{compOrgDes}. 
+  \item[Design principle 2] Smaller is faster ~\cite[p.~81]{compOrgDes}
+  \item[Design principle 3] Make the common case fast.~\cite[p.~86]{compOrgDes}
+\end{description}
+
+\todo{Fix these references}
+
+\todo{Link galapagos ISA to these principles}
+
+%%As with MIPS, the galapagos rely on relatively few instruction classes. The instructions classes are constructed with regularity in mind. The different part of the instructions are always located in the same place. The instructions classes are includes here for reference:
+
+
+%%This makes the construction of the data path a lot simpler, since it does not rely on any advance logic to decode and execute the instructions. 
+
+
+
+
 
 The Galapagos ISA was designed and fully specified quite early in the project, which made it an important resource for the rest of the component design process.
 
@@ -10,4 +28,3 @@ Present in the \Gls{galapagos} ISA are the genetic instructions \texttt{ldg}, \t
 They are the instructions for loading and storing \glspl{individual} to the genetics accelerator, and configuring the genetics accelerator, respectively.
 Refer to the ISA documentation in appendix \vref{appendix:isa} for in-depth documentation about what they do.
 
-\todo{Design principles used when designing the ISA}
