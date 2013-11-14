@@ -1,39 +1,39 @@
 TITLE: Crossover
 
-Crossover is the second phase in the genetics accelerator. Two inputs are forwarded from the two selections cores as "parents", and two outputs are the "children" of the inputs, containing bits from both parents. All the bits from both the parents are forwarded in the children, but at some points the bit-patterns are switched on the children, based on random_number inputs from the PRNG. Henceforth this is called crossover.
+Crossover is the second phase in the genetics accelerator. Two inputs are forwarded from the two selections cores as "parents", and two outputs are the "children" of the inputs, containing bits from both parents. All the bits from both the parents are forwarded in the children, but at some points the bit-patterns are switched on the children, based on random\_number inputs from the PRNG. Henceforth this is called crossover.
 
-There are three distinct crossover functions that are implented: Crossover_split, crossover_doublesplit and crossover_xor.
+There are three distinct crossover functions that are implented: Crossover\_split, crossover\_doublesplit and crossover\_xor.
 
-SUB_TITLE: Crossover_split 
+SUB\_TITLE: Crossover\_split 
 
-FIGURE Y1: Crossover_split
+FIGURE Y1: Crossover\_split
 
-The first function, crossover_split, performs crossover from a selected bit number in the children and until the edge (bit number 0). This can be seen in figure Y1. The values in the parents are represented with X's and Y's, and a single X or Y can have the value 0 or 1, independent of each pther.
-The bit_number for starting crossover is based on the value of a 6-bit input random_number, which is provided by the PRNG. This value ranges from 0 to 63.
-
-(Describe how it technically works?)
-
-SUB_TITLE: Crossover_doublesplit
-
-FIGURE Y2: Crossover_doublesplit
-
-The second function, crossover_doublesplit, is similar to the crossover_split-function, but in additionally to having a starting bit for crossover, it also has an ending bit where the crossover starts, instead of reaching the edge at bit nr. 0. PRNG provides with 2 6-bit inputs, random_number1 and random_number2, whose values selects the starting bit and the ending bit for the crossover. These values range from 0 to 63, and if both are the same, then only one bit will be selected for crossover.
+The first function, crossover\_split, performs crossover from a selected bit number in the children and until the edge (bit number 0). This can be seen in figure Y1. The values in the parents are represented with X's and Y's, and a single X or Y can have the value 0 or 1, independent of each pther.
+The bit\_number for starting crossover is based on the value of a 6-bit input random\_number, which is provided by the PRNG. This value ranges from 0 to 63.
 
 (Describe how it technically works?)
 
-SUB_TITLE: Crossover_xor
+SUB\_TITLE: Crossover\_doublesplit
 
-FIGURE Y3:  Crossover_xor
+FIGURE Y2: Crossover\_doublesplit
 
-The third function, crossover_xor, performs crossover bit by bit, based on the 64-bit input random_number. For each bit number i that has the value 1, the function will perform crossover on the children on the same bit number i. This function is called XOR because of use of XOR-gates in earlier version of the function, and the principle is still the same in the current version: For each bit number i in the child, the value will be from bit number i from one and only one parent.
+The second function, crossover\_doublesplit, is similar to the crossover\_split-function, but in additionally to having a starting bit for crossover, it also has an ending bit where the crossover starts, instead of reaching the edge at bit nr. 0. PRNG provides with 2 6-bit inputs, random\_number1 and random\_number2, whose values selects the starting bit and the ending bit for the crossover. These values range from 0 to 63, and if both are the same, then only one bit will be selected for crossover.
 
 (Describe how it technically works?)
 
-SUB_TITLE: Crossover_toplevel
+SUB\_TITLE: Crossover\_xor
 
-FIGURE Y4: Crossover_toplevel.png (Who should generate this? Per Thomas, so that architecture style/image is similar to rest?)
+FIGURE Y3:  Crossover\_xor
 
-Crossover is implemented on the genetics accelerator as a toplevel containing 3 cores, one for each function, as well as a fourth path with no crossover. In addition to the two parent inputs and 64-bit input random_number, the toplevel also takes in a control_number used for determining which crossover function is to be used: Split, doublesplit, xor, "party mode" or no crossover at all. Party mode is choosing crossover function at random, based on the 2 LS bits in the random_number. In this way, whenever inputs are sent through the crossover_toplevel, different functions may be used at different times. These are the control values:
+The third function, crossover\_xor, performs crossover bit by bit, based on the 64-bit input random\_number. For each bit number i that has the value 1, the function will perform crossover on the children on the same bit number i. This function is called XOR because of use of XOR-gates in earlier version of the function, and the principle is still the same in the current version: For each bit number i in the child, the value will be from bit number i from one and only one parent.
+
+(Describe how it technically works?)
+
+SUB\_TITLE: Crossover\_toplevel
+
+FIGURE Y4: Crossover\_toplevel.png (Who should generate this? Per Thomas, so that architecture style/image is similar to rest?)
+
+Crossover is implemented on the genetics accelerator as a toplevel containing 3 cores, one for each function, as well as a fourth path with no crossover. In addition to the two parent inputs and 64-bit input random\_number, the toplevel also takes in a control\_number used for determining which crossover function is to be used: Split, doublesplit, xor, "party mode" or no crossover at all. Party mode is choosing crossover function at random, based on the 2 LS bits in the random\_number. In this way, whenever inputs are sent through the crossover\_toplevel, different functions may be used at different times. These are the control values:
 * 000 - Split
 * 001 - Doublesplit
 * 010 - XOR
