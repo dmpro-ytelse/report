@@ -131,10 +131,7 @@ However as an precaution, the individuals are passed through yet another phase, 
 Lastly, it is important to mention that there exist a lot of different classes of genetic algorithms. They usually use employ many different techniques for performing selection, crossover and mutation. The point of this project is not covering all of them. Actually, only a subset of problems will be supported on galapagos architecture. 
 
 
-
-
-
-
+\todo{Fix this section}
 
 
 \subsection{Continuous Genetic Algorithms}
@@ -142,7 +139,13 @@ Lastly, it is important to mention that there exist a lot of different classes o
 A new and better strategy is gaining traction in the literature.\TODO{TODO: find a citation for this}.
 Continuous genetic algorithms do away with the concept of discrete generations.
 Rather, it continuously selects a few individuals, processes them, and returns them (or their offspring) to the population.
-This erases the generational border, and is shown \TODO{TODO:cite our own research here, plus literature} to converge faster towards an optimal solution.
+This erases the generational border, and is shown \TODO{TODO:cite our own research here, plus literature} to converge faster towards an optimal solution. This also implies that the operations involved in the genetic algorithm is  more easily parallelizeble, since the generation restriction no longer visible. More specific it allows the algorithm a possible way to work on both rated an unrated individuals on the same time. As the reader may have noticed in section, the algorithm presented were very sequential. 
+
+This algorithm uses an other approach, by disregarding the generation boundaries. It is possible to both rate and handle rated elements simultaneously without bothering about generating specific generations of individuals that are passed to the next stage.      
+
+
+
+
 
 The genetic algorithm used in the Barricelli computer is a continuous genetic algorithm.
 
