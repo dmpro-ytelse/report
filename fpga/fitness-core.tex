@@ -54,41 +54,34 @@ The control unit sets up the components based on the \emph{FUNCTION CODE} and th
 \input{fpga/tbl/opcode_tbl}
 
 
-
-
-
-
-
-
-
-
-
 \input{fpga/tbl/fitness_core_control_unit_tbl}
 
 
 %%The meaning of the different control signals
 
-\subsubsection{ALU\_FUNC}
+The following paragraphs document and explain each of the control unit's control signals that control the functionality in the fitness core.
+
+\paragraph{ALU\_FUNC}
 The \emph{ALU\_FUNC} is the least four significant bits of the instruction, and is responsible for determining the type of operation the \emph{ALU} should perform. This are set according to table \ref{fpga:tbl:alu_function_codes_tbl} 
 
 \input{fpga/tbl/alu_function_codes_tbl}
 
 
-\subsubsection{ALU\_SOURCE}
+\paragraph{ALU\_SOURCE}
 The \emph{ALU\_SOURCE} signal is used to specify the second \emph{ALU operand}. When this signal is asserted the second ALU operand is the immediate field of the instruction. This implies that the instruction class of the instruction is either RRI or RI. On the other hand, if this signal is de-asserted, the operand comes from read register to of the instruction file. Note that this value may or may not have been forwarded. 
 
-\subsubsection{REG\_WRITE}
+\paragraph{REG\_WRITE}
 This signals specifies whether the value, residing in the \emph{write-back} stage, should be written to the register file. When this signal is asserted the value from the \emph{write-back} stage is written to the specified register address. The register address is specified in the instruction, and always reside in the RT address field of the instruction. This fact makes it simpler when deciding at what address the value should be written. However, when this signal is de-asserted, this is equivalent with no operation. 
 
-\subsubsection{IMM\_SOURCE}
+\paragraph{IMM\_SOURCE}
 The galapagos ISA have two different instruction classes (RI, RRI) that uses different lengths of the immediate field. In order to differentiated between these immediate fields, the \emph{IMM\_SOURCE} signal is responsible of selecting immediate field based on the instruction class of the current instruction. The selection is done with a multiplexor. In case of an RRI instruction the 10-bits immediate field is selected, and the 19-bits for a RI instruction.   
 
 
-\subsubsection{REG\_SOURCE}
+\paragraph{REG\_SOURCE}
 In case of \emph{JMP} and \emph{CALL} instructions the immediate address field of the instruction is added with the address content of RD. The RD address specified in the in the instruction must be read from the register file. Normally, the register file would use the \emph{RS} and \emph{RT} part of the instructions as inputs to the register file. In the special case of \emph{RI} instructions the register file must read the RD instead of RS. This is accomplished by asserting the \emph{REG\_SOURCE} signal. This signals causes the a multiplexor to choose the \emph{RD} portion of the instruction instead of the \emph{RS} as input to the register file. This will output the content of the correct data from the register file. This is also visible in figure \todo{reference figure}   
 
 
-\subsubsection{STORE\_SOURCE}
+\paragraph{STORE\_SOURCE}
 
 
 
@@ -96,16 +89,16 @@ In case of \emph{JMP} and \emph{CALL} instructions the immediate address field o
 
 \todo{this}
 
-\subsubsection{JUMP}
+\paragraph{JUMP}
 The jump instruction is use the address in the immediate field of the instruction to load a new value into the \emph{program counter} register. Which specifies the address of the next instruction to be executed. The jump signal is used in a multiplexor in the memory stage to select between the jump address or the incremented program counter. In case of jump, this signal is asserted and the jump address is chosen. When de-asserted the program counter is the incremented program counter. This signal is also asserted when performing call instructions which is discussed in the section below.   
 
-\subsubsection{CALL}
+\paragraph{CALL}
 MIPS operate with what is known as a \emph{link-and-jump} instruction in order to support function calls \cn. The galapagos ISA also support this functionality, however, the instruction is denoted as \emph{CALL} instead of \emph{JAL}. The instruction works very similar to the jump instruction described above. The difference lay in the fact that the incremented program counter is stored in combination with the program counter being modified. This address is stored in register 31.This value can be used later when returning from the function call. The return of a function is basically a jump instruction that jumps back to the address after the call instruction.
 
 The responsibility of the \emph{CALL} signal is to make sure that the incremented program counter is stored at register 31. When asserted the signal make sure that the write register address is changed to 31. If the signal is de-asserted the write register will stay unmodified, and the RT register in the instruction is responsible for specifying the register address.
 
 
-\subsubsection{GENE\_OP}
+\paragraph{GENE\_OP}
 The loading and storing fitness values and chromosomes is the responsibility of the \emph{genetic controller}. This controller is able to perform three types of actions: \emph{load}, \emph{store} and \emph{settings} dependent of the instruction class executed. When performing a load, a chromosome is loaded from the unrated pool. The store operation is used to store a chromosome and its corresponding fitness value to the rated pool. The settings are used to apply settings to the genetic pipeline.  In order to divide these cases, the galapagos architecture rely on \emph{gene operation} vector. The bit-vector is set depending on the instruction class as seen in table \ref{fpga:tbl:gene_op_code_tbl}
 
 
@@ -116,13 +109,13 @@ Depending on the bit-vector-signal, the \emph{genetic controller} is able to per
 
 \todo{Fix} 
 
-\subsubsection{MEM\_OP}
+\paragraph{MEM\_OP}
 As with the genetic controller, the memory controller must be able to distinguish between operations. In case of memory controller, these operations are loading and storing to/from the external memory. In same manner as with, the genetic controller, these signals are set according to the instruction class currently being executed. These can be seen in table \ref{fpga:tbl:mem_op_code_tbl}
 
 \input{fpga/tbl/mem_op_code_tbl}
 
 
-\subsubsection{TO\_REG}
+\paragraph{TO\_REG}
 In the \emph{write-back} stage, there is need to distinguish between several outputs from the \emph{memory stage}. The \emph{TO\_REG} signal is responsible for selecting which value that should be written to the register file. The selection is aided by a 4-to-1 multiplexor. The different inputs are: \emph{Gene}, \emph{Data}, and \emph{PC+1}, \emph{Res}, as seen in figure \todo{add reference}. However, keep in mind that the \emph{REG\_WRITE} signals must be asserted for the data to be written. 
 
 The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_multiplexor_output_tbl}
@@ -130,7 +123,7 @@ The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_mu
 \input{fpga/tbl/to_reg_multiplexor_output_tbl}
 
 
-\subsubsection{The ALU}
+\subsection{The ALU}
 
 
 \subsubsection{Multiplication}
