@@ -10,10 +10,10 @@ The \Gls{galapagos} Instruction Set Architecture is the Instruction Set Archtect
 
 \todo{Link galapagos ISA to these principles}
 
-%%As with MIPS, the galapagos rely on relatively few instruction classes. The instructions classes are constructed with regularity in mind. The different part of the instructions are always located in the same place. The instructions classes are includes here for reference:
+All of these principles visible in both the ISA and the data path of the galapagos architecture. As with MIPS, galapagos rely on relatively few instructions classes. The instructions formats are constructed to be regular, in order to make the decode process simpler. The different information in the instruction is always located on the same positions.  
 
 
-%%This makes the construction of the data path a lot simpler, since it does not rely on any advance logic to decode and execute the instructions. Which result in a simpler pipeline architecture. 
+The galapagos ISA is in fact an RISC architecture. The instructions are kept simple and are only performing very specific and small tasks. That is, the instructions are low level instructions working executed directly on the hardware without need for additional decoding in form of microinstructions. The different instruction formats supported by the galapagos architecture can be seen in figure(?) \todo{list instructions formats} \todo{clarify, RISC vs CISC}. 
 
 
 
