@@ -185,6 +185,9 @@ When the bus is acquired, the \emph{fitness memory controller} puts the address 
 As with the communication with the main data controller, each fitness core also have a small controller to synchronise the communication with the \emph{genetic memory controller}. This controller is referred to as the \emph{fitness genetic controller}. This controller is also implemented as a state machine. However, this component contains more functionality than the \emph{fitness memory controller}. The communication against the genetic controller require more functionality, since this controller communicate with the \emph{genetic controller}, which handles the access with both the rated and unrated pool. 
 
 
+
+
+
 \subsubsection{Halting the pipeline}
 In normal computer systems the time to access the memory is variable. It depends on the different states of the machine. This imposes a problem when several cores competes about access to the memory. It is difficult to determine precisely the times that is actually used to receive the required data. In order to fix this issue, and prevent the processor to compute when there is no data. Each interaction with memory is able to halt the processor in case when performing memory operations. The different situations arise when accessing the instruction memory, data memory, and the genetic data pools. Their corresponding controllers are able to set a halt signal before performing the operation. When the \emph{halt} signals is asserted, the program counter and the pipeline registers will be halted, ensuring that the \emph{fitness core} does not change state. 
 
