@@ -125,13 +125,28 @@ The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_mu
 
 \subsection{The ALU}
 
+The Arithmetic Logic Unit, or ALU, is the heart of the fitness core, so to speak.
+It is responsible for executing the scheduled operations on data.
+The ALU is perhaps the most important single component of the fitness core.
+
+The ALU in the fitness core is capable of performing a large array of different mathematical and logical operations on 64-bit words, including addition, subtraction, comparisons, shifts and multiplications, in addition to a slew of bitwise logical operations such as and, or, xor and not.
+Division is not supported.
+
+On the FPGA, large parts of the ALU is implemented with \glspl{DSP slice}, which means that dedicated pre-fabricated ALU-specific circuitry is used in place of regular generic \gls{FPGA} \glspl{LUT} for increased performance and space utilization.
 
 \subsubsection{Multiplication}
-Multiplication is handled as a special case in the architecture. The multiplication is designed to use two cycles in the \emph{execution stage}. This is because the multiplication is the slowest of the ALU operations, and the overall performance would be degrade if this case was treated as the longest path. To overcome this limitation, a state machine is designed in the execution stage to halt the pipeline when performing multiplication. This will make sure the multiplication operation is able to finish without needing to adjust the clock for the other arithmetic operations performed by the ALU. This will make the architecture to be able to run at greater clock speeds. 
 
+Multiplication is handled as a special case in the architecture.
+The multiplication is designed to use two cycles in the \emph{execution stage}, rather than the normal one cycle per operation.
+This is because the multiplication is the slowest of the ALU operations, and the maximum clock frequency would be severely limited, were the multiplication path allowed to become the longest path.
+This would result in a degradation of the overall performance of the processor, which is not desirable.
+To overcome this limitation, a state machine is designed in the execution stage to halt the pipeline when performing multiplication.
+This effectively makes the multiplication a multi-cycle operation.
+The result of this is that the multiplication operation is able to finish without the rest of the system needing to slow down to accomodate for it, meaning that the maximum clock speed is not limited by the multiplication circuitry.
 
-\todo{fix this brain dump}
+\subsubsection{Shifters}
 
+\todo{I've heard a lot about the epicness of the shifters. perhaps we should write something about them?}
 
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
