@@ -1,9 +1,34 @@
 \section{Performance}
+\subsection{performance measurements and benchmarking}
+\subsection{average instructions per cycle}
+\subsection{performance comparison}
 
 \todo{this}
 
 \section{Energy Efficiency}
 
 \todo{this}
+\section{theory}
+In this section theory related to MIMD architectures and how to further improve their performances are discussed.
+This also covers the discussions inside the group about the design of the architecture in the planning phase of the project.
+\subsection{SPMD and concurrency}
+One of the first discussions that came up in the group after the assignment were given was if the processor cores should
+be able to synchronize themselves. By doing this, the processor cores would be able to execute code that is not completely independent in paralell in an elegant way.
+However this also raises some issues as for instance data hazards.
+
+\subsubsection{coherrency}
+In addition to data hazards, cache coherency is a large issue....
+
+\subsection{using Cisc or Risc ISAs}
+Cisc and Risc instruction set architectures are two very different ways of thinking when it comes to creating instruction sets.
+While in the last years, Risc ISAs have been the most dominant instruction set architecture, we can also see that CISC architectures
+are on their way back into the markets. Some of the reasons for this is that increasing paralellism is gaining lesser performance increases.
+
+\subsubsection{micro operations: a bridge between Complex and reduced instruction sets}
+The use of micro operations is based on the principle that you want to convert a complex instruction into a set of smaller micro operations. This
+may simplify the design of for instance a super scalar processor because dependencies between the converted micro instructions would already be known. 
+
+
+\subsection{Memory management policies}
 
 \section{\todo{probably more stuff}}
