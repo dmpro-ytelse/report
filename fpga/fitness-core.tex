@@ -155,7 +155,11 @@ There is need for some mechanism to handle the data dependencies that arise betw
 
 The forwarding logic is implemented by comparing register dependencies of the instruction in the execution stage with other instructions currently residing in the pipeline. If the forwarding unit notices register dependencies and that these instructions will write to these registers at a later time, it will assert signals that causes the data to be forwarded to the execution stage. The control signals is used in two 3-to-1 multiplexors in order to choose which source the data should arrive from. An overview of the control signals and their meaning can be seen in table. \ref{tbl:fpga:forwarding_signals}.
 
-\todo{Perhaps this can be rewritten a bit}
+Forwarding does, however, not solve all occurrences of data hazards. It exists some situations where forwarding is not enough, and the processor need to stall. These occurrences happen in relations with \emph{LOAD} operations, where there exists some register dependency between the \emph{LOAD} instruction and some other instruction currently residing in the pipeline. The problem occurs because the data loaded from memory is not available until the write-back stage. This implies that the forwarding unit is unable to forward any data until the this stage. The galapagos architecture does not solve this problem in hardware, but rather in software. The assembler is responsible for inserting \emph{NOP} instructions in case of such hazards.  
+
+
+
+\todo{Re-write this shit}
 
 
 \input{fpga/tbl/forwarding_unit_tbl}
