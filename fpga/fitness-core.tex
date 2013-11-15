@@ -148,15 +148,33 @@ The forwarding logic is implemented by comparing register dependencies of the in
 
 
 \subsubsection{Conditionals} 
-Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies      
-that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the following instructions is not supposed to be validated. To avoid this the memory stage contain a counter which keep control of how many instructions that should be invalidated. The instructions themselves are simply invalidated by changing their conditional code to yield not executed. An overview of the conditional codes can be found in table \todo{reference} in appendix \todo{reference}.
+Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the instructions currently residing in the pipeline are not supposed to be validated. More specific, the instructions residing in the \emph{fetch stage}, \emph{decode stage}, \emph{execute stage} needs to be flushed.  This is accomplished with a 2-bit counter. The counter is used to determine how many instructions should be flushed when reaching the memory stage. Fortunately, this number is always three in case of a conditional branch.The instructions themselves are simply invalidated by invalidate their control signals. Note that the state is not changed until the memory stage and the write back stage. By simply intercept and change this signals the result of the instruction would in effect be a \emph{NOP}. 
+
+
+\todo{reference}.
 
 \todo{Better flow}
 
 
 
 \subsubsection{Fitness Memory Controller} 
-In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. This is controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the fitness core. Since the galapagos architecture is an load/store architecture, there are two instructions that are able to work an memory, \emph{load word} and \emph{store word}. To accommodate these instructions the memory controller have two cases, one for loading and one for storing a memory word, both which requires access to the bus. The \emph{fitness memory controller} requests the bus by sending a request signal to the main \emph{Data controller}. The \emph{Data controller} either a responds to this request, immediately granting the bus with an acknowledgment, or prosponds sending acknowledgment, in case some other core is using the bus. Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. 
+In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. The controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the \emph{fitness core}.  
+
+
+
+
+
+Depending on the instruction, either load or store, the controller react by 
+
+The \emph{fitness core} supports two instructions for interacting with the data memory,  \emph{load word} and \emph{store word}. 
+
+
+
+
+
+
+
+To accommodate these instructions the memory controller have two cases, one for loading and one for storing a memory word, both which requires access to the bus. The \emph{fitness memory controller} requests the bus by sending a request signal to the main \emph{Data controller}. The \emph{Data controller} either a responds to this request, immediately granting the bus with an acknowledgment, or prosponds sending acknowledgment, in case some other core is using the bus. Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. 
 
 When the bus is acquired, the \emph{fitness memory controller} puts the address on the address bus. Depending on the operation, \emph{LOAD} or \emph{STORE}, it either receives data on the input bus, or puts data on the output bus. 
 
@@ -167,28 +185,10 @@ When the bus is acquired, the \emph{fitness memory controller} puts the address 
 As with the communication with the main data controller, each fitness core also have a small controller to synchronise the communication with the \emph{genetic memory controller}. This controller is referred to as the \emph{fitness genetic controller}. This controller is also implemented as a state machine. However, this component contains more functionality than the \emph{fitness memory controller}. The communication against the genetic controller require more functionality, since this controller communicate with the \emph{genetic controller}, which handles the access with both the rated and unrated pool. 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Especially, regarding the write operation.  
-
-
-
-
-
-
-
-
 \subsubsection{Halting the pipeline}
+In normal computer systems the time to access the memory is variable. It depends on the different states of the machine. This imposes a problem when several cores competes about access to the memory. It is difficult to determine precisely the times that is actually used to receive the required data. In order to fix this issue, and prevent the processor to compute when there is no data. Each interaction with memory is able to halt the processor in case when performing memory operations. The different situations arise when accessing the instruction memory, data memory, and the genetic data pools. Their corresponding controllers are able to set a halt signal before performing the operation. When the \emph{halt} signals is asserted, the program counter and the pipeline registers will be halted, ensuring that the \emph{fitness core} does not change state. 
+
+\todo{hmm? Integrate with the controllers} 
 
 
 
