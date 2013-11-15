@@ -1,27 +1,47 @@
-The \Gls{galapagos} Instruction Set Architecture is the Instruction Set Archtecture designed for the \Gls{barricelli} computer for this project. The ISA is loosely based on the well-known and tested MIPS architecture\cn, but borrows inspiration from many other different sources as well. Especially, inspirational is the the core design principles used when designing \emph{MIPS}.
+The \Gls{galapagos} Instruction Set Architecture is the Instruction Set Archtecture designed for the \Gls{barricelli} computer for this project.
+The architecture is loosely based on the well-known and tested MIPS architecture\cn, but borrows inspiration from many other different sources as well.
+Especially inspirational for the design of the \Gls{galapagos} ISA have been the core design principles used when designing \emph{MIPS}, which can be found in table \vref{fpga:tbl:mips-design-principles}.
 
-\begin{description}
-  \item[Design principle 1] Simplicity favours regularity~\cite[p.~79]{compOrgDes}. 
-  \item[Design principle 2] Smaller is faster ~\cite[p.~81]{compOrgDes}
-  \item[Design principle 3] Make the common case fast.~\cite[p.~86]{compOrgDes}
-\end{description}
+The ISA is thoroughly documented in appendix \vref{appendix:isa}.
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{l l} 
+     \textbf{Design principle 1} & Simplicity favours regularity.~\cite[p.~79]{compOrgDes}. \\
+     \textbf{Design principle 2} & Smaller is faster.~\cite[p.~81]{compOrgDes} \\
+     \textbf{Design principle 3} & Make the common case fast.~\cite[p.~86]{compOrgDes} \\
+    \hline
+\end{tabular}
+    \caption{MIPS Design Principles}
+    \label{fpga:tbl:mips-design-principles}
+\end{table}
 
 \todo{Fix these references}
 
 \todo{Link galapagos ISA to these principles}
 
-All of these principles visible in both the ISA and the data path of the galapagos architecture. As with MIPS, galapagos rely on relatively few instructions classes. The instructions formats are constructed to be regular, in order to make the decode process simpler. The different information in the instruction is always located on the same positions.  
+All of these principles are visible in both the ISA and the data path of the \Gls{galapagos} architecture.
 
+The \Gls{galapagos} instruction set architecture is a RISC architecture.
+The instructions are kept simple and only perform very specific and small tasks.
+That is, the instructions are low-level instructions executed directly in hardware without the need for additional decoding in form of microinstructions or the like.
 
-The galapagos ISA is in fact an RISC architecture. The instructions are kept simple and are only performing very specific and small tasks. That is, the instructions are low level instructions working executed directly on the hardware without need for additional decoding in form of microinstructions. The different instruction formats supported by the galapagos architecture can be seen in figure(?) \todo{list instructions formats} \todo{clarify, RISC vs CISC}. 
+\subsection{Instruction Formats}
 
+As with \Gls{MIPS}, \Gls{galapagos}, in true \gls{RISC} fashion, has relatively few instruction formats.
+These instruction formats are constructed to be regular, which means that the different information parts of the instruction are always located in the same positions, when possible.
+This makes the instruction decoding process in the processor much simpler.
+This is done in accordance with design principle 1 of table \vref{fpga:tbl:mips-design-principles}.
 
-
-
+The three instruction formats used in \Gls{galapagos} are the RRR, RRI and RI formats.
+They are named after the types of data they contain.
+RRR contains three register addresses.
+RRI contains two register addresses and one immediate.
+RI contains one register address and a larger immediate.
 
 The Galapagos ISA was designed and fully specified quite early in the project, which made it an important resource for the rest of the component design process.
 
-The ISA is thoroughly documented in appendix \vref{appendix:isa}.
+\subsection{Genetics Instructions}
 
 One of the requirements\cn was that the ISA should support genetic-specific instructions to facilitate performant genetic algorithms programming.
 Present in the \Gls{galapagos} ISA are the genetic instructions \texttt{ldg}, \texttt{stg} and \texttt{setg}.
