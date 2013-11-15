@@ -1,4 +1,4 @@
-\documentclass{report}
+\documentclass[a4paper]{report}
 
 \input{config}
 
@@ -27,7 +27,12 @@
 \include{glossary}
 \pagenumbering{roman}
 
-\maketitle
+\ThisCenterWallPaper{1}{fig/barricelli-title-page.pdf}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
 
 \begin{abstract}
 	\input{abstract/abstract.tex}
@@ -48,6 +53,9 @@ A big thank you is extended to the following for invaluable help and guidance du
 \todo{more?}
 \end{description}
 
+% set to 3 bacause abstact and acknowledgement comes before it
+\setcounter{page}{3}
+
 \tableofcontents
 \newpage
 
@@ -57,6 +65,7 @@ A big thank you is extended to the following for invaluable help and guidance du
 \renewcommand{\lstlistlistingname}{List of Listings}
 \lstlistoflistings
 
+\newpage
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
