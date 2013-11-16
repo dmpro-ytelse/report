@@ -2,7 +2,7 @@ The mutation core is the final part in the genetics accelerator. The mutation co
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{fpga/fig/mutation.png}
-\caption{Mutation core fuction example}
+\caption{Mutation core function concept}
 \label{Fig_Mutation}
 \end{figure}
 
@@ -22,6 +22,18 @@ These are numbered after the amount of allowed mutation. Nr. 1 will always happe
 Note that if more than one of these numbers point to the same bit to be mutated, the output M will still be the inverted from the original input. For instance, if both numbers 1 and 2 (bits 11-6 and 5-0) have the value 000110, and therefore point at bit number 6, the same mutation will still happen as if only one of these numbers were 000110. If the input bit was 1, the mutated will be 0, and vice versa.
 In the example provided in figure \ref{Fig_Mutation}, the 6 first bits of the random\_number are less than the chance\_input, therefore a mutation happens. Bits 23-0 have the values 30, 14, 23 and 5. Because the value of bits 25-24 is 10 (mutation\_amount has value 2), there will be 3 mutations, and the fourth does not occur (though the figure shows where it would have occured if allowed).
 
-The mutation core is implemented by use of four shifter variables, one for each possible mutation, and set so that only one bit is 1 for the output. A final mutation is set by combining the outputs from the shifter variables by using OR-funftion, and the mutation\_amount determines how many of these outputs are combined. A final output is set by combining the input and mutation with the XOR-fuction, so that for each bit \emph{i}, the bit is set to 1 if and only if bit \emph{i} is set in either the input or the mutation, but not both.
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{fpga/fig/mutation_mask.png}
+\caption{Setting mutation}
+\label{fig_mutation_mask}
+\end{figure}
+
+The mutation core is implemented by use of four shifter variables, one for each possible mutation, and set so that only one bit is 1 for the output. A final mutation is set by combining the outputs from the shifter variables by using OR-funftion, and the mutation\_amount determines how many of these outputs are combined. Figure \ref{fig_mutation_mask} shows an example where bits 1, 4, 6 and 9 are set for mutation. In this case the final output is set by combining the input and mutation with the XOR-fuction, so that for each bit \emph{i}, the bit is set to 1 if and only if bit \emph{i} is set in either the input or the mutation, but not both. This can be seen in figure \ref{fig_mutation_perform}.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{fpga/fig/mutation_mask.png}
+\caption{Performing mutation}
+\label{fig_mutation_perform}
+\end{figure}
 
 \todo{ "Selected bit number" needs to somehow be defined in the description of the shifter variable + ShifterVariable needs to be described.}
