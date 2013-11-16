@@ -30,10 +30,10 @@ will then work as the usb host.
 
 
 \subsubsection{serial port} //the name rs232 is too ambigious. We need to explain what it is
+RS-232 is a communication standard/protocol which is implemented through a serial port interface.
 Even though serial communication was technically not required due to presence of USB interface, it was decided to implement RS-232 communication as well.
-rs-232 is a communication standard/protocol which is implemented through a serial port interface.
-This was included in case there would be troubles with USB, it should still be possible to communicate over RS-232; and vice versa.
-The microcontroller also supports communication over RS-232, so the this should be a natural second choice.
+This way, in case there were troubles with USB, it would still be possible to communicate over RS-232; and vice versa.
+The microcontroller supports communication over RS-232, so the this should be a natural second choice.
 We placed socket connector on the PCB as well as a RS-232 driver that transforms input and output signals to given voltage.
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
