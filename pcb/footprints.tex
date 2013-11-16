@@ -13,12 +13,12 @@ Some manufacturers favor imperial system and some favor metric system.
 Attention should be payed to units when designing the footprint.
 Once one gets a hang of Altium PCB editor it takes surprisingly little time to create a footprint for a regular component.
 
-We encountred one issue with designing footprints.
-The pads in footprint that was designed for polarized capasitor component EEE1HA1R0AR matched the size of components pins (they were in fact even smaller - 4.7mm vs max 5.5mm in specefication). 
+We encountred one issue while designing footprints.
+The pads of footprint that was designed for polarized capasitor component EEE1HA1R0AR matched the size of components pins (they were in fact even smaller - 4.7mm vs max 5.5mm in specefication). 
 // figure pol_cap_size_footprint_vs_specs.png
 This made soldering nontrivial.
 // figure pol_cap_size_on_board.png
-So to conclude, the pads on footprint should be longer than the pins.
+To avoid this complication the pads on footprint should be designed to be longer than the pins.
 That will make the pads protrude under the actual component resulting in much simpler soldering.
 
 USB:
