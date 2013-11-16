@@ -46,7 +46,8 @@ and to use it in the project is easily done. As it is a slow way to transfer dat
 \subsubsection{USB}
 
 Universal Serial Bus is a bus interface.
-\todo{What is it, what does it do in the system?}
+
+In Barricelli, it is used for communication between a computer and the SCU.
 
 \subsubsection{SD}
 
@@ -54,11 +55,17 @@ Universal Serial Bus is a bus interface.
 
 \subsubsection{LEDs}
 
-\todo{What is it, what does it do in the system?}
+The fastest way to get interaction from the microcontroller is to use LEDs, short for Light-Emmiting Diode. Driven by General Purpose IO pins on the SCU, to have them active is as simple 
+as setting the correct pin high. This enables fast checking of the system.
+
+It was chosen to have 16 LEDs, so that two bytes could be represented with lights. This would allow an onboard representation of results of the programs etc.
 
 \subsubsection{Buttons}
 
-\todo{What is it, what does it do in the system?}
+Just as with the LEDs, there is placed 8 buttons on the circuit board. These can be used as a makeshift keyboard in applications that run on the computer, allowing for user input during execution.
+
+As well there is a power switch and a reset \todo{there is, right?} button on the chip. The reset button starts the program loaded in the SCU.
+
 
 \subsection{Memory}
 
