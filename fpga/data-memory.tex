@@ -5,6 +5,8 @@ The galapagos architecture is MIMD architecture with shared memory. This imposes
 
 These algorithm is based on round-robin scheduling. The request bits of \emph{fitness cores} are checked in turn to check if one of the cores has requested the memory bus. The type of request is determined by combination of two request signals sent by each \emph{fitness core}. The signals refer to either a \emph{NOP}, \emph{READ}, or \emph{WRITE} operation. In case of \emph{NOP} the algorithms move to check the next state request lines. It moves in this fashion until a \emph{READ} or \emph{WRITE} request is encountered. 
 
+
+
 \todo{More details}
 
 
