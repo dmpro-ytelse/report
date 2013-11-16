@@ -24,8 +24,12 @@
 
 \section{Design decision}
 \begin{itemize}
-    \item Microcontroller, same as devkit
-    \item No OS
+    \item The microcontroller chosen is the same as in the available development kit. As there was no restrictions on power usage, 
+          it was decided to use the micro controller most convenient to develop on.
+    \item Early in the process, a discussion arised about how it could be beneficial to run an operating system on the micro controller
+          such that familiar programs could be used on it. A scenario pitched was to have network access, and then be able to talk to the
+          machine remotely using programs such as \textit{SSH} or \textit{telnet}. However, as the Linux version available on the Energy Micro
+          system was deemed not so useful, and the controller misses network support, it was decided that running an OS was unnecessarily much work.
     \item FPGA Bus, huge
 \end{itemize}
 

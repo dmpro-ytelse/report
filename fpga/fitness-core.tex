@@ -54,41 +54,34 @@ The control unit sets up the components based on the \emph{FUNCTION CODE} and th
 \input{fpga/tbl/opcode_tbl}
 
 
-
-
-
-
-
-
-
-
-
 \input{fpga/tbl/fitness_core_control_unit_tbl}
 
 
 %%The meaning of the different control signals
 
-\subsubsection{ALU\_FUNC}
+The following paragraphs document and explain each of the control unit's control signals that control the functionality in the fitness core.
+
+\paragraph{ALU\_FUNC}
 The \emph{ALU\_FUNC} is the least four significant bits of the instruction, and is responsible for determining the type of operation the \emph{ALU} should perform. This are set according to table \ref{fpga:tbl:alu_function_codes_tbl} 
 
 \input{fpga/tbl/alu_function_codes_tbl}
 
 
-\subsubsection{ALU\_SOURCE}
+\paragraph{ALU\_SOURCE}
 The \emph{ALU\_SOURCE} signal is used to specify the second \emph{ALU operand}. When this signal is asserted the second ALU operand is the immediate field of the instruction. This implies that the instruction class of the instruction is either RRI or RI. On the other hand, if this signal is de-asserted, the operand comes from read register to of the instruction file. Note that this value may or may not have been forwarded. 
 
-\subsubsection{REG\_WRITE}
+\paragraph{REG\_WRITE}
 This signals specifies whether the value, residing in the \emph{write-back} stage, should be written to the register file. When this signal is asserted the value from the \emph{write-back} stage is written to the specified register address. The register address is specified in the instruction, and always reside in the RT address field of the instruction. This fact makes it simpler when deciding at what address the value should be written. However, when this signal is de-asserted, this is equivalent with no operation. 
 
-\subsubsection{IMM\_SOURCE}
+\paragraph{IMM\_SOURCE}
 The galapagos ISA have two different instruction classes (RI, RRI) that uses different lengths of the immediate field. In order to differentiated between these immediate fields, the \emph{IMM\_SOURCE} signal is responsible of selecting immediate field based on the instruction class of the current instruction. The selection is done with a multiplexor. In case of an RRI instruction the 10-bits immediate field is selected, and the 19-bits for a RI instruction.   
 
 
-\subsubsection{REG\_SOURCE}
+\paragraph{REG\_SOURCE}
 In case of \emph{JMP} and \emph{CALL} instructions the immediate address field of the instruction is added with the address content of RD. The RD address specified in the in the instruction must be read from the register file. Normally, the register file would use the \emph{RS} and \emph{RT} part of the instructions as inputs to the register file. In the special case of \emph{RI} instructions the register file must read the RD instead of RS. This is accomplished by asserting the \emph{REG\_SOURCE} signal. This signals causes the a multiplexor to choose the \emph{RD} portion of the instruction instead of the \emph{RS} as input to the register file. This will output the content of the correct data from the register file. This is also visible in figure \todo{reference figure}   
 
 
-\subsubsection{STORE\_SOURCE}
+\paragraph{STORE\_SOURCE}
 
 
 
@@ -96,16 +89,16 @@ In case of \emph{JMP} and \emph{CALL} instructions the immediate address field o
 
 \todo{this}
 
-\subsubsection{JUMP}
+\paragraph{JUMP}
 The jump instruction is use the address in the immediate field of the instruction to load a new value into the \emph{program counter} register. Which specifies the address of the next instruction to be executed. The jump signal is used in a multiplexor in the memory stage to select between the jump address or the incremented program counter. In case of jump, this signal is asserted and the jump address is chosen. When de-asserted the program counter is the incremented program counter. This signal is also asserted when performing call instructions which is discussed in the section below.   
 
-\subsubsection{CALL}
+\paragraph{CALL}
 MIPS operate with what is known as a \emph{link-and-jump} instruction in order to support function calls \cn. The galapagos ISA also support this functionality, however, the instruction is denoted as \emph{CALL} instead of \emph{JAL}. The instruction works very similar to the jump instruction described above. The difference lay in the fact that the incremented program counter is stored in combination with the program counter being modified. This address is stored in register 31.This value can be used later when returning from the function call. The return of a function is basically a jump instruction that jumps back to the address after the call instruction.
 
 The responsibility of the \emph{CALL} signal is to make sure that the incremented program counter is stored at register 31. When asserted the signal make sure that the write register address is changed to 31. If the signal is de-asserted the write register will stay unmodified, and the RT register in the instruction is responsible for specifying the register address.
 
 
-\subsubsection{GENE\_OP}
+\paragraph{GENE\_OP}
 The loading and storing fitness values and chromosomes is the responsibility of the \emph{genetic controller}. This controller is able to perform three types of actions: \emph{load}, \emph{store} and \emph{settings} dependent of the instruction class executed. When performing a load, a chromosome is loaded from the unrated pool. The store operation is used to store a chromosome and its corresponding fitness value to the rated pool. The settings are used to apply settings to the genetic pipeline.  In order to divide these cases, the galapagos architecture rely on \emph{gene operation} vector. The bit-vector is set depending on the instruction class as seen in table \ref{fpga:tbl:gene_op_code_tbl}
 
 
@@ -116,13 +109,13 @@ Depending on the bit-vector-signal, the \emph{genetic controller} is able to per
 
 \todo{Fix} 
 
-\subsubsection{MEM\_OP}
+\paragraph{MEM\_OP}
 As with the genetic controller, the memory controller must be able to distinguish between operations. In case of memory controller, these operations are loading and storing to/from the external memory. In same manner as with, the genetic controller, these signals are set according to the instruction class currently being executed. These can be seen in table \ref{fpga:tbl:mem_op_code_tbl}
 
 \input{fpga/tbl/mem_op_code_tbl}
 
 
-\subsubsection{TO\_REG}
+\paragraph{TO\_REG}
 In the \emph{write-back} stage, there is need to distinguish between several outputs from the \emph{memory stage}. The \emph{TO\_REG} signal is responsible for selecting which value that should be written to the register file. The selection is aided by a 4-to-1 multiplexor. The different inputs are: \emph{Gene}, \emph{Data}, and \emph{PC+1}, \emph{Res}, as seen in figure \todo{add reference}. However, keep in mind that the \emph{REG\_WRITE} signals must be asserted for the data to be written. 
 
 The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_multiplexor_output_tbl}
@@ -130,18 +123,30 @@ The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_mu
 \input{fpga/tbl/to_reg_multiplexor_output_tbl}
 
 
+\subsection{The ALU}
 
+The Arithmetic Logic Unit, or ALU, is the heart of the fitness core, so to speak.
+It is responsible for executing the scheduled operations on data.
+The ALU is perhaps the most important single component of the fitness core.
 
+The ALU in the fitness core is capable of performing a large array of different mathematical and logical operations on 64-bit words, including addition, subtraction, comparisons, shifts and multiplications, in addition to a slew of bitwise logical operations such as and, or, xor and not.
+Division is not supported.
 
-\subsubsection{The ALU}
-
+On the FPGA, large parts of the ALU is implemented with \glspl{DSP slice}, which means that dedicated pre-fabricated ALU-specific circuitry is used in place of regular generic \gls{FPGA} \glspl{LUT} for increased performance and space utilization.
 
 \subsubsection{Multiplication}
-Multiplication is handled as a special case in the architecture. The multiplication is designed to use two cycles in the \emph{execution stage}. This is because the multiplication is the slowest of the ALU operations, and the overall performance would be degrade if this case was treated as the longest path. To overcome this limitation, a state machine is designed in the execution stage to halt the pipeline when performing multiplication. This will make sure the multiplication operation is able to finish without needing to adjust the clock for the other arithmetic operations performed by the ALU. This will make the architecture to be able to run at greater clock speeds. 
 
+Multiplication is handled as a special case in the architecture.
+The multiplication is designed to use two cycles in the \emph{execution stage}, rather than the normal one cycle per operation.
+This is because the multiplication is the slowest of the ALU operations, and the maximum clock frequency would be severely limited, were the multiplication path allowed to become the longest path.
+This would result in a degradation of the overall performance of the processor, which is not desirable.
+To overcome this limitation, a state machine is designed in the execution stage to halt the pipeline when performing multiplication.
+This effectively makes the multiplication a multi-cycle operation.
+The result of this is that the multiplication operation is able to finish without the rest of the system needing to slow down to accomodate for it, meaning that the maximum clock speed is not limited by the multiplication circuitry.
 
-\todo{fix this brain dump}
+\subsubsection{Shifters}
 
+\todo{I've heard a lot about the epicness of the shifters. perhaps we should write something about them?}
 
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
@@ -150,7 +155,15 @@ There is need for some mechanism to handle the data dependencies that arise betw
 
 The forwarding logic is implemented by comparing register dependencies of the instruction in the execution stage with other instructions currently residing in the pipeline. If the forwarding unit notices register dependencies and that these instructions will write to these registers at a later time, it will assert signals that causes the data to be forwarded to the execution stage. The control signals is used in two 3-to-1 multiplexors in order to choose which source the data should arrive from. An overview of the control signals and their meaning can be seen in table. \ref{tbl:fpga:forwarding_signals}.
 
-\todo{Perhaps this can be rewritten a bit}
+An additional forwarding unit is also implemented in the decode stage. This is implemented very similar the one implemented in the execution stage. The difference between them lays in the fact that the forwarding unit located in the decode stage is only concerned by forwarding data from the write back stage. This is done because the main forwarding unit is unable to forward the data in circumstances when there exists register dependencies between instructions residing in the \emph{decode stage} and the \emph{write-back stage}. This occurs because the register files uses one cycle in order to write the register file. This implies that the data is unavailable when 
+the instruction reaches the \emph{execute stage}, and thus needs to be forwarded when the instruction is the execution stage. 
+
+
+Forwarding does, however, not solve all occurrences of data hazards. It exists some situations where forwarding is not enough, and the processor need to stall. These occurrences happen in relations with \emph{LOAD} operations, where there exists some register dependency between the \emph{LOAD} instruction and some other instruction currently residing in the pipeline. The problem occurs because the data loaded from memory is not available until the write-back stage. This implies that the forwarding unit is unable to forward any data until the this stage. The galapagos architecture does not solve this problem in hardware, but rather in software. The assembler is responsible for inserting \emph{NOP} instructions in case of such hazards.  
+
+
+
+\todo{Re-write this shit}
 
 
 \input{fpga/tbl/forwarding_unit_tbl}
@@ -158,17 +171,37 @@ The forwarding logic is implemented by comparing register dependencies of the in
 
 
 \subsubsection{Conditionals} 
-Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies      
-that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the following instructions is not supposed to be validated. To avoid this the memory stage contain a counter which keep control of how many instructions that should be invalidated. The instructions themselves are simply invalidated by changing their conditional code to yield not executed. An overview of the conditional codes can be found in table \todo{reference} in appendix \todo{reference}.
+Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the instructions currently residing in the pipeline are not supposed to be validated. More specific, the instructions residing in the \emph{fetch stage}, \emph{decode stage}, \emph{execute stage} needs to be flushed.  This is accomplished with a 2-bit counter. The counter is used to determine how many instructions should be flushed when reaching the memory stage. Fortunately, this number is always three in case of a conditional branch.The instructions themselves are simply invalidated by invalidate their control signals. Note that the state is not changed until the memory stage and the write back stage. By simply intercept and change this signals the result of the instruction would in effect be a \emph{NOP}. 
+
+
+\todo{reference}.
 
 \todo{Better flow}
 
 
 
 \subsubsection{Fitness Memory Controller} 
-In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. This is controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the fitness core.
+In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. The controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the \emph{fitness core}.  
 
- 
+
+
+
+
+Depending on the instruction, either load or store, the controller react by 
+
+The \emph{fitness core} supports two instructions for interacting with the data memory,  \emph{load word} and \emph{store word}. 
+
+
+
+
+
+
+
+To accommodate these instructions the memory controller have two cases, one for loading and one for storing a memory word, both which requires access to the bus. The \emph{fitness memory controller} requests the bus by sending a request signal to the main \emph{Data controller}. The \emph{Data controller} either a responds to this request, immediately granting the bus with an acknowledgment, or prosponds sending acknowledgment, in case some other core is using the bus. Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. 
+
+When the bus is acquired, the \emph{fitness memory controller} puts the address on the address bus. Depending on the operation, \emph{LOAD} or \emph{STORE}, it either receives data on the input bus, or puts data on the output bus. 
+
+
 
 
 \subsubsection{Fitness Genetic Controller} 
@@ -178,25 +211,10 @@ As with the communication with the main data controller, each fitness core also 
 
 
 
-
-
-
-
-
-
-
-
-
-Especially, regarding the write operation.  
-
-
-
-
-
-
-
-
 \subsubsection{Halting the pipeline}
+In normal computer systems the time to access the memory is variable. It depends on the different states of the machine. This imposes a problem when several cores competes about access to the memory. It is difficult to determine precisely the times that is actually used to receive the required data. In order to fix this issue, and prevent the processor to compute when there is no data. Each interaction with memory is able to halt the processor in case when performing memory operations. The different situations arise when accessing the instruction memory, data memory, and the genetic data pools. Their corresponding controllers are able to set a halt signal before performing the operation. When the \emph{halt} signals is asserted, the program counter and the pipeline registers will be halted, ensuring that the \emph{fitness core} does not change state. 
+
+\todo{hmm? Integrate with the controllers} 
 
 
 

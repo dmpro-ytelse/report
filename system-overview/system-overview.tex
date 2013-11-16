@@ -26,7 +26,7 @@ The FPGA is connected to its own memory.
 
 \subsection{SCU}
 
-The SCU, or System Control Unit, is an energy micro micro controller \todo{version number etc} which administrates communication between the FPGA and the outside world.
+The SCU, or System Control Unit, is an Energy Micro EFM32GG990 micro controller which administrates communication between the FPGA and the outside world.
 It is the SCU's job to react to user input, to program the custom CPU implemented on the FPGA and to perform other administrative duties.
 Having a separate micro controller to perform these tasks minimises the complexity of the design implemented on the FPGA, which means that more resources can be used to create a performant and clean custom CPU design.
 
@@ -36,12 +36,16 @@ The Barricelli has several different inputs and outputs.
 While only one input and one output are strictly needed for a functional system, multiple different types of input have been added to the design in the name of safety through redendancy.
 Having multiple communication channels between the user and the system means that even if one or more channels should fail, the system will still be operational.
 
-\subsubsection{RS232}
+\subsubsection{TIA-232}
 
-\todo{What is it, what does it do in the system?}
+TIA-232, otherwise known as RS-232, is a standard describing transfer of data using a serial cable. \todo{more, cite RS-232 or TIA-232}
+
+To easily communicate with the microcontroller, a serial port was added to the schematics. The micro controller used in the project has a built in UART device\cite{efm32gg990-datasheet}, 
+and to use it in the project is easily done. As it is a slow way to transfer data, it will be used more as a fallback to the USB.
 
 \subsubsection{USB}
 
+Universal Serial Bus is a bus interface.
 \todo{What is it, what does it do in the system?}
 
 \subsubsection{SD}

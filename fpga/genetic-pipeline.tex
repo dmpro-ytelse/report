@@ -1,0 +1,23 @@
+\todo{some words about the genetics accelerator}
+The galapagos architecture includes a highly specialised pipeline for performing genetic operations. The pipeline is based on the observation that selection, crossover, and mutation works similar for a specific subset of problems. These can therefore be implemented as hardware accelerators constructed for performing one specific task. Constructing such accelerators has been proven to be very beneficial regarding performance. Designing specialised hardware is usually simpler and thereby more effective than constructing general purpose components.\todo{Bullshit ?} This pipeline will effectively relieve the general cores, the fitness cores, from computing the evolution of individuals. The idea is that these will make the fitness cores able to only focus on the computation of fitness ranking, which is considered computational intensive. In the mean time the \emph{genetic pipeline} can produce new data for ranking. These operations could have been performed by the processor, however, the processor is badly suited for these kind of operations. Note that the instructions in the pipeline actually uses 5 cycles in order to complete propagate through the pipeline. It is a far better to only use one cycle in order to complete the one specific operation.  
+
+The genetic pipeline is constructed with three specialised cores for performing selection, crossover, and mutation. These are operations that occurs frequently in genetic algorithms. These are connected to two internal memory banks on the \emph{FPGA}, namely the unrated and rated pool.
+
+
+-Abstraction for the programmer. Simpler to program.
+-Do not need components like ALU
+- effective 
+- Less control over the genetic pipeline
+- 
+
+
+\subsubsection {Selection Core} \label{fpga:selection:ss:selection_core}
+    \input{fpga/selection-core} \label{fpga:subsection:selection_core}
+
+\subsubsection{Crossover Core} \label{fpga:crossover:ss:crossover_core}
+    \input{fpga/crossover-core} \label{fpga:subsection:crossover_core}
+
+\subsubsection{Mutation Core}\label{fpga:mutation:ss:mutation_core}
+    \input{fpga/mutation-core} \label{fpga:subsection:mutation_core}
+
+

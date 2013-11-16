@@ -1,14 +1,14 @@
 \section {Design choices}
 
-Here we will talk about the choices that were made that largly affected what the final PCB were like and what hardware it contained.
+Here we will talk about the most important hardware choices that affected the functionality of the final PCB.
 
 \subsection{IO devices} \label{pcb:design-choices:ss:IO_devices}
-Here we will talk about the IO devices we picked and about the other alternatives we did not choose..
+This section presents the IO devices that were selected and discuss other alternatives as well
 
 \subsubsection{SD}
 We talked about using micro-sd cards, but because it was harder to find any guidlines on how to use/implement it we decided to use the normal SD interface.
 In the SD interface, there are several protocols used for communication. 
-However for this project we use the mode called "SPI bus mode", which is the interface that is used by the microcontroller.  
+However for this project we use the mode called "SPI bus mode", which is the interface that is used by the microcontroller.  --verify IO group
 The SPI or "serial peripheral interface" is a scheme where you use a syncronized master-slave configuration or relation to communicate with the IO-devices. 
 The goal with this choice is to have better compatibillity with the microcontroller.
 
@@ -16,19 +16,39 @@ The goal with this choice is to have better compatibillity with the microcontrol
 For usb interface we chosed the micro-usb. 
 The reason for this is that the size of the assosiated hardware is much smaller.
 In the design we also made circuts to prevent unwanted effects like electrostatic discharge, and circuts to prevent the signals from picking up unwanted noice from the background or from crosstalk.
-Of course we also added neccessary resistances to prevent shortcircuting.
+Resistances are added as well to prevent shortcircuting.
+
+It should be mentioned that there are several configurations that applies to the USB interface. The usb-protocol
+specifies that there is one host or "master" and at least one or more "slaves". The master is responcible for managing the connections
+to it's slaves. The host is also able to provide a 5V current to devices (slaves) if needed.
+
+In this case, the microcontroller works as a self powered device or a slave. The computer that is communicating with the microcontroller
+will then work as the usb host.
 
 
-\subsubsection{RS-232}
+//insert picture from http://www.silabs.com/Support%20Documents/TechnicalDocs/AN0046.pdf
+
+
+\subsubsection{serial port} //the name rs232 is too ambigious. We need to explain what it is
 Even though serial communication was technically not required due to presence of USB interface, it was decided to implement RS-232 communication as well.
-This way in case there were troubles with USB, it was still possible to communicate over RS-232; and vice versa.
-The microcontroller supports communication over RS-232, so there were no problems there.
+rs-232 is a communication standard/protocol which is implemented through a serial port interface.
+This was included in case there would be troubles with USB, it should still be possible to communicate over RS-232; and vice versa.
+The microcontroller also supports communication over RS-232, so the this should be a natural second choice.
 We placed socket connector on the PCB as well as a RS-232 driver that transforms input and output signals to given voltage.
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
 
 Here we will talk about how our internal commmunication on the board work, and how it was planed.
+??
+
 
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
-
+//someone look at this and correct it
+//what other alternatives to memory are possible?
+//how did our choice increase the efficiency? ( remember we are the performance group)
 Here we will talk about the memory we have, why it was picked and what other alternatives we did not choose.
+When the group talked about selecting memory, there was lots of options. The FPGA group needed a memory that could provide 
+fast accesses in order to increase efficiency. Because of this, the group decided to use SRAM because of the fast access times.
+However, the downside with these memories is that they are small and expensive. Still we ended up with XXX-MiB modules with xxx- write delay and xxx- access/read delay.
+A larger size of the memory could probably have been chosen, without any risk of going over the budget. However for the task that the FPGA is going to perform
+the current selection is sufficient for our use.

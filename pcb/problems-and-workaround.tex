@@ -18,3 +18,8 @@ A wire was pulled from FPGA_HEADER78 to the header from the SCU, and this header
 Here we will talk about various problems we discovered during the soldering process, and how we found ways to workaround them.
 We expect that there will be some things that may be possible to work around in code on the microcontroller, and other parts that require hardware fixes.
 There might also be problems that cause parts of the board to not function.
+
+\subsection{workaround usb}
+When the PCB came back from production, it was discovered that the USB was not connected to the microcontroller
+according to the recommanded spesifications from the manufacturer of the microcontroller. The problem were that the
+signal carrying the 5V current on the USB were not connected. This were fixed by soldering copper wires between the unconnected pins and the 5V net on the USB interface

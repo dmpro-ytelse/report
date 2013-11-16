@@ -64,10 +64,13 @@ A genome the collection of all chromosomes for an individual.
 \subsubsection{Genetic operators}
 
 \paragraph{Selection}
+Probabilistic selection of rated individuals allowed to reproduce.
 
 \paragraph{Crossover}
+Reproduction method involving combining individuals in some way (problem specific). 
 
 \paragraph{Mutation}
+Mutation of an individual. Random or based on specific rules (problem specific). 
 
 \subsection{Pseudo-code for a General Genetic Algorithm}
 
@@ -105,14 +108,47 @@ Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a ge
 
 \subsection{Generational Genetic Algorithms}
 
-Traditionally, genetic algorithms are implemented generationally \TODO{TODO: cite hromcovic or something}. That means that an entire population of individuals are rated and combined to create a completely new population, and the old population is discarded.
+Traditionally, genetic algorithms are implemented generationally \TODO{TODO: cite hromcovic or something}. That means that an entire population of individuals are rated and combined to create a completely new population, and the old population is discarded. The generational genetic algorithm can be seen as performing five steps:
+
+
+\begin{enumerate}
+    \item Start with an initial population
+    \item Calculate the fitness of each individual in the generation
+    \item Selection
+    \item Crossover
+    \item Mutation  
+\end{enumerate}
+
+The initial population is usually random made from randomly generated individuals. This ensures sufficient diversity in the population. The diversity ensures that it is possible for the generation to evolve towards a solution. In the next stage the fitness of each individual calculated. The fitness value calculated is very specific for the problem at hand, but is either way used to check the fitness of the individual. If this fitness values exceeds some specified threshold, the solution is deemed good enough. Note that a genetic algorithm is not always finding the correct solution, but a solution that is sufficient for the problem at hand.
+
+The solution is found during several phases though a selection, crossover and a mutation phase. 
+These phases are used to evolve the population through several generations until an appropriate 
+solution is found. 
+
+The selection core aim to chose individuals for reproduction based on their fitness score.The selection is constructed in such that higher fitness score equals higher probability of being chosen. This does not necessary mean that only the fittest individuals are allowed to reproduce. An important concept of the genetic algorithm is to achieve diversity while exploring the different solutions. Diversity is important to prevent the algorithm from reaching what is known as a local maximum. E.g stage where it is unable to evolve any further even though the solution found is far from being optimal.
+
+The crossover core uses the individuals from the selection to cross the individuals to produce new individuals. Because of the initial diversity in the initial population, this will cause the diversity to be large in the beginning. However this will settle in further generations. The goal of the crossover phase is to converge against a solution by continuos creating better a better generation of individuals. There are several methods for achieving the crossover of individuals, however, the different methods will not be discussed in great detail here. The different algorithms are highly dependent on the task at hand. However, the different crossover methods implemented in the employed in the galapagos architecture will be discussed in greater detail in section(?) \todo{reference to section}
+
+However as an precaution, the individuals are passed through yet another phase, mutation. The goal of the mutation state is ensure diversity by mutating the individuals by some probability. The mutation process is usually a simple one by just modifying some of the bits in the individual. As with the crossover method, algorithms also exist for performing the mutation. 
+
+Lastly, it is important to mention that there exist a lot of different classes of genetic algorithms. They usually use employ many different techniques for performing selection, crossover and mutation. The point of this project is not covering all of them. Actually, only a subset of problems will be supported on galapagos architecture. 
+
+
+\todo{Fix this section}
+
 
 \subsection{Continuous Genetic Algorithms}
 
 A new and better strategy is gaining traction in the literature.\TODO{TODO: find a citation for this}.
 Continuous genetic algorithms do away with the concept of discrete generations.
 Rather, it continuously selects a few individuals, processes them, and returns them (or their offspring) to the population.
-This erases the generational border, and is shown \TODO{TODO:cite our own research here, plus literature} to converge faster towards an optimal solution.
+This erases the generational border, and is shown \TODO{TODO:cite our own research here, plus literature} to converge faster towards an optimal solution. This also implies that the operations involved in the genetic algorithm is  more easily parallelizeble, since the generation restriction no longer visible. More specific it allows the algorithm a possible way to work on both rated an unrated individuals on the same time. As the reader may have noticed in section, the algorithm presented were very sequential. 
+
+This algorithm uses an other approach, by disregarding the generation boundaries. It is possible to both rate and handle rated elements simultaneously without bothering about generating specific generations of individuals that are passed to the next stage.      
+
+
+
+
 
 The genetic algorithm used in the Barricelli computer is a continuous genetic algorithm.
 
