@@ -85,7 +85,15 @@ The \Gls{galapagos assembler} supports outputting assembled programs compiled to
 \subsection{Validation Tests}
 
 \section{Testing the PCB}
+During and after the components were soldered on the PCB board, the board were tested to ensure that the powergrid were working as it was supposed to.
+For the first test, it was checked that all the various leds on the board was working in order to verify that the board actually was powered right, and that there was
+no short circuts on the power grid itself.
 
+Some of the earliest test were also to check that the FPGA actually was working properly, and it was done by making a simple FPGA echo program to test the various pins on the fpga.
+The pins on the fpga were tested by connecting a led to the various FPGA-headers. If the fpga worked correctly, the led will activate, indicating the the pins actually are operating right.
+When this test was conducted on the first board that were soldered, it came out that the FPGA was not "baked on" right, and that we had to start solder a new board. 
+
+--picture of fpga headers
 \todo{the thing where we made a simple fpga echo program for the pins, and tested the lines from the fpga to the headers using an led. for results: we discovered a bad bake this way}
 
 \section{Testing IO}
@@ -97,18 +105,6 @@ The \Gls{galapagos assembler} supports outputting assembled programs compiled to
 \todo{galapagos-as has a test-suite, write about it}
 
 \section{Additional Tests}
-
-\subsection{The Drop Test}
-
-\test
-{Drop Test}{
-    \item{Put Barricelli on a surface 75cm above ground level.}
-    \item{Attach power cable and SCU debug wires.}
-    \item{Power on Barricelli.}
-    \item{Entwine leg in cables and quickly extend limbs.}
-}{Barricelli should fall face first on the floor with no visible damage.}
-{Barricelli fell face first on the foor with no visible damage.}
-
 
 
 \todo{The contiunous ga test}
