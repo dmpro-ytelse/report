@@ -3,7 +3,7 @@ This chapter aims to put this report in context.
 \section{MIMD Computing}
 
 \Gls{barricelli}, the solution computer presented in this report, is a \Gls{MIMD} computer. \Gls{MIMD}, or Multiple Instruction, Multiple Data, is a class of computer architectures involving multiple autonomous computing units executing different instructions on different data.
-MIMD lends itself quite well to high performance computing through parallelism. Thus, a MIMD systems consists of several fully independent processing units or cores, interconnected in some way. Each core/processor are able to work fully independent and asynchronous with their counterparts. They use either a shared memory model or distributed memory model. This architecture are usually found in all today’s multi-core superscalar processors. 
+MIMD lends itself quite well to high performance computing through parallelism. Thus, a MIMD systems consists of several fully independent processing units or cores, interconnected in some way. Each core/processor are able to work fully independent and asynchronous with their counterparts. They use either a shared memory model or distributed memory model. This architecture are usually found in all today’s multi-core superscalar processors. This is in contrast to the early uniprocessors, which were based on SISD, or single instruction and single data. 
 
 
 
@@ -144,7 +144,7 @@ Continuous genetic algorithms do away with the concept of discrete generations.
 Rather, it continuously selects a few individuals, processes them, and returns them (or their offspring) to the population.
 This erases the generational border, and is shown \TODO{TODO:cite our own research here, plus literature} to converge faster towards an optimal solution. This also implies that the operations involved in the genetic algorithm is  more easily parallelizeble, since the generation restriction no longer visible. More specific it allows the algorithm a possible way to work on both rated an unrated individuals on the same time. As the reader may have noticed in section, the algorithm presented were very sequential. 
 
-This algorithm uses an other approach, by disregarding the generation boundaries. It is possible to both rate and handle rated elements simultaneously without bothering about generating specific generations of individuals that are passed to the next stage.      
+This algorithm uses an other approach, by disregarding the generation boundaries. It is possible to both rate and handle rated elements simultaneously without bothering about generating specific generations of individuals that are passed to the next stage. The previous algorithm finished with one generation before start working on the next one. The continuous approach, work on individuals instead. E.g the individuals are continuously rated and passed along to reproduce. The same steps are performed, however, not in sequential order any more. All the steps has the possibility to be performed in parallel. This has the advantage of increasing the throughput. The problem is also more suited on MIMD architecture, like the one galapagos is based on.      
 
 
 
