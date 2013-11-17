@@ -1,4 +1,7 @@
 \section {Problems and workaround}
+Here we will talk about various problems we discovered during the soldering process, and how we found ways to workaround them.
+We expect that there will be some things that may be possible to work around in code on the microcontroller, and other parts that require hardware fixes.
+There might also be problems that cause parts of the board to not function.
 
 \subsection{ Power connector footprint }
 
@@ -13,13 +16,10 @@ Because of an error made during the routing of the board, the header pin for FPG
 This error can be corrected by using one of our spare FPGA lines available on headers.
 A wire was pulled from FPGA\_HEADER78 to the header from the SCU, and this header cable allowed us to run the rest of the bus as planed.
 
-
-
-Here we will talk about various problems we discovered during the soldering process, and how we found ways to workaround them.
-We expect that there will be some things that may be possible to work around in code on the microcontroller, and other parts that require hardware fixes.
-There might also be problems that cause parts of the board to not function.
-
 \subsection{ USB port }
 When the PCB came back from production, it was discovered that the USB was not connected to the microcontroller
-according to the recommanded spesifications from the manufacturer of the microcontroller. The problem were that the
-signal carrying the 5V current on the USB were not connected. This were fixed by soldering copper wires between the unconnected pins and the 5V net on the USB interface
+according to the recommanded spesifications from the manufacturer of the microcontroller. 
+The problem were that the signals USB\_VBUS and USB\_VREGI were not connected to the VBUS-pin on the USB receptacle. This were fixed by soldering copper wires on the capacitators designated as C18 and C17 to USB-HEADER2 (called VBUS\_ENABLE in the schematics).
+According to tests done on the PCB before and after this work-around, the problem seams to be fixed.
+
+
