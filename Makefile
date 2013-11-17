@@ -8,7 +8,8 @@ all:
 	pdflatex report
 	makeglossaries report
 	pdflatex report
-	scp report.pdf runholm@abakus.tk:/var/www/	
+	makeglossaries report
+	pdflatex report
 
 .PHONY: clean
 clean:
