@@ -192,10 +192,6 @@ Like ARM , the galapagos architecture use conditional codes in order to determin
 
 
 
-
- 
-
-
 \todo{reference}.
 
 \todo{Better flow}
@@ -220,12 +216,16 @@ When performing a \emph{WRITE} operation this is done in the same manner as with
 
 
 
-
-
-
-
 \subsubsection{Fitness Genetic Controller} 
-As with the communication with the main data controller, each fitness core also have a small controller to synchronise the communication with the \emph{genetic memory controller}. This controller is referred to as the \emph{fitness genetic controller}. This controller is also implemented as a state machine. However, this component contains more functionality than the \emph{fitness memory controller}, since this controller communicate with the \emph{genetic controller}, which handles the access with both the rated and unrated pool. 
+As with the communication with the main data controller, each fitness core also have a small controller to synchronise the communication with the \emph{genetic memory controller}. This controller is referred to as the \emph{fitness genetic controller}. This controller is also implemented as a state machine. However, this component contains more functionality than the \emph{fitness memory controller}, since this controller communicate with the \emph{genetic controller}, which handles the access with both the rated and unrated pool. The fitness cores and the genetic pipeline uses these pools depending on the operation. The fitness core is able to perform the following genetic operations: \emph{LOAD GENE}, \emph{STORE GENE}, \emph{SETTINGS} and \emph{NOP}. These different operations require different uses of the \emph{rated} and \emph{unrated} pools. 
+
+The \emph{LOAD GENE} operations load a gene from the unrated pool. This gene is loaded by requesting the gene from the \emph{genetic controller}, thereby halting the requesting fitness core. When the \emph{genetic controller} is finished fetching the gene, it is transmitted to the requested fitness core. The fitness core receives the unrated gene and continuous the execution.
+
+The \emph{STORE} gene operations store a fitness and gene to the rated pool. This is atomic operation. Atomic in the sense that the selection core is unable to access the rated pool during this time. This is done avoiding any memory collisions. The fitness value and the gene is stored by requesting the bus. When the bus access is granted. The \emph{fitness genetic controller} writes to the transmit the fitness and genetic values over two cycles to the \emph{genetic controller}.  
+
+The \emph{SETTINGS} operation is used to configure the genetic pipeline. It is able to configure the \emph{selection core}, \emph{crossover core}, and the \emph{mutation core}. The selection core can be configured to perform a varied number of tournament rounds. The crossover core can be configured to perform between four different types of crossover. More on the different types of crossover can be seen i section(?) \todo{Add me}. The mutation core can be configured with a value specifying the probability of muting the gene. 
+
+\todo{fix me} 
 
 
 \subsubsection{Halting the pipeline}
