@@ -21,5 +21,8 @@ There might also be problems that cause parts of the board to not function.
 
 \subsection{ USB port }
 When the PCB came back from production, it was discovered that the USB was not connected to the microcontroller
-according to the recommanded spesifications from the manufacturer of the microcontroller. The problem were that the
-signal carrying the 5V current on the USB were not connected. This were fixed by soldering copper wires between the unconnected pins and the 5V net on the USB interface
+according to the recommanded spesifications from the manufacturer of the microcontroller. 
+The problem were that the signals "USB_VBUS" and "USB_VREGI" were not connected to the VBUS-pin on the USB receptacle. This were fixed by soldering copper wires on the capacitators designated as C18 and C17 to USB-HEADER2 (called VBUS_ENABLE in the schematics).
+According to tests done on the PCB before and after this work-around, the problem seams to be fixed.
+
+
