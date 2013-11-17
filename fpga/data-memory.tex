@@ -1,6 +1,35 @@
-The galapagos architecture is MIMD architecture with shared memory. This imposes problems when more fitness cores need to access the memory simultaneously. In order to overcome this problem the access to the memory is controlled with a memory controller. The responsibility of the memory controller is granting access and performing memory related tasks on behalf of the requesting fitness cores. The controller is constructed in a way that only allows one fitness core to be able to carry out a memory request at a single time. In case of multiple memory requests, the controller performs a selection deciding in which order the requesting cores is granted the bus. The precise technique of selection can be seen in algorithm (?)
+The galapagos architecture is MIMD architecture with shared memory. This imposes problems when more fitness cores need to access the memory simultaneously. In order to overcome this problem the access to the memory is controlled with a memory controller. The responsibility of the memory controller is granting access and performing memory related tasks on behalf of the requesting fitness cores. The controller is constructed in a way that only allows one fitness core to be able to carry out a memory request at a single time. In case of multiple memory requests, the controller performs a selection deciding in which order the requesting cores is granted the bus. The precise technique of selection can be seen in algorithm \ref{algorithm:round-robin-selection}
 
-\todo{selection algorithm}
+\begin{figure}[H]
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{Requests - requests signals from the fitness cores }
+\KwData{Request - 2-bits specifying the operation}
+\Begin{
+    $ Requests \longleftarrow $ requests from the fitness cores\;
+    \While{$ True $}{
+        \For {Request in Requests} {
+        \uIf{request $=$ asserted}{
+            performMemoryOperation()
+        }
+         \Else{
+        continue
+        
+        }
+               
+        
+        }
+        
+        
+           }
+}
+\caption{Round-robin selection}
+\label{algorithm:round-robin-selection}
+\end{algorithm}
+\end{figure}
+
+
 
 
 These algorithm is based on round-robin scheduling. The request bits of \emph{fitness cores} are checked in turn to check if one of the cores has requested the memory bus. The type of request is determined by combination of two request signals sent by each \emph{fitness core}. The signals refer to either a \emph{NOP}, \emph{READ}, or \emph{WRITE} operation. In case of \emph{NOP} the algorithms move to check the next state request lines. It moves in this fashion until a \emph{READ} or \emph{WRITE} request is encountered. 
