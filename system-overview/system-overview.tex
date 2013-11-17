@@ -38,16 +38,12 @@ While only one input and one output are strictly needed to meet the functional r
 \subsubsection{USB}
 
 Universal Serial Bus is a bus interface used to facilitate the communication between Barricelli and a host computer.
-
-The microcontroller has a built in USB controller~\cite{efm32gg990-datasheet} and energy micro has supplied an application note~\cite{an0065} with code for utilizing the included USB controller in order to act as a USB device.
+USB support has become very widespread, and was chosen as the main communication link due to the large number of software libraries and examples available.
 
 \subsubsection{TIA-232}
 
-TIA-232, otherwise known as RS-232, is a standard describing transfer of data using a serial cable. \todo{more, cite RS-232 or TIA-232}
-
-To easily communicate with the microcontroller, a serial port was added to the schematics.
-The micro controller used in the project has a built in UART Receiver/Transmitter\cite{efm32gg990-datasheet} which is easily activated with code from AN0045~\cite{an0045}.
-As it is a comparatively slow way to transfer data, it is mainly a fallback in case the USB link should fail.
+TIA-232, more commonly known as RS-232, is a set of standards defining communication over what is commonly known as serial ports.
+The serial link is an old standard and a comparatively slow way to transfer data, so it is mainly included as a fallback in case the USB link should fail.
 
 \subsubsection{SD}
 
@@ -55,8 +51,8 @@ As it is a comparatively slow way to transfer data, it is mainly a fallback in c
 
 \subsubsection{LEDs}
 
-The simplest way to get output from the microcontroller is to use LEDs, short for Light-Emmiting Diode \todo{Move light-emitting diode to own abbr-list?}.
-The leds are driven by General Purpose IO pins on the SCU, requiring a minimal amount of code in order to get a working output, which is especially handy in the early stages of implementation.
+The simplest way to get output from the microcontroller is to use LEDs, short for Light-Emmiting Diode.
+There are a total of 16 LEDs which can be used to display status from the IO controller, or simply show that the IO controller is working on something.
 
 \subsubsection{Buttons}
 
