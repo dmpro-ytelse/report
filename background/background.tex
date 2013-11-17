@@ -39,11 +39,13 @@ Examples of well-known MIMD computing platforms today include Intel' Larrabee\cn
 
 \section{Genetic Algorithms}
 
-A genetic algorithm is a search heuristic that is very useful for finding approximate solutions to hard optimization and search problems.
+A genetic algorithm is a specific type of heuristic search algorithm that is very useful for finding approximate solutions to hard optimization and search problems.
 A hard problem in this context is a problem for which there exists no algorithm for feasibly computing a solution within a reasonable amount of time.
 In practice, this typically means NP-hard problems.
-It mimics the natural process of evolution to find fit approximations in the search space.
+Classical examples of a hard problems for which genetic algorithms can find suitible approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.\cn\todo{hromkovic}.
+Efficiently finding good approximations to this class of problems is extremely important for many heavy instrustry processes such as planning and scheduling of \todo{something}, finding optimal placement and routing of components in microchip manufacturing, and \todo{another example}.
 
+The distringuising feature of a genetic algorithm compared to other heuristic search algorithms is how it performs its search: it mimics the natural process of evolution to find fit approximations in the search space.
 A genetic algorithm represents possible solutions to a given problem as individuals of a population.
 The individuals' fitness is calculated by a problem-specific fitness function, and fit individuals are combined together to create new individuals, mimicing the process of natural selection.
 The idea is that after simulating a number of virtual generations of individuals, the fittest individual will have survived, and provides a good approximation to the solution.
@@ -54,6 +56,8 @@ To fully understand the inner workings of the \Gls{barricelli}, it is useful to 
 This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
 
 \subsubsection{Things\todo{better word for this}}
+
+\todo{remove the words we don't need and never use, add some missing words if there any.}
 
 \paragraph{Individual}
 
