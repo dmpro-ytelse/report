@@ -1,21 +1,22 @@
 \section{\Gls{galapagos assembler}}
 
 The \Gls{galapagos assembler} is an assembler for \Gls{galapagos} Assembly that was written for this project.
-It is written in Python. 
+It asembles galapagos assembly to be run on the programmable fitness cores of the Barricelli computer.
+The assembler is written in Python. 
 It is designed with a modular, object-oriented software architecture, which makes it easily extensible and modifiable.
 Indeed, during the short time it has been published on the Internet, it has already been forked and adapted for use for other instruction set architectures and assembly languages.\cn \todo{yes, I'm talking about how I cooked galapagos-as for use in dmkons -- sigve}
-The assembler supports the entire \Gls{galapagos} ISA.
+The assembler supports the entire \Gls{galapagos} instruction set.
 
-The assembler does not perform any optimizations such as instruction re-ordering.
-This is because the forwarding unit in the CPU architecture resolves many of the same issues that the assembler would work around using instruction re-ordering.
-The only non-control related hazards that the forwarding unit doesn't already resolve  are use-after-load conflicts.
+With a an assembler available, opportunities for performance optimizations through instruction re-ordering are made available.
+The idea is that instructions within a simple code block, i.e. a branch-less block of consecutive instructions with no labels, instructions may be carefully re-ordered to minimize data hazards.
+The assembler does not perform these instruction re-orderings.
+This is because the forwarding unit in the processor architecture already resolves many of the same issues that the assembler would work around using instruction re-ordering.
+
+The only non-control related hazards that the forwarding unit doesn't already resolve are use-after-load conflicts.
 A use-after-load conflict is a conflict where the processor plans the execute a data load from memory, and then use the result from that load in the immediately proceding execution.
 When this happens, the result from the memory load is not yet ready when the execution is planned to execute.
 This hazard is resolved off-line by the assembler.
 It can detect use-after-load hazards during assembly, and will insert a \gls{nop} between the load and use instructions, forcing the processor to wait until the data is available.
-This technique is called forced bubble resolution.\cn
-
-\todo{I pulled the sentence above out of my ass, but wouldn't it be cool if there was a good name for that technique? Can we coin it?}
 
 \Gls{galapagos assembler} is available in PyPi, the leading python package index.
 This means that it is easily installable for end users using \texttt{pip}, the python package manager.

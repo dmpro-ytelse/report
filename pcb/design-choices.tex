@@ -8,7 +8,7 @@ This section presents the IO devices that were selected and discuss other altern
 \subsubsection{SD}
 We talked about using micro-sd cards, but because it was harder to find any guidlines on how to use/implement it we decided to use the normal SD interface.
 In the SD interface, there are several protocols used for communication. 
-However for this project we use the mode called "SPI bus mode", which is the interface that is used by the microcontroller.  --verify IO group
+However for this project we use the mode called "SPI bus mode", which is the interface that is used by the microcontroller.  \todo{the IO group must verify this}
 The SPI or "serial peripheral interface" is a scheme where you use a syncronized master-slave configuration or relation to communicate with the IO-devices. 
 The goal with this choice is to have better compatibillity with the microcontroller.
 
@@ -25,30 +25,32 @@ to it's slaves. The host is also able to provide a 5V current to devices (slaves
 In this case, the microcontroller works as a self powered device or a slave. The computer that is communicating with the microcontroller
 will then work as the usb host.
 
+\todo{insert picture from http://www.silabs.com/Support\%20Documents/TechnicalDocs/AN0046.pdf}
 
-//insert picture from http://www.silabs.com/Support%20Documents/TechnicalDocs/AN0046.pdf
-
-
-\subsubsection{serial port} //the name rs232 is too ambigious. We need to explain what it is
+\subsubsection{serial port} 
+\todo{the name rs232 is too ambigious. We need to explain what it is WAIT HAS THIS BEEN DONE ALREADY?}
+RS-232 is a communication standard/protocol which is implemented through a serial port interface.
 Even though serial communication was technically not required due to presence of USB interface, it was decided to implement RS-232 communication as well.
-rs-232 is a communication standard/protocol which is implemented through a serial port interface.
-This was included in case there would be troubles with USB, it should still be possible to communicate over RS-232; and vice versa.
-The microcontroller also supports communication over RS-232, so the this should be a natural second choice.
+This way, in case there were troubles with USB, it would still be possible to communicate over RS-232; and vice versa.
+The microcontroller supports communication over RS-232, so the this should be a natural second choice.
 We placed socket connector on the PCB as well as a RS-232 driver that transforms input and output signals to given voltage.
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
 
-Here we will talk about how our internal commmunication on the board work, and how it was planed.
-??
-
+The two major components on the system are the SCU and the FPGA.
+They each fill an important role, and work on essential tasks.
+The system need them both to work together, and to accomplish this we need a communication channel.
+On Barricelli this was accomplished with by a 41 bit bus.
+This bus have 16 bits of data, 19 bits of addressing, a small 2 bit bus to control the state of the processor and 3 control signals.
+The statet bus detemine what the FPGA should do with the data, while the control signals tells the targeted unit what to do with the data. 
 
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
-//someone look at this and correct it
-//what other alternatives to memory are possible?
-//how did our choice increase the efficiency? ( remember we are the performance group)
-Here we will talk about the memory we have, why it was picked and what other alternatives we did not choose.
-When the group talked about selecting memory, there was lots of options. The FPGA group needed a memory that could provide 
-fast accesses in order to increase efficiency. Because of this, the group decided to use SRAM because of the fast access times.
-However, the downside with these memories is that they are small and expensive. Still we ended up with XXX-MiB modules with xxx- write delay and xxx- access/read delay.
-A larger size of the memory could probably have been chosen, without any risk of going over the budget. However for the task that the FPGA is going to perform
-the current selection is sufficient for our use.
+When the group talked about selecting memory, there was lots of options.
+The FPGA group needed a memory that could provide fast accesses in order to increase efficiency.
+In addition a memory with large inout/output size was a goal.
+Because of this, the group decided to use SRAM because of the fast access times.
+However, the downside with these memories is that they are small and expensive.
+Still we ended up with 8-MBit modules with 16bit input/output size, 10ns write cycle time and 10ns read cycle time.
+A larger size of the memory could probably have been chosen, without any risk of going over the budget.
+However for the task that the FPGA is going to perform the current selection is sufficient for our use.
+

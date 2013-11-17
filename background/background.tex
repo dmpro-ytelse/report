@@ -1,13 +1,37 @@
-This chapter aims to put this report in context.
+This chapter aims to put this report in context by providing a brief overview of some of the central concepts of the \Gls{barricelli} computer.
 
 \section{MIMD Computing}
 
 \Gls{barricelli}, the solution computer presented in this report, is a \Gls{MIMD} computer. \Gls{MIMD}, or Multiple Instruction, Multiple Data, is a class of computer architectures involving multiple autonomous computing units executing different instructions on different data.
-MIMD lends itself quite well to high performance computing through parallelism. Thus, a MIMD systems consists of several fully independent processing units or cores, interconnected in some way. Each core/processor are able to work fully independent and asynchronous with their counterparts. They use either a shared memory model or distributed memory model. This architecture are usually found in all today’s multi-core superscalar processors. This is in contrast to the early uniprocessors, which were based on SISD, or single instruction and single data. 
+Thus, a MIMD computer system consists of several fully independent processing units or cores, interconnected in some way.
+Each core/processor is able to work fully independently and asynchronously with their counterparts.
+Because of this MIMD lends itself quite well to high performance computing through parallelism.
+
+Communication between the different, possibly hetereogeneous independant computing units is either done by message passing, or sharing memory between processors.
+Computers that solve communication using message passing might not have any shared memory between the processing units at all.
+Each processing unit instead holds its own private memory.
+This is called a distributed memory model.
+Most MIMD computers implement some hybrid memory solution using both shared memory and distributed memory.
+
+A simplified block-level overview of a MIMD computer can be seen in figure \vref{figure:mimd-block-diagram}.
+The computer in the figure uses a shared memory model.
+In the figure, the blocks labeled PU are induvidual processing units.
+
+\begin{figure}[H]
+\begin{center}
+    \includegraphics[width=\textwidth/2]{fig/mimd-block-diagram.pdf}
+    \label{figure:mimd-block-diagram}
+    \caption{Block-level overview of a MIMD computer with a shared memory model}
+\end{center}
+\end{figure}
+
+MIMD architecture forms the basis in the great majority all today’s multi-core superscalar processors.
+This is in contrast to the early uniprocessors, which were based on SISD, or Single Instruction stream, Single Data stream. 
 
 
+Examples of well-known MIMD computing platforms today include Intel' Larrabee\cn platform, and computer clusters connected for instance over the internet.
 
-
+\todo{cite http://en.wikipedia.org/wiki/File:MIMD.svg}
 
 \todo{write more about MIMD}
 
@@ -15,11 +39,13 @@ MIMD lends itself quite well to high performance computing through parallelism. 
 
 \section{Genetic Algorithms}
 
-A genetic algorithm is a search heuristic that is very useful for finding approximate solutions to hard optimization and search problems.
+A genetic algorithm is a specific type of heuristic search algorithm that is very useful for finding approximate solutions to hard optimization and search problems.
 A hard problem in this context is a problem for which there exists no algorithm for feasibly computing a solution within a reasonable amount of time.
 In practice, this typically means NP-hard problems.
-It mimics the natural process of evolution to find fit approximations in the search space.
+Classical examples of a hard problems for which genetic algorithms can find suitible approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.\cn\todo{hromkovic}.
+Efficiently finding good approximations to this class of problems is extremely important for many heavy instrustry processes such as planning and scheduling of \todo{something}, finding optimal placement and routing of components in microchip manufacturing, and \todo{another example}.
 
+The distringuising feature of a genetic algorithm compared to other heuristic search algorithms is how it performs its search: it mimics the natural process of evolution to find fit approximations in the search space.
 A genetic algorithm represents possible solutions to a given problem as individuals of a population.
 The individuals' fitness is calculated by a problem-specific fitness function, and fit individuals are combined together to create new individuals, mimicing the process of natural selection.
 The idea is that after simulating a number of virtual generations of individuals, the fittest individual will have survived, and provides a good approximation to the solution.
@@ -30,6 +56,8 @@ To fully understand the inner workings of the \Gls{barricelli}, it is useful to 
 This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
 
 \subsubsection{Things\todo{better word for this}}
+
+\todo{remove the words we don't need and never use, add some missing words if there any.}
 
 \paragraph{Individual}
 

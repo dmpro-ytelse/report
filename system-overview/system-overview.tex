@@ -26,7 +26,7 @@ The FPGA is connected to its own memory.
 
 \subsection{SCU}
 
-The SCU, or System Control Unit, is an Energy Micro EFM32GG990 micro controller which administrates communication between the FPGA and the outside world.
+The SCU, or System Control Unit, is an Energy Micro EFM32GG990F1024 micro controller which administrates communication between the FPGA and the outside world.
 It is the SCU's job to react to user input, to program the custom CPU implemented on the FPGA and to perform other administrative duties.
 Having a separate micro controller to perform these tasks minimises the complexity of the design implemented on the FPGA, which means that more resources can be used to create a performant and clean custom CPU design.
 
@@ -40,13 +40,15 @@ Having multiple communication channels between the user and the system means tha
 
 TIA-232, otherwise known as RS-232, is a standard describing transfer of data using a serial cable. \todo{more, cite RS-232 or TIA-232}
 
-To easily communicate with the microcontroller, a serial port was added to the schematics. The micro controller used in the project has a built in UART device\cite{efm32gg990-datasheet}, 
-and to use it in the project is easily done. As it is a slow way to transfer data, it will be used more as a fallback to the USB.
+To easily communicate with the microcontroller, a serial port was added to the schematics.
+The micro controller used in the project has a built in UART interface\cite{efm32gg990-datasheet} which is easily activated with code from application note \todo{cite specific}.
+As it is a comparatively slow way to transfer data, it is mainly a fallback in case the USB link should fail.
 
 \subsubsection{USB}
 
 Universal Serial Bus is a bus interface.
-\todo{What is it, what does it do in the system?}
+
+In Barricelli, it is used for communication between a computer and the SCU.
 
 \subsubsection{SD}
 
@@ -54,24 +56,28 @@ Universal Serial Bus is a bus interface.
 
 \subsubsection{LEDs}
 
-\todo{What is it, what does it do in the system?}
+The simplest way to get output from the microcontroller is to use LEDs, short for Light-Emmiting Diode \todo{Move light-emitting diode to own abbr-list?}.
+The leds are driven by General Purpose IO pins on the SCU, requiring a minimal amount of code in order to get a working output, which is especially handy in the early stages of implementation.
 
 \subsubsection{Buttons}
 
-\todo{What is it, what does it do in the system?}
+Buttons is the fastest and simplest way of having some form of user input on the board.
+The buttons allow the user to interact with the program running on the SCU without requiring some external IO.
 
 \subsection{Memory}
 
-The \Gls{galapagos} CPU is connected to two separate external memories, the instruction memory and the data memory, meaning that the \Gls{galapagos} architecture is a Harvard machine.
+The \Gls{galapagos} CPU is connected to two separate external memories, the instruction memory and the data memory.
+This separation means that the \Gls{galapagos} architecture is a Harvard machine.
 This design choice was made because it increases the performance of the machine, since instruction memory and data memory and be accessed independantly, and in parallel. 
 
 \subsubsection{Instruction Memory}
 
-The Instruction Memory, labeled as ``INST MEM'' in figure \vref{figure:system-overview}, ...
-\todo{What is it, what does it do in the system?}
+The Instruction Memory, labeled as ``INST MEM'' in figure \vref{figure:system-overview}, is the memory that holds the program instructions for the processing units in the Barricelli running on the FPGA.
+The memory is read-only for the processors in the FPGA, but can be written to by the SCU.
+The instruction memory is shared by all the processing units in the FPGA.
 
 \subsubsection{Data Memory}
 
-The Data Memory, labeled as ``DATA MEM'' in figure \vref{figure:system-overview}, ...
-
-\todo{What is it, what does it do in the system?}
+The Data Memory, labeled as ``DATA MEM'' in figure \vref{figure:system-overview}, is the memory that holds processing data for the processors in the FPGA.
+The memory can be read and read by both the processing units in the FPGA, and the SCU.
+The data memory is shared by all the processing units in the FPGA.

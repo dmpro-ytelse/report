@@ -1,35 +1,94 @@
-\section{Testing the FPGA}
+When designing a computer with a custom architecture from scratch, it is important to continually test and evaluate the correctness of the solution at all possible stages, to ensure that final product is a success.
+This section documents and explaines the rationale behind the different types of tests that have been performed.
 
-\subsection{Testing the fitness core}
-In order to test the fitness core independent from the other parts of the architecture a simple test framework was developed. \todo{this}
+\section{Testing the Processor}
 
-\todo{we're talking about test\_utils here, right? we can cook https://github.com/dmkons/reports}
+Baricelli's processor has been tested at four different levels: \gls{VHDL}-based unit test simulations of the different subcomponents,  \gls{VHDL}-based integration test simulations of each processing unit, \gls{VHDL}-based system test simulations of the entire system interfacing against a mock SCU and mock memory, and finally physical integration tests of the processor programmed onto the FPGA of the Barricelli.
 
-\subsubsection{Conformance tests}
+\todo{what about timing simulations?}
 
-\input{testing/template}
+\subsection{\gls{VHDL}-based Subcomponent Unit Test Simulations}
+
+Unit testing VHDL entites is extremely important in a large and complex design like the Barricelli.
+For this project, almost every component, perhaps except the most trivial entities, is tested in an automated or semi-automated VHDL test bench.
+A tool was developed to ease the automation of VHDL test running and validation, modeled after the leading test runners in the software industry, such as JUnit\cn and Karma\cn.
+This tool enabled tests to be written using easy-to-use self-evaluating tests that compare signals at specific times against expected values.
+
+The goal of these unit tests is to ensure that the building block components work as expected when reacting to specified input.
+
+Results of these tests can be found in \todo{we need to stash results somewhere}.
+
+\subsection{\gls{VHDL}-based Processing Unit Integration Test Simulations}
+
+Each processing unit, which each consists of several interconnected subcomponents, has been simulated for integration testing.
+The goal of these tests are to verify that the different subcomponents interface correctly with eachother, and that the behaviour of the supercomponent is as expected.
+
+\subsubsection{Testing the Fitness Core}
+
+\todo{about tb\_fitness\_core.vhd}
+
+\subsubsection{Testing the Genetics Pipeline}
+
+\todo{about tb\_genetics\_pipeline.vhd}
+
+\subsection{\gls{VHDL}-based System test Simulations}
+\label{section:testing:fpga:system-tests}
+
+The toplevel simulation test bench of the barricelli computer, which simulates the entire FPGA as a black box interfacing against the external components, supports pre-loading entire programs into a mocked instruction memory component.
+The \Gls{galapagos assembler} supports outputting assembled programs compiled to one of these mock memory components, meaning that testing new programs in a simulated environment is an easy and fun process.
+
+\todo{the title of the test should be above the table in which its results are displayed, not just as the caption (rendered below) of the table}
+
+A formal description of the system tests performed at this level can be found in tables
+\ref{testing:fitness:pipeline_test},
+\ref{testing:fitness:branch_taken},
+\ref{testing:fitness:branch_not_taken},
+\ref{testing:fitness:conditional_taken},
+\ref{testing:fitness:conditional_not_taken},
+\ref{testing:fitness:load_data},
+\ref{testing:fitness:store_data},
+\ref{testing:fitness:store_gene},
+and
+\ref{testing:fitness:load_gene}.
 
 \input{testing/fitness/pipeline_test}
-
 \input{testing/fitness/branch_taken}
-
 \input{testing/fitness/branch_not_taken}
-
 \input{testing/fitness/conditional_taken}
-
 \input{testing/fitness/conditional_not_taken}
-
 \input{testing/fitness/load_data}
-
 \input{testing/fitness/store_data}
-
 \input{testing/fitness/store_gene}
-
 \input{testing/fitness/load_gene}
-
 \input{testing/tbl/flow_template}
 
-\subsection{Unit Tests}
+\subsection{Physical Integration Tests}
+
+Finally, on the physical board, the processor was tested by running the same programs as in the system tests described in section \vref{section:testing:fpga:system-tests}.
+These programs were programmed into the instruction memory of the processor by the SCU.
+
+\section{Testing the PCB}
+During and after the components were soldered on the PCB board, the board were tested to ensure that the powergrid were working as it was supposed to.
+For the first test, it was checked that all the various leds on the board was working in order to verify that the board actually was powered right, and that there was
+no short circuts on the power grid itself.
+
+Some of the earliest test were also to check that the FPGA actually was working properly, and it was done by making a simple FPGA echo program to test the various pins on the fpga.
+The pins on the fpga were tested by connecting a led to the various FPGA-headers. If the fpga worked correctly, the led will activate, indicating the the pins actually are operating right.
+When this test was conducted on the first board that were soldered, it came out that the FPGA was not "baked on" right, and that we had to start solder a new board. 
+
+--picture of fpga headers
+\todo{the thing where we made a simple fpga echo program for the pins, and tested the lines from the fpga to the headers using an led. for results: we discovered a bad bake this way}
+
+\section{Testing IO}
+\input{io/testing}
+
+\section{Testing Additional Components}
+
+\subsection{Galapagos Assembler}
+
+\todo{galapagos-as has a test-suite, write about it}
+
+\section{Additional Tests}
 
 \subsection{The Pseudo-Random Number Generator}
 
@@ -51,63 +110,6 @@ Finally, some genetics algorithms convergence tests were run, also simulated in 
 Based on the results from these experiments, it is safe to conclude that, while Barricelli's pseudo-random number generator algorithm may not be best-in-class for producing convincing randomness, it is definitely good enough for problem solving using genetic algorithms, and most certainly quicker than other more ``proper'' algorithms.
 
 \todo{ dig up some numbers, show some graphs}
-
-\subsubsection{VHDL Test Benches}
-
-Unit testing VHDL entites is extremely important in a large and complex design like the Barricelli.
-For this project, almost every component, perhaps except the most trivial entities, is tested in an automated or semi-automated VHDL test bench.
-A tool was developed to ease the automation of VHDL test running and validation, modeled after the leading test runners in the software industry, such as JUnit\cn and Karma\cn.
-This tool enabled tests to be written using easy-to-use self-evaluating tests that compare signals at specific times against expected values.
-
-The toplevel simulation test bench of the barricelli computer, which simulates the entire FPGA as a black box interfacing against the external components, supports pre-loading entire programs into a mocked instruction memory component.
-The \Gls{galapagos assembler} supports outputting assembled programs compiled to one of these mock memory components, meaning that testing new programs in a simulated environment is an easy and fun process.
-
-
-\test
-{Control unit test bench}{
-    \item{Run the control unit test bench simulation in ISim.}
-    \item{Run the control unit test bench simulation in ISim.}
-    \item{Run the control unit test bench simulation in ISim.}
-}{Simulation raises no assertion errors.}
-{Simulation raises no assertion errors.}
-
-\test
-{Control unit test bench}
-{
-\item{Hello world.}
-}
-{Simulation raises no assertion errors.}
-{Simulation raises no assertion errors.}
-
-\subsection{Integration Tests}
-\input{fpga/testing/integration-tests}
-
-\subsection{Validation Tests}
-
-\section{Testing the PCB}
-
-\todo{the thing where we made a simple fpga echo program for the pins, and tested the lines from the fpga to the headers using an led. for results: we discovered a bad bake this way}
-
-\section{Testing IO}
-
-\section{Testing Additional Components}
-
-\subsection{Galapagos Assembler}
-
-\todo{galapagos-as has a test-suite, write about it}
-
-\section{Additional Tests}
-
-\subsection{The Drop Test}
-
-\test
-{Drop Test}{
-    \item{Put Barricelli on a surface 75cm above ground level.}
-    \item{Attach power cable and SCU debug wires.}
-    \item{Power on Barricelli.}
-    \item{Entwine leg in cables and quickly extend limbs.}
-}{Barricelli should fall face first on the floor with no visible damage.}
-{Barricelli fell face first on the foor with no visible damage.}
 
 
 

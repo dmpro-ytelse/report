@@ -3,12 +3,30 @@
 Here we will short (probably in list form with an introduction) explain how the footprints for the major components were found or deigned.
 This section is most of all here to help future similar projects, and to document our work.
 
+Getting right footprints is a fairly easy task when working in Altium.
+It is worth checking out whether the footprint is already available somewhere on the manufacturers site.
+If it is available, it can simply be imported into the project and used.
+In case it is not available, Altium makes it really easy to design the footprint.
+The most important thing here is to get the right blueprint.
+All of our components had their blueprints in the manufacturers technical datasheets.
+Some manufacturers favor imperial system and some favor metric system.
+Attention should be payed to units when designing the footprint.
+Once one gets a hang of Altium PCB editor it takes surprisingly little time to create a footprint for a regular component.
+
+We encountred one issue while designing footprints.
+The pads of footprint that was designed for polarized capasitor component EEE1HA1R0AR matched the size of components pins (they were in fact even smaller - 4.7mm vs max 5.5mm in specefication). 
+\todo{insert figure? ref figure? figure pol\_cap\_size\_footprint\_vs\_specs.png}
+This made soldering nontrivial.
+\todo{figure pol\_cap\_size\_on\_board.png}
+To avoid this complication the pads on footprint should be designed to be longer than the pins.
+That will make the pads protrude under the actual component resulting in much simpler soldering.
+
 USB:
 
 the footprint for the micro-usb was found in the altium libary. 
 
 
-/as we can see in the picture, the usb have 4 pins that it uses. pin 1 is where the signal goes and.....
+\todo{as we can see in the picture, the usb have 4 pins that it uses. pin 1 is where the signal goes and.....}
 
 SD-CARD:
 
@@ -16,5 +34,5 @@ The footprint for the SD-card was designed by the group. The reason for this was
 every manufacturer have their own design on the receptacles. 
 
 
-/the picture shows the interface of the SD card. the different pins that can be seen on the picture are a part of the standardized SD-protocol that 
-every manufacturer have to follow........
+\todo{the picture shows the interface of the SD card. the different pins that can be seen on the picture are a part of the standardized SD-protocol that every manufacturer have to follow...}
+
