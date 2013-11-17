@@ -8,7 +8,7 @@ This section presents the IO devices that were selected and discuss other altern
 \subsubsection{SD}
 We talked about using micro-sd cards, but because it was harder to find any guidlines on how to use/implement it we decided to use the normal SD interface.
 In the SD interface, there are several protocols used for communication. 
-However for this project we use the mode called "SPI bus mode", which is the interface that is used by the microcontroller.  --verify IO group
+However for this project we use the mode called "SPI bus mode", which is the interface that is used by the microcontroller.  \todo{the IO group must verify this}
 The SPI or "serial peripheral interface" is a scheme where you use a syncronized master-slave configuration or relation to communicate with the IO-devices. 
 The goal with this choice is to have better compatibillity with the microcontroller.
 
@@ -26,10 +26,11 @@ In this case, the microcontroller works as a self powered device or a slave. The
 will then work as the usb host.
 
 
-//insert picture from http://www.silabs.com/Support%20Documents/TechnicalDocs/AN0046.pdf
+\todo{insert picture from http://www.silabs.com/Support%20Documents/TechnicalDocs/AN0046.pdf}
 
 
-\subsubsection{serial port} //the name rs232 is too ambigious. We need to explain what it is
+\subsubsection{serial port} 
+\todo{the name rs232 is too ambigious. We need to explain what it is WAIT HAS THIS BEEN DONE ALREADY?}
 RS-232 is a communication standard/protocol which is implemented through a serial port interface.
 Even though serial communication was technically not required due to presence of USB interface, it was decided to implement RS-232 communication as well.
 This way, in case there were troubles with USB, it would still be possible to communicate over RS-232; and vice versa.
@@ -38,14 +39,13 @@ We placed socket connector on the PCB as well as a RS-232 driver that transforms
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
 
-Here we will talk about how our internal commmunication on the board work, and how it was planed.
-??
-
+Here we will talk about how our internal commmunication on the board work, and how it was planned.
+\todo{write this section}
 
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
-//someone look at this and correct it
-//what other alternatives to memory are possible?
-//how did our choice increase the efficiency? ( remember we are the performance group)
+\todo{someone look at this and correct it}
+\todo{what other alternatives to memory are possible?}
+\todo{how did our choice increase the efficiency? ( remember we are the performance group)}
 Here we will talk about the memory we have, why it was picked and what other alternatives we did not choose.
 When the group talked about selecting memory, there was lots of options. The FPGA group needed a memory that could provide 
 fast accesses in order to increase efficiency. Because of this, the group decided to use SRAM because of the fast access times.
