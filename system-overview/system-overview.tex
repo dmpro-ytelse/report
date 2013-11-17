@@ -71,11 +71,12 @@ This design choice was made because it increases the performance of the machine,
 
 \subsubsection{Instruction Memory}
 
-The Instruction Memory, labeled as ``INST MEM'' in figure \vref{figure:system-overview}, ...
-\todo{What is it, what does it do in the system?}
+The Instruction Memory, labeled as ``INST MEM'' in figure \vref{figure:system-overview}, is the memory that holds the program instructions for the processing units in the Barricelli running on the FPGA.
+The memory is read-only for the processors in the FPGA, but can be written to by the SCU.
+The instruction memory is shared by all the processing units in the FPGA.
 
 \subsubsection{Data Memory}
 
-The Data Memory, labeled as ``DATA MEM'' in figure \vref{figure:system-overview}, ...
-
-\todo{What is it, what does it do in the system?}
+The Data Memory, labeled as ``DATA MEM'' in figure \vref{figure:system-overview}, is the memory that holds processing data for the processors in the FPGA.
+The memory can be read and read by both the processing units in the FPGA, and the SCU.
+The data memory is shared by all the processing units in the FPGA.
