@@ -45,7 +45,8 @@ Because the value of bits 25-24 is 10 (mutation\_amount has value 2), there will
 \label{fig_mutation_mask}
 \end{figure}
 
-The mutation core is implemented by use of four shifter variables, one for each possible mutation, and set so that only one bit is 1 for the output. 
+Originally, the mutation core was implemented by behavioural descprition, but since this caused the syntheziser to generate latches, ShifterVariables have been implemented instead.
+The mutation core is implemented by use of four ShifterVariables, one for each possible mutation, and set so that only one bit is 1 for the output. 
 A final mutation is set by combining the outputs from the ShifterVariables by using OR-function, and the mutation\_amount determines how many of these outputs are combined. Figure \ref{fig_mutation_mask} shows an example where bits 1, 4, 6 and 9 are set for mutation. 
 In this case the final output is set by combining the input and mutation with the XOR-fuction, so that for each bit \emph{i}, the bit is set to 1 if and only if bit \emph{i} is set in either the input or the mutation, but not both. This can be seen in figure \ref{fig_mutation_perform}.
 

@@ -147,7 +147,23 @@ The result of this is that the multiplication operation is able to finish withou
 \subsubsection{Shifters}
 
 \todo{I've heard a lot about the epicness of the shifters. perhaps we should write something about them?}
+A shifter can shift an input by \emph{M} bits, either left or right unsigned, or right signed. \emph{M} is set generically when the component is created, while signal inputs  \emph{Left} and \emph{Arith} determines type of shift. 
+If \emph{Left} is set, there is unsigned shift to left.
+If \emph{Left} is not set, but \emph{Arith} is, then it is a signed shift to right.
+Otherwise, the shift is to the right unsigned.
+If \emph{Enable} is not set, then there will be no shift.
 
+\paragraph{ShifterVariables}
+A ShifterVariable consists of a larger set of shifters. 
+It takes two inputs: One main input \emph{I} with size \emph{N} (default 64) to be shifted, and one \emph{count} input of size \emph{M} that determines how many bits to be shifted. 
+The number of shifters in the ShifterVariable is equal to \emph{M} (default 1), and each shifter may shift the main input by $2^i$ bits, where \emph{i} is a number in the range 0 to M-1. 
+Shifter number \emph{i} will perform shift if bit number \emph{i} in \emph{count} is 1. 
+For example, if the count input is 000110, then 4 of the shifters will not shift, while two shifters will shift input \emph{I} by $2^1 + 2^2$, which is 6.
+The ShifterVariable has also inputs for \emph{Left}, \emph{Arith} and \emph{Enable}.
+ShifterVariables are not only used in the ALU, but also in the Crossover Core and Mutation Cores in the Genetics Pipeline.
+
+
+\todo{ Lage grafikk?}
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
 Since the executions of instructions overlap in the pipeline.
