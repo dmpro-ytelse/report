@@ -6,8 +6,9 @@ It is designed with a modular, object-oriented software architecture, which make
 Indeed, during the short time it has been published on the Internet, it has already been forked and adapted for use for other instruction set architectures and assembly languages.\cn \todo{yes, I'm talking about how I cooked galapagos-as for use in dmkons -- sigve}
 The assembler supports the entire \Gls{galapagos} ISA.
 
+\todo{rewrite the following paragraph because it is about as concise as a sponge}
 The assembler does not perform any optimizations such as instruction re-ordering.
-This is because the forwarding unit in the CPU architecture resolves many of the same issues that the assembler would work around using instruction re-ordering.
+This is because the forwarding unit in the CPU architecture resolves many of the same issues that the assembler would work around using instruction re-ordering. \todo{does the forwarding unit work around other issues (1), or only those solved by instruction re-ordering (2)? if 2 then don't use "such as" in this paragraph's first sentence. if 1 then list the other issues it resolves}
 The only non-control related hazards that the forwarding unit doesn't already resolve  are use-after-load conflicts.
 A use-after-load conflict is a conflict where the processor plans the execute a data load from memory, and then use the result from that load in the immediately proceding execution.
 When this happens, the result from the memory load is not yet ready when the execution is planned to execute.
