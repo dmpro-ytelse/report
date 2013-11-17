@@ -187,7 +187,13 @@ Forwarding does, however, not solve all occurrences of data hazards. It exists s
 
 
 \subsubsection{Conditionals} 
-Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the instructions currently residing in the pipeline are not supposed to be validated. More specific, the instructions residing in the \emph{fetch stage}, \emph{decode stage}, \emph{execute stage} needs to be flushed.  This is accomplished with a 2-bit counter. The counter is used to determine how many instructions should be flushed when reaching the memory stage. Fortunately, this number is always three in case of a conditional branch.The instructions themselves are simply invalidated by invalidate their control signals. Note that the state is not changed until the memory stage and the write back stage. By simply intercept and change this signals the result of the instruction would in effect be a \emph{NOP}. 
+Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the instructions currently residing in the pipeline are not supposed to be validated. More specific, the instructions residing in the \emph{fetch stage}, \emph{decode stage}, \emph{execute stage} needs to be flushed. This is accomplished with the jump signal working as flush signal to the different pipeline registers. This makes sure the instructions in the pipeline are invalidated, effectively inserting \emph{NOPs}
+
+
+
+
+
+ 
 
 
 \todo{reference}.
@@ -216,9 +222,6 @@ When the bus is acquired, the \emph{fitness memory controller} puts the address 
 
 \subsubsection{Fitness Genetic Controller} 
 As with the communication with the main data controller, each fitness core also have a small controller to synchronise the communication with the \emph{genetic memory controller}. This controller is referred to as the \emph{fitness genetic controller}. This controller is also implemented as a state machine. However, this component contains more functionality than the \emph{fitness memory controller}, since this controller communicate with the \emph{genetic controller}, which handles the access with both the rated and unrated pool. 
-
-
-
 
 
 \subsubsection{Halting the pipeline}
