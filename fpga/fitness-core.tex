@@ -147,7 +147,23 @@ The result of this is that the multiplication operation is able to finish withou
 \subsubsection{Shifters}
 
 \todo{I've heard a lot about the epicness of the shifters. perhaps we should write something about them?}
+A shifter can shift an input by \emph{M} bits, either left or right unsigned, or right signed. \emph{M} is set generically when the component is created, while signal inputs  \emph{Left} and \emph{Arith} determines type of shift. 
+If \emph{Left} is set, there is unsigned shift to left.
+If \emph{Left} is not set, but \emph{Arith} is, then it is a signed shift to right.
+Otherwise, the shift is to the right unsigned.
+If \emph{Enable} is not set, then there will be no shift.
 
+\paragraph{ShifterVariables}
+A ShifterVariable consists of a larger set of shifters. 
+It takes two inputs: One main input \emph{I} with size \emph{N} (default 64) to be shifted, and one \emph{count} input of size \emph{M} that determines how many bits to be shifted. 
+The number of shifters in the ShifterVariable is equal to \emph{M} (default 1), and each shifter may shift the main input by $2^i$ bits, where \emph{i} is a number in the range 0 to M-1. 
+Shifter number \emph{i} will perform shift if bit number \emph{i} in \emph{count} is 1. 
+For example, if the count input is 000110, then 4 of the shifters will not shift, while two shifters will shift input \emph{I} by $2^1 + 2^2$, which is 6.
+The ShifterVariable has also inputs for \emph{Left}, \emph{Arith} and \emph{Enable}.
+ShifterVariables are not only used in the ALU, but also in the Crossover Core and Mutation Cores in the Genetics Pipeline.
+
+
+\todo{ Lage grafikk?}
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
 Since the executions of instructions overlap in the pipeline.
@@ -171,7 +187,9 @@ Forwarding does, however, not solve all occurrences of data hazards. It exists s
 
 
 \subsubsection{Conditionals} 
-Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the instructions currently residing in the pipeline are not supposed to be validated. More specific, the instructions residing in the \emph{fetch stage}, \emph{decode stage}, \emph{execute stage} needs to be flushed.  This is accomplished with a 2-bit counter. The counter is used to determine how many instructions should be flushed when reaching the memory stage. Fortunately, this number is always three in case of a conditional branch.The instructions themselves are simply invalidated by invalidate their control signals. Note that the state is not changed until the memory stage and the write back stage. By simply intercept and change this signals the result of the instruction would in effect be a \emph{NOP}. 
+Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the instructions currently residing in the pipeline are not supposed to be validated. More specific, the instructions residing in the \emph{fetch stage}, \emph{decode stage}, \emph{execute stage} needs to be flushed. This is accomplished with the jump signal working as flush signal to the different pipeline registers. This makes sure the instructions in the pipeline are invalidated, effectively inserting \emph{NOPs}
+
+
 
 
 \todo{reference}.
@@ -184,7 +202,13 @@ Like ARM , the galapagos architecture use conditional codes in order to determin
 In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. The controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the \emph{fitness core}.  The \emph{fitness core} supports two instructions for interacting with the data memory,  \emph{load word} and \emph{store word}. 
 
 To accommodate these instructions the memory controller have two cases, one for loading and one for storing a memory word, both which requires access to the bus. The \emph{fitness memory controller} requests the bus by sending a request signal to the main \emph{Data controller}. 
-The \emph{data controller} either handles this request immediately, or the request is handled when the bus is ready, in case some other core is currently using the bus.  Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. When the \emph{data controller} is ready, it will send out an acknowledgment granting the bus.  
+The \emph{data controller} either handles this request immediately, or the request is handled when the bus is ready, in case some other core is currently using the bus.  Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. When the \emph{data controller} is ready, it will send out an acknowledgment granting the bus. When receiving the bus the \emph{fitness memory controller} is able to use the bus freely. 
+
+In case of a \emph{READ} operation, the address is put on the address bus. This address corresponds to a memory position on the external memory. When receiving this address, the \emph{data memory controller}, starts fetching the memory word. During this time the fitness memory controller needs to wait. It stays in a wait loop unit the \emph{data memory controller} is finished reading. Note that the bus to external memory is only 16-bits wide. This implies that four read instructions are required to read a 64-bits word. When the \emph{memory data controller} is finished reading data from memory, the data is put on the data bus, and the can be read by the fitness core. Then the fitness core is disconnected from both the data and memory bus and it continuous its execution through the pipeline.
+
+
+When performing a \emph{WRITE} operation this is done in the same manner as with the \emph{READ} operation. The difference lay in the fact that during a memory write, the data to be written is put on the outgoing data bus. The \emph{fitness core} is in wait state at this moment. When the data is finished writing to memory, the \emph{memory data controller} responds with an acknowledgement. The \emph{fitness core} continous with its computation.  
+\todo{kladd!!}A state diagram showing this can be seen in figure (?) \todo{add me}.   
 
 
 
@@ -192,17 +216,16 @@ The \emph{data controller} either handles this request immediately, or the reque
 
 
 
-
-When the bus is acquired, the \emph{fitness memory controller} puts the address on the address bus. Depending on the operation, \emph{LOAD} or \emph{STORE}, it either receives data on the input bus, or puts data on the output bus. 
-
-
-
-
 \subsubsection{Fitness Genetic Controller} 
-As with the communication with the main data controller, each fitness core also have a small controller to synchronise the communication with the \emph{genetic memory controller}. This controller is referred to as the \emph{fitness genetic controller}. This controller is also implemented as a state machine. However, this component contains more functionality than the \emph{fitness memory controller}. The communication against the genetic controller require more functionality, since this controller communicate with the \emph{genetic controller}, which handles the access with both the rated and unrated pool. 
+As with the communication with the main data controller, each fitness core also have a small controller to synchronise the communication with the \emph{genetic memory controller}. This controller is referred to as the \emph{fitness genetic controller}. This controller is also implemented as a state machine. However, this component contains more functionality than the \emph{fitness memory controller}, since this controller communicate with the \emph{genetic controller}, which handles the access with both the rated and unrated pool. The fitness cores and the genetic pipeline uses these pools depending on the operation. The fitness core is able to perform the following genetic operations: \emph{LOAD GENE}, \emph{STORE GENE}, \emph{SETTINGS} and \emph{NOP}. These different operations require different uses of the \emph{rated} and \emph{unrated} pools. 
 
+The \emph{LOAD GENE} operations load a gene from the unrated pool. This gene is loaded by requesting the gene from the \emph{genetic controller}, thereby halting the requesting fitness core. When the \emph{genetic controller} is finished fetching the gene, it is transmitted to the requested fitness core. The fitness core receives the unrated gene and continuous the execution.
 
+The \emph{STORE} gene operations store a fitness and gene to the rated pool. This is atomic operation. Atomic in the sense that the selection core is unable to access the rated pool during this time. This is done avoiding any memory collisions. The fitness value and the gene is stored by requesting the bus. When the bus access is granted. The \emph{fitness genetic controller} writes to the transmit the fitness and genetic values over two cycles to the \emph{genetic controller}.  
 
+The \emph{SETTINGS} operation is used to configure the genetic pipeline. It is able to configure the \emph{selection core}, \emph{crossover core}, and the \emph{mutation core}. The selection core can be configured to perform a varied number of tournament rounds. The crossover core can be configured to perform between four different types of crossover. More on the different types of crossover can be seen i section(?) \todo{Add me}. The mutation core can be configured with a value specifying the probability of muting the gene. 
+
+\todo{fix me} 
 
 
 \subsubsection{Halting the pipeline}
