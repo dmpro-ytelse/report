@@ -1,26 +1,75 @@
-\todo{Microcontroller (efm32gg990f1024) handling I/O between computer, buttons, LEDs and FPGA. Redundancy, can manage with one of SD/USB/Serial.}
+\section{Input and Output}
+The PCB contains a microcontroller used to manage all input and output between the FPGA and the outside world.
+The microcontroller is responsible for handling input from all the available input sources, populating the FPGA's memory and outputing the calculated values to the appropriate destinations.
+\todo{Include figure of IO part from system overview.}
 
-\section{IO Channels/hardware}
-\todo{Subsectionise, detailed about everything, including software/libraries used to facilitate communication.}
-\begin{itemize}
-    \item Data IO
-    \begin{itemize}
-        \item SD
-        \item USB
-        \item Serial
-    \end{itemize}
-    \item LEDs, buttons
-    \item Huge FPGA bus
-    \item Upload/debug connection
-\end{itemize}
+\subsection{Communication channels}
+\subsubsection{SD Card}
+The SD card reader is primarily used as a storage for programs that are to be uploaded on the FPGA.
+However, it might also be used to store memory snapshots in order to look how the genetic algorithm converges to a solution over time.
+\todo{Reference application note with example code for SD}
+
+\subsubsection{USB}
+The USB is the main communication line with a host computer, allowing the host computer to start running programs on the FPGA and recieve snapshots of the memory periodically.
+\todo{Reference application note with example code for USB}
+
+\subsubsection{Serial}
+The serial port is meant as a backup solution in case USB doesn't work, with the exact same opportunities, but with an older, simler interface.
+\todo{Reference application note with example code for UART}
+
+\subsubsection{LEDs and buttons}
+The most primitive form of IO we have are the onboard LEDs and buttons.
+They allow a quick and easy way to verify that a program is running, and possibly letting the user change execution modes or the program on the FPGA with the buttons.
+All code interfacing with the LEDs and buttons are simple code either setting or reading the value of GPIO pins.
+
+\subsubsection{FPGA}
+There are 41 lines between the FPGA and the SCU in order to facilitate communication.
+The FPGA has no way of signalling that it wants to output something, so the SCU is responsible for periodically halting the CPU and reading from it's memory.
+
+\subsubsection{J-link}
+In order to program and debug the programs on the SCU, we utilise the built-in pins for debugging using J-Link.
+\todo{What more to write about this?}
+It can also be used as a form of emergency output as it makes it possible to display text that is printed by the program running on the SCU.
 
 \section{FPGA Control}
-\todo{Direct memory access, only way of talking with FPGA. A few diagrams, timing etc.}
+The only way of communication with the FPGA is with direct memory access to the FPGA's data and instruction memory.
+All the data is transfered directly over the SCU's GPIO pins, without any form for memory mapping or built-in bus interfaces.
+Since the instruction memory stores 32 bits per address, \todo{Cite fpga chapter on instruction memory}, there are two states for accessing instruction memory, either the upper or the lower half.
+The SRAM datasheet~\cite{sram-datasheet} specifies that the data signal has to be stable for at least 10ns in order to complete a write.
+This means that it is not necessary to worry about timing when accessing the SRAM since changing the signal more than every 10ns requires a clock speed of 100MHz.
 
-\section{Interaction}
-\todo{Main loop, state machine (diagrams ++).}
-\subsection{Host program}
-\todo{Basically the same as above, but for the computer talking with the FPGA.}
+\begin{table}
+    \begin{tabular}{| l | l | l |}
+        \hline
+        Signal & Bus width & \\
+        \hline
+        FPGA enable & 1 & Enables the FPGA on high, disables it on low\\
+        \hline
+        FPGA State & 2 & \pbox{20cm}{00: Processor enable\\01: Instruction memory upper half access\\10: Instruction memory lower half access\\11: Data memory access}\\
+        \hline
+        Chip enable & 1 & The chip enable signal in to the selected memory block.\\
+        \hline
+        Write enable & 1 & The write enable signal in to the selected memory block.\\
+        \hline
+        Address & 19 & The adress bus to the selected memory block.\\
+        \hline
+        Data & 16 & The data bus to the selected memory block.\\
+        \hline
+        LBUB & 1 & The LB and the UB signal to the selected memory block.\\
+        \hline
+    \end{tabular}
+    \caption{Lines between the SCU and FPGA}
+\end{table}
+
+\section{IO Program}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{io/fig/program.png}
+    \caption{The body of the IO program's main loop}
+\end{figure}
+
+The IO program was designed to be as simple as possible in order to decrease the amount of things that could go wrong.
+The main idea is that every IO device is required to define two function, a function that can be called to check whether some input has happened, and a function that is called whenever a device reports input.
+In order to enable sending messages between different IO units, the poll functions return a pointer which may point to any object in memory, which allows other modules to read the data given that they know what type of data the pointer points to.
 
 \section{Design decision}
 \begin{itemize}
@@ -38,4 +87,5 @@
     \item Not getting work done
     \item Crystal
     \item USB VBus
+    \item No UART?
 \end{itemize}

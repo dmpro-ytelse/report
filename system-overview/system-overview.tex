@@ -26,7 +26,7 @@ The FPGA is connected to its own memory.
 
 \subsection{SCU}
 
-The SCU, or System Control Unit, is an Energy Micro EFM32GG990 micro controller which administrates communication between the FPGA and the outside world.
+The SCU, or System Control Unit, is an Energy Micro EFM32GG990F1024 micro controller which administrates communication between the FPGA and the outside world.
 It is the SCU's job to react to user input, to program the custom CPU implemented on the FPGA and to perform other administrative duties.
 Having a separate micro controller to perform these tasks minimises the complexity of the design implemented on the FPGA, which means that more resources can be used to create a performant and clean custom CPU design.
 
@@ -40,8 +40,9 @@ Having multiple communication channels between the user and the system means tha
 
 TIA-232, otherwise known as RS-232, is a standard describing transfer of data using a serial cable. \todo{more, cite RS-232 or TIA-232}
 
-To easily communicate with the microcontroller, a serial port was added to the schematics. The micro controller used in the project has a built in UART device\cite{efm32gg990-datasheet}, 
-and to use it in the project is easily done. As it is a slow way to transfer data, it will be used more as a fallback to the USB.
+To easily communicate with the microcontroller, a serial port was added to the schematics.
+The micro controller used in the project has a built in UART interface\cite{efm32gg990-datasheet} which is easily activated with code from application note \todo{cite specific}.
+As it is a comparatively slow way to transfer data, it is mainly a fallback in case the USB link should fail.
 
 \subsubsection{USB}
 
@@ -55,17 +56,13 @@ In Barricelli, it is used for communication between a computer and the SCU.
 
 \subsubsection{LEDs}
 
-The fastest way to get interaction from the microcontroller is to use LEDs, short for Light-Emmiting Diode. Driven by General Purpose IO pins on the SCU, to have them active is as simple 
-as setting the correct pin high. This enables fast checking of the system.
-
-It was chosen to have 16 LEDs, so that two bytes could be represented with lights. This would allow an onboard representation of results of the programs etc.
+The simplest way to get output from the microcontroller is to use LEDs, short for Light-Emmiting Diode \todo{Move light-emitting diode to own abbr-list?}.
+The leds are driven by General Purpose IO pins on the SCU, requiring a minimal amount of code in order to get a working output, which is especially handy in the early stages of implementation.
 
 \subsubsection{Buttons}
 
-Just as with the LEDs, there is placed 8 buttons on the circuit board. These can be used as a makeshift keyboard in applications that run on the computer, allowing for user input during execution.
-
-As well there is a power switch and a reset \todo{there is, right?} button on the chip. The reset button starts the program loaded in the SCU.
-
+Buttons is the fastest and simplest way of having some form of user input on the board.
+The buttons allow the user to interact with the program running on the SCU without requiring some external IO.
 
 \subsection{Memory}
 
