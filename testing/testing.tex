@@ -1,13 +1,13 @@
 \section{Testing the FPGA}
 
-
 \subsection{Testing the fitness core}
 In order to test the fitness core independent from the other parts of the architecture a simple test framework was developed. \todo{this}
 
-
+\todo{we're talking about test\_utils here, right? we can cook https://github.com/dmkons/reports}
 
 \subsubsection{Conformance tests}
 
+\todo{the title of the test should be above the table in which its results are displayed, not just as the caption (rendered below) of the table}
 
 \input{testing/template}
 
@@ -29,17 +29,41 @@ In order to test the fitness core independent from the other parts of the archit
 
 \input{testing/fitness/load_gene}
 
-
 \input{testing/tbl/flow_template}
-
-
-
 
 \subsection{Unit Tests}
 
-\todo{mention the prng tests}
+\subsection{The Pseudo-Random Number Generator}
+
+A key component in any genetic algorithm worth its salt is a decent source of (pseudo-)random numbers.
+The Barricelli computer has a hardware pseudo-random number generator module built into its genetics accelerator.
+When designing a pseudo-random number generator, there is always a trade-off between generating ``good'' random numbers, and generating them fast.
+Having high performance as a design goal\cn, it was desirable to design a pseudo-random number generator that is as fast as possible while still meeting the minimum requirements for randomness that is needed for successfully using it in a genetics algorithm application.
+
+The pseudo-random number generator designed for the Barricelli has been tested extensively with a pseudo-random number generator test suite called DieHarder\cn.
+DieHarder is a test suite which measures the ``goodness'' of a pseudo-random number generator based a number of criteria.
+\todo{ what are these criteria?}
+
+The algorithm was implemented in python and tested agains the DieHarder integration suite\cn.
+
+The shift-based algorithm used in the pseudo-random number generator scores quite poorly in the DieHarder tests when every single bit of the output is used.
+However, by only using every 7th number\cn, the algorithm ranks quite well.
+
+Finally, some genetics algorithms convergence tests were run, also simulated in python, using the different pseudo-random algorithm candidates as a random number source in the experiments.
+Based on the results from these experiments, it is safe to conclude that, while Barricelli's pseudo-random number generator algorithm may not be best-in-class for producing convincing randomness, it is definitely good enough for problem solving using genetic algorithms, and most certainly quicker than other more ``proper'' algorithms.
+
+\todo{ dig up some numbers, show some graphs}
 
 \subsubsection{VHDL Test Benches}
+
+Unit testing VHDL entites is extremely important in a large and complex design like the Barricelli.
+For this project, almost every component, perhaps except the most trivial entities, is tested in an automated or semi-automated VHDL test bench.
+A tool was developed to ease the automation of VHDL test running and validation, modeled after the leading test runners in the software industry, such as JUnit\cn and Karma\cn.
+This tool enabled tests to be written using easy-to-use self-evaluating tests that compare signals at specific times against expected values.
+
+The toplevel simulation test bench of the barricelli computer, which simulates the entire FPGA as a black box interfacing against the external components, supports pre-loading entire programs into a mocked instruction memory component.
+The \Gls{galapagos assembler} supports outputting assembled programs compiled to one of these mock memory components, meaning that testing new programs in a simulated environment is an easy and fun process.
+
 
 \test
 {Control unit test bench}{
@@ -60,14 +84,22 @@ In order to test the fitness core independent from the other parts of the archit
 \subsection{Integration Tests}
 \input{fpga/testing/integration-tests}
 
-
-
-
 \subsection{Validation Tests}
 
 \section{Testing the PCB}
+During and after the components were soldered on the PCB board, the board were tested to ensure that the powergrid were working as it was supposed to.
+For the first test, it was checked that all the various leds on the board was working in order to verify that the board actually was powered right, and that there was
+no short circuts on the power grid itself.
+
+Some of the earliest test were also to check that the FPGA actually was working properly, and it was done by making a simple FPGA echo program to test the various pins on the fpga.
+The pins on the fpga were tested by connecting a led to the various FPGA-headers. If the fpga worked correctly, the led will activate, indicating the the pins actually are operating right.
+When this test was conducted on the first board that were soldered, it came out that the FPGA was not "baked on" right, and that we had to start solder a new board. 
+
+--picture of fpga headers
+\todo{the thing where we made a simple fpga echo program for the pins, and tested the lines from the fpga to the headers using an led. for results: we discovered a bad bake this way}
 
 \section{Testing IO}
+\input{io/testing}
 
 \section{Testing Additional Components}
 
@@ -76,5 +108,6 @@ In order to test the fitness core independent from the other parts of the archit
 \todo{galapagos-as has a test-suite, write about it}
 
 \section{Additional Tests}
+
 
 \todo{The contiunous ga test}

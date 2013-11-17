@@ -50,6 +50,9 @@ TBA.
 
 If you have a Make-compatible system (linux, mac), just do `make`.
 If not, you need to check the documentation of whatever compiler you installed.
+HOWEVER YOU CAN'T DO IT ON WINDOWS CURRENTLY BECAUSE OF REASONS.
+So just switch to a *nix system and do it from there.
+
 
 ### Getting references and bibtex to work
 In order for the references and bibliography and citations and such to update properly, you have to run
