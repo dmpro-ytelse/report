@@ -1,5 +1,30 @@
-he galapagos architecture employ the Harvard architecture. The memory is split into instruction and data memory. This is done to achieve better memory throughput, because both memories can be accessed simultaneously. The instruction memory is constructed as an memory hierarchy, with the slow external memory (SRAM) and the fast caches (BRAM). This is constructed to achieve better instruction throughput. The internal resources on the FPGA is a lot faster to access than the external memory. Also, the different fitness cores compete for the memory access. This is disaster waiting to happen. In order to fix this the galapagos architecture employ dual port access to the caches. Since, there exists four cores, the architecture employ two caches. This imply that the fitness cores have dedicated access to their cache. This results in fast access times as long as the instruction is located in the cache. The access to the cache is handled by an cache controller that is responsible for locating and transferring instructions from the instruction memory. In case of a cache miss the data requesting core is halted until the instruction is transferred from memory.
+he galapagos architecture employ the Harvard architecture. The memory is split into instruction and data memory. This is done to achieve better memory throughput, because both memories can be accessed simultaneously. The instruction memory is constructed as an memory hierarchy, with the slow external memory (SRAM) and the fast caches (BRAM). This is constructed to achieve better instruction throughput. The internal resources on the FPGA is a lot faster to access than the external memory. Also, the different fitness cores compete for the memory access. This is disaster waiting to happen. In order to fix this the galapagos architecture employ a private cache for each core. This cache is dedicated for each fitness core, and results in fast fetching of instructions, as long as the instruction exists in the cache that is.  The access to the cache is handled by an cache controller that is responsible for locating and transferring instructions from the instruction memory. In case of a cache miss the data requesting core is halted until the instruction is transferred from memory. This scheme is created to resolve the conflicts that arise from using shared memory. 
 
 
 The internal resources on the FPGA is a lot faster to access. Because of this the architecture tries to use the caches as much as possible. The best possible case, is if the program as a whole fits the caches.  
 
+\todo {Fix this shit}
+
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{
+    $ a = $ an instruction address \\
+    $ Ci = $ an array of instructions \\
+    $ Ca = $ an array of the corresponding addresses \\
+    $ M = $ the instruction memory, indexable by instruction addresses
+}
+\KwResult{The instruction at address $ a $}
+\Begin{
+    \If{$ a = Ca[A \bmod{512}] $}{
+        \Return{$ Ci[A \bmod{512}] $}
+    }\Else{
+        $ Caa \bmod{512}] \longleftarrow a $\;
+        $ Ci[a \bmod{512}] \longleftarrow M[a] $\;
+        \Return{$ Ci[A \bmod{512}] $}
+    }
+}
+\caption{Fetching an instruction from the cache}
+\label{algorithm:cache-operation}
+\end{algorithm}

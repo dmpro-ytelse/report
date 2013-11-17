@@ -1,0 +1,17 @@
+Individuals making up the populations are stored on the FPGA for for faster access. These are stored in \emph{BRAM} on the FPGA. This implies a lot faster access times, compared to access times to the external memory, as mentioned in (?). This is done to achieve better memory throughput when executing the algorithms. The pools are further divided into two separate \emph{BRAM} blocks, one for rated individuals, and one for un-rated. This is done to achieve even better memory throughput. The increased throughput are achieved because the different computational can work on the rated and un-rated pool simultaneously. For instance while one fitness core is storing a ranked individual, while another fitness core is fetching a new individual for ranking. 
+
+\todo{More details and better explanation} 
+
+Both the rated pool and the unrated pool is associated with the a controller, referred as the \emph{Genetic controller}. As with the data controller, this controller is responsible for granting access for the rated and unrated pool. This buses in question are, however, not the same as those used to access the data memory. The genetic controller use their own separate buses. The controller is based on mostly the same idea as the data controller described in section (?). The when performing genetic operations, the fitness cores need to request the data bus by using two request signals. The combination of these signals refer to the operation the fitness core requests from the genetic controller. 
+
+The genetic cores continuously performs a round-robin in order to grant bus to the requesting fitness cores and the genetic pipeline. The logic surrounding the different operations are implemented as an state machine to divide the operations in different clock cycles. This is the same method as used in the data controller.
+
+
+
+
+
+
+
+The state machine can be seen in figure(?)
+
+

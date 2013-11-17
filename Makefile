@@ -8,6 +8,8 @@ all:
 	pdflatex report
 	makeglossaries report
 	pdflatex report
+	makeglossaries report
+	pdflatex report
 
 .PHONY: clean
 clean:
