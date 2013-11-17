@@ -1,0 +1,53 @@
+\subsection{IO device tests}
+\test
+{Debug connection test}{
+    \item{Connect the debug pins to the appropriate pins on the energy micro development kit}
+    \item{Turn the debug to OUT}
+    \item{Connect to the development kit using commander \todo{ref?}}
+}{EFM32GG990F1024 listed as microcontroller}
+{EFM32GG990F1024 listed as microcontroller}
+
+\todo{This test, ref AN}
+\test
+{SD Card test}{
+    \item{Run the example code ...}
+}{Success}
+{Failure}
+
+\todo{ref AN}
+\test
+{USB test}{
+    \item{Compile the code from AN\#\#\#\#}
+    \item{Upload and run it}
+    \item{Run the supplied host PC program while connected to the PCB through USB}
+}{The host programs runs successfully}
+{The host program fails to connect through USB}
+
+\todo{ref AN}
+\test
+{Serial test}{
+    \item{Compile the code from AN\#\#\#\#}
+    \item{Upload and run it}
+    \item{Connect the host PC to the PCB and run terminal emulator of choice}
+}{\todo{Get text that is supposed to be sent} appears in the terminal}
+{No ouput from program}
+
+\todo{Buttons \& LEDs? Aleready done, set LEDs 0-7 active if Buttons 0-7 are pressed}
+
+\subsection{FPGA bus}
+\todo{The setup of the busses}
+\test
+{SRAM test}{
+    \item{Write a value to an address}
+    \item{Read the same address and compare with the value written}
+}{The values are identical}
+{}
+
+\test
+{Running a program}{
+    \item{Write data to memory address}
+    \item{Write simple program to change memory value}
+    \item{Let the CPU run for at least \todo{Make up number here} cycles/seconds}
+    \item{Read data}
+}{The value is as expected}
+{}
