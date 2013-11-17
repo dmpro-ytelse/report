@@ -27,7 +27,9 @@ The function will perform crossover on bits 12-0 in the children.
 \label{fig_crossover_split_mask}
 \end{figure}
 
-The split function uses a ShifterVariable, that uses a 32-bit number of 1s as main input, and the random\_number for shifting input.
+The split function was originally implemented by using behavioural descpription, but this caused the synthesizer to create many latches.
+The same problem occured also for the double-split function.
+In order to avoid this, the function now uses a ShifterVariable, that uses a 32-bit number of 1's as main input, and the random\_number for shifting input.
 This yields an output that consists of 1's until the selected bit number, and 0's on the rest.
 Figure \ref{fig_crossover_split_mask} shows an example where bit number 6 is selected for where to begin crossover. 
 Bits 6-0 in the output consist of 0's, and the rest 1's.
