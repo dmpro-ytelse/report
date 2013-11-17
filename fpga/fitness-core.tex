@@ -206,7 +206,13 @@ Like ARM , the galapagos architecture use conditional codes in order to determin
 In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. The controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the \emph{fitness core}.  The \emph{fitness core} supports two instructions for interacting with the data memory,  \emph{load word} and \emph{store word}. 
 
 To accommodate these instructions the memory controller have two cases, one for loading and one for storing a memory word, both which requires access to the bus. The \emph{fitness memory controller} requests the bus by sending a request signal to the main \emph{Data controller}. 
-The \emph{data controller} either handles this request immediately, or the request is handled when the bus is ready, in case some other core is currently using the bus.  Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. When the \emph{data controller} is ready, it will send out an acknowledgment granting the bus.  
+The \emph{data controller} either handles this request immediately, or the request is handled when the bus is ready, in case some other core is currently using the bus.  Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. When the \emph{data controller} is ready, it will send out an acknowledgment granting the bus. When receiving the bus the \emph{fitness memory controller} is able to use the bus freely. 
+
+In case of a \emph{READ} operation, the address is put on the address bus. This address corresponds to a memory position on the external memory. When receiving this address, the \emph{data memory controller}, starts fetching the memory word. During this time the fitness memory controller needs to wait. It stays in a wait loop unit the \emph{data memory controller} is finished reading. Note that the bus to external memory is only 16-bits wide. This implies that four read instructions are required to read a 64-bits word. When the \emph{memory data controller} is finished reading data from memory, the data is put on the data bus, and the can be read by the fitness core. Then the fitness core is disconnected from both the data and memory bus and it continuous its execution through the pipeline.
+
+
+When performing a \emph{WRITE} operation this is done in the same manner as with the \emph{READ} operation. The difference lay in the fact that during a memory write, the data to be written is put on the outgoing data bus. The \emph{fitness core} is in wait state at this moment. When the data is finished writing to memory, the \emph{memory data controller} responds with an acknowledgement. The \emph{fitness core} continous with its computation.  
+\todo{kladd!!}A state diagram showing this can be seen in figure (?) \todo{add me}.   
 
 
 
@@ -214,8 +220,6 @@ The \emph{data controller} either handles this request immediately, or the reque
 
 
 
-
-When the bus is acquired, the \emph{fitness memory controller} puts the address on the address bus. Depending on the operation, \emph{LOAD} or \emph{STORE}, it either receives data on the input bus, or puts data on the output bus. 
 
 
 
