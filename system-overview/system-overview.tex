@@ -33,22 +33,21 @@ Having a separate micro controller to perform these tasks minimises the complexi
 \subsection{I/O}
 
 The Barricelli has several different inputs and outputs.
-While only one input and one output are strictly needed for a functional system, multiple different types of input have been added to the design in the name of safety through redendancy.
-Having multiple communication channels between the user and the system means that even if one or more channels should fail, the system will still be operational.
+While only one input and one output are strictly needed to meet the functional requirements, multiple different types of input have been added to the design in the name of safety through redundancy.
+
+\subsubsection{USB}
+
+Universal Serial Bus is a bus interface used to facilitate the communication between Barricelli and a host computer.
+
+The microcontroller has a built in USB controller~\cite{efm32gg990-datasheet} and energy micro has supplied an application note~\cite{an0065} with code for utilizing the included USB controller in order to act as a USB device.
 
 \subsubsection{TIA-232}
 
 TIA-232, otherwise known as RS-232, is a standard describing transfer of data using a serial cable. \todo{more, cite RS-232 or TIA-232}
 
 To easily communicate with the microcontroller, a serial port was added to the schematics.
-The micro controller used in the project has a built in UART interface\cite{efm32gg990-datasheet} which is easily activated with code from application note \todo{cite specific}.
+The micro controller used in the project has a built in UART Receiver/Transmitter\cite{efm32gg990-datasheet} which is easily activated with code from AN0045~\cite{an0045}.
 As it is a comparatively slow way to transfer data, it is mainly a fallback in case the USB link should fail.
-
-\subsubsection{USB}
-
-Universal Serial Bus is a bus interface.
-
-In Barricelli, it is used for communication between a computer and the SCU.
 
 \subsubsection{SD}
 

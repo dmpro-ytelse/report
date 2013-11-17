@@ -1,7 +1,6 @@
 \section{Input and Output}
-The PCB contains a microcontroller used to manage all input and output between the FPGA and the outside world.
-The microcontroller is responsible for handling input from all the available input sources, populating the FPGA's memory and outputing the calculated values to the appropriate destinations.
-\todo{Include figure of IO part from system overview.}
+The PCB contains a microcontroller used to manage all input and output between the FPGA and the IO devies shown in figure ~\ref{figure:system-overview}.
+The microcontroller listens on all IO channels for input, and acts on the input, either forwarding the request to another device or performing memory operations on the FPGA's memory.
 
 \subsection{Communication channels}
 \subsubsection{SD Card}
