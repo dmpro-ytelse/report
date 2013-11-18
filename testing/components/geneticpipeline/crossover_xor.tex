@@ -1,0 +1,38 @@
+\begin{table}[H]
+  \begin{tabular}{r | p{8cm}}
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    
+    What to test:  & Check if Crossover XOR Function performs crossover
+                     correctly, from correct starting bit to correct ending bit \\
+
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+
+    How to test:   &    All types of situations are to be tested. 
+                        What affects the outputs are the inputs, and the parent inputs            
+                        and the random\_number input are changes during the test. 
+                        \\
+                      
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+
+    Pass criteria: &    Changes in parents should cause changes in children. 
+                        The output for child1 should have output from parent1 and child2
+                        from parent2 for each bit \emph{i}, where in the random\_number 
+                        the value is 0, and child1 should have output from parent2 and 
+                        child2 from parent1 for each bit \emph{i}, where in the 
+                        random\_number the value is 1.
+                        \\
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    
+    Results: &      Successfull. 
+                    Changes in parents cause expected changes in children, and for each
+                    bit \emph{i} in the random\_number, there are crossover at same bit    
+                    \emph{i} from the parents to the children.
+                    \\
+   \noalign{\smallskip}\hline\noalign{\smallskip}
+  
+  
+  
+  \end{tabular}
+  \caption{Crossover Core XOR function}
+  \label{testing:components:genetic_pipeline:crossover_core_xor}
+\end{table}

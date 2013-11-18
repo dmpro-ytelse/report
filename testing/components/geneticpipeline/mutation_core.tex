@@ -1,0 +1,55 @@
+\begin{table}[H]
+  \begin{tabular}{r | p{8cm}}
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    
+    What to test:  & Check if Mutation Core selects mutates when allowed, mutates the 
+                     correct amount of bits, and the correct bit numbers, all based
+                     on chance\_input and random\_number.\\
+
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+
+    How to test:   &    Changes on input will change output. Therefore input will have 
+                        changes.
+                        Changes in random\_number with focus on different parts: 
+                        \begin{itemize}
+                            \item 6 first bits are set to lower and higher/equal to
+                                  chance\_input (default P = 6 is used in the test). 
+                            \item The next two bits are set to test allowed amount of 
+                                  mutations.
+                            \item Bits 24-0 are set to point out four different bit 
+                                  locations.
+                        \end{itemize}
+                        \\
+                      
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+
+    Pass criteria: &    When the 6 first bits in random\_number is equal to or higher 
+                        than chance\_input, there should be no mutation at all.
+                        When mutation is allowed, the next two bits should allow these 
+                        ammount of mutations:  
+                        \begin{itemize}
+                            \item 00 - 1
+                            \item 01 - 2
+                            \item 10 - 3
+                            \item 11 - 4
+                        \end{itemize}
+                        Bits 23-0 selects four bit locations for mutations, and the 
+                        output should have opposite value on these locations compared to
+                        the input.
+                        If more than one bit location pointer has the same value, the 
+                        same bit location should still have the mutation on the output.
+                                                \\
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    
+    Results: &      Successfull. 
+                    Mutation is allowed only when the 6 first bits are lower than the
+                    chance input, the correct amount of mutations were set and each four 
+                    bit locations were selected correctly as expected by bits 23-0
+                    \\
+   \noalign{\smallskip}\hline\noalign{\smallskip}
+  
+  
+  \end{tabular}
+  \caption{Mutation Core}
+  \label{testing:components:genetic_pipeline:mutation_core}
+\end{table}

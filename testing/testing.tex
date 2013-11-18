@@ -16,7 +16,30 @@ This tool enabled tests to be written using easy-to-use self-evaluating tests th
 
 The goal of these unit tests is to ensure that the building block components work as expected when reacting to specified input.
 
-Results of these tests can be found in \todo{we need to stash results somewhere}.
+Screenshots of simulations of these tests can be found in Appendix \ref{appendix:test-bench-documentation}.
+\todo{ Make sure screenshots of as many tests as possible are available. If not, then we probably have to do references from the following tables}
+\todo{we need to stash results somewhere}.
+
+\subsubsection{Fitness Core Components}
+\todo{ Insert text and tables for components used in Fitness Core}
+
+\subsubsection{Genetic Pipepline Components}
+\todo{ Insert text and tables for components used in Genetics Pipeline}
+\paragraph{Selection Core}
+\paragraph{Genetic Pipeline Controller?}
+\paragraph{Unrated pool?}
+\paragraph{Rated pool?}
+
+\todo{ Hmm...seems I overdid the length in the tables. Again!....(T-Bear)}
+\input{testing/components/geneticpipeline/crossover_split.tex}
+\input{testing/components/geneticpipeline/crossover_doublesplit.tex}
+\input{testing/components/geneticpipeline/crossover_xor.tex}
+\input{testing/components/geneticpipeline/crossover_core_toplevel.tex}
+\input{testing/components/geneticpipeline/mutation_core.tex}
+
+
+\subsubsection{Components stolen from AREA 51}
+\todo{ Insert text and tables for components used elsewhere}
 
 \subsection{\gls{VHDL}-based Processing Unit Integration Test Simulations}
 
@@ -61,6 +84,8 @@ and
 \input{testing/fitness/store_gene}
 \input{testing/fitness/load_gene}
 \input{testing/tbl/flow_template}
+\input{testing/tbl/genetic_color}
+\input{testing/tbl/genetic_knapsack}
 
 \subsection{Physical Integration Tests}
 
