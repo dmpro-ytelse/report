@@ -27,6 +27,9 @@ The source code for these demonstration programs can be found in appendix \vref{
 
 The color search program is a very simple program demonstrating a basic usage of the genetics accelerator.
 The program tries to find a specific color in the search-space of all 24-bit colors.
+
+\subsubsection{Individual representation}
+
 An individual represents a specific 24-bit color in RGB format.
 The individual is coded to a 64-bit data word like in figure \vref{figure:color-search-bytefield}.
 
@@ -43,6 +46,24 @@ The individual is coded to a 64-bit data word like in figure \vref{figure:color-
         \label{figure:color-search-bytefield}
     \end{center}
 \end{figure}
+
+\subsubsection{Fitness Function}
+
+The fitness for an individual is calculated using equation \vref{equation:color-search-fitness-function}.
+The fitness a any given individual falls in the range $ [0, 768] $.
+
+\begin{eqnarray}
+\nonumber
+fitness & = & 768 \\
+\nonumber
+        & - & |red_{individual} - red_{target}| \\
+\nonumber
+        & - & |green_{individual} - green_{target}| \\
+        & - & |blue_{individual} - blue_{target}|
+\label{equation:color-search-fitness-function}
+\end{eqnarray}
+
+\subsubsection{Results}
 
 Figure \vref{figure:color-search} shows the evolution of the approximation suggested as an answer by the genetic algorithm.
 In this problem instance the target color was magic pink, i.e. the color with color code $ rgb(255, 0, 255) $.
