@@ -3,6 +3,10 @@ The galapagos architecture includes a highly specialised pipeline for performing
 
 The genetic pipeline is constructed with three types of specialised cores for performing selection, crossover, and mutation. These are operations that occurs frequently in genetic algorithms. These are connected to two internal memory banks on the \emph{FPGA}, namely the unrated and rated pool.
 
+In the selection core, on the other hand, the core needs to be able to access the data bus very frequently in order maximize the throughput.
+Since fitness calculation can be assumed to be computationally bound, the data bus is more or less available for the selection core.
+This allows the genetic pipeline to compute the chromosomes required for the next step before they are required by the fitness cores. 
+
 
 -Abstraction for the programmer. Simpler to program.
 -Do not need components like ALU
