@@ -7,12 +7,14 @@
 }{EFM32GG990F1024 listed as microcontroller}
 {EFM32GG990F1024 listed as microcontroller}
 
-\todo{This test, ref AN}
 \test
 {SD Card test}{
-    \item{Run the example code ...}
-}{Success}
-{Failure}
+    \item{Edit the code from AN0030 to use correct pins}
+    \item{Compile the code, upload and run it, with SD Card connected}
+    \item{Confirm data on SD Card}
+}{File with string ``EFM32 ...the world's most energy friendly microcontrollers !'' is added to the SD Card.}
+{The file is not present.}
+\todo{Is this really our result?}
 
 \todo{ref AN}
 \test
