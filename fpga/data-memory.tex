@@ -30,8 +30,18 @@ These algorithm is based on round-robin scheduling. The request bits of \emph{fi
 
 When a \emph{READ} or \emph{WRITE} operation is encountered, the \emph{data controller} starts to carry out the request from the fitness core. Note that the the memory buses from and to the memory are 16-bits wide. This implies that  it requires at least for cycles in order to transmit/receive 64-bits data over the buses. In addition, external memory requires different control signals. These control signals need to be asserted or de-asserted at specific times when performing the operation. The timing diagrams for the memory chip can be seen in figure (?) \todo{Add timing diagram for memory chip}
 
-This requires the memory controller to use the specific communication protocol when transmitting/receiving data from memory. To accomplish this communication, the memory controller is implemented as a state machine. The responsibility of the state machine is to divide the functionality required to write and read into different cycles. \todo{More details required}
+This requires the memory controller to use the specific communication protocol when transmitting/receiving data from memory. To accomplish this communication, the memory controller is implemented as a state machine. The responsibility of the state machine is to divide the functionality required to write and read into different cycles. \todo{More details required} \todo{Add reference}
 
+
+
+\begin{figure}
+
+  \centering
+  % Trim er [left bottom right top]
+  \includegraphics[width=\textwidth]{fpga/fig/memory_ctrl_state_machine.png}
+  \caption{Data memory controller state machine}
+  \label{fpga:fig:mem:data_memory_ctrl}
+\end{figure}
 
 
 
