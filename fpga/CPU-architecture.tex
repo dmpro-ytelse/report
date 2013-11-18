@@ -50,6 +50,7 @@ This allows the genetic pipeline to compute the chromosomes required for the nex
 \input{fpga/genetic-pipeline}
 
 \subsection{Parallelism}
+\todo{awkwardly placed section.. move it somewhere else?}
 The Barricelli is a MIMD computer, which means that it can execute multiple different instruction streams on multiple different data streams simultaneously, in parallel.
 The four\cn fitness cores in the archtecture have each their own program counters and may load different data independantly of eachother.
 They all share the same data and instruction memory, however, which makes the Barricelli a shared memory model MIMD computer.

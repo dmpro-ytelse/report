@@ -131,7 +131,7 @@ The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_mu
 \input{fpga/tbl/to_reg_multiplexor_output_tbl}
 
 
-\subsection{The ALU}
+\subsubsection{The ALU}
 
 The Arithmetic Logic Unit, or ALU, is the heart of the fitness core, so to speak.
 It is responsible for executing the scheduled operations on data.
@@ -142,7 +142,7 @@ Division is not supported.
 
 On the FPGA, large parts of the ALU is implemented with \glspl{DSP slice}, which means that dedicated pre-fabricated ALU-specific circuitry is used in place of regular generic \gls{FPGA} \glspl{LUT} for increased performance and space utilization.
 
-\subsubsection{Multiplication}
+\paragraph{Multiplication}
 
 Multiplication is handled as a special case in the architecture.
 The multiplication is designed to use two cycles in the \emph{execution stage}, rather than the normal one cycle per operation.
@@ -152,7 +152,7 @@ To overcome this limitation, a state machine is designed in the execution stage 
 This effectively makes the multiplication a multi-cycle operation.
 The result of this is that the multiplication operation is able to finish without the rest of the system needing to slow down to accomodate for it, meaning that the maximum clock speed is not limited by the multiplication circuitry.
 
-\subsubsection{Shifters}
+\paragraph{Shifters}
 
 \todo{I've heard a lot about the epicness of the shifters. perhaps we should write something about them?}
 A shifter can shift an input by \emph{M} bits, either left or right unsigned, or right signed. \emph{M} is set generically when the component is created, while signal inputs  \emph{Left} and \emph{Arith} determines type of shift. 
@@ -194,7 +194,7 @@ Forwarding does, however, not solve all occurrences of data hazards. It exists s
 
 
 
-\subsubsection{Conditionals} 
+\subsubsection{Conditional Unit}
 Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the instructions currently residing in the pipeline are not supposed to be validated. More specific, the instructions residing in the \emph{fetch stage}, \emph{decode stage}, \emph{execute stage} needs to be flushed. This is accomplished with the jump signal working as flush signal to the different pipeline registers. This makes sure the instructions in the pipeline are invalidated, effectively inserting \emph{NOPs}
 
 
