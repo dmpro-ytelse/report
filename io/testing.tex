@@ -3,7 +3,7 @@
 {Debug connection test}{
     \item{Connect the debug pins to the appropriate pins on the energy micro development kit}
     \item{Turn the debug to OUT}
-    \item{Connect to the development kit using commander \todo{ref?}}
+    \item{Connect to the development kit using energyAware commander}
 }{EFM32GG990F1024 listed as microcontroller}
 {EFM32GG990F1024 listed as microcontroller}
 
@@ -16,22 +16,20 @@
 {The file is not present.}
 \todo{Is this really our result?}
 
-\todo{ref AN}
 \test
 {USB test}{
-    \item{Compile the code from AN\#\#\#\#}
+    \item{Compile the code from AN0065~\ref{an0065}}
     \item{Upload and run it}
     \item{Run the supplied host PC program while connected to the PCB through USB}
 }{The host programs runs successfully}
 {The host program fails to connect through USB}
 
-\todo{ref AN}
 \test
 {Serial test}{
-    \item{Compile the code from AN\#\#\#\#}
+    \item{Compile the code from AN0045~\ref{an0045}}
     \item{Upload and run it}
     \item{Connect the host PC to the PCB and run terminal emulator of choice}
-}{\todo{Get text that is supposed to be sent} appears in the terminal}
+}{"Energy Micro RS-232 - Please press a key" appears in the terminal}
 {No ouput from program}
 
 \todo{Buttons \& LEDs? Aleready done, set LEDs 0-7 active if Buttons 0-7 are pressed}
