@@ -1,10 +1,17 @@
-he galapagos architecture employ the Harvard architecture. The memory is split into instruction and data memory. This is done to achieve better memory throughput, because both memories can be accessed simultaneously. The instruction memory is constructed as an memory hierarchy, with the slow external memory (SRAM) and the fast caches (BRAM). This is constructed to achieve better instruction throughput. The internal resources on the FPGA is a lot faster to access than the external memory. Also, the different fitness cores compete for the memory access. This is disaster waiting to happen. In order to fix this the galapagos architecture employ a private cache for each core. This cache is dedicated for each fitness core, and results in fast fetching of instructions, as long as the instruction exists in the cache that is.  The access to the cache is handled by an cache controller that is responsible for locating and transferring instructions from the instruction memory. In case of a cache miss the data requesting core is halted until the instruction is transferred from memory. This scheme is created to resolve the conflicts that arise from using shared memory. 
+The Barricelli is a Harvard machine.
+The memory is split into instruction and data memory.
+This is done to achieve better memory throughput, because both memories can be accessed simultaneously.
+The instruction memory is constructed as an memory hierarchy, with slower external memory (SRAM) and faster, internal on-chip caches (BRAM).
+This separation enables a high instruction thoughput by using fast memory without compromising the data storage capabilities of a larger, slower chip.
+Each fitness core has its own private instruction memory which buffers instructions to decrease the number of slow memory accesses needed during runtime.
 
+Access to an instruction cache is handled by its dedicated cache controller responsible for locating and transferring instructions from the instruction memory.
+In case of a cache miss the data requesting core is halted until the instruction is transferred from memory.
+A pseudo-algorithm describing the cache-fetch operation can be found in algorithm \vref{algorithm:cahe-operation}.
+This scheme is created to resolve the conflicts that arise from using shared memory. 
 
-The internal resources on the FPGA is a lot faster to access. Because of this the architecture tries to use the caches as much as possible. The best possible case, is if the program as a whole fits the caches.  
-
-\todo {Fix this shit}
-
+The internal resources on the FPGA are a lot faster to access.
+Because of this the architecture tries to use the caches as much as possible.
 
 \begin{algorithm}[H]
 \SetAlgoLined
