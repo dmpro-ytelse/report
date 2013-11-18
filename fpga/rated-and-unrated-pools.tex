@@ -10,22 +10,21 @@ This is essential to achieve a high memory throughput when executing the algorit
 It is important to note that the two pools are designed as separate \gls{BRAM} devices.
 This is done to achieve even better memory throughput.
 The increased throughput is achieved because the different computational units can work on the rated and unrated pools simultaneously.
-For instance while one fitness core is storing a ranked individual, while another fitness core is fetching a new individual for ranking. 
+For instance while one fitness core is storing a ranked individual, another fitness core may be fetching a new individual for ranking. 
 
-Access to both the rated pool and the unrated pool is arbitraged by a controller referred as the \gls{genetic controller}.
-As with the \gls{data controller}, the \gls{genetic controller} is responsible for granting access to the rated and unrated pool.
-As is shown in figure x\cn\todo{ref the architecture figure}, the genetics accelerator has its own data buses connected to the fitness cores separate from the data bus that is connected to the regular shared data memory.
+Access to both the rated pool and the unrated pool is arbitraged by a controller referred to as the \gls{genetic controller}.
+As with the \gls{data controller} for data memory access, the \gls{genetic controller} is responsible for granting access to the rated and unrated pool.
+As shown in figure x\cn\todo{ref the architecture figure}, the genetics accelerator has its own data buses connected to the fitness cores separate from the data bus that is connected to the regular shared data memory.
 
-The controller is based on the same principle as the \gls{data controller} described in section (?)\cn.
+The \gls{genetic controller} is based on the same principle as the \gls{data controller} described in section \vref{subsec:fpga-data-memory}.
 When performing genetic operations, the fitness cores need to request the data bus by using two request signals.
 The combination of these signals refer to the operation the fitness core requests from the genetic controller. 
 
 The genetic controller continuously performs a simple round-robin request handling scheme in order to grant bus access to the requesting fitness cores, and to the genetic pipeline.
 The logic surrounding the different operations are implemented as an state machine to divide the operations in different clock cycles.
-This is the same method as used in the data controller.
+This is the same method as is used in the data controller.
 
-The state machine can be seen in figure \ref{fpga:fig:mem:genetic_memory_ctrl}.\cn
-
+The state machine is shown in figure \ref{fpga:fig:mem:genetic_memory_ctrl}.
 
 \begin{figure}
 

@@ -1,13 +1,16 @@
-A key component in any genetic algorithm worth its salt is a decent source of (pseudo-)random numbers.
+A key component in any genetic algorithm is a decent source of (pseudo-)random numbers.
 Genetic algorithms require diversity in the individuals to prevent reaching a local maximum, as discussed in section (?) \todo{add me}. 
 To achieve this, the architecture need to support a way to produce random numbers for the genetic pipeline.   
 
 The Barricelli computer has a hardware pseudo-random number generator module built into its genetics accelerator.
 
-When designing a pseudo-random number generator, there is always a trade-off between generating ``good'' random numbers, and generating them fast.
-Having high performance as a design goal\cn, it was desirable to design a pseudo-random number generator that is as fast as possible while still meeting the minimum requirements for randomness that is needed for successfully using it in a genetics algorithm application.
+When designing a pseudo-random number generator, there is always a trade-off between generating ``good'' random numbers, and generating numbers them quickly.
+Having high performance as a design goal\cn, it was desirable to design a pseudo-random number generator that is as fast as possible while still bein usable for genetic algorithms.
 
 The pseudo-random number generator uses a linear shift feedback-based taps algorithm to efficiently generate random numbers.
+
+The design is inspired by \todo{cite this: http://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/1999f/Drivers\_Ed/lfsr.html}.
+
 This algorithm is shown in algorithm \vref{algorithm:prng}.
 
 \begin{algorithm}[H]
@@ -33,3 +36,4 @@ This algorithm is shown in algorithm \vref{algorithm:prng}.
 \caption{Pseudo-random number generation algorithm}
 \label{algorithm:prng}
 \end{algorithm}
+
