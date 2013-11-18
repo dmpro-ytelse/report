@@ -119,10 +119,6 @@ SD card were connected right, and outputting the right signals.
 
 \subsection{The Pseudo-Random Number Generator}
 
-A key component in any genetic algorithm worth its salt is a decent source of (pseudo-)random numbers.
-The Barricelli computer has a hardware pseudo-random number generator module built into its genetics accelerator.
-When designing a pseudo-random number generator, there is always a trade-off between generating ``good'' random numbers, and generating them fast.
-Having high performance as a design goal\cn, it was desirable to design a pseudo-random number generator that is as fast as possible while still meeting the minimum requirements for randomness that is needed for successfully using it in a genetics algorithm application.
 
 The pseudo-random number generator designed for the Barricelli has been tested extensively with a pseudo-random number generator test suite called DieHarder\cn.
 DieHarder is a test suite which measures the ``goodness'' of a pseudo-random number generator based a number of criteria.

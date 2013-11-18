@@ -1,6 +1,35 @@
+A key component in any genetic algorithm worth its salt is a decent source of (pseudo-)random numbers.
 Genetic algorithms require diversity in the individuals to prevent reaching a local maximum, as discussed in section (?) \todo{add me}. 
-
 To achieve this, the architecture need to support a way to produce random numbers for the genetic pipeline.   
 
-To achieve this, the architecture need some way of creating sufficiently random numbers. These generated numbers do not need to be true randoms number, this implies that a psudo number generator will suffice. 
+The Barricelli computer has a hardware pseudo-random number generator module built into its genetics accelerator.
 
+When designing a pseudo-random number generator, there is always a trade-off between generating ``good'' random numbers, and generating them fast.
+Having high performance as a design goal\cn, it was desirable to design a pseudo-random number generator that is as fast as possible while still meeting the minimum requirements for randomness that is needed for successfully using it in a genetics algorithm application.
+
+The pseudo-random number generator uses a linear shift feedback-based taps algorithm to efficiently generate random numbers.
+This algorithm is shown in algorithm \vref{algorithm:prng}.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{\\
+    $ LFSR = $ a 32-bit linear shift feedback register containing the previous random number \\
+    $ taps = "01000110000000000000000100000000" $
+}
+\KwResult{A new random number}
+\Begin{
+    $ feedback \longleftarrow LFSR[31] $\;
+    \For{i from 31 to 0, non-inclusive}{
+        \If{taps[i - 1] = 1}{
+            $ LFSR[i] \longleftarrow LFSR[i - 1] \oplus feedback $\;
+        }\Else{
+            $ LFSR[i] \longleftarrow LFSR[i - 1] $\;
+        }
+    }
+    $ LFSR[0] = feedback $\;
+    \Return{LFSR}
+}
+\caption{Pseudo-random number generation algorithm}
+\label{algorithm:prng}
+\end{algorithm}
