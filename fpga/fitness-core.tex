@@ -3,7 +3,7 @@ For genetic algorithms, the fitness core is tasked with calculating fitness scor
 
 The design of the fitness core is highly influenced by the classic pipelined \gls{MIPS} core design\cn.
 The core is designed as a five stage pipeline.
-The contents of the different stages in the pipeline, however, differs from the original \gls{MIPS} architecture, as the CPU architecture has to accomadate for the \gls{ISA} design which combines ideas from multiple exisiting architectures.
+The contents of the different stages in the pipeline, however, differs from the original \gls{MIPS} architecture, as the CPU architecture has to accomodate for the \gls{ISA} design which combines ideas from multiple exisiting architectures.
 An example of an \gls{ISA} feature which differs from \gls{MIPS} is the embedded branch-less conditionals\footnote{a feature which is shamelessly ripped whole-sale from ARM}.
 An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitness_arch}
 
@@ -34,97 +34,120 @@ It  will increase performance by effectively increasing the instruction throughp
 Note that instruction throughput is an important metric because real applications execute millions of instructions \cite[p.~335]{compOrgDes}
 
 
-
-More advanced features like branch prediction and instruction scheduling are not taken into consideration while designing the data path.
 The group decided that the overall design should be as simple as possible.
 Hazard and branching schemes are kept simple.
 Hazards are resolved with the \emph{forwarding unit}, which forwards data if dependencies are detected.
 Branching are resolved with use of \emph{conditional} codes in each instructions.
 The reader may refer to their respective sections for more details.
 
-
+The fitness core features ``branch not taken'' branch prediction, which means that it assumes that conditional jumps will not be executed.
+This gives a nice performance increase, because the pipeline does not have to be flushed when the branch is correctly predicted.
+More advanced features like instruction rescheduling have not been implemented.
 
 \subsubsection{Control Unit} 
 
-The responsibility of the control unit is to configure all the different components for the current CPU operation so that the desired computation will emerge from the flow of data.
-The control unit achieves this by setting the control signals of the relevant control signals of the relevant components to the values associated with the current instruction.
+The control unit is the ``puppet master'' of the processor, so to speak.
+Residing in the instruction decode stage, it is responsible for configuring all the different components for the current CPU operation so that the desired computation will emerge from the flow of data.
+The control unit achieves this by setting the relevant control signals of the relevant components to the values associated with the current instruction.
 Note that different instructions classes requires different use of the data path.
-Thus, combinations the control signals must accommodate the different instructions formats. The different instructions classes and their control can be seen in table \ref{fpga:fitness:control_unit_out_tbl}. 
+Thus, combinations the control signals must accommodate the different instructions formats. The different instructions classes and their corresponding control signals can be seen in table \ref{fpga:fitness:control_unit_out_tbl}. 
 
-The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction. The \emph{FUNCTION CODE} is the 4 least significant bits of the instruction, and is responsible for determining the operation the ALU should perform. 
+The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction.
+The \emph{FUNCTION CODE} is the 4 least significant bits of the instruction, and is responsible for determining the operation the ALU should perform. 
 
-The control unit lies in the decode stage.
- 
 \input{fpga/tbl/control_unit_output_tbl}
  
-
-
 \input{fpga/tbl/opcode_tbl}
-
 
 \input{fpga/tbl/fitness_core_control_unit_tbl}
 
-
 %%The meaning of the different control signals
 
-The following paragraphs document and explain each of the control unit's control signals that control the functionality in the fitness core.
+The following paragraphs exhaustively documents and explains the technical details of each of the control unit's control signals.
 
 \paragraph{ALU\_FUNC}
-The \emph{ALU\_FUNC} is the least four significant bits of the instruction, and is responsible for determining the type of operation the \emph{ALU} should perform. This are set according to table \ref{fpga:tbl:alu_function_codes_tbl} 
+The \emph{ALU\_FUNC} is the least four significant bits of the instruction, and is responsible for determining the type of operation the \emph{ALU} should perform.
+This are set according to table \ref{fpga:tbl:alu_function_codes_tbl} 
 
 \input{fpga/tbl/alu_function_codes_tbl}
 
-
 \paragraph{ALU\_SOURCE}
-The \emph{ALU\_SOURCE} signal is used to specify the second \emph{ALU operand}. When this signal is asserted the second ALU operand is the immediate field of the instruction. This implies that the instruction class of the instruction is either RRI or RI. On the other hand, if this signal is de-asserted, the operand comes from read register to of the instruction file. Note that this value may or may not have been forwarded. 
+The \emph{ALU\_SOURCE} signal is used to specify the second \emph{ALU operand}.
+When this signal is asserted the second ALU operand is the immediate field of the instruction.
+This implies that the instruction class of the instruction is either RRI or RI.
+On the other hand, if this signal is de-asserted, the operand comes from read register to of the instruction file. Note that this value may or may not have been forwarded. 
 
 \paragraph{REG\_WRITE}
-This signals specifies whether the value, residing in the \emph{write-back} stage, should be written to the register file. When this signal is asserted the value from the \emph{write-back} stage is written to the specified register address. The register address is specified in the instruction, and always reside in the RT address field of the instruction. This fact makes it simpler when deciding at what address the value should be written. However, when this signal is de-asserted, this is equivalent with no operation. 
+This signal specifies whether the write back value residing in the \emph{write-back} stage should be written to the register file.
+When this signal is asserted, the value from the \emph{write-back} stage is written to the specified register address.
+The register address is specified in the instruction, and always resides in the RT address field of the instruction.
 
 \paragraph{IMM\_SOURCE}
-The galapagos ISA have two different instruction classes (RI, RRI) that uses different lengths of the immediate field. In order to differentiated between these immediate fields, the \emph{IMM\_SOURCE} signal is responsible of selecting immediate field based on the instruction class of the current instruction. The selection is done with a multiplexor. In case of an RRI instruction the 10-bits immediate field is selected, and the 19-bits for a RI instruction.   
-
+The \Gls{galapagos} ISA has two different instruction classes (RI, RRI) that uses different lengths of the immediate field.
+In order to differentiate between these immediate fields, the \emph{IMM\_SOURCE} signal is responsible for selecting the correct immediate field based on the instruction class of the current instruction.
+The selection is done with a multiplexer.
+In the case of an RRI instruction the 10-bits immediate field is selected, and in the case of an RI instruction, the 19-bits field is chosen.
 
 \paragraph{REG\_SOURCE}
-In case of \emph{JMP} and \emph{CALL} instructions the immediate address field of the instruction is added with the address content of RD. The RD address specified in the in the instruction must be read from the register file. Normally, the register file would use the \emph{RS} and \emph{RT} part of the instructions as inputs to the register file. In the special case of \emph{RI} instructions the register file must read the RD instead of RS. This is accomplished by asserting the \emph{REG\_SOURCE} signal. This signals causes the a multiplexor to choose the \emph{RD} portion of the instruction instead of the \emph{RS} as input to the register file. This will output the content of the correct data from the register file. This is also visible in figure \todo{reference figure}   
+For \emph{JMP} and \emph{CALL} instructions, the immediate address field of the instruction is added with the address content of Rd.
+The Rd address specified in the instruction must be read from the register file.
+Normally, the register file would use the \emph{Rs} and \emph{Rt} part of the instructions as inputs to the register file.
+In the special case of \emph{RI} instructions the register file must read the Rd instead of Rs.
+This is accomplished by asserting the \emph{REG\_SOURCE} signal, which causes a multiplexer to choose the \emph{Rd} portion of the instruction instead of the \emph{Rs} as input to the register file.
+This will output the content of the correct data from the register file.
+This is visible in figure \todo{reference figure}.
 
 
 \paragraph{STORE\_SOURCE}
 
-
-
-
-
 \todo{this}
 
 \paragraph{JUMP}
-The jump instruction is use the address in the immediate field of the instruction to load a new value into the \emph{program counter} register. Which specifies the address of the next instruction to be executed. The jump signal is used in a multiplexor in the memory stage to select between the jump address or the incremented program counter. In case of jump, this signal is asserted and the jump address is chosen. When de-asserted the program counter is the incremented program counter. This signal is also asserted when performing call instructions which is discussed in the section below.   
+The JMP instruction uses the address in the immediate field of the instruction to load a new value into the \emph{program counter} register.
+The jump signal selects between the jump address and the incremented program counter when deciding a new value for the program counter at each cycle.
+In case of jump, this signal is asserted and the jump address is chosen.
+When de-asserted the program counter is set to the incremented program counter, making the program execute normally.
+This signal is also asserted when performing call instructions.   
 
 \paragraph{CALL}
-MIPS operate with what is known as a \emph{link-and-jump} instruction in order to support function calls \cn. The galapagos ISA also support this functionality, however, the instruction is denoted as \emph{CALL} instead of \emph{JAL}. The instruction works very similar to the jump instruction described above. The difference lay in the fact that the incremented program counter is stored in combination with the program counter being modified. This address is stored in register 31.This value can be used later when returning from the function call. The return of a function is basically a jump instruction that jumps back to the address after the call instruction.
+The \Gls{galapagos} ISA supports non-recursive procedure calls at a hardware level.
+The call instruction works similar to the jump instruction described above.
+The difference is that the incremented value of the program counter before the jump is stored to register r31, which is conventionally used as a link register.
+This value can be used later when returning from the procedure call.
+To return from a procedure call, one  needs simply to jump back to the address stored in r31.
 
-The responsibility of the \emph{CALL} signal is to make sure that the incremented program counter is stored at register 31. When asserted the signal make sure that the write register address is changed to 31. If the signal is de-asserted the write register will stay unmodified, and the RT register in the instruction is responsible for specifying the register address.
+The \emph{CALL} signal is responsible for making sure that the incremented program counter is stored at register 31.
+When asserted the signal make sure that the write register address is changed to 31.
+If the signal is de-asserted the write register will stay unmodified, and the Rt register in the instruction is responsible for specifying the register address.
 
 
 \paragraph{GENE\_OP}
-The loading and storing fitness values and chromosomes is the responsibility of the \emph{genetic controller}. This controller is able to perform three types of actions: \emph{load}, \emph{store} and \emph{settings} dependent of the instruction class executed. When performing a load, a chromosome is loaded from the unrated pool. The store operation is used to store a chromosome and its corresponding fitness value to the rated pool. The settings are used to apply settings to the genetic pipeline.  In order to divide these cases, the galapagos architecture rely on \emph{gene operation} vector. The bit-vector is set depending on the instruction class as seen in table \ref{fpga:tbl:gene_op_code_tbl}
-
-
+Loading and storing of fitness values and chromosomes is the responsibility of the \emph{genetic controller}.
+This controller is able to perform three types of actions: \emph{load}, \emph{store} and \emph{settings}, dependent of the instruction class executed.
+When performing a load, a chromosome is loaded from the unrated pool.
+The store operation is used to store a chromosome and its corresponding fitness value to the rated pool.
+The settings are used to apply settings to the genetic pipeline.
+In order to divide these cases, the galapagos architecture relies on the \emph{gene operation} vector.
+This bit-vector is set depending on the instruction class as seen in table \ref{fpga:tbl:gene_op_code_tbl}.
 
 \input{fpga/tbl/gene_op_code_tbl}
 
 Depending on the bit-vector-signal, the \emph{genetic controller} is able to perform the appropriate action. 
 
-\todo{Fix} 
-
 \paragraph{MEM\_OP}
-As with the genetic controller, the memory controller must be able to distinguish between operations. In case of memory controller, these operations are loading and storing to/from the external memory. In same manner as with, the genetic controller, these signals are set according to the instruction class currently being executed. These can be seen in table \ref{fpga:tbl:mem_op_code_tbl}
+As with the genetic controller, the memory controller must be able to distinguish between operations.
+In case of memory controller, these operations are loading and storing to and from the external data memory.
+These signals are set according to the instruction class currently being executed.
+An overview can be found in table \ref{fpga:tbl:mem_op_code_tbl}
 
 \input{fpga/tbl/mem_op_code_tbl}
 
-
 \paragraph{TO\_REG}
-In the \emph{write-back} stage, there is need to distinguish between several outputs from the \emph{memory stage}. The \emph{TO\_REG} signal is responsible for selecting which value that should be written to the register file. The selection is aided by a 4-to-1 multiplexor. The different inputs are: \emph{Gene}, \emph{Data}, and \emph{PC+1}, \emph{Res}, as seen in figure \todo{add reference}. However, keep in mind that the \emph{REG\_WRITE} signals must be asserted for the data to be written. 
+In the \emph{write-back} stage, there is need to distinguish between several outputs from the \emph{memory stage}.
+The \emph{TO\_REG} signal is responsible for selecting which value that should be written to the register file.
+The selection is aided by a 4-to-1 multiplexor.
+The different inputs are: \emph{Gene}, \emph{Data}, and \emph{PC+1}, \emph{Res}, as seen in figure \todo{add reference}.
+However, keep in mind that the \emph{REG\_WRITE} signals must be asserted for the data to be written. 
 
 The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_multiplexor_output_tbl}
 
@@ -133,9 +156,9 @@ The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_mu
 
 \subsubsection{The ALU}
 
-The Arithmetic Logic Unit, or ALU, is the heart of the fitness core, so to speak.
-It is responsible for executing the scheduled operations on data.
-The ALU is perhaps the most important single component of the fitness core.
+The Arithmetic Logic Unit, or ALU, is the heart of the fitness core, colloquially put.
+It is responsible for executing scheduled arithmetic and logical operations on data.
+The ALU is perhaps the single most important component of the fitness core.
 
 The ALU in the fitness core is capable of performing a large array of different mathematical and logical operations on 64-bit words, including addition, subtraction, comparisons, shifts and multiplications, in addition to a slew of bitwise logical operations such as and, or, xor and not.
 Division is not supported.
@@ -154,7 +177,7 @@ The result of this is that the multiplication operation is able to finish withou
 
 \paragraph{Shifters}
 
-\todo{I've heard a lot about the epicness of the shifters. perhaps we should write something about them?}
+A shifter is a subcomponent within the ALU designed for efficient generic bit shifting.
 A shifter can shift an input by \emph{M} bits, either left or right unsigned, or right signed. \emph{M} is set generically when the component is created, while signal inputs  \emph{Left} and \emph{Arith} determines type of shift. 
 If \emph{Left} is set, there is unsigned shift to left.
 If \emph{Left} is not set, but \emph{Arith} is, then it is a signed shift to right.
