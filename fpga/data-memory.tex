@@ -1,21 +1,25 @@
-The galapagos architecture is MIMD architecture with shared memory. This imposes problems when more fitness cores need to access the memory simultaneously. In order to overcome this problem the access to the memory is controlled with a memory controller. The responsibility of the memory controller is granting access and performing memory related tasks on behalf of the requesting fitness cores. The controller is constructed in a way that only allows one fitness core to be able to carry out a memory request at a single time. In case of multiple memory requests, the controller performs a selection deciding in which order the requesting cores is granted the bus. The precise technique of selection can be seen in algorithm \ref{algorithm:round-robin-selection}
+The \gls{galapagos} architecture is a \gls{MIMD} architecture with shared memory.
+In the \Gls{barricelli} computer, a central memory controller is responsible for synchronizing memory access on the shared data bus.
+Each component that wants to access memory must go through the memory controller, and follow the proper memory access request protocol.
+The controller is constructed in a way that only allows one fitness core to be able to carry out a memory request at a single time.
+In case of multiple memory requests, the controller performs a selection deciding in which order the requesting cores is granted the bus.
+The precise technique of selection can be seen in algorithm \ref{algorithm:round-robin-selection}.
+This may introduce a potential bottleneck for memory-bound problems.
+For this reason, each fitness core has a generous 31 general purpose registers, which should reduce the data memory load quite a bit.
 
 \begin{figure}[H]
 \begin{algorithm}[H]
 \SetAlgoLined
 \DontPrintSemicolon
-\KwData{Requests - requests signals from the fitness cores\newline 
-Request - 2-bits specifying the operation}
+\KwData{$ Requests = $ requests signals from the fitness cores\newline 
+$ Request = $ 2-bits specifying the operation}
 \Begin{
     $ Requests \longleftarrow $ requests from the fitness cores\;
     \While{$ True $}{
-        \For {Request in Requests} {
-        \uIf{request $=$ asserted}{
-            performMemoryOperation()
-        }
-         \Else{
-        continue
-        }           
+        \For {request in Requests} {
+            \If{request $=$ asserted}{
+                performMemoryOperation()
+            }
         }
         
     }
@@ -26,13 +30,19 @@ Request - 2-bits specifying the operation}
 \end{figure}
 
 
-These algorithm is based on round-robin scheduling. The request bits of \emph{fitness cores} are checked in turn to check if one of the cores has requested the memory bus. The type of request is determined by combination of two request signals sent by each \emph{fitness core}. The signals refer to either a \emph{NOP}, \emph{READ}, or \emph{WRITE} operation. In case of \emph{NOP} the algorithms move to check the next state request lines. It moves in this fashion until a \emph{READ} or \emph{WRITE} request is encountered. 
+The selection algorithm is based on round-robin scheduling, and will be explained in further detail here.
+The request signals of \emph{fitness cores} are checked in turn to check if one of the cores has requested the memory bus.
+The type of request is determined by combination of two request signals sent by each \emph{fitness core}.
+The signals refer to either a \emph{NOP}, \emph{READ}, or \emph{WRITE} operation.
+In case of \emph{NOP}, the algorithm moves on to check the next state request lines.
+It continues doing this in this fashion until a \emph{READ} or \emph{WRITE} request is encountered. 
 
-When a \emph{READ} or \emph{WRITE} operation is encountered, the \emph{data controller} starts to carry out the request from the fitness core. Note that the the memory buses from and to the memory are 16-bits wide. This implies that  it requires at least for cycles in order to transmit/receive 64-bits data over the buses. In addition, external memory requires different control signals. These control signals need to be asserted or de-asserted at specific times when performing the operation. The timing diagrams for the memory chip can be seen in figure (?) \todo{Add timing diagram for memory chip}
+When a \emph{READ} or \emph{WRITE} operation is encountered, the \emph{data controller} starts to carry out the request from the fitness core.
+Performing a memory operation takes at least four cycles, as the processor word size is 64 bits, while the memory bus to the external memory chips are only 16 bits wide.
+Because of this, data needs to be shuffled across the bus 16-bits at a time, which accounts for the four cycle minumum for data operations.
 
-This requires the memory controller to use the specific communication protocol when transmitting/receiving data from memory. To accomplish this communication, the memory controller is implemented as a state machine. The responsibility of the state machine is to divide the functionality required to write and read into different cycles. \todo{More details required} \todo{Add reference}
-
-
+For the external memory to be operated correctly by the memory controller, the proper control signals need to be set at the correct times.
+The timing diagrams for the memory chip can be seen in figure (?) \todo{Add timing diagram for memory chip}.
 
 \begin{figure}
 
@@ -42,15 +52,3 @@ This requires the memory controller to use the specific communication protocol w
   \caption{Data memory controller state machine}
   \label{fpga:fig:mem:data_memory_ctrl}
 \end{figure}
-
-
-
- 
-
-
-
-
-
-
-
-

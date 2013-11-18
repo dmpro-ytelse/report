@@ -21,7 +21,10 @@ In the figure, the blocks labeled PU are induvidual processing units.
 \begin{center}
     \includegraphics[width=\textwidth/2]{fig/mimd-block-diagram.pdf}
     \label{figure:mimd-block-diagram}
-    \caption{Block-level overview of a MIMD computer with a shared memory model}
+    \caption[
+    Block-level overview of a MIMD computer with a shared memory model
+    ]{
+    Block-level overview of a MIMD computer with a shared memory model\footnote{http://en.wikipedia.org/wiki/File:MIMD.svg}}
 \end{center}
 \end{figure}
 
@@ -29,21 +32,15 @@ MIMD architecture forms the basis in the great majority all today’s multi-core
 This is in contrast to the early uniprocessors, which were based on SISD, or Single Instruction stream, Single Data stream. 
 
 
-Examples of well-known MIMD computing platforms today include Intel's Larrabee\cn platform, and computer clusters connected for instance over the internet.
-
-\todo{cite http://en.wikipedia.org/wiki/File:MIMD.svg}
-
-\todo{write more about MIMD}
-
-\todo{use this image http://en.wikipedia.org/wiki/File:MIMD.svg for illustration purposed (remember to atttribute)}
+Examples of well-known MIMD computing platforms today include Intel's Larrabee platform, and computer clusters connected for instance over the internet.
 
 \section{Genetic Algorithms}
 
 A genetic algorithm is a specific type of heuristic search algorithm that is very useful for finding approximate solutions to hard optimization and search problems.
 A hard problem in this context is a problem for which there exists no algorithm for feasibly computing a solution within a reasonable amount of time.
 In practice, this typically means NP-hard problems.
-Classical examples of hard problems for which genetic algorithms can find suitible approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.\cn\todo{hromkovic}.
-Efficiently finding good approximations to this class of problems is extremely important for many heavy instrustry processes such as planning and scheduling of \todo{something}, finding optimal placement and routing of components in microchip manufacturing, and \todo{another example}.
+Classical examples of hard problems for which genetic algorithms can find suitible approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.
+Efficiently finding good approximations to this class of problems is extremely important for many heavy instrustry processes such as planning and scheduling of processes, finding optimal placement and routing of components in microchip manufacturing, and many other business-critical tasks.
 
 The distringuising feature of a genetic algorithm compared to other heuristic search algorithms is how it performs its search: it mimics the natural process of evolution to find fit approximations in the search space.
 A genetic algorithm represents possible solutions to a given problem as individuals of a population.
@@ -54,6 +51,8 @@ The idea is that after simulating a number of virtual generations of individuals
 
 To fully understand the inner workings of the \Gls{barricelli}, it is useful to become aquainted with the basic concepts of genetic algorithms.
 This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
+
+\todo{this list sucks, lets fix it}
 
 \subsubsection{Things\todo{better word for this}}
 

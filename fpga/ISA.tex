@@ -1,5 +1,5 @@
 The \Gls{galapagos} Instruction Set Architecture is the instruction set archtecture designed for the \Gls{barricelli} computer for this project.
-The architecture is loosely based on the well-known and tested \gls{MIPS} architecture\cn, but borrows inspiration from many other different sources as well.
+The architecture is loosely based on the well-known and tested \gls{MIPS} architecture, but borrows inspiration from many other different sources as well.
 Especially inspirational for the design of the \Gls{galapagos} ISA have been the \gls{MIPS} core design principles, which can be found in table \vref{fpga:tbl:mips-design-principles}.
 
 \begin{table}[H]
@@ -17,6 +17,9 @@ Especially inspirational for the design of the \Gls{galapagos} ISA have been the
 The Galapagos ISA was designed and fully specified quite early in the project, which made it an important resource for the rest of the component design process.
 
 While the ISA is thoroughly documented in appendix \vref{appendix:isa}, the rest of this section will present a short overview for the reader's convenience.
+
+\bigskip
+\bigskip
 
 The \Gls{galapagos} instruction set architecture is a RISC architecture.
 The instructions are kept simple, and only perform very specific and small tasks.
@@ -36,7 +39,7 @@ RRI contains two register addresses and one immediate.
 RI contains one register address and a larger immediate.
 
 Every instruction has a set of conditional flags that may be set.
-Though these flags, a programmer can decide whether or not an instruction will be executed.
+Through these flags, a programmer can decide whether or not an instruction will be executed.
 This allows for branchless conditional execution of single instructions.
 These conditional signals allow for many clever applications - a \gls{nop} instruction can be implemented as any instruction with the condition set to ``never execute''.
 Indeed, even conditional branching is implemented as a branch-less conditional!
@@ -45,7 +48,7 @@ For a more detailed docummentation of the \gls{galapagos} instruction set archit
 
 \subsection{Genetics Instructions}
 
-One of the requirements\cn was that the ISA should support genetic-specific instructions to facilitate performant genetic algorithms programming.
+One of the requirements in section \vref{section:requirements} was that the ISA should support genetic-specific instructions to facilitate performant genetic algorithms programming.
 Present in the \Gls{galapagos} ISA are the genetic instructions \texttt{ldg}, \texttt{stg} and \texttt{setg}.
 They are the instructions for loading and storing \glspl{individual} to the genetics accelerator, and configuring the genetics accelerator, respectively.
 With these instructions available to the programmer, using the genetics accelerator is easy and painless.

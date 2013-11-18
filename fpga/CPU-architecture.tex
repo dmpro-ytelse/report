@@ -6,7 +6,7 @@
 \label{figure:fpga-architecture}
 \end{figure}
 
-The CPU architecture designed for the Barricelli computer is a very clean design, and the key to its high performance lies in its simplicity.
+The processor architecture designed for the Barricelli computer is a very clean design, and the key to its high performance lies in its simplicity.
 The architecture contains a number of general cores, which in this context are named fitness cores.
 The fitness cores are general purpose cores in the sense that they are programmable and turing complete, but for genetic algorithm applications the cores are intended to calculate fitness scores of individuals.
 
@@ -21,12 +21,8 @@ To avoid any memory synchronization issues the data bus is controlled by a centr
 In Barricelli's memory architecture, a central memory controller is responsible for synchronizing memory access on the shared data bus.
 Each component that wants to access memory must go through the memory controller, and follow the proper memory access request protocol.
 This may introduce a potential bottleneck for memory-bound problems.
-Fortunately, genetic algorithms often use only a small amount of data in the ranking of the chromosomes.\cn
-This implies that a high number of registers in each core should be sufficient to avoid any memory spill during computation.
+For this reason, each fitness core has a generous 31 general purpose registers, which should reduce the data memory load quite a bit.
 
-In the selection core, on the other hand, the core needs to be able to access the data bus very frequently in order maximize the throughput.
-Since the fitness is computationally bound, the data bus is more or less available for the selection core.
-This allows the genetic pipeline to compute the chromosomes required for the next step before they are required by the fitness cores. 
 
 \input{fpga/data-memory}
 
