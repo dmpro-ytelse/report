@@ -46,7 +46,6 @@ This implies that port used by the selection core is unavailable to others durin
 It is designed to not use the memory more than it absolutely have to.
 For instance, if the current fitness value is greater than the fitness value just fetched, the selection core will not bother fetching the accompanying chromosome.
 This ensures that the memory resources are not wasted, and is accomplished with an \emph{state machine}. 
-\todo{show the state machine in a diagram}
 
 Since the Crossover Core will need two inputs when performing crossover, two selection cores are implemented on the genetics pipeline.
 
