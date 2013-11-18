@@ -1,26 +1,22 @@
-The Barricelli is a Harvard machine.
+The \Gls{barricelli} is a \Gls{harvard machine}.
 The memory is split into instruction and data memory.
 This is done to achieve better memory throughput, because both memories can be accessed simultaneously.
-The instruction memory is constructed as an memory hierarchy, with slower external memory (SRAM) and faster, internal on-chip caches (BRAM).
-This separation enables a high instruction thoughput by using fast memory without compromising the data storage capabilities of a larger, slower chip.
-Each fitness core has its own private instruction memory which buffers instructions to decrease the number of slow memory accesses needed during runtime.
+The instruction memory is organized in a two layer memory hierarchy, with slower external memory (\gls{SRAM}) and faster, internal on-chip caches (\gls{BRAM}).
+This separation combines the high instruction thoughput of fast on-board memory wit the comfortably spaceous data storage capabilities of a larger, slower chip external chip.
 
-Access to an instruction cache is handled by its dedicated cache controller responsible for locating and transferring instructions from the instruction memory.
-In case of a cache miss the data requesting core is halted until the instruction is transferred from memory.
-A pseudo-algorithm describing the cache-fetch operation can be found in algorithm \vref{algorithm:cahe-operation}.
+Each fitness core has its own private instruction memory cache which buffers instructions to decrease the number of slow memory accesses needed during runtime.
+Access to an instruction cache is handled by a fitness core's dedicated cache controller, which is responsible for locating and transferring instructions from the instruction memory.
+In case of a cache miss, the data-requesting core is halted until the instruction is transferred from memory.
+A pseudo-algorithm describing the cache fetch operation can be found in algorithm \vref{algorithm:cache-operation}.
 This scheme is created to resolve the conflicts that arise from using shared memory. 
-
-The internal resources on the FPGA are a lot faster to access.
-Because of this the architecture tries to use the caches as much as possible.
 
 \begin{algorithm}[H]
 \SetAlgoLined
 \DontPrintSemicolon
-\KwData{
-    $ a = $ an instruction address \\
-    $ Ci = $ an array of instructions \\
-    $ Ca = $ an array of the corresponding addresses \\
-    $ M = $ the instruction memory, indexable by instruction addresses
+\KwData{ $ a = $ an instruction address \newline
+$ Ci = $ an array of instructions \newline
+$ Ca = $ an array of the corresponding addresses \newline
+$ M = $ the instruction memory, indexable by instruction addresses
 }
 \KwResult{The instruction at address $ a $}
 \Begin{
