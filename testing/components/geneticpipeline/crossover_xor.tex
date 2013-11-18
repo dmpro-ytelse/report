@@ -1,5 +1,5 @@
 \begin{table}[H]
-  \begin{tabular}{r | p{8cm}}
+  \begin{tabular}{r | p{9cm}}
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
     What to test:  & Check if Crossover XOR Function performs crossover
@@ -7,15 +7,14 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:   &    All types of situations are to be tested. 
-                        What affects the outputs are the inputs, and the parent inputs            
-                        and the random\_number input are changes during the test. 
+    How to test:   &    Changes in any input should cause change in the outputs.
+                        Therefore parent inputs and random\_number will be changed
+                        during test.  
                         \\
                       
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Pass criteria: &    Changes in parents should cause changes in children. 
-                        The output for child1 should have output from parent1 and child2
+    Pass criteria: &    The output for child1 should have output from parent1 and child2
                         from parent2 for each bit \emph{i}, where in the random\_number 
                         the value is 0, and child1 should have output from parent2 and 
                         child2 from parent1 for each bit \emph{i}, where in the 
@@ -23,7 +22,7 @@
                         \\
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    Results: &      Successfull. 
+    Results: &      Successfull.
                     Changes in parents cause expected changes in children, and for each
                     bit \emph{i} in the random\_number, there are crossover at same bit    
                     \emph{i} from the parents to the children.
