@@ -17,7 +17,13 @@ be able to synchronize themselves. By doing this, the processor cores would be a
 However this also raises some issues as for instance data hazards.
 
 \subsubsection{coherrency}
-In addition to data hazards, cache coherency is a large issue....
+MIMD architecture use a shared memory models. This imposes a problem when using caches, and memory in general. When more core updates on the same values on the same memory positions; memory collisions occur. These problems can be fixed by enforcing that only one core is able to access the memory at any given time. A far more difficult problem is the problem of cache coherence. Cache coherency issues occurs when several cores have private caches containing the same data, and some core changes the data. Then the data in the caches is not consistent among the cores. In order for the data to be consistent, in this example, is for each core having the same data. Note that same data in this context mean data from the same memory location. 
+
+The galapagos architecture does not support private data caches. This design choice relieves the processor designer of implementing advanced cache coherency algorithms in hardware. Instead of private data caches the galapagos architectures employ shared pools for rated and un-rated chromosomes. These are connected to a bus and the connected through the \emph{genetic controller}. The controller is configured to only allow one core perform its operation on one of the pools at any given time. This implies that read and write operations are atomic. As a direct consequence cache coherency issues are not possible in the architecture. 
+\todo{fix}
+
+
+
 
 \subsection{using Cisc or Risc ISAs}
 Cisc and Risc instruction set architectures are two very different ways of thinking when it comes to creating instruction sets.
