@@ -21,7 +21,7 @@ This section contains an exhaustive list of the components in figure \vref{figur
 \todo{What is it, what does it do in the system?}
 The FPGA is a Xilinx Spartan6 LX45\cn Field-Programmable Gate Array, which is a microchip which can be programmed to behave like any arbitrary intergrated circuit.
 The FPGA is programmed to contain an implementation of the custom \Gls{galapagos} CPU Architecture designed for the \Gls{barricelli} computer.
-It is connected to the SCU by a 39-bit\cn wide bus, though which the CPU can be programmed by users.
+It is connected to the SCU by a 41-bit wide bus, though which the CPU can be programmed by users.
 The FPGA is connected to its own memory.
 
 \subsection{SCU}
@@ -33,22 +33,17 @@ Having a separate micro controller to perform these tasks minimises the complexi
 \subsection{I/O}
 
 The Barricelli has several different inputs and outputs.
-While only one input and one output are strictly needed for a functional system, multiple different types of input have been added to the design in the name of safety through redendancy.
-Having multiple communication channels between the user and the system means that even if one or more channels should fail, the system will still be operational.
-
-\subsubsection{TIA-232}
-
-TIA-232, otherwise known as RS-232, is a standard describing transfer of data using a serial cable. \todo{more, cite RS-232 or TIA-232}
-
-To easily communicate with the microcontroller, a serial port was added to the schematics.
-The micro controller used in the project has a built in UART interface\cite{efm32gg990-datasheet} which is easily activated with code from application note \todo{cite specific}.
-As it is a comparatively slow way to transfer data, it is mainly a fallback in case the USB link should fail.
+While only one input and one output are strictly needed to meet the functional requirements, multiple different types of input have been added to the design in the name of safety through redundancy.
 
 \subsubsection{USB}
 
-Universal Serial Bus is a bus interface.
+Universal Serial Bus is a bus interface used to facilitate the communication between Barricelli and a host computer.
+USB support has become very widespread, and was chosen as the main communication link due to the large number of software libraries and examples available.
 
-In Barricelli, it is used for communication between a computer and the SCU.
+\subsubsection{TIA-232}
+
+TIA-232, more commonly known as RS-232, is a set of standards defining communication over what is commonly known as serial ports.
+The serial link is an old standard and a comparatively slow way to transfer data, so it is mainly included as a fallback in case the USB link should fail.
 
 \subsubsection{SD}
 
@@ -56,8 +51,8 @@ In Barricelli, it is used for communication between a computer and the SCU.
 
 \subsubsection{LEDs}
 
-The simplest way to get output from the microcontroller is to use LEDs, short for Light-Emmiting Diode \todo{Move light-emitting diode to own abbr-list?}.
-The leds are driven by General Purpose IO pins on the SCU, requiring a minimal amount of code in order to get a working output, which is especially handy in the early stages of implementation.
+The simplest way to get output from the microcontroller is to use LEDs, short for Light-Emmiting Diode.
+There are a total of 16 LEDs which can be used to display status from the IO controller, or simply show that the IO controller is working on something.
 
 \subsubsection{Buttons}
 
