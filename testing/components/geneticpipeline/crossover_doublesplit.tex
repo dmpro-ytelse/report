@@ -1,0 +1,47 @@
+\begin{table}[H]
+  \begin{tabular}{r | p{8cm}}
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    
+    What to test:  & Check if Crossover Double-Split Function performs crossover
+                     correctly, from correct starting bit to correct ending bit \\
+
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+
+    How to test:   &    All types of situations are to be tested. 
+                        What affects the outputs are the inputs, and the parent inputs            
+                        and the random_number input are changes during the test. 
+                        \\
+                      
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+
+    Pass criteria: &    Changes in parents should cause changes in children. 
+                        The output for child1 should have output from parent1 and child2
+                        from parent2 before crossover starting point and after ending 
+                        point, and child1 should have output from parent2 and child2
+                        from parent1 between the crossover starting point and ending
+                        point. 
+                        The random\_number with the highest value should always be the 
+                        starting point, and the one with the lowest value should always
+                        be the ending point. 
+                        These points, which are the first and the last bit in the 
+                        crossover, should always be the bit numbers equal to the value     
+                        of the random_numbers. 
+                        If both have same value, then only one bit location will have a
+                        crossover
+                        \\
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    
+    Results: &      Successfull. 
+                    Changes in parents cause expected changes in children, and starting 
+                    point for crossover is always equal to the value of the highest 
+                    random\_number, and ending point for crossover is always equal to 
+                    the value of the lowest random\_number
+                    \\
+   \noalign{\smallskip}\hline\noalign{\smallskip}
+  
+  
+  
+  \end{tabular}
+  \caption{Crossover Core Double-Split function}
+  \label{testing:components:genetic_pipeline:crossover_core_doublesplit}
+\end{table}

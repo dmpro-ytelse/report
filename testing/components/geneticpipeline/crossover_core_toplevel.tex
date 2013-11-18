@@ -1,0 +1,48 @@
+\begin{table}[H]
+  \begin{tabular}{r | p{8cm}}
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    
+    What to test:  & Check if Crossover Toplevel selects correct crossover function
+                     based on control\_input, and random\_number when in "Party Mode"\\
+
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+
+    How to test:   &    Changes in parents are not relevant, since this test is not 
+                        inteded to test the functions themselves, only the function 
+                        selection.
+                        Every input of control\_input will be tested.
+                        Changes in random\_number will be done with focus on the 2 LS 
+                        bits when control\_input is "1XX", and in party mode.
+                        \\
+                      
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+
+    Pass criteria: &    When control\_input is set to 000, or 1XX and random\_input-bits 
+                        to 00, crossover should be split with the value of the 6 LS bits 
+                        from random\_number used for starting point.
+                        When control\_input is set to 001, or 1XX and random\_input-bits 
+                        to 01, crossover should be double-split, with the value of the 
+                        12 LS bits from random\_number used for starting and ending 
+                        point.
+                        When control\_input is set to 010, or 1XX and random\_input-bits 
+                        to 10, crossover should be xor, with crossover on every bit 
+                        numbers that are 1 in random\_number.
+                        When control\_input is set to 011, or 1XX and random\_input-bits 
+                        to 11 there should be no crossover at all, and output children 
+                        should be equal to each their input parent.
+                        \\
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    
+    Results: &      Successfull. 
+                    Each value in control\_input was tested, and set the expected 
+                    function. When set to 1XX, every value on the 2 LS bits in the 
+                    random\_number was tested, and set the expected function.
+                    \\
+   \noalign{\smallskip}\hline\noalign{\smallskip}
+  
+  
+  
+  \end{tabular}
+  \caption{Crossover Core Toplevel}
+  \label{testing:components:genetic_pipeline:crossover_core_toplevel}
+\end{table}
