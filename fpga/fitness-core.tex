@@ -1,10 +1,15 @@
-\subsubsection{Data Path} 
-The design of the fitness core is highly influenced by the classic pipelined MIPS core design\cn.
+The fitness core in the processor architecture is the general processing core.
+For genetic algorithms, the fitness core is tasked with calculating fitness scores for individuals, hence the name.
+
+The design of the fitness core is highly influenced by the classic pipelined \gls{MIPS} core design\cn.
 The core is designed as a five stage pipeline.
-The contents of the different stages in the pipeline, however, differs from the original MIPS architecture, as the CPU architecture has to accomadate for the ISA design which combines ideas from multiple exisiting architectures.
+The contents of the different stages in the pipeline, however, differs from the original \gls{MIPS} architecture, as the CPU architecture has to accomadate for the \gls{ISA} design which combines ideas from multiple exisiting architectures.
+An example of an \gls{ISA} feature which differs from \gls{MIPS} is the embedded branch-less conditionals\footnote{a feature which is shamelessly ripped whole-sale from ARM}.
 An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitness_arch}
 
 \input{fpga/fig/fitness_architecture}.
+
+\subsubsection{Data Path} 
 
 The data path is simple.
 The instruction is the same length for all the instructions.
@@ -12,10 +17,11 @@ This makes it easier to fetch the instruction in the first stage and decode it i
 Also, the ISA only supports three different instructions classes with the register mappings located on the same positions.
 This allows the register file to be read on the same time as the control unit determines the correct control signals for that particular instruction.
 This allows for a shorter pipeline.
-If the instruction format where not symmetric, we would need to split the register file and decode stage in two stages.
+Were the the instruction format asymmetric, the instruction would have to split the register file and decode stage in two stages.
 A bigger pipeline would imply higher risk for pipeline hazards, and a more complicated hazard detection and correction schemes. 
 
-The data path is in fact a load/store architecture.
+The Barricelli computer is a load/store machine.
+There is no preconception of a program stack at the hardware level.
 This simplifies the execution and memory interaction.
 Note that memory operands only appear in load and store instructions.
 This implies that the execution stages is responsible for calculating the memory address and that the memory access can happen in the following stage.
@@ -39,6 +45,7 @@ The reader may refer to their respective sections for more details.
 
 
 \subsubsection{Control Unit} 
+
 The responsibility of the control unit is to configure all the different components for the current CPU operation so that the desired computation will emerge from the flow of data.
 The control unit achieves this by setting the control signals of the relevant control signals of the relevant components to the values associated with the current instruction.
 Note that different instructions classes requires different use of the data path.
@@ -46,6 +53,7 @@ Thus, combinations the control signals must accommodate the different instructio
 
 The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction. The \emph{FUNCTION CODE} is the 4 least significant bits of the instruction, and is responsible for determining the operation the ALU should perform. 
 
+The control unit lies in the decode stage.
  
 \input{fpga/tbl/control_unit_output_tbl}
  

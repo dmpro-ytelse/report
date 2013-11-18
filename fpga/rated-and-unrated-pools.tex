@@ -1,17 +1,27 @@
-Individuals making up the populations are stored on the FPGA for for faster access. These are stored in \emph{BRAM} on the FPGA. This implies a lot faster access times, compared to access times to the external memory, as mentioned in (?). This is done to achieve better memory throughput when executing the algorithms. The pools are further divided into two separate \emph{BRAM} blocks, one for rated individuals, and one for un-rated. This is done to achieve even better memory throughput. The increased throughput are achieved because the different computational can work on the rated and un-rated pool simultaneously. For instance while one fitness core is storing a ranked individual, while another fitness core is fetching a new individual for ranking. 
+In the beginning and the end of the genetics accelerator pipeline lies the rated and the unrated pools, respectively.
+The rated and unrated pools are caches of genetics individuals that waiting to either 1) get selected and be sent through the pipeline, 2) die, or 3) get picked up by a fitness core for fitness ranking.
+The rated pool contains individuals stored with a fitness score, and are the indivuiduals that have just been inserted into the accelerator by a fitness core.
+The unrated pool contains individuals that have no fitness score calculated.
+They are the new individuals produced by the accelerator pipeline, and are waiting to be picked up and rated by a fitness core.
 
-\todo{More details and better explanation} 
+The rated and unrated pools are implemented in \gls{BRAM} on the FPGA for as fast access times as possible.
+This is essential to achieve a high memory throughput when executing the algorithms.
 
-Both the rated pool and the unrated pool is associated with the a controller, referred as the \emph{Genetic controller}. As with the data controller, this controller is responsible for granting access for the rated and unrated pool. This buses in question are, however, not the same as those used to access the data memory. The genetic controller use their own separate buses. The controller is based on mostly the same idea as the data controller described in section (?). The when performing genetic operations, the fitness cores need to request the data bus by using two request signals. The combination of these signals refer to the operation the fitness core requests from the genetic controller. 
+It is important to note that the two pools are designed as separate \gls{BRAM} devices.
+This is done to achieve even better memory throughput.
+The increased throughput is achieved because the different computational units can work on the rated and unrated pools simultaneously.
+For instance while one fitness core is storing a ranked individual, while another fitness core is fetching a new individual for ranking. 
 
-The genetic cores continuously performs a round-robin in order to grant bus to the requesting fitness cores and the genetic pipeline. The logic surrounding the different operations are implemented as an state machine to divide the operations in different clock cycles. This is the same method as used in the data controller.
+Access to both the rated pool and the unrated pool is arbitraged by a controller referred as the \gls{genetic controller}.
+As with the \gls{data controller}, the \gls{genetic controller} is responsible for granting access to the rated and unrated pool.
+As is shown in figure x\cn\todo{ref the architecture figure}, the genetics accelerator has its own data buses connected to the fitness cores separate from the data bus that is connected to the regular shared data memory.
 
+The controller is based on the same principle as the \gls{data controller} described in section (?)\cn.
+When performing genetic operations, the fitness cores need to request the data bus by using two request signals.
+The combination of these signals refer to the operation the fitness core requests from the genetic controller. 
 
+The genetic controller continuously performs a simple round-robin request handling scheme in order to grant bus access to the requesting fitness cores, and to the genetic pipeline.
+The logic surrounding the different operations are implemented as an state machine to divide the operations in different clock cycles.
+This is the same method as used in the data controller.
 
-
-
-
-
-The state machine can be seen in figure(?)
-
-
+The state machine can be seen in figure(?).\cn
