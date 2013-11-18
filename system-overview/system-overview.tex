@@ -8,27 +8,26 @@ This section aims to provide a birds-eye overview of the system archictecture of
 \label{figure:system-overview}
 \end{figure}
 
-The requirements stated\cn that the \Gls{barricelli} should use an FPGA and an micro controller as system components.
-The \Gls{barricelli}'s specialized CPU design is implemented and compiled onto an FPGA, and a micro controller is used to facilitate I/O, control and communications between the FPGA and the outside world.
+The requirements in section \vref{section:requirements} stated that the \Gls{barricelli} should use an \gls{FPGA} and an micro controller as system components.
+The \Gls{barricelli}'s specialized CPU design is implemented and compiled onto an \gls{FPGA}, and a micro controller is used to facilitate Input/Output, control and communications between the \gls{FPGA} and the outside world.
 A graphical overview illustrating the system architecture can be found in figure \vref{figure:system-overview}.
 
 \section{Components}
 
 This section contains an exhaustive list of the components in figure \vref{figure:system-overview}, documenting their roles in the system architecture.
 
-\subsection{FPGA}
+\subsection{\gls{FPGA}}
 
-\todo{What is it, what does it do in the system?}
-The FPGA is a Xilinx Spartan6 LX45\cn Field-Programmable Gate Array, which is a microchip which can be programmed to behave like any arbitrary intergrated circuit.
-The FPGA is programmed to contain an implementation of the custom \Gls{galapagos} CPU Architecture designed for the \Gls{barricelli} computer.
-It is connected to the SCU by a 41-bit wide bus, though which the CPU can be programmed by users.
-The FPGA is connected to its own memory.
+The \gls{FPGA} is a Xilinx Spartan6 LX45\cn Field-Programmable Gate Array, which is a microchip which can be programmed to behave like any arbitrary intergrated circuit.
+The \gls{FPGA} is programmed to contain an implementation of the custom \Gls{galapagos} Processor Architecture designed for the \Gls{barricelli} computer.
+It is connected to the \gls{SCU} by a 41-bit wide bus, though which the processor can be programmed by users.
+The \gls{FPGA} is connected to its own external \gls{SRAM} memory.
 
-\subsection{SCU}
+\subsection{\gls{SCU}}
 
-The SCU, or System Control Unit, is an Energy Micro EFM32GG990F1024 micro controller which administrates communication between the FPGA and the outside world.
-It is the SCU's job to react to user input, to program the custom CPU implemented on the FPGA and to perform other administrative duties.
-Having a separate micro controller to perform these tasks minimises the complexity of the design implemented on the FPGA, which means that more resources can be used to create a performant and clean custom CPU design.
+The \gls{SCU}, or System Control Unit, is an Energy Micro EFM32GG990F1024 micro controller which administrates communication between the gls{FPGA} and the outside world.
+It is the \gls{SCU}'s job to react to user input, to program the custom processor implemented on the FPGA and to perform other administrative duties.
+Having a separate micro controller to perform these tasks minimises the complexity of the design implemented on the \gls{FPGA}, which means that more resources can be used to create a performant and clean custom processor design.
 
 \subsection{I/O}
 
@@ -67,12 +66,12 @@ This design choice was made because it increases the performance of the machine,
 
 \subsubsection{Instruction Memory}
 
-The Instruction Memory, labeled as ``INST MEM'' in figure \vref{figure:system-overview}, is the memory that holds the program instructions for the processing units in the Barricelli running on the FPGA.
-The memory is read-only for the processors in the FPGA, but can be written to by the SCU.
-The instruction memory is shared by all the processing units in the FPGA.
+The Instruction Memory, labeled as ``INST MEM'' in figure \vref{figure:system-overview}, is the memory that holds the program instructions for the processing units in the \Gls{barricelli} running on the \gls{FPGA}.
+The memory is read-only for the processors in the \gls{FPGA}, but can be written to by the \gls{SCU}.
+The instruction memory is shared by all the processing units in the \gls{FPGA}.
 
 \subsubsection{Data Memory}
 
-The Data Memory, labeled as ``DATA MEM'' in figure \vref{figure:system-overview}, is the memory that holds processing data for the processors in the FPGA.
-The memory can be read and read by both the processing units in the FPGA, and the SCU.
-The data memory is shared by all the processing units in the FPGA.
+The Data Memory, labeled as ``DATA MEM'' in figure \vref{figure:system-overview}, is the memory that holds processing data for the processors in the \gls{FPGA}.
+The memory can be read and read by both the processing units in the \gls{FPGA}, and the \gls{SCU}.
+The data memory is shared by all the processing units in the \gls{FPGA}.
