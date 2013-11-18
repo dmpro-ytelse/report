@@ -15,21 +15,14 @@ This accelerator consists of several operation-specific special cores for select
 The fitness cores and the genetic pipeline are all connected to a single data bus.
 To avoid any memory synchronization issues the data bus is controlled by a central arbitration unit.
 
-\subsection{Data Memory}
-\label{subsec:fpga-data-memory}
-
-In Barricelli's memory architecture, a central memory controller is responsible for synchronizing memory access on the shared data bus.
-Each component that wants to access memory must go through the memory controller, and follow the proper memory access request protocol.
-This may introduce a potential bottleneck for memory-bound problems.
-For this reason, each fitness core has a generous 31 general purpose registers, which should reduce the data memory load quite a bit.
-
-
-\input{fpga/data-memory}
 
 \subsection{Instruction Memory}
 \label{subsec:fpga-instruction-memory}
 \input{fpga/instruction-memory}
 
+\subsection{Data Memory}
+\label{subsec:fpga-data-memory}
+\input{fpga/data-memory}
 
 \subsection{Rated and Unrated Pools}
 \input{fpga/rated-and-unrated-pools}
