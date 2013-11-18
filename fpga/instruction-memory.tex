@@ -10,6 +10,7 @@ In case of a cache miss, the data-requesting core is halted until the instructio
 A pseudo-algorithm describing the cache fetch operation can be found in algorithm \vref{algorithm:cache-operation}.
 This scheme is created to resolve the conflicts that arise from using shared memory. 
 
+\begin{figure}[H]
 \begin{algorithm}[H]
 \SetAlgoLined
 \DontPrintSemicolon
@@ -31,3 +32,4 @@ $ M = $ the instruction memory, indexable by instruction addresses
 \caption{Fetching an instruction from the cache}
 \label{algorithm:cache-operation}
 \end{algorithm}
+\end{figure}

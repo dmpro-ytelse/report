@@ -9,6 +9,7 @@ An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitnes
 
 \input{fpga/fig/fitness_architecture}.
 
+\newpage
 \subsubsection{Data Path} 
 
 The data path is simple.
@@ -44,6 +45,7 @@ The fitness core features ``branch not taken'' branch prediction, which means th
 This gives a nice performance increase, because the pipeline does not have to be flushed when the branch is correctly predicted.
 More advanced features like instruction rescheduling have not been implemented.
 
+\newpage
 \subsubsection{Control Unit} 
 
 The control unit is the ``puppet master'' of the processor, so to speak.
@@ -154,6 +156,7 @@ The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_mu
 \input{fpga/tbl/to_reg_multiplexor_output_tbl}
 
 
+\newpage
 \subsubsection{The ALU}
 
 The Arithmetic Logic Unit, or ALU, is the heart of the fitness core, colloquially put.
@@ -196,6 +199,7 @@ ShifterVariables are not only used in the ALU, but also in the Crossover Core an
 
 \todo{ Lage grafikk?}
 
+\newpage
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
 Since the execution of instructions overlap in the pipeline, there is need for some mechanism to handle the data dependencies that arise between the instructions.
 These dependencies are known as data hazards.
@@ -223,11 +227,13 @@ The assembler is responsible for inserting \emph{NOP} instructions in case of su
 
 \input{fpga/tbl/forwarding_unit_tbl}
 
+\newpage
 \subsubsection{Conditional Unit}
 Like ARM, the \Gls{galapagos} architecture embeds conditional codes in every single instruction in order to determine if it should be executed.
 In Barricelli's processor, every instruction is executed, but the conditional codes may disable the effect of the instruction.
 The \emph{condition unit} is responsible for checking the condition code against the status flags set by the previous instruction, and using this information to effect the conditional.
 
+\newpage
 \subsubsection{Fitness Memory Controller} 
 In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller.
 This small controller, referred to as the \emph{fitness data memory controller}, is responsible for mediating memory requests between the data memory controller and the fitness memory controller.
@@ -244,12 +250,14 @@ In case of a \emph{READ} operation, the address is put on the address bus. This 
 When performing a \emph{WRITE} operation this is done in the same manner as with the \emph{READ} operation. The difference lay in the fact that during a memory write, the data to be written is put on the outgoing data bus. The \emph{fitness core} is in wait state at this moment. When the data is finished writing to memory, the \emph{memory data controller} responds with an acknowledgement. The \emph{fitness core} continous with its computation.  
 \todo{kladd!!}A state diagram showing this can be seen in figure (?) \todo{add me}.   
 
+\newpage
 \subsubsection{Fitness Genetic Controller} 
 
 Analogously to the fitness core, the genetics pipeline also has a separate mediating memory controller.
 This controller is referred to as the \emph{fitness genetic controller}.
 It is more complex than its sibling in the fitness core, since it interfaces with the genetics data controller, which arbitrates two independant memory stores.
 
+\newpage
 \subsubsection{Halting the Pipeline}
 
 In normal computer systems, the time to access the memory is variable.
