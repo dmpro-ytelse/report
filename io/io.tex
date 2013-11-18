@@ -9,8 +9,32 @@ The SD card reader is primarily used as a storage for programs that are to be up
 However, it might also be used to store memory snapshots in order to look how the genetic algorithm converges to a solution over time.
 \todo{Reference application note with example code for SD}
 
-The Energy Micro Application Note on Fat and SD cards \todo{cite the application note}, and its example code, describes an implementation of the FatFS library on the Giant Gecko micro controller.
+The Energy Micro Application Note on Fat and SD cards \todo{cite the application note}, and its example code, describes an implementation of the FatFS library on the Giant Gecko microcontroller.
 
+\paragraph{FatFS}\cite{fatfs-web}
+
+FatFS is a generic FAT file system for microcontrollers, with a generic interface for the FAT operations, and a hardware specific interface for disk I/O.
+Because of this structure, the system is easily portable.
+To add read and write a FAT system on some disk drive, FatFS needs the following functions:
+
+\begin{table}
+    \begin{tabular}{| l | l |}
+        \hline
+        disk\_initialize & Initialize disk drive \\
+        \hline
+        disk\_status & Get disk status \\
+        \hline
+        disk\_read & Read sectors on disk \\
+        \hline
+        disk\_write & Write sectors on disk \\
+        \hline
+        disk\_ioctl & Control device dependent features \\
+        \hline
+        get\_fattime & Get current time for FAT \\
+        \hline
+    \end{tabular}
+    \caption{Overview of disk I/O functions}
+\end{table}
 
 \subsubsection{USB}
 The USB is the main communication line with a host computer, allowing the host computer to start running programs on the FPGA and recieve snapshots of the memory periodically.
