@@ -60,7 +60,7 @@ There are 41 lines between the FPGA and the SCU in order to facilitate communica
 The FPGA has no way of signalling that it wants to output something, so the SCU is responsible for periodically halting the CPU and reading from it's memory.
 
 \subsubsection{J-link}
-In order to program and debug the programs on the SCU, we utilize the built-in pins for debugging using J-Link\texttrademark.
+In order to program and debug the programs on the SCU, we utilize the built-in pins for debugging using J-Link\texttrademark as described in AN0043~\ref{an0043}.
 It can also be used as a form of last resort emergency output as it makes it possible to display text that is printed by the program running on the SCU.
 
 \section{FPGA Control}
