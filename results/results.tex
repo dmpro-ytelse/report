@@ -83,6 +83,38 @@ The algorithm quickly finds a decent approximation of the target color, but find
 
 \todo{Explain the binary knapsack program}
 
+\subsubsection{Individual representation}
+
+An individual represents a \todo{...}.
+The individual is coded to a 64-bit data word like in figure \vref{figure:binary-knapsack-bytefield}.
+
+\begin{figure}[H]
+    \begin{center}
+        \begin{bytefield}[bitwidth=0.5em,endianness=big]{64}
+            \bitheader{0, 63} \\
+            \bitbox{63}{bit $ i $ set if item $ i $ is in the include set, else unset}
+        \end{bytefield}
+        \caption{The binary coding of an individual for the binary knapsack problem}
+        \label{figure:binary-knapsack-bytefield}
+    \end{center}
+\end{figure}
+
+\subsubsection{Fitness Function}
+
+The fitness for an individual is calculated using equation \vref{equation:binary-knapsack-fitness-function}.
+The fitness a any given individual falls in the range \todo{a range}.
+
+\begin{eqnarray}
+\nonumber 
+fitness & = & \\
+        &   & \todo{a fitness function}
+\label{equation:color-search-fitness-function}
+\end{eqnarray}
+
+\subsubsection{Results}
+
+\todo{results}
+
 \subsection{Blinkenlights}
 
 Blinkenlights is a program that demonstrates the use of the input and output of the \Gls{barricelli} driven by the \Gls{SCU}.
