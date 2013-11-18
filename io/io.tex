@@ -2,6 +2,13 @@
 The PCB contains a microcontroller used to manage all input and output between the FPGA and the IO devies shown in figure ~\ref{figure:system-overview}.
 The microcontroller listens on all IO channels for input, and acts on the input, either forwarding the request to another device or performing memory operations on the FPGA's memory.
 
+\subsection{Initial requirements}
+The assignment required a microcontroller to handle IO for the FPGA.
+To minimize the amount of things that could go wrong, much of the initial work was focused on finding a few reliable and relatively simple data connections.
+
+Specifically, the microcontroller was required to be able to put some program and data on the FPGA's memory, and then later output values from the data memory through the proper communication lines.
+The I/O devices together with the microcontroller and it's software should be able to provide a reliable and stable I/O connection between the outside world and the FPGA.
+
 \subsection{Communication channels}
 \subsubsection{SD Card}
 The SD card reader is primarily used as a storage for programs that are to be uploaded on the FPGA.
@@ -54,18 +61,22 @@ There are 41 lines between the FPGA and the SCU in order to facilitate communica
 The FPGA has no way of signalling that it wants to output something, so the SCU is responsible for periodically halting the CPU and reading from it's memory.
 
 \subsubsection{J-link}
-In order to program and debug the programs on the SCU, we utilise the built-in pins for debugging using J-Link.
-\todo{What more to write about this?}
-It can also be used as a form of emergency output as it makes it possible to display text that is printed by the program running on the SCU.
+In order to program and debug the programs on the SCU, we utilize the built-in pins for debugging using J-Link\texttrademark.
+It can also be used as a form of last resort emergency output as it makes it possible to display text that is printed by the program running on the SCU.
 
 \section{FPGA Control}
 The only way of communication with the FPGA is with direct memory access to the FPGA's data and instruction memory.
 All the data is transfered directly over the SCU's GPIO pins, without any form for memory mapping or built-in bus interfaces.
-Since the instruction memory stores 32 bits per address, \todo{Cite fpga chapter on instruction memory}, there are two states for accessing instruction memory, either the upper or the lower half.
-The SRAM datasheet~\cite{sram-datasheet} specifies that the data signal has to be stable for at least 10ns in order to complete a write.
-This means that it is not necessary to worry about timing when accessing the SRAM since changing the signal more than every 10ns requires a clock speed of 100MHz.
+This is mostly due to the fact that we did not do enough research early in the design process and recognised that we could use something like External Bus Interface to access the memory.
 
-\begin{table}
+Access to the FPGA's memory is controlled by the signals seen in table~\ref{tab:scu-fpga-link}.
+It should be noted that there are two states to access the FPGA's instruction memory, the upper and lower half.
+This is because the instruction memory stores 32 bits per address while the SRAM chips only stores 16 bits per address (see section~\ref{subsec:fpga-instruction-memory} for more details on the instruction memory).
+
+The SRAM datasheet~\cite{sram-datasheet} specifies that the data signal has to be stable for at least 10ns in order to complete a write.
+This means that it is not necessary to worry about timing when accessing the SRAM since changing the signal more than every 10ns requires a clock speed of 100MHz since we can at most change the ouput of a single pin every cycle.
+
+\begin{table}[H]
     \begin{tabular}{| l | l | l |}
         \hline
         Signal & Bus width & \\
@@ -85,6 +96,7 @@ This means that it is not necessary to worry about timing when accessing the SRA
         LBUB & 1 & The LB and the UB signal to the selected memory block.\\
         \hline
     \end{tabular}
+    \label{tab:scu-fpga-link}
     \caption{Lines between the SCU and FPGA}
 \end{table}
 
@@ -95,12 +107,13 @@ This means that it is not necessary to worry about timing when accessing the SRA
 \end{figure}
 
 The IO program was designed to be as simple as possible in order to decrease the amount of things that could go wrong.
-The main idea is that every IO device is required to define two function, a function that can be called to check whether some input has happened, and a function that is called whenever a device reports input.
+The main idea is that every IO device is required to define two functions in order to be used: a function to poll for input and a function that is called whenever a device reports input.
+
 In order to enable sending messages between different IO units, the poll functions return a pointer which may point to any object in memory, which allows other modules to read the data given that they know what type of data the pointer points to.
 
 \section{Design decision}
 \begin{itemize}
-    \item The microcontroller chosen is the same as in the available development kit. As there was no restrictions on power usage, 
+    \item The microcontroller chosen is the same as in the available development kit. As there was no restrictions on power usage,
           it was decided to use the micro controller most convenient to develop on.
     \item Early in the process, a discussion arised about how it could be beneficial to run an operating system on the micro controller
           such that familiar programs could be used on it. A scenario pitched was to have network access, and then be able to talk to the
@@ -109,12 +122,9 @@ In order to enable sending messages between different IO units, the poll functio
     \item FPGA Bus, huge
 \end{itemize}
 
-\section{Issues?}
-\subsection{Not getting work done}
-
+\section{Issues}
 \subsection{Crystal}
 
 \subsection{USB VBus}
 
 \subsection{No UART}
-
