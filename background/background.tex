@@ -52,59 +52,30 @@ The idea is that after simulating a number of virtual generations of individuals
 To fully understand the inner workings of the \Gls{barricelli}, it is useful to become aquainted with the basic concepts of genetic algorithms.
 This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
 
-\todo{this list sucks, lets fix it}
-
-\subsubsection{Things\todo{better word for this}}
-
-\todo{remove the words we don't need and never use, add some missing words if there any.}
-
 \paragraph{Individual}
-
-An individual is any possible solution to a given problem.
+An individual is one possible solution to a given problem.
 
 \paragraph{Population}
-
 A population is the group of all current individuals in a given experiment.
 
-\paragraph{Search Space}
-
-The search space is the set of all possible solutions to a given problem.
-
-\paragraph{Chromosome}
-
-A chromosome is a blueprint for an individual.
-
-\paragraph{Trait}
-
-A trait is a possible aspect of an individual.
-
-\paragraph{Allele}
-
-An allele is a possible setting for a trait.
-
-\paragraph{Locus}
-
-A locus is the position of a gene on a chromosome.
-
-\paragraph{Genome}
-
-A genome the collection of all chromosomes for an individual.
-
-\subsubsection{Genetic operators}
+\paragraph{Fitness}
+The fitness value of an individual is an evaluation of how close it is to the theoretically perfect individual. It is calculated by an objective rating function.
 
 \paragraph{Selection}
 Probabilistic selection of rated individuals allowed to reproduce.
+The probability of picking a certain individual is normally proportional to its fitness rating.
 
 \paragraph{Crossover}
-Reproduction method involving combining individuals in some way (problem specific). 
+Reproduction method involving combining individuals in some way to form a new individual (problem specific). 
 
 \paragraph{Mutation}
-Mutation of an individual. Random or based on specific rules (problem specific). 
+Mutation of an individual. It is either random or based on specific rules (problem specific). 
 
 \subsection{Pseudo-code for a General Genetic Algorithm}
 
 Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a general genetic algorithm.
 
+\begin{figure}[H]
 \begin{algorithm}[H]
 \SetAlgoLined
 \DontPrintSemicolon
@@ -132,6 +103,7 @@ Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a ge
 \caption{Generic genetic algorithm}
 \label{algorithm:pseudo-code-for-ga}
 \end{algorithm}
+\end{figure}
 
 \todo{tidy}
 
