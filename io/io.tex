@@ -61,7 +61,7 @@ It can also be used as a form of emergency output as it makes it possible to dis
 \section{FPGA Control}
 The only way of communication with the FPGA is with direct memory access to the FPGA's data and instruction memory.
 All the data is transfered directly over the SCU's GPIO pins, without any form for memory mapping or built-in bus interfaces.
-Since the instruction memory stores 32 bits per address, \todo{Cite fpga chapter on instruction memory}, there are two states for accessing instruction memory, either the upper or the lower half.
+Since the instruction memory stores 32 bits per address, (see section \ref{subsec:fpga-instruction-memory} for more details on the instruction memory) there are two states for accessing instruction memory, either the upper or the lower half.
 The SRAM datasheet~\cite{sram-datasheet} specifies that the data signal has to be stable for at least 10ns in order to complete a write.
 This means that it is not necessary to worry about timing when accessing the SRAM since changing the signal more than every 10ns requires a clock speed of 100MHz.
 
@@ -100,7 +100,7 @@ In order to enable sending messages between different IO units, the poll functio
 
 \section{Design decision}
 \begin{itemize}
-    \item The microcontroller chosen is the same as in the available development kit. As there was no restrictions on power usage, 
+    \item The microcontroller chosen is the same as in the available development kit. As there was no restrictions on power usage,
           it was decided to use the micro controller most convenient to develop on.
     \item Early in the process, a discussion arised about how it could be beneficial to run an operating system on the micro controller
           such that familiar programs could be used on it. A scenario pitched was to have network access, and then be able to talk to the

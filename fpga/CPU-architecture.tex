@@ -16,6 +16,7 @@ The fitness cores and the genetic pipeline are all connected to a single data bu
 To avoid any memory synchronization issues the data bus is controlled by a central arbitration unit.
 
 \subsection{Data Memory}
+\label{subsec:fpga-data-memory}
 
 In Barricelli's memory architecture, a central memory controller is responsible for synchronizing memory access on the shared data bus.
 Each component that wants to access memory must go through the memory controller, and follow the proper memory access request protocol.
@@ -30,6 +31,7 @@ This allows the genetic pipeline to compute the chromosomes required for the nex
 \input{fpga/data-memory}
 
 \subsection{Instruction Memory}
+\label{subsec:fpga-instruction-memory}
 \input{fpga/instruction-memory}
 
 
