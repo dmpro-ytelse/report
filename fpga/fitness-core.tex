@@ -197,43 +197,46 @@ ShifterVariables are not only used in the ALU, but also in the Crossover Core an
 \todo{ Lage grafikk?}
 
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}
-Since the executions of instructions overlap in the pipeline.
-There is need for some mechanism to handle the data dependencies that arise between the instructions. These dependencies are known as data hazards. They occur when a planned execution of an instruction cannot happen in that cycle because some data is not yet available. This problem can be solved in two ways, either by stalling or forwarding. Stalling, the simplest solution, is done by avoiding the hazard by stalling until the data becomes available. This is accomplished by inserting \emph{NOPs} in the pipeline. Although, this method work, it is to slow in most cases. Since this processor aim to achieve high performance this solution is far from optional. A far better approach is to rely on forwarding, also known as register forwarding. In this approach the aim is to resolve the dependencies by simply forwarding internal resources from other stages in the pipeline, if needed.
+Since the execution of instructions overlap in the pipeline, there is need for some mechanism to handle the data dependencies that arise between the instructions.
+These dependencies are known as data hazards.
+They occur when a planned execution of an instruction cannot happen in that cycle because some data is not yet available.
+This problem can be solved in two ways, either by stalling or forwarding.
+Stalling, the simplest solution, is done by avoiding the hazard by stalling until the data becomes available.
+This is accomplished by inserting \emph{NOPs} in the pipeline.
+Although, this method works, it is unacceptably slow for a high performance architecture.
+Since this processor aims to achieve high performance, stalling is far from optimal.
+A far better approach is to rely on register forwarding.
+In this approach the aim is to resolve the dependencies by simply forwarding internal resources from one pipeline stage to another, if needed.
 
-The forwarding logic is implemented by comparing register dependencies of the instruction in the execution stage with other instructions currently residing in the pipeline. If the forwarding unit notices register dependencies and that these instructions will write to these registers at a later time, it will assert signals that causes the data to be forwarded to the execution stage. The control signals is used in two 3-to-1 multiplexors in order to choose which source the data should arrive from. An overview of the control signals and their meaning can be seen in table. \ref{tbl:fpga:forwarding_signals}.
+The forwarding logic is implemented by comparing register dependencies of the currently executing instruction with the other instructions currently flowing through the pipeline.
+If the forwarding unit detects a data hazard, it will forward the apropriate data to the execution stage so it can be used at once.
+An overview of the control signals and their meaning can be seen in table. \ref{tbl:fpga:forwarding_signals}.
 
-An additional forwarding unit is also implemented in the decode stage. This is implemented very similar the one implemented in the execution stage. The difference between them lays in the fact that the forwarding unit located in the decode stage is only concerned by forwarding data from the write back stage. This is done because the main forwarding unit is unable to forward the data in circumstances when there exists register dependencies between instructions residing in the \emph{decode stage} and the \emph{write-back stage}. This occurs because the register files uses one cycle in order to write the register file. This implies that the data is unavailable when 
-the instruction reaches the \emph{execute stage}, and thus needs to be forwarded when the instruction is in the execution stage. 
+A second, more unconventional forwarding unit is also implemented in the decode stage.
+It forwards data from the write back stage to the decode stage to solve data hazards caused by a single cycle write delay in the register file that the regular forwarding unit cannot detect.
 
-
-Forwarding does, however, not solve all occurrences of data hazards. It exists some situations where forwarding is not enough, and the processor need to stall. These occurrences happen in relations with \emph{LOAD} operations, where there exists some register dependency between the \emph{LOAD} instruction and some other instruction currently residing in the pipeline. The problem occurs because the data loaded from memory is not available until the write-back stage. This implies that the forwarding unit is unable to forward any data until the this stage. The galapagos architecture does not solve this problem in hardware, but rather in software. The assembler is responsible for inserting \emph{NOP} instructions in case of such hazards.  
-
-
-
-\todo{Re-write this shit}
-
+Unfortunately, forwarding does not solve all possible data hazards in the processor.
+In the case of a memory load instruction being immediately proceeded by an instruction dependant on the data fetched from memory, a data hazard occurs.
+Since it does not make sense to forward data from memory, this class of data hazards is resulted by stalling.
+The galapagos architecture does not solve this problem in hardware, but rather in software.
+The assembler is responsible for inserting \emph{NOP} instructions in case of such hazards.  
 
 \input{fpga/tbl/forwarding_unit_tbl}
 
-
-
 \subsubsection{Conditional Unit}
-Like ARM , the galapagos architecture use conditional codes in order to determine if an instruction should be executed or not. Instead of using explicit branch instructions each instruction carries a 4-bit conditional code. Every instruction is in fact executed, however, the effect of the instruction is determined by the \emph{condition unit}. The \emph{condition unit} is implemented by checking the condition code of the current instruction against the status flags of the previous instruction. Dependent on this information the \emph{condition unit} produces an \emph{execute signal}. This signal is used to either, invalidate or approve the current instruction. However, this may also alter instruction stream and cause more instructions to be invalidated. Note that the determination of the branch is performed during the memory stage. This implies that the instructions following the branch is loaded in the pipeline. If the branch is not taken, this does not impose a problem since the instruction were going to be validated anyway. However, if the branch is taken, the instructions currently residing in the pipeline are not supposed to be validated. More specific, the instructions residing in the \emph{fetch stage}, \emph{decode stage}, \emph{execute stage} needs to be flushed. This is accomplished with the jump signal working as flush signal to the different pipeline registers. This makes sure the instructions in the pipeline are invalidated, effectively inserting \emph{NOPs}
-
-
-
-
-\todo{reference}.
-
-\todo{Better flow}
-
-
+Like ARM, the \Gls{galapagos} architecture embeds conditional codes in every single instruction in order to determine if it should be executed.
+In Barricelli's processor, every instruction is executed, but the conditional codes may disable the effect of the instruction.
+The \emph{condition unit} is responsible for checking the condition code against the status flags set by the previous instruction, and using this information to effect the conditional.
 
 \subsubsection{Fitness Memory Controller} 
-In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller. This small controller, referred to as the \emph{fitness data memory controller}. The controller is implemented as a state machine, and is responsible for requesting the memory bus, and specify the type of operation the \emph{Data memory controller} is to perform on behalf of the \emph{fitness core}.  The \emph{fitness core} supports two instructions for interacting with the data memory,  \emph{load word} and \emph{store word}. 
+In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller.
+This small controller, referred to as the \emph{fitness data memory controller}, is responsible for mediating memory requests between the data memory controller and the fitness memory controller.
 
-To accommodate these instructions the memory controller have two cases, one for loading and one for storing a memory word, both which requires access to the bus. The \emph{fitness memory controller} requests the bus by sending a request signal to the main \emph{Data controller}. 
-The \emph{data controller} either handles this request immediately, or the request is handled when the bus is ready, in case some other core is currently using the bus.  Either way, the requesting fitness core will halt the pipeline waiting for access to the bus. When the \emph{data controller} is ready, it will send out an acknowledgment granting the bus. When receiving the bus the \emph{fitness memory controller} is able to use the bus freely. 
+To use the data memory bus, the the \emph{fitness memory controller} may send a request signal to the main \emph{Data controller}. 
+The \emph{data controller} either handles this request immediately, or the request is handled when the bus is ready, in case some other core is currently using the bus.
+Either way, the requesting fitness core will halt the pipeline waiting for access to the bus.
+When the \emph{data controller} is ready, it will send out an acknowledgment granting the bus.
+Upon receiving the bus, the \emph{fitness memory controller} is able to use it freely. 
 
 In case of a \emph{READ} operation, the address is put on the address bus. This address corresponds to a memory position on the external memory. When receiving this address, the \emph{data memory controller}, starts fetching the memory word. During this time the fitness memory controller needs to wait. It stays in a wait loop unit the \emph{data memory controller} is finished reading. Note that the bus to external memory is only 16-bits wide. This implies that four read instructions are required to read a 64-bits word. When the \emph{memory data controller} is finished reading data from memory, the data is put on the data bus, and the can be read by the fitness core. Then the fitness core is disconnected from both the data and memory bus and it continuous its execution through the pipeline.
 
@@ -241,29 +244,19 @@ In case of a \emph{READ} operation, the address is put on the address bus. This 
 When performing a \emph{WRITE} operation this is done in the same manner as with the \emph{READ} operation. The difference lay in the fact that during a memory write, the data to be written is put on the outgoing data bus. The \emph{fitness core} is in wait state at this moment. When the data is finished writing to memory, the \emph{memory data controller} responds with an acknowledgement. The \emph{fitness core} continous with its computation.  
 \todo{kladd!!}A state diagram showing this can be seen in figure (?) \todo{add me}.   
 
-
-
-\todo{Lot of work to be done}
-
-
-
 \subsubsection{Fitness Genetic Controller} 
-As with the communication with the main data controller, each fitness core also have a small controller to synchronise the communication with the \emph{genetic memory controller}. This controller is referred to as the \emph{fitness genetic controller}. This controller is also implemented as a state machine. However, this component contains more functionality than the \emph{fitness memory controller}, since this controller communicate with the \emph{genetic controller}, which handles the access with both the rated and unrated pool. The fitness cores and the genetic pipeline uses these pools depending on the operation. The fitness core is able to perform the following genetic operations: \emph{LOAD GENE}, \emph{STORE GENE}, \emph{SETTINGS} and \emph{NOP}. These different operations require different uses of the \emph{rated} and \emph{unrated} pools. 
 
-The \emph{LOAD GENE} operations load a gene from the unrated pool. This gene is loaded by requesting the gene from the \emph{genetic controller}, thereby halting the requesting fitness core. When the \emph{genetic controller} is finished fetching the gene, it is transmitted to the requested fitness core. The fitness core receives the unrated gene and continuous the execution.
+Analogously to the fitness core, the genetics pipeline also has a separate mediating memory controller.
+This controller is referred to as the \emph{fitness genetic controller}.
+It is more complex than its sibling in the fitness core, since it interfaces with the genetics data controller, which arbitrates two independant memory stores.
 
-The \emph{STORE} gene operations store a fitness and gene to the rated pool. This is atomic operation. Atomic in the sense that the selection core is unable to access the rated pool during this time. This is done avoiding any memory collisions. The fitness value and the gene is stored by requesting the bus. When the bus access is granted. The \emph{fitness genetic controller} writes to the transmit the fitness and genetic values over two cycles to the \emph{genetic controller}.  
+\subsubsection{Halting the Pipeline}
 
-The \emph{SETTINGS} operation is used to configure the genetic pipeline. It is able to configure the \emph{selection core}, \emph{crossover core}, and the \emph{mutation core}. The selection core can be configured to perform a varied number of tournament rounds. The crossover core can be configured to perform between four different types of crossover. More on the different types of crossover can be seen i section(?) \todo{Add me}. The mutation core can be configured with a value specifying the probability of muting the gene. 
-
-\todo{fix me} 
-
-
-\subsubsection{Halting the pipeline}
-In normal computer systems the time to access the memory is variable. It depends on the different states of the machine. This imposes a problem when several cores competes about access to the memory. It is difficult to determine precisely the times that is actually used to receive the required data. In order to fix this issue, and prevent the processor to compute when there is no data. Each interaction with memory is able to halt the processor in case when performing memory operations. The different situations arise when accessing the instruction memory, data memory, and the genetic data pools. Their corresponding controllers are able to set a halt signal before performing the operation. When the \emph{halt} signals is asserted, the program counter and the pipeline registers will be halted, ensuring that the \emph{fitness core} does not change state. 
-
-\todo{hmm? Integrate with the controllers} 
-
-
-
-
+In normal computer systems, the time to access the memory is variable.
+It depends on the different states of the machine.
+This imposes a problem when several cores competes about access to the memory.
+It is difficult to determine precisely the times that is actually used to receive the required data.
+In order to fix this issue, and to prevent the processor to compute when there is no data, each interaction with memory is able to halt the processor if need be.
+The different situations arise when accessing the instruction memory, data memory, and the genetic data pools.
+Their corresponding controllers are able to set a halt signal before performing the operation.
+When the one of the \emph{halt} signals is asserted, the program counter and the pipeline registers will be halted, ensuring that the \emph{fitness core} does not change state prematurely. 
