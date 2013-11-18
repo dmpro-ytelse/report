@@ -36,6 +36,8 @@ Even though serial communication was technically not required due to presence of
 This way, in case there were troubles with USB, it would still be possible to communicate over RS-232; and vice versa.
 The microcontroller supports communication over RS-232, so the this should be a natural second choice.
 We placed socket connector on the PCB as well as a RS-232 driver that transforms input and output signals to given voltage.
+UART: UART or Serial port was primarily selected as a backup choice for the USB interface. This was made only in case the implementation
+of the USB goes wrong either by a bad PCB design or if there by some reason is problems related to software that would cause the USB interface to not work as intended.
 
 
 \subsection{FPGA}
