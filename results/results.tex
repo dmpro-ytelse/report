@@ -1,4 +1,5 @@
-results? what results?
+This section section describes the results of different measurements, calculations and tests that were run on the Barricelli computer.
+It also documents the different demonstration programs that showcase and illustrate Barricelli's purpose through practical use.
 
 \section{Measurements}
 
@@ -18,20 +19,52 @@ results? what results?
 
 \section{Demonstration Programs}
 
-\todo{a short intro about the demonstration programs}
+This section documents the demonstration programs written for the Barricelli computer to demonstrate its functionality.
+The programs are typically written in \gls{galapagos} assembly for programs runnin on the custom processor, and C for programs running on the \Gls{SCU}.
+The source code for these demonstration programs can be found in appendix \vref{appendix:demonstration-programs-source-code}.
 
 \subsection{Genetic Algorithm: Color Search}
 
-\todo{Explain the color search program}
+The color search program is a very simple program demonstrating a basic usage of the genetics accelerator.
+The program tries to find a specific color in the search-space of all 24-bit colors.
+An individual represents a specific 24-bit color in RGB format.
+The individual is coded to a 64-bit data word like in figure \vref{figure:color-search-bytefield}.
+
+\begin{figure}[H]
+    \begin{center}
+        \begin{bytefield}[bitwidth=0.5em,endianness=big]{64}
+            \bitheader[bitformatting={\tiny\rotatebox[origin=B]{90}}]{0, 7, 8, 15, 16, 23, 24, 63} \\
+        \bitbox{40}{\color{lightgray}\rule{\width}{\height}}
+            \bitbox{8}{blue}
+            \bitbox{8}{green}
+            \bitbox{8}{red}
+        \end{bytefield}
+        \caption{The binary coding of an individual for the color search problem}
+        \label{figure:color-search-bytefield}
+    \end{center}
+\end{figure}
+
+Figure \vref{figure:color-search} shows the evolution of the approximation suggested as an answer by the genetic algorithm.
+In this problem instance the target color was magic pink, i.e. the color with color code $ rgb(255, 0, 255) $.
+The program run illustrated in figure \vref{figure:color-search} ran on 7 seven cores, and the measurements are from regularly polling a single core for its current best solution.
+Figure \vref{figure:color-search} clearly illustrates a typical trait of genetic algorithm approximations: they are quite good at finding decent approximations, but iterating to improve accuracy of the result is a game of diminishing returns.
+The algorithm quickly finds a decent approximation of the target color, but finding the exact value down to the last bit still takes time.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{fig/color-search}
+    \caption{Color search progression (7 cores, 1 core sampled)}
+    \label{figure:color-search}
+    \end{center}
+\end{figure}
 
 \subsection{Genetic Algorithm: Binary Knapsack Problem}
 
 \todo{Explain the binary knapsack program}
 
-\subsection{Genetic Algorithm: Travelling Salesman Problem}
-
-\todo{Explain the travelling salesman problem}
-
 \subsection{Blinkenlights}
 
-\todo{Explain the blinkenlights program (it is a program that blinks the lights or something, and maybe reacts to some buttons, to show the IO stuff we have}
+Blinkenlights is a program that demonstrates the use of the input and output of the \Gls{barricelli} driven by the \Gls{SCU}.
+Blinkenlights blinks the 16 output leds of the computer and can react to button presses.
+
+\todo{somebody needs to write this program.}
