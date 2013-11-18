@@ -29,11 +29,25 @@ will then work as the usb host.
 
 \subsubsection{serial port} 
 \todo{the name rs232 is too ambigious. We need to explain what it is WAIT HAS THIS BEEN DONE ALREADY?}
+\todo{also known as UART}
+
 RS-232 is a communication standard/protocol which is implemented through a serial port interface.
 Even though serial communication was technically not required due to presence of USB interface, it was decided to implement RS-232 communication as well.
 This way, in case there were troubles with USB, it would still be possible to communicate over RS-232; and vice versa.
 The microcontroller supports communication over RS-232, so the this should be a natural second choice.
 We placed socket connector on the PCB as well as a RS-232 driver that transforms input and output signals to given voltage.
+
+
+\subsection{FPGA}
+\todo{which one did we pick?}
+
+\todo{why did we pick this one?}
+
+\subsection{SCU / Microcontroller}
+\todo{which one did we pick?}
+we got the giant gecko one because we had the dev board for those lying around in the lab and also we picked the model with the most memory? \todo{VERIFICATION REQUIRED}.
+
+\todo{why did we pick this one?}
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
 
@@ -43,6 +57,8 @@ The system need them both to work together, and to accomplish this we need a com
 On Barricelli this was accomplished with by a 41 bit bus.
 This bus have 16 bits of data, 19 bits of addressing, a small 2 bit bus to control the state of the processor and 3 control signals.
 The statet bus detemine what the FPGA should do with the data, while the control signals tells the targeted unit what to do with the data. 
+
+
 
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
 When the group talked about selecting memory, there was lots of options.
