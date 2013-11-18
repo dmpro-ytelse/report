@@ -5,7 +5,7 @@ This section highlights and explains the choices made relating to the hardware o
 This section presents the Input/Output (I/O) devices that were selected and discuss alternatives that were not.
 An I/O device or channel that can be used to communicate between a computer system and the outside world (or another computer system).
 
-\subsubsection{Secure Digital} 
+\subsubsection{Secure Digital (SD)} 
 The Secure Digital (SD) memory card format was chosen because there were SD cards available in the lab and most of the team's members' laptops had SD card slots.
 The microSD format was considered, but guidelines on how to use and implement it were scarce compared to information about the larger SD format.
 
@@ -13,19 +13,20 @@ In the SD interface, there are several protocols used for communication.
 The ``Serial Peripheral Interface Bus'' transfer mode (``SPI bus mode'') was chosen for the project as it allows the microcontroller to communicate with the SD card as if it were a bus.
 
 
-\subsubsection{Universal Serial Bus}
+\subsubsection{Universal Serial Bus (USB)}
+The USB interface was chosen because USB connectors are prevalent on computers, and every team member's laptop had at least one USB connector.
+A micro-USB interface was chosen because it was the smallest USB compliant interface available, which meant the associated hardware would take up less physical space on the PCB than its larger siblings'.
 
-For usb interface we chosed the micro-usb. 
-The reason for this is that the size of the assosiated hardware is much smaller.
-In the design we also made circuts to prevent unwanted effects like electrostatic discharge, and circuts to prevent the signals from picking up unwanted noice from the background or from crosstalk.
-Resistances are added as well to prevent shortcircuting.
+The design also includes circuits to prevent undesirable effects like electrostatic discharge, preventing the signals from picking up unwanted background noise, and crosstalk (disturbance of the signal from signals in other circuits).
+Resistors were also added to prevent short circuiting.
 
-It should be mentioned that there are several configurations that applies to the USB interface. The usb-protocol
-specifies that there is one host or "master" and at least one or more "slaves". The master is responcible for managing the connections
-to it's slaves. The host is also able to provide a 5V current to devices (slaves) if needed.
+There are several configurations applicable to the USB interface.
+The USB protocol specifies that there should be one host (or ``master'') and at least one or more ``slaves''.
+The master is responsible for managing the connection to its slaves, and should also be able to provide a 5V current to its slaves if needed.
 
-In this case, the microcontroller works as a self powered device or a slave. The computer that is communicating with the microcontroller
-will then work as the usb host.
+In Barricelli's case, the microcontroller functions as a self-powered slave.
+The device that is connected through the USB interface in order to communicate with the microcontroller functions as the master.
+
 
 \todo{insert picture from http://www.silabs.com/Support\%20Documents/TechnicalDocs/AN0046.pdf}
 
