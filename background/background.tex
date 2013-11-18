@@ -52,59 +52,30 @@ The idea is that after simulating a number of virtual generations of individuals
 To fully understand the inner workings of the \Gls{barricelli}, it is useful to become aquainted with the basic concepts of genetic algorithms.
 This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
 
-\todo{this list sucks, lets fix it}
-
-\subsubsection{Things\todo{better word for this}}
-
-\todo{remove the words we don't need and never use, add some missing words if there any.}
-
 \paragraph{Individual}
-
-An individual is any possible solution to a given problem.
+An individual is one possible solution to a given problem.
 
 \paragraph{Population}
-
 A population is the group of all current individuals in a given experiment.
 
-\paragraph{Search Space}
-
-The search space is the set of all possible solutions to a given problem.
-
-\paragraph{Chromosome}
-
-A chromosome is a blueprint for an individual.
-
-\paragraph{Trait}
-
-A trait is a possible aspect of an individual.
-
-\paragraph{Allele}
-
-An allele is a possible setting for a trait.
-
-\paragraph{Locus}
-
-A locus is the position of a gene on a chromosome.
-
-\paragraph{Genome}
-
-A genome the collection of all chromosomes for an individual.
-
-\subsubsection{Genetic operators}
+\paragraph{Fitness}
+The fitness value of an individual is an evaluation of how close it is to the theoretically perfect individual. It is calculated by an objective rating function.
 
 \paragraph{Selection}
 Probabilistic selection of rated individuals allowed to reproduce.
+The probability of picking a certain individual is normally proportional to its fitness rating.
 
 \paragraph{Crossover}
-Reproduction method involving combining individuals in some way (problem specific). 
+Reproduction method involving combining individuals in some way to form a new individual (problem specific). 
 
 \paragraph{Mutation}
-Mutation of an individual. Random or based on specific rules (problem specific). 
+Mutation of an individual. It is either random or based on specific rules (problem specific). 
 
 \subsection{Pseudo-code for a General Genetic Algorithm}
 
 Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a general genetic algorithm.
 
+\begin{figure}[H]
 \begin{algorithm}[H]
 \SetAlgoLined
 \DontPrintSemicolon
@@ -132,6 +103,7 @@ Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a ge
 \caption{Generic genetic algorithm}
 \label{algorithm:pseudo-code-for-ga}
 \end{algorithm}
+\end{figure}
 
 \todo{tidy}
 
@@ -148,15 +120,19 @@ Traditionally, genetic algorithms are implemented generationally \TODO{TODO: cit
     \item Mutation  
 \end{enumerate}
 
-The initial population is usually random made from randomly generated individuals. This ensures sufficient diversity in the population. The diversity ensures that it is possible for the generation to evolve towards a solution. In the next stage the fitness of each individual calculated. The fitness value calculated is very specific for the problem at hand, but is either way used to check the fitness of the individual. If this fitness values exceeds some specified threshold, the solution is deemed good enough. Note that a genetic algorithm is not always finding the correct solution, but a solution that is sufficient for the problem at hand.
+The initial population is normally made from randomly generated individuals.
+The diversity ensures that it is possible for the generation to evolve towards a solution without getting stuck in an early local maxima.
+In the next stage the fitness of each individual calculated, which is very specific for the problem at hand.
+If this fitness values exceeds some specified threshold, the solution is deemed good enough and the algorithm stops.
+Note that it will not always finding a perfect solution, but one that is sufficient for the problem at hand.
+If however none of the individuals end up with a fitness value above the threshold, the algorithm continues.
 
 The solution is found during several phases though a selection, crossover and a mutation phase. 
-These phases are used to evolve the population through several generations until an appropriate 
-solution is found. 
+These phases are used to evolve the population through several generations until an appropriate solution is found. 
 
 The selection core aim to chose individuals for reproduction based on their fitness score.The selection is constructed in such that higher fitness score equals higher probability of being chosen. This does not necessary mean that only the fittest individuals are allowed to reproduce. An important concept of the genetic algorithm is to achieve diversity while exploring the different solutions. Diversity is important to prevent the algorithm from reaching what is known as a local maximum. E.g stage where it is unable to evolve any further even though the solution found is far from being optimal.
 
-The crossover core uses the individuals from the selection to cross the individuals to produce new individuals. Because of the initial diversity in the initial population, this will cause the diversity to be large in the beginning. However this will settle in further generations. The goal of the crossover phase is to converge against a solution by continuos creating better a better generation of individuals. There are several methods for achieving the crossover of individuals, however, the different methods will not be discussed in great detail here. The different algorithms are highly dependent on the task at hand. However, the different crossover methods implemented in the employed in the galapagos architecture will be discussed in greater detail in section(?) \todo{reference to section}
+The crossover core uses the individuals from the selection to cross the individuals to produce new individuals. Because of the initial diversity in the initial population, this will cause the diversity to be large in the beginning. However this will settle in further generations. The goal of the crossover phase is to converge against a solution by continuos creating better a better generation of individuals. There are several methods for achieving the crossover of individuals, however, the different methods will not be discussed in great detail here. The different algorithms are highly dependent on the task at hand. However, the different crossover methods implemented in the employed in the galapagos architecture will be discussed in greater detail in section \vref{fpga:subsection:genetic_pipeline}.
 
 However as an precaution, the individuals are passed through yet another phase, mutation. The goal of the mutation state is ensure diversity by mutating the individuals by some probability. The mutation process is usually a simple one by just modifying some of the bits in the individual. As with the crossover method, algorithms also exist for performing the mutation. 
 

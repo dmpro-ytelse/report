@@ -2,17 +2,18 @@
 
 Here we will talk about the most important hardware choices that affected the functionality of the final PCB.
 
-\subsection{IO devices} \label{pcb:design-choices:ss:IO_devices}
-This section presents the IO devices that were selected and discuss other alternatives as well
+\subsection{Input/Output devices} \label{pcb:design-choices:ss:IO_devices}
+This section presents the Input/Output (I/O) devices that were selected and discuss alternatives that were not.
+An I/O device or channel that can be used to communicate between a computer system and the outside world (or another computer system).
 
-\subsubsection{SD}
+\subsubsection{Secure Digital} 
 We talked about using micro-sd cards, but because it was harder to find any guidlines on how to use/implement it we decided to use the normal SD interface.
 In the SD interface, there are several protocols used for communication. 
 However for this project we use the mode called "SPI bus mode", which is the interface that is used by the microcontroller.  \todo{the IO group must verify this}
 The SPI or "serial peripheral interface" is a scheme where you use a syncronized master-slave configuration or relation to communicate with the IO-devices. 
 The goal with this choice is to have better compatibillity with the microcontroller.
 
-\subsubsection{USB}
+\subsubsection{Universal Serial Bus}
 For usb interface we chosed the micro-usb. 
 The reason for this is that the size of the assosiated hardware is much smaller.
 In the design we also made circuts to prevent unwanted effects like electrostatic discharge, and circuts to prevent the signals from picking up unwanted noice from the background or from crosstalk.
@@ -29,11 +30,27 @@ will then work as the usb host.
 
 \subsubsection{serial port} 
 \todo{the name rs232 is too ambigious. We need to explain what it is WAIT HAS THIS BEEN DONE ALREADY?}
+\todo{also known as UART}
+
 RS-232 is a communication standard/protocol which is implemented through a serial port interface.
 Even though serial communication was technically not required due to presence of USB interface, it was decided to implement RS-232 communication as well.
 This way, in case there were troubles with USB, it would still be possible to communicate over RS-232; and vice versa.
 The microcontroller supports communication over RS-232, so the this should be a natural second choice.
 We placed socket connector on the PCB as well as a RS-232 driver that transforms input and output signals to given voltage.
+UART: UART or Serial port was primarily selected as a backup choice for the USB interface. This was made only in case the implementation
+of the USB goes wrong either by a bad PCB design or if there by some reason is problems related to software that would cause the USB interface to not work as intended.
+
+
+\subsection{FPGA} \label{pcb:design-choices:ss:fpga}
+\todo{which one did we pick?}
+
+\todo{why did we pick this one?}
+
+\subsection{SCU / Microcontroller} \label{pcb:design-choices:ss:scu}
+\todo{which one did we pick?}
+we got the giant gecko one because we had the dev board for those lying around in the lab and also we picked the model with the most memory? \todo{VERIFICATION REQUIRED}.
+
+\todo{why did we pick this one?}
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
 
@@ -43,6 +60,8 @@ The system need them both to work together, and to accomplish this we need a com
 On Barricelli this was accomplished with by a 41 bit bus.
 This bus have 16 bits of data, 19 bits of addressing, a small 2 bit bus to control the state of the processor and 3 control signals.
 The statet bus detemine what the FPGA should do with the data, while the control signals tells the targeted unit what to do with the data. 
+
+
 
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
 When the group talked about selecting memory, there was lots of options.
