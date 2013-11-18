@@ -124,7 +124,13 @@ In order to enable sending messages between different IO units, the poll functio
 
 \section{Issues}
 \subsection{Crystal}
+In the design phase it was decided to go with just a single high frequency crystal oscillator.
+Unfortunately the crystal that was selected had a clock frequency in the kHz range, instead of the MHz range, which was what was inteded.
+Luckily the microcontroller has a built-in RC oscillator, so the crystal oscillator was not essential to get code running on the microcontroller.
 
-\subsection{USB VBus}
+\subsection{USB Circuitry not working}
+While mapping the PCB curcuitry, only the pins available for GPIO were looked at initially, but this did not include the vbus and vregi pins.
+The pins were connected to capacitors, and a quick hack soldering the appropriate lines to the USB header was tried without success.
 
 \subsection{No UART}
+The microcontroller believes that data is being outputted, and there seems to be a signal going out to the RS-232 interface, but there is no data being recieved on the other end.
