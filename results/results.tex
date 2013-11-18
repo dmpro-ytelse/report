@@ -23,6 +23,35 @@ results? what results?
 \subsection{Genetic Algorithm: Color Search}
 
 \todo{Explain the color search program}
+The color search program is a very simple program demonstrating a basic usage of the genetics accelerator.
+The program tries to find a specific color in the search-space of all 24-bit colors.
+An individual represents a specific 24-bit color in RGB format.
+The individual is coded to a 64-bit data word like in figure \vref{figure:color-search-bytefield}.
+
+\begin{figure}[H]
+    \begin{center}
+        \begin{bytefield}[bitwidth=0.5em,endianness=big]{64}
+            \bitheader[bitformatting={\tiny\rotatebox[origin=B]{90}}]{0, 7, 8, 15, 16, 23, 24, 63} \\
+        \bitbox{40}{\color{lightgray}\rule{\width}{\height}}
+            \bitbox{8}{blue}
+            \bitbox{8}{green}
+            \bitbox{8}{red}
+        \end{bytefield}
+        \caption{The binary coding of an individual}
+        \label{figure:color-search-bytefield}
+    \end{center}
+\end{figure}
+
+
+\todo{vref figure \vref{figure:color-search}}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{fig/color-search}
+    \caption{Color search progression (7 cores, 1 core sampled)}
+    \label{figure:color-search}
+    \end{center}
+\end{figure}
 
 \subsection{Genetic Algorithm: Binary Knapsack Problem}
 
