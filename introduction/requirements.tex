@@ -25,11 +25,13 @@ The non-functional requirements for the project are listed in table \vref{table:
  \hline
  Requirement & Description & Priority\\
  \hline
- FR1 & The system should be a general computer. & High \\
- FR2 & The system should be able to solve hard problems using genetic alogorithms. & High \\
- FR3 & The system should be able to recieve instructions and data from an external entity. & High \\
- FR4 & The system should be able to send data to an external entity. & High \\
- FR5 & The product should have maximized performance rather than energy-efficiency. & Medium \\
+ FR1 & The system should be a MIMD computer. & High \\
+ FR2 & The system should be a general computer. & High \\
+ FR3 & The system should be able to solve hard problems using genetic alogorithms. & High \\
+ FR4 & The system should be able to recieve instructions and data from an external entity. & High \\
+ FR5 & The system should be able to send data to an external entity. & High \\
+ FR6 & The product should have maximized performance rather than energy-efficiency. & Medium \\
+ FR7 & The instruction set should contain custom made instructions for faster execution of genetic algorithms. & Medium \\
  \hline
  \end{tabular}
  \caption{Functional Requirements}
@@ -39,38 +41,50 @@ The non-functional requirements for the project are listed in table \vref{table:
 
 \subsubsection{FR1}
 
- FR1 in table \vref{table:functional-requirements} states that the system should be a general computer.
+FR1 in table \vref{table:functional-requirements} states that the system should be a MIMD computer.
+This requirement is set as the main requirement in the assigment text, and is therefore a high prority requirement.
+
+\subsubsection{FR2}
+
+ FR2 in table \vref{table:functional-requirements} states that the system should be a general computer.
  That means that the computer should be Turing Complete, which implies that it can solve any computable problem.
  This was set as a goal because it enables the computation of fitness values of genetic individuals for arbitrary problems. 
  Because this requirement is a necessity for the chosen genetic algorithm solver application, is has a high priority.
 
-\subsubsection{FR2}
+\subsubsection{FR3}
 
-FR2 in table \vref{table:functional-requirements} states that the system should be able to solve hard problems using genetic algorithms.
+FR3 in table \vref{table:functional-requirements} states that the system should be able to solve hard problems using genetic algorithms.
 This is the application that was chosen for the computer, and is its \textit{raison d'être}.
 Therefore, this requirement also has a high priority.
 
-\subsubsection{FR3}
+\subsubsection{FR4}
 
-FR3 in table \vref{table:functional-requirements} states that the system should be able to receive instructions and data from an external entity.
+FR4 in table \vref{table:functional-requirements} states that the system should be able to receive instructions and data from an external entity.
 Without this requirement fulfilled, it is impossible to program, configure or run the program with other instructions or data than what comes 'pre-loaded', so to speak.
 That would make the system pretty useless.
 For this reason, this requirement also has a high priority.
 
-\subsubsection{FR4}
+\subsubsection{FR5}
 
-FR4 in table \vref{table:functional-requirements} states that the system should be able to send data to an external entity.
+FR5 in table \vref{table:functional-requirements} states that the system should be able to send data to an external entity.
 This is needed for the computer to return its computed results to a user.
 Again, without this requirement, the computer would be quite useless.
 Of course, that means that this requirement also must have a high priority.
 
-\subsubsection{FR5}
+\subsubsection{FR6}
 
-FR5 in table \vref{table:functional-requirements} states that the product should have maximized performance rather than energy-efficiency.
+FR6 in table \vref{table:functional-requirements} states that the product should have maximized performance rather than energy-efficiency.
 This requirement is set from the assignment text.
 Although this is an important requirement, not meeting it does not imply that the solution computer is completely useless.
 A less-than-optimally performant computer will still be able to solve hard problems, even if it will do it slower.
 Because of this, even though this requirement is specifically mentioned in the assignment text, this requirement is assigned a medium priority.
+
+\subsubsection{FR7}
+
+FR7 in table \vref{table:functional-requirements} states that the instruction set should contain custom made instructions for faster execution of genetic algorithms.
+This requirement is set because it helps setting the focus on high performance.
+Another reason for this requirement is that it makes high performance genetic algorithm programming easier for developers using the computer.
+This greatly increases the usability of the computer.
 
 \subsection{Non-functional Requirements}
 
@@ -80,15 +94,13 @@ Because of this, even though this requirement is specifically mentioned in the a
 \hline
 Requirement & Description & Priority \\
 \hline
-NFR1 & The system should be a MIMD computer. & High \\
-NFR2 & The instruction set should contain custom made instructions for faster execution of genetic algorithms. & Medium \\
-NFR3 & The system should have a 3D-printed case. & Low \\
-NFR4 & The system should be built so that the soldering process does not take longer then 8 hours when done by hand. & High \\
-NFR5 & The system should use a Spartan 6 FPGA. & High\\
-NFR6 & The system should use an "Energy Micro" microcontroller. & High \\
-NFR7 & The system should not cost more than 10000 NOK. & High \\
-NFR8 & A working demo program running a genetic algorithm. & Medium \\
-NFR9 & A report detailing the product and process. & High \\
+NFR1 & The system should be built so that the soldering process does not take longer then 8 hours when done by hand. & High \\
+NFR2 & The system should use a Spartan 6 FPGA. & High\\
+NFR3 & The system should use an "Energy Micro" microcontroller. & High \\
+NFR4 & The system should not cost more than 10000 NOK. & High \\
+NFR5 & A report detailing the product and process. & High \\
+NFR6 & A working demo program running a genetic algorithm. & Medium \\
+NFR7 & The system should have a 3D-printed case. & Low \\
 \hline
 \end{tabular}
 \caption{Non-functional Requirements}
@@ -98,50 +110,39 @@ NFR9 & A report detailing the product and process. & High \\
 
 \subsubsection{NFR1}
 
-NFR1 in table \vref{table:non-functional-requirements} states that the system should be a MIMD computer.
-This requirement is set as the main requirement in the assigment text, and is therefore a high prority requirement.
+NFR1 in table \vref{table:non-functional-requirements} states that The system should be built so that soldering does not take longer then 8 hours when done by hand. This would also include simple BGN baking.
+This requirement is chosen because hand-soldering and simple bgn baking are the fabrication techniques readily available to the group without incurring probitively large costs, and is therefore a high priority requirement.
 
 \subsubsection{NFR2}
 
-NFR2 in table \vref{table:non-functional-requirements} states that the instruction set should contain custom made instructions for faster execution of genetic algorithms.
-This requirement is set because it helps setting the focus on high performance.
-Another reason for this requirement is that it makes high performance genetic algorithm programming easier for developers using the computer.
-This greatly increases the usability of the computer.
+NFR2 in table \vref{table:non-functional-requirements} states that the system should use a Spartan 6 FPGA.
+Using a FPGA is a requirement specified in the assignment text, and the Spartan 6 was chosen. This is a high priority requirement. 
 
 \subsubsection{NFR3}
 
-NFR3 in table \vref{table:non-functional-requirements} states that the system should have a 3D-printed case.
-This requirement has a low priority, as, while it looks good, provides protective cover for the computer, and increases usability, it is not crucial for making the computer work.
+NFR3 in table \vref{table:non-functional-requirements} states that the system should use an "Energy Micro" microcontroller.
+The microcontroller is needed to be able to communicate with the FPGA properly and is a high priority requirement.
 
 \subsubsection{NFR4}
 
-NFR4 in table \vref{table:non-functional-requirements} states that The system should be built so that soldering does not take longer then 8 hours when done by hand. This would also include simple BGN baking.
-This requirement is chosen because hand-soldering and simple bgn baking are the fabrication techniques readily available to the group without incurring probitively large costs, and is therefore a high priority requirement.
+NFR4 in table \vref{table:non-functional-requirements} states that the system should not cost more than 10000 NOK.
+This is a requirement specified in the assignment text, and is therefore a high priority requirement.
 
 \subsubsection{NFR5}
 
-NFR5 in table \vref{table:non-functional-requirements} states that the system should use a Spartan 6 FPGA.
-Using a FPGA is a requirement specified in the assignment text, and the Spartan 6 was chosen. This is a high priority requirement. 
+NFR5 in table \vref{table:non-functional-requirements} states that there should be a report detailing the product and process.
+This requirement is perhaps the most important requirement, as all the other work would have been for nothing it were not documented for others to see.
+This makes this requirement a high priority requirement.
 
 \subsubsection{NFR6}
 
-NFR6 in table \vref{table:non-functional-requirements} states that the system should use an "Energy Micro" microcontroller.
-The microcontroller is needed to be able to communicate with the FPGA properly and is a high priority requirement.
-
-\subsubsection{NFR7}
-
-NFR7 in table \vref{table:non-functional-requirements} states that the system should not cost more than 10000 NOK.
-This is a requirement specified in the assignment text, and is therefore a high priority requirement.
-
-\subsubsection{NFR8}
-
-NFR8 in table \vref{table:non-functional-requirements} states that there should be a working demo program running a genetic algorithm on the system computer.
+NFR6 in table \vref{table:non-functional-requirements} states that there should be a working demo program running a genetic algorithm on the system computer.
 Although this requirement is also specified in the assignment text, it is set for demonstration purposes.
 If a working demo program is not produced, it does not imply that the solution computer is defective.
 Because of this, this requirement has a medium priority.
 
-\subsubsection{NFR9}
+\subsubsection{NFR7}
 
-NFR9 in table \vref{table:non-functional-requirements} states that there should be a report detailing the product and process.
-This requirement is perhaps the most important requirement, as all the other work would have been for nothing it were not documented for others to see.
-This makes this requirement a high priority requirement.
+NFR7 in table \vref{table:non-functional-requirements} states that the system should have a 3D-printed case.
+This requirement has a low priority, as, while it looks good, provides protective cover for the computer, and increases usability, it is not crucial for making the computer work.
+
