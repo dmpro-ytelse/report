@@ -1,7 +1,22 @@
 This section describes the requirements and goals for this assignment, and explains the rationale behind them.
+The current project goals are listed in table \vref{table:goals}.
 The functional requirements for the project are listed in table \vref{table:functional-requirements}.
 The non-functional requirements for the project are listed in table \vref{table:non-functional-requirements}.
-
+\subsection{Goals}
+\begin{table}[H]
+ \begin{center}
+ \begin{tabular}{| l | p{7cm} | l |}
+ \hline
+ Goal& Description\\
+ \hline
+ G1 & Having a fully functional generic solver of optimzation and approximation problems implemented on a MIMD processor architecture  \\
+ G2 & Using a MIMD architecture should increase overall efficiency of the implementation by at least 50\\% compared to using only one processor core
+ \hline
+ \end{tabular}
+ \caption{Goals}
+ \label{table:goals}
+ \end{center}
+ \end{table}
  \subsection{Functional Requirements}
 
  \begin{table}[H]
@@ -26,7 +41,7 @@ The non-functional requirements for the project are listed in table \vref{table:
 
  FR1 in table \vref{table:functional-requirements} states that the system should be a general computer.
  That means that the computer should be Turing Complete, which implies that it can solve any computable problem.
- This was set as a goal because it enables the computation of fitness values of genetic individuals for arbitrary problems.
+ This was set as a goal because it enables the computation of fitness values of genetic individuals for arbitrary problems. 
  Because this requirement is a necessity for the chosen genetic algorithm solver application, is has a high priority.
 
 \subsubsection{FR2}
@@ -68,9 +83,9 @@ Requirement & Description & Priority \\
 NFR1 & The system should be a MIMD computer. & High \\
 NFR2 & The instruction set should contain custom made instructions for faster execution of genetic algorithms. & Medium \\
 NFR3 & The system should have a 3D-printed case. & Low \\
-NFR4 & The system should be possible to solder by hand, or use approved/known bgn packages\todo{which?}. & High \\
+NFR4 & The system should be built so that the soldering process does not take longer then 8 hours when done by hand. & High \\
 NFR5 & The system should use a Spartan 6 FPGA. & High\\
-NFR6 & The system should use an Energy Micro microcontroller. & High \\
+NFR6 & The system should use an "Energy Micro" microcontroller. & High \\
 NFR7 & The system should not cost more than 10000 NOK. & High \\
 NFR8 & A working demo program running a genetic algorithm. & Medium \\
 NFR9 & A report detailing the product and process. & High \\
@@ -100,18 +115,18 @@ This requirement has a low priority, as, while it looks good, provides protectiv
 
 \subsubsection{NFR4}
 
-NFR4 in table \vref{table:non-functional-requirements} states that the system should be possible to solder by hand, or use approved/known bgn packages.
+NFR4 in table \vref{table:non-functional-requirements} states that The system should be built so that soldering does not take longer then 8 hours when done by hand. This would also include simple BGN baking.
 This requirement is chosen because hand-soldering and simple bgn baking are the fabrication techniques readily available to the group without incurring probitively large costs, and is therefore a high priority requirement.
 
 \subsubsection{NFR5}
 
 NFR5 in table \vref{table:non-functional-requirements} states that the system should use a Spartan 6 FPGA.
-This is a requirement specified in the assignment text, and is therefore a high priority requirement.
+Using a FPGA is a requirement specified in the assignment text, and the Spartan 6 was chosen. This is a high priority requirement. 
 
 \subsubsection{NFR6}
 
-NFR6 in table \vref{table:non-functional-requirements} states that the system should use an Energy Micro microcontroller.
-This is a requirement specified in the assignment text, and is therefore a high priority requirement.
+NFR6 in table \vref{table:non-functional-requirements} states that the system should use an "Energy Micro" microcontroller.
+The microcontroller is needed to be able to communicate with the FPGA properly and is a high priority requirement.
 
 \subsubsection{NFR7}
 
