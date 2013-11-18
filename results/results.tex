@@ -22,7 +22,6 @@ results? what results?
 
 \subsection{Genetic Algorithm: Color Search}
 
-\todo{Explain the color search program}
 The color search program is a very simple program demonstrating a basic usage of the genetics accelerator.
 The program tries to find a specific color in the search-space of all 24-bit colors.
 An individual represents a specific 24-bit color in RGB format.
@@ -37,13 +36,16 @@ The individual is coded to a 64-bit data word like in figure \vref{figure:color-
             \bitbox{8}{green}
             \bitbox{8}{red}
         \end{bytefield}
-        \caption{The binary coding of an individual}
+        \caption{The binary coding of an individual for the color search problem}
         \label{figure:color-search-bytefield}
     \end{center}
 \end{figure}
 
-
-\todo{vref figure \vref{figure:color-search}}
+Figure \vref{figure:color-search} shows the evolution of the approximation suggested as an answer by the genetic algorithm.
+In this problem instance the target color was magic pink, i.e. the color with color code $ rgb(255, 0, 255) $.
+The program run illustrated in figure \vref{figure:color-search} ran on 7 seven cores, and the measurements are from regularly polling a single core for its current best solution.
+Figure \vref{figure:color-search} clearly illustrates a typical trait of genetic algorithm approximations: they are quite good at finding decent approximations, but iterating to improve accuracy of the result is a game of diminishing returns.
+The algorithm quickly finds a decent approximation of the target color, but finding the exact value down to the last bit still takes time.
 
 \begin{figure}[H]
     \begin{center}
