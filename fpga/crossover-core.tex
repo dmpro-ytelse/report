@@ -35,14 +35,12 @@ Figure \ref{fig_crossover_split_mask} shows an example where bit number 6 is sel
 Bits 6-0 in the output consist of 0's, and the rest 1's.
 This output is called \emph{mask1}. Notice that \emph{mask1} has had an extra shift to the left, in order to perform the crossover from the correct selected bit. 
 The ShifterVariable performs shifting with an input of 1's, and in this example bit number 6 would be the last bit with value 1, but it needs to be the first bit with value 0. Therefore, an extra shift is required.
-\todo{ Hmm....mulig det trengs å beskrives om ShifterVariables snart, så at denne beskrivelsen kan forbedres. Btw: THE CAKE IS A LIE!!}
 \emph{Mask2} is set as a negation of \emph{mask1}, so the bits in \emph{mask2} would be 1's where they would be 0's in \emph{mask1}, and vice versa.
 Only bits 6-0 would be 1's in \emph{mask2} in the figure.
 The output on the children are set by combininging the parents and the masks:
 \linebreak
 \linebreak child1 $\leftarrow$ (parent1 and mask1) or (parent2 and mask2);
 \linebreak child2 $\leftarrow$ (parent1 and mask2) or (parent2 and mask1);
-\linebreak \todo{ ShifterVariable needs to be described.}
 
 \paragraph{\textit{Double-split Fucntion}}
 \begin{figure}[H]
@@ -69,8 +67,6 @@ Figure \ref{fig_crossover_doublesplit_mask} provides such an example, where bits
 The bits 14-6 in \emph{mask1} would be 1's and the rest 0's by using XOR-function with the outputs from the ShifterVariables, and vice versa in \emph{mask2} by setting it as the negation of \emph{mask1}.
 The final outputs are set the same way as in the split function.
 
-\todo{ ShifterVariable needs to be described.}
-
 \paragraph{\textit{XOR Function}}
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{fpga/fig/crossover_xor.png}
@@ -84,7 +80,6 @@ This function is called XOR because of use of XOR-gates in earlier version of th
 And which parent it is depends on the value of bit number \emph{i} in random\_number.
 
 \paragraph{\textit{Crossover Core Toplevel}}
-\todo{ Bilde hadde vært fint, men teksten er klar nok til at det trolig går an å droppe hvis det ikke blir tid. Foreslår å nedprioritere}
 The crossover core is implemented on the genetics accelerator as a toplevel containing 3 subcores, one for each function, as well as a fourth path with no crossover.
 In addition to the two parent inputs and 64-bit input random\_number, the toplevel has a control\_number input used for determining which crossover function is to be used: Split, doublesplit, xor, "party mode" or no crossover at all.
 Party mode is choosing crossover function at random, based on the 2 LS bits in the random\_number.
