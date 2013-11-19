@@ -4,14 +4,21 @@
 \label{figure:fpga-architecture}
 \end{figure}
 
+\todo{Modify figure \vref{figure:fpga-architecture} so that it is easy to see that the number of fitness cores is configurable.}
+
 The processor architecture designed for the Barricelli computer is a very clean design, and the key to its high performance lies in its simplicity.
 The architecture contains a number of general cores, which in this context are named fitness cores.
 The fitness cores are general purpose cores in the sense that they are programmable and turing complete, but for genetic algorithm applications the cores are intended to calculate fitness scores of individuals.
+
+The number of fitness cores is configurable.
+The reference implementation of the Barricelli computer is configured to have 7 fitness cores.
 
 Common genetic algorithms operations are performed by a separate hardware accelerator pipeline.
 This accelerator consists of several operation-specific special cores for selection, crossover and mutation.
 The fitness cores and the genetic pipeline are all connected to a single data bus.
 To avoid any memory synchronization issues the data bus is controlled by a central arbitration unit.
+
+The processor architecture is illustrated in figure \vref{figure:fpga-architecture}.
 
 
 \subsection{Instruction Memory}
