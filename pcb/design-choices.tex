@@ -1,10 +1,13 @@
-\section {Design choices}
+\section{Design choices}
 This section highlights and explains the choices made relating to the hardware of the final PCB.
 
-\subsection{FPGA} \label{pcb:design-choices:ss:fpga}
-\todo{which one did we pick?}
+\subsection{Fast Programmable Gate Array (FPGA)} \label{pcb:design-choices:ss:fpga}
+Per the project's second non-functional requirement\vref{table:non-functional-requirements}, the system's FPGA was required to be one produced by Xilinx.
+The Spartan-6 family was chosen because development boards with the Spartan-6 LX16 FPGA was available at the lab.
+Higher-numbered Spartan-6 FPGAs have more resources but fewer I/O ports and a higher price tag than lower-numbered ones.
 
-\todo{why did we pick this one?}
+A Xilinx Spartan-6 LX45 (specifically, the XC6SLX45-2CSG324I) was chosen because of it having a sufficient number of resources and enough I/O ports while sporting a reasonable price tag.
+
 
 \subsection{SCU / Microcontroller} \label{pcb:design-choices:ss:scu}
 \todo{which one did we pick?}
