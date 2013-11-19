@@ -16,11 +16,11 @@ some write ideas:
 Here we will talk about how the design was transfered to the PCB, what problems were discovered in this process and how they were solved.
 
 In the planning phase, the group estimated that the design of the PCB and the routing process using the autorouter, would take about 3-4 days. However in reality it took much longer then estimated. The reason for this was that several
-problems were encountered during the designphase and routing of the PCB. After we used the autorouter once, we found out that the autorouter violated several design constraints for the board. It was then tried to reroute the board several times
-with different options in an attempt to fix the problem. Since the auto routing process took about six hours on the lab computers, the group decided to use some powerful private computers to do the routing. This reduced the time it takes for autorouting from about 6 hours to 1.
+problems were encountered during the design phase and routing of the PCB. After the first autorouting run, it was discovered that the autorouter violated several design constraints for the board. It was then tried to reroute the board several times
+with different options in an attempt to fix the problem. Since the auto routing process took about six hours on the lab computers, the group decided to use more powerful private computers to do the routing. This reduced the time it takes for autorouting from about 6 hours to 1.
 
-After some attempts on the autorouter, the group decided to manually route the last signals in addition to fix the constraint violation. This was a time consuming process, but during this, several serious design flaws were uncovered which would have costed
-more time due to the need to produce new boards. Among the errors that were discovered, was that the footprint for the microcontroller was wrong. Several of the capacitators were also unconnected, or just connected wrong. This means that even though the manual routing of the PCB took longer,
+After some attempts on the autorouter, the group decided to manually route the last signals in addition to fix the constraint violations. This was a time consuming process, but during this, several serious design flaws were uncovered which would have costed
+more time due to the need to produce new boards. Among the errors that were discovered, was that the footprint for the microcontroller was wrong. Several of the capacitators were also unconnected, or just connected in a wrong way. This means that even though the manual routing of the PCB took longer,
 the discovery of the designflaws probably saved us some time in total.
 \subsection{Soldering} \label{pcb:process:ss:soldering}
 
