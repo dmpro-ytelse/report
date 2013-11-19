@@ -1,7 +1,7 @@
 The fitness core in the processor architecture is the general processing core.
 For genetic algorithms, the fitness core is tasked with calculating fitness scores for individuals, hence the name.
 
-The design of the fitness core is highly influenced by the classic pipelined \gls{MIPS} core design\cn.
+The design of the fitness core is highly influenced by the classic pipelined \gls{MIPS} core design ~\cite[p.~362]{compOrgDes}.
 The core is designed as a five stage pipeline.
 The contents of the different stages in the pipeline, however, differs from the original \gls{MIPS} architecture, as the CPU architecture has to accomodate for the \gls{ISA} design which combines ideas from multiple exisiting architectures.
 An example of an \gls{ISA} feature which differs from \gls{MIPS} is the embedded branch-less conditionals\footnote{a feature which is shamelessly ripped whole-sale from ARM}.
