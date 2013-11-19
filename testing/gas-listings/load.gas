@@ -1,0 +1,5 @@
+/* load test */
+
+ld r1, r0, 0
+
+/* r1 shoudld contain the contents of memory address 0 */

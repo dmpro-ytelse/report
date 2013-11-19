@@ -1,0 +1,7 @@
+/* store gene test */
+
+addi r1, r0, 1
+addi r2, r0, 2
+stg r2, r1
+
+/* an individual ('1') with fitness 2 should be sent to the rated pool */

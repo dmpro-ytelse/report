@@ -1,0 +1,5 @@
+/* load gene test */
+
+stg r1
+
+/* r1 should contain an unrated individual from the unrated pool */
