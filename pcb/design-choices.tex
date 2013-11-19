@@ -1,4 +1,5 @@
 \section{Design choices} 
+\label{pcb:design-choices}
 This section highlights and explains the choices made relating to the hardware of the final PCB.
 
 \subsection{Field Programmable Gate Array (FPGA)} \label{pcb:design-choices:ss:fpga}
@@ -25,7 +26,7 @@ They each fill an important role, and work on essential tasks.
 The system needs them both to work together, and to accomplish this a communication channel is needed.
 On Barricelli this was a 41 bit bus.
 This bus has 16 bits of data, 19 bits of addressing, a small 2 bit bus to control the state of the processor and 3 control signals.
-The statet bus determine what the FPGA should do with the data, while the control signals tells the targeted unit what to do with the data. 
+The stated bus determine what the FPGA should do with the data, while the control signals tells the targeted unit what to do with the data. 
 
 
 \subsection{Input/Output devices} \label{pcb:design-choices:ss:IO_devices}
@@ -62,7 +63,7 @@ The circuit design was copied from the microcontroller's developer's application
 % cite page 5 ?
 
 \subsubsection{Ethernet}
-Ethernet support was not added to the system in favor of USB the chosen microcontroller did nothave built-in support for ethernet.
+Ethernet support was not added to the system in favor of USB the chosen microcontroller did not have built-in support for Ethernet.
 
 
 \subsubsection{Serial Port/RS-232} 
@@ -71,7 +72,11 @@ Even though serial communication was not required due to presence of USB interfa
 The serial port serves as a backup for the USB as the chosen microcontroller supports communication over RS-232.
 
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
-The FPGA group wanted memory that would provide fast accesses in combination with a large input/output capasity in order maximize speed and efficiency.
+The FPGA group wanted memory that would provide fast accesses in combination with a large input/output capacity in order maximize speed and efficiency.
 SRAM (Static random-access memory) chips were selected selected because of its fast access times.
 Reasonably priced 8 Mbit (512K x 16 bit) modules with $10$ns write and read cycle times were found to be suitable and selected. 
 
+\subsection{Crystal}
+A $32.768$KHz crystal was selected to drive the microcontroller.
+However as the project progressed and the microcontroller's application notes were read more closely it was discovered that it did not need an external crystal to drive it as it had an internal clock.
+In addition the $32.768$KHz crystal was connected to the wrong ports. 

@@ -1,15 +1,15 @@
 When designing a computer with a custom architecture from scratch, it is important to continually test and evaluate the correctness of the solution at all possible stages, to ensure that final product is a success.
-This section documents and explaines the rationale behind the different types of tests that have been performed.
+This section documents and explains the rationale behind the different types of tests that have been performed.
 
 \section{Testing the Processor}
 
-Baricelli's processor has been tested at four different levels: \gls{VHDL}-based unit test simulations of the different subcomponents,  \gls{VHDL}-based integration test simulations of each processing unit, \gls{VHDL}-based system test simulations of the entire system interfacing against a mock SCU and mock memory, and finally physical integration tests of the processor programmed onto the FPGA of the Barricelli.
+Barricelli's processor has been tested at four different levels: \gls{VHDL}-based unit test simulations of the different subcomponents,  \gls{VHDL}-based integration test simulations of each processing unit, \gls{VHDL}-based system test simulations of the entire system interfacing against a mock SCU and mock memory, and finally physical integration tests of the processor programmed onto the FPGA of the Barricelli.
 
 \todo{what about timing simulations?}
 
 \subsection{\gls{VHDL}-based Subcomponent Unit Test Simulations}
 
-Unit testing VHDL entites is extremely important in a large and complex design like the Barricelli.
+Unit testing VHDL entities is extremely important in a large and complex design like the Barricelli.
 For this project, almost every component, perhaps except the most trivial entities, is tested in an automated or semi-automated VHDL test bench.
 A tool was developed to ease the automation of VHDL test running and validation, modeled after the leading test runners in the software industry, such as JUnit\cn and Karma\cn.
 This tool enabled tests to be written using easy-to-use self-evaluating tests that compare signals at specific times against expected values.
@@ -23,7 +23,7 @@ Screenshots of simulations of these tests can be found in Appendix \ref{appendix
 \subsubsection{Fitness Core Components}
 \todo{ Insert text and tables for components used in Fitness Core}
 
-\subsubsection{Genetic Pipepline Components}
+\subsubsection{Genetic Pipeline Components}
 \todo{ Insert text and tables for components used in Genetics Pipeline}
 \paragraph{Selection Core}
 \paragraph{Genetic Pipeline Controller?}
@@ -43,7 +43,7 @@ Screenshots of simulations of these tests can be found in Appendix \ref{appendix
 \subsection{\gls{VHDL}-based Processing Unit Integration Test Simulations}
 
 Each processing unit, which each consists of several interconnected subcomponents, has been simulated for integration testing.
-The goal of these tests are to verify that the different subcomponents interface correctly with eachother, and that the behaviour of the supercomponent is as expected.
+The goal of these tests are to verify that the different subcomponents interface correctly with each other, and that the behaviour of the supercomponent is as expected.
 
 \subsubsection{Testing the Fitness Core}
 
@@ -56,7 +56,7 @@ The goal of these tests are to verify that the different subcomponents interface
 \subsection{\gls{VHDL}-based System test Simulations}
 \label{section:testing:fpga:system-tests}
 
-The toplevel simulation test bench of the barricelli computer, which simulates the entire FPGA as a black box interfacing against the external components, supports pre-loading entire programs into a mocked instruction memory component.
+The toplevel simulation test bench of the Barricelli computer, which simulates the entire FPGA as a black box interfacing against the external components, supports pre-loading entire programs into a mocked instruction memory component.
 The \Gls{galapagos assembler} supports outputting assembled programs compiled to one of these mock memory components, meaning that testing new programs in a simulated environment is an easy and fun process.
 
 \todo{the title of the test should be above the table in which its results are displayed, not just as the caption (rendered below) of the table}
@@ -99,19 +99,19 @@ Finally, on the physical board, the processor was tested by running the same pro
 These programs were programmed into the instruction memory of the processor by the SCU.
 
 \section{Testing the PCB}
-During and after the components were soldered on the PCB board, the board were tested to ensure that the powergrid were working as it was supposed to.
-For the first test, it was checked that all the various leds on the board was working in order to verify that the board actually was powered right, and that there was
-no short circuts on the power grid itself.
+During and after the components were soldered on the PCB board, the board were tested to ensure that the power grid were working as it was supposed to.
+For the first test, it was checked that all the various LEDs on the board was working in order to verify that the board actually was powered right, and that there was
+no short circuits on the power grid itself.
 
-Some of the earliest test were also to check that the FPGA actually was working properly, and it was done by making a simple FPGA echo program to test the various pins on the fpga.
-The pins on the fpga were tested by connecting a led to the various FPGA-headers. If the fpga worked correctly, the led will activate, indicating the the pins actually are operating right.
+Some of the earliest test were also to check that the FPGA actually was working properly, and it was done by making a simple FPGA echo program to test the various pins on the FPGA.
+The pins on the FPGA were tested by connecting a led to the various FPGA-headers. If the FPGA worked correctly, the led will activate, indicating the the pins actually are operating right.
 When this test was conducted on the first board that were soldered, it came out that the FPGA was not "baked on" right, and that we had to start solder a new board. 
 
 \subsection{testing the SD card}
-After the completion of the solderingprocess for the PCB a test were also conducted in order to ensure that the 
+After the completion of the soldering process for the PCB a test were also conducted in order to ensure that the 
 SD card were connected right, and outputting the right signals. 
---picture of fpga headers
-\todo{the thing where we made a simple fpga echo program for the pins, and tested the lines from the fpga to the headers using an led. for results: we discovered a bad bake this way}
+--picture of FPGA headers
+\todo{the thing where we made a simple FPGA echo program for the pins, and tested the lines from the FPGA to the headers using an led. for results: we discovered a bad bake this way}
 
 \section{Testing IO}
 \input{io/testing}
@@ -131,7 +131,7 @@ The pseudo-random number generator designed for the Barricelli has been tested e
 DieHarder is a test suite which measures the ``goodness'' of a pseudo-random number generator based a number of criteria.
 \todo{ what are these criteria?}
 
-The algorithm was implemented in python and tested agains the DieHarder integration suite\cn.
+The algorithm was implemented in python and tested against the DieHarder integration suite\cn.
 
 The shift-based algorithm used in the pseudo-random number generator scores quite poorly in the DieHarder tests when every single bit of the output is used.
 However, by only using every 7th number\cn, the algorithm ranks quite well.
@@ -143,4 +143,4 @@ Based on the results from these experiments, it is safe to conclude that, while 
 
 
 
-\todo{The contiunous ga test}
+\todo{The continuous ga test}

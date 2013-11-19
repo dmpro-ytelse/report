@@ -6,22 +6,22 @@ Once a type of component has been decided upon for a project a specific instance
 In order for said component to fit onto the PCB and properly function, its footprint, must be placed somewhere on the PCB.
 The footprint is a kind of blueprint containing a component's outline and pads.
 
-Obtaining a footprint for a component typically involves creating one manually or using a wizard based on the information contained in the component's datasheet.
+Obtaining a footprint for a component typically involves creating one manually or using a wizard based on the information contained in the component's data sheet.
 Some manufacturers make footprints for their components available on their websites, however they might not be available in a format that is understandable by whatever PCB design suite that is employed in the current project.
 Altium Designer (version 13.3) feature a browsable database of footprints for various components, all of which can be used immediately in any Altium project.
 
 If a component's footprint is not readily available it has to be created manually.
-The most important aspect of this process is to obtain the component's technical datasheet and examine it for a description of the component's package and dimensions.
+The most important aspect of this process is to obtain the component's technical data sheet and examine it for a description of the component's package and dimensions.
 This is sometimes labeled as an outline drawing, suggested land pattern (suggested pad size) or package outline.
-It is important to notice what system the supplied measurements are in, as mixing for example imperial and metric units in a project could lead to unforseen incompatabilities.
+It is important to notice what system the supplied measurements are in, as mixing for example imperial and metric units in a project could lead to unforeseen incompatibilities.
 Once one gets a hang of Altium PCB editor it takes surprisingly little time to create a footprint.
 
-For components with standarized packages, Altium has an IPC compliant footprint wizard that generates footprints for a component given its package type and some package specific measurements available in the component's datasheet.
+For components with standardized packages, Altium has an IPC compliant footprint wizard that generates footprints for a component given its package type and some package specific measurements available in the component's data sheet.
 
 \begin{figure}
 \centering
 \includegraphics[width=10cm,keepaspectratio]{pcb/pol_cap_size_footprint_vs_specs.png}
-\caption{Polarized capasitor footprint dimentions}
+\caption{Polarized capacitor footprint dimensions}
 \label{figure:pol-cap-size-yo}
 \end{figure}
 
@@ -45,22 +45,19 @@ To avoid this complication the pads on footprint should be designed to be larger
  \hline
  Component & Footprint source\\
  \hline
- Headers & Available in Altiums Miscellaneous Connectors \\
+ Headers & Available in Altium's Miscellaneous Connectors \\
  FPGA & Available at manufacturer's website \\
- Serial port connector & Available in Altiums Miscellaneous Connectors \\
+ Serial port connector & Available in Altium's Miscellaneous Connectors \\
  Serial port driver & Available in Altium Content Vault \\
  Microcontroller & Available in Altium Content Vault \\
- Power connector &  Available in Altiums Miscellaneous Connectors\\
+ Power connector &  Available in Altium's Miscellaneous Connectors\\
  Memory chip & Created with Altium \\
- Leds &  Available at manufacturer's website\\
+ LEDs &  Available at manufacturer's website\\
  Crystal &  Created with Altium \\
- micro USB connector &  \\
+ micro USB connector & Available at manufacturer's website \\
  SD card receptacle & Created with Altium \\
  Switches & Created with Altium \\
- Transient voltage suppressor &  \\
- ESD suppressors & \\
- Noise suppressor &  \\
- Ferrite Chip Beads &  \\
+ Transient voltage suppressor & Available at manufacturer's website \\
  \hline
  \end{tabular}
  \caption{Footprints}
@@ -68,6 +65,5 @@ To avoid this complication the pads on footprint should be designed to be larger
  \end{center}
  \end{table}
 
-\todo{finish the table  Transient voltage suppressor  ESD suppressors Noise suppressor Ferrite Chip Beads}
 
 The overview over components that we used and the way footprint for each of them was acquired is presented in a table. See \vref{table:footprints-available-and-not}

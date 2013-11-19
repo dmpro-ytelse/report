@@ -7,7 +7,7 @@ The mutation core takes in a forwarded child from the crossover core as input an
 \label{Fig_Mutation}
 \end{figure}
 
-In addition to the the 64-bit child, the mutation core also takes in a random\_number and a chance\_input as inputs. 
+In addition to the the 64-bit child, the mutation core also takes in a random\_number and a chance\_input as inputs. The random\_number is used for performing mutation, like allowing mutations, setting how many mutations will occur, and where, while the chance\_input is used to configure the chance of it to happen, or how often mutations happen on an avarage level. 
 Default size P for chance\_input is 6, and P + 26 for the random\_number is 32. 
 As it can be seen in the abstract example in figure \ref{Fig_Mutation}, all bits that are not mutated are represented by an A, and mutated bits are represented with M. 
 The values in each A or M can be 0 or 1, independent of each other. 
@@ -37,7 +37,7 @@ Note that if more than one of these numbers point to the same bit to be mutated,
 For instance, if both numbers 1 and 2 (bits 11-6 and 5-0) have the value 000110, and therefore point at bit number 6, the same mutation will still happen as if only one of these numbers were 000110. 
 If the input bit was 1, the mutated output will be 0, and vice versa.
 In the example provided in figure \ref{Fig_Mutation}, the 6 first bits of the random\_number are less than the chance\_input, therefore a mutation happens. Bits 23-0 have the values 30, 14, 23 and 5. 
-Because the value of bits 25-24 is 10 (mutation\_amount has value 2), there will be 3 mutations, and the fourth does not occur (though the figure shows where it would have occured if allowed).
+Because the value of bits 25-24 is 10 (mutation\_amount has value 2), there will be 3 mutations, and the fourth does not occur (though the figure shows where it would have occurred if allowed).
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{fpga/fig/mutation_mask.png}
@@ -45,10 +45,10 @@ Because the value of bits 25-24 is 10 (mutation\_amount has value 2), there will
 \label{fig_mutation_mask}
 \end{figure}
 
-Originally, the mutation core was implemented by behavioural descprition, but since this caused the syntheziser to generate latches, ShifterVariables have been implemented instead.
+Originally, the mutation core was implemented by behavioural description, but since this caused the synthesizer to generate latches, ShifterVariables have been implemented instead.
 The mutation core is implemented by use of four ShifterVariables, one for each possible mutation, and set so that only one bit is 1 for the output. 
 A final mutation is set by combining the outputs from the ShifterVariables by using OR-function, and the mutation\_amount determines how many of these outputs are combined. Figure \ref{fig_mutation_mask} shows an example where bits 1, 4, 6 and 9 are set for mutation. 
-In this case the final output is set by combining the input and mutation with the XOR-fuction, so that for each bit \emph{i}, the bit is set to 1 if and only if bit \emph{i} is set in either the input or the mutation, but not both. This can be seen in figure \ref{fig_mutation_perform}.
+In this case the final output is set by combining the input and mutation with the XOR-function, so that for each bit \emph{i}, the bit is set to 1 if and only if bit \emph{i} is set in either the input or the mutation, but not both. This can be seen in figure \ref{fig_mutation_perform}.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{fpga/fig/mutation_perform.png}

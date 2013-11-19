@@ -2,19 +2,31 @@
   \begin{tabular}{r | p{8cm}}
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    What to test:  & \\
+    What to test:  & Test a spesfic genetic problem using the barricelli computer. 
+                     The problem in question aims to find a solution to the knapsack problem. 
+                     The problems involves finding the best combination of items to put into a
+                     knapsack with a weight constraint. The test start with a set of items with
+                     a given score and weight. 
+                      \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:  & \\
+    How to test:  & The program in listing \todo{Add listing} is loaded into a test bench. 
+                    The program consists of both genetic and fitness related instructions.
+                    The program is executed and verified in isim. The registers containing the
+                    best solutions are studied during the run. \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Pass criteria: &  \\
+    Pass criteria: &  It is observed that the best solution converges against a better solution
+                       regularly. E.g that it continuously improve for the better.  \\
     
      \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Results: &   \\
+    Results: &   It is observable that it improve after a number of microseconds. It is, however, 
+                 difficult to determine if this solution is good since the simulation 
+                 is limited to just a few microseconds. Note that the simulations
+                 create a lot of simulation related data for a small amount of simulation time.  \\
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   
