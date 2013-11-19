@@ -44,13 +44,32 @@ Because of this, data needs to be shuffled across the bus 16-bits at a time, whi
 For the external memory to be operated correctly by the memory controller, the proper control signals need to be set at the correct times.
 The timing diagrams for the memory chip can be seen in figure (?) \todo{Add timing diagram for memory chip}.
 
-\begin{figure}
-
+\begin{figure}[H]
   \centering
-  % Trim er [left bottom right top]
-  \includegraphics[width=\textwidth]{fpga/fig/memory_ctrl_state_machine.png}
-  \caption{Data memory controller state machine}
+  \includegraphics[width=\textwidth]{fpga/fig/timing/data_mem_read.pdf}
+  \caption{Data memory read cycle}
+  \label{fpga:fig:timing:dmem:read}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fpga/fig/timing/data_mem_write.pdf}
+  \caption{Data memory write cycle}
+  \label{fpga:fig:timing:dmem:write}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fpga/fig/memory_ctrl.png}
+  \caption{Data memory controller signals mapping}
   \label{fpga:fig:mem:data_memory_ctrl}
 \end{figure}
 
-\todo{write about and ref to \vref{fpga:fig:mem:data_memory_ctrl}}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fpga/fig/memory_ctrl_state_machine.png}
+  \caption{Data memory controller state machine}
+  \label{fpga:fig:mem:data_memory_ctrl_state_machine}
+\end{figure}
+
+\todo{write about and ref to above graphs}

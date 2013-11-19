@@ -12,25 +12,30 @@ This is done to achieve even better memory throughput.
 The increased throughput is achieved because the different computational units can work on the rated and unrated pools simultaneously.
 For instance while one fitness core is storing a ranked individual, another fitness core may be fetching a new individual for ranking. 
 
-Access to both the rated pool and the unrated pool is arbitraged by a controller referred to as the \gls{genetic controller}.
-As with the \gls{data controller} for data memory access, the \gls{genetic controller} is responsible for granting access to the rated and unrated pool.
-As shown in figure x\cn\todo{ref the architecture figure}, the genetics accelerator has its own data buses connected to the fitness cores separate from the data bus that is connected to the regular shared data memory.
+Access to the \gls{rated pool} and the \gls{unrated pool} is managed by control units referred to as the \gls{rated controller} and the \gls{unrated controller}.
+As with the \gls{data controller} for data memory access, these controllers are responsible for granting access to the rated and unrated pools.
+As shown in figure \vref{fpga:fig:genetic:genetic_pipeline}, the genetics accelerator has its own data buses connected to the fitness cores separate from the data bus that is connected to the regular shared data memory, to increase performance by reducing bus conflicts.
 
-The \gls{genetic controller} is based on the same principle as the \gls{data controller} described in section \vref{subsec:fpga-data-memory}.
-When performing genetic operations, the fitness cores need to request the data bus by using two request signals.
+The controllers are based on the same principles as the \gls{data controller} described in section \vref{subsec:fpga-data-memory}.
+When in need of performing genetic operations, the fitness cores need to request the data bus by setting some request signals.
 The combination of these signals refer to the operation the fitness core requests from the genetic controller. 
 
-The genetic controller continuously performs a simple round-robin request handling scheme in order to grant bus access to the requesting fitness cores, and to the genetic pipeline.
-The logic surrounding the different operations are implemented as an state machine to divide the operations in different clock cycles.
-This is the same method as is used in the data controller.
+The controllers continuously perform simple round-robin request handling schemes in order to grant bus access to the next requesting fitness cores, and to the genetic pipeline.
+The logic for the \gls{rated controller} is implemented as a state machine, while the \gls{unrated controller}'s simple structure allows it not have one at all.
 
-The state machine is shown in figure \ref{fpga:fig:mem:genetic_memory_ctrl}.
+As the timing diagrams in figure \vref{fpga:fig:timing:genetic:rated_genetic_proc} and \vref{fpga:fig:timing:unrated_genetic_proc} show, both controllers are highly optimized for speed. The single occation where the bus is unused is the cycle in which the \ref{genetic controller} tells the \gls{rated controller} that it no longer requires access.
 
-\begin{figure}
-
+\begin{figure}[H]
   \centering
-  % Trim er [left bottom right top]
-  \includegraphics[width=\textwidth]{fpga/fig/genetic_ctrl.png}
-  \caption{Genetic memory controller state machine}
-  \label{fpga:fig:mem:genetic_memory_ctrl}
+  \includegraphics[width=\textwidth]{fpga/fig/timing/rated_genetic_proc.pdf}
+  \caption{Fitness values and individuals being read by the selection cores followed by a fitness core writing a new fitness and individual.}
+  \label{fpga:fig:timing:genetic:rated_genetic_proc}
 \end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fpga/fig/timing/unrated_genetic_proc.pdf}
+  \caption{A two-induvidual selection core access }
+  \label{fpga:fig:timing:genetic:unrated_genetic_proc}
+\end{figure}
+
