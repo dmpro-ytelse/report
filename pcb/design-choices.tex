@@ -29,22 +29,14 @@ The device that is connected through the USB interface in order to communicate w
 
 The circuit design was copied from the microcontroller's developer's application notes~\cite[Figure 2.2]{an0046}.
 
-\todo{skrive at vi kopierte designet, eller include bildet vi referer til og si hvor vi fant det?}
+\todo{skal vi skrive at vi kopierte designet, eller include bildet vi referer til og si hvor vi fant det?}
 %insert picture from http://www.silabs.com/Support\%20Documents/TechnicalDocs/AN0046.pdf
 % cite page 5 ?
 
-\subsubsection{serial port} 
-\todo{the name rs232 is too ambigious. We need to explain what it is WAIT HAS THIS BEEN DONE ALREADY?}
-\todo{also known as UART}
-
-RS-232 is a communication standard/protocol which is implemented through a serial port interface.
-Even though serial communication was technically not required due to presence of USB interface, it was decided to implement RS-232 communication as well.
-This way, in case there were troubles with USB, it would still be possible to communicate over RS-232; and vice versa.
-The microcontroller supports communication over RS-232, so the this should be a natural second choice.
-We placed socket connector on the PCB as well as a RS-232 driver that transforms input and output signals to given voltage.
-UART: UART or Serial port was primarily selected as a backup choice for the USB interface. This was made only in case the implementation
-of the USB goes wrong either by a bad PCB design or if there by some reason is problems related to software that would cause the USB interface to not work as intended.
-
+\subsubsection{Serial Port/RS-232} 
+RS-323 (colloquially known as a ``serial port'') is a communication standard which is implemented through a serial port interface.
+Even though serial communication was not required due to presence of USB interface, the decision was made to implement it.
+The serial port serves as a backup for the USB as the chosen microcontroller supports communication over RS-232.
 
 \subsection{FPGA} \label{pcb:design-choices:ss:fpga}
 \todo{which one did we pick?}
