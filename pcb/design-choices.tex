@@ -1,7 +1,7 @@
 \section{Design choices} 
 This section highlights and explains the choices made relating to the hardware of the final PCB.
 
-\subsection{Fast Programmable Gate Array (FPGA)} \label{pcb:design-choices:ss:fpga}
+\subsection{Field Programmable Gate Array (FPGA)} \label{pcb:design-choices:ss:fpga}
 Per the project's second non-functional requirement\vref{table:non-functional-requirements}, the system's FPGA was required to be one produced by Xilinx.
 The Spartan-6 family was chosen because development boards with the Spartan-6 LX16 FPGA was available at the lab.
 Higher-numbered Spartan-6 FPGAs have more resources but fewer I/O ports and a higher price tag than lower-numbered ones.
@@ -22,14 +22,14 @@ The EFM32GG390F1024-BGA112 was chosen because it was deemed powerful enough to s
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
 The two major components on the system are the SCU and the FPGA.
 They each fill an important role, and work on essential tasks.
-The system need them both to work together, and to accomplish this we need a communication channel.
-On Barricelli this was accomplished with by a 41 bit bus.
-This bus have 16 bits of data, 19 bits of addressing, a small 2 bit bus to control the state of the processor and 3 control signals.
-The statet bus detemine what the FPGA should do with the data, while the control signals tells the targeted unit what to do with the data. 
+The system needs them both to work together, and to accomplish this a communication channel is needed.
+On Barricelli this was a 41 bit bus.
+This bus has 16 bits of data, 19 bits of addressing, a small 2 bit bus to control the state of the processor and 3 control signals.
+The statet bus determine what the FPGA should do with the data, while the control signals tells the targeted unit what to do with the data. 
 
 
 \subsection{Input/Output devices} \label{pcb:design-choices:ss:IO_devices}
-This section presents the Input/Output (I/O) devices that were selected and discuss alternatives that were not.
+This section presents the Input/Output (I/O) devices that were selected and discusses alternatives that were not.
 An I/O device or channel that can be used to communicate between a computer system and the outside world (or another computer system).
 
 \subsubsection{Secure Digital (SD)} 
@@ -66,12 +66,12 @@ Ethernet support was not added to the system in favor of USB the chosen microcon
 
 
 \subsubsection{Serial Port/RS-232} 
-RS-323 (colloquially known as a ``serial port'') is a communication standard which is implemented through a serial port interface.
+RS-232 (colloquially known as a ``serial port'') is a communication standard which is implemented through a serial port interface.
 Even though serial communication was not required due to presence of USB interface, the decision was made to implement it.
 The serial port serves as a backup for the USB as the chosen microcontroller supports communication over RS-232.
 
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
-The FPGA group wanted memory that would provide fast accesses in combination with a large input/output size in order maximize speed and efficiency.
+The FPGA group wanted memory that would provide fast accesses in combination with a large input/output capasity in order maximize speed and efficiency.
 SRAM (Static random-access memory) chips were selected selected because of its fast access times.
-Reasonably priced 8 Mbit (512K x 16 bit) modules with $10$ns write and read cycle times were found to be sufficient and selected. 
+Reasonably priced 8 Mbit (512K x 16 bit) modules with $10$ns write and read cycle times were found to be suitable and selected. 
 
