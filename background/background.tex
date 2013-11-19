@@ -110,9 +110,8 @@ Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a ge
 \end{figure}
 
 
-\subsection{Generational Genetic Algorithms}
-
-Traditionally, genetic algorithms are implemented generationally \TODO{TODO: cite hromcovic or something}. That means that an entire population of individuals are rated and combined to create a completely new population, and the old population is discarded. The generational genetic algorithm can be seen as performing five steps:
+\subsection{Generational Genetic Algorithms} 
+Traditionally, genetic algorithms are implemented with discrete generations \TODO{TODO: cite hromcovic or something}. That means that an entire population of individuals are rated and combined to create a completely new population, and the old population is discarded. The generational genetic algorithm can be seen as performing five steps:
 
 
 \begin{enumerate}
@@ -164,17 +163,13 @@ In fact, only a subset of problems will be supported on galapagos architecture.
 
 
 \subsection{Continuous Genetic Algorithms}
-
-A new and better strategy is gaining traction in the literature.\TODO{TODO: find a citation for this}.
+A new and better strategy is gaining traction in the literature.\TODO{TODO: find a citation for this}.\todo{what literature?}
 Continuous genetic algorithms do away with the concept of discrete generations.
-Rather, it continuously selects a few individuals, processes them, and returns them (or their offspring) to the population.
-This erases the generational border, and is shown \TODO{TODO:cite our own research here, plus literature} to converge faster towards an optimal solution. This also implies that the operations involved in the genetic algorithm is  more easily parallelizeble, since the generation restriction no longer visible. More specific it allows the algorithm a possible way to work on both rated an unrated individuals on the same time. As the reader may have noticed in section, the algorithm presented were very sequential. 
-
-This algorithm uses an other approach, by disregarding the generation boundaries. It is possible to both rate and handle rated elements simultaneously without bothering about generating specific generations of individuals that are passed to the next stage. The previous algorithm finished with one generation before start working on the next one. The continuous approach, work on individuals instead. E.g the individuals are continuously rated and passed along to reproduce. The same steps are performed, however, not in sequential order any more. All the steps has the possibility to be performed in parallel. This has the advantage of increasing the throughput. The problem is also more suited on MIMD architecture, like the one galapagos is based on.      
-
-
-
-
+Rather they continuously select a few individuals, processes and returns them (or their offspring) to the population.
+Older members of the population eventually disappear, based on some selection scheme, preventing the population from growing infinitely large.
+This erases the generational border, and has been shown to converge faster towards an optimal solution\TODO{TODO:cite our own research here, plus literature}.
+More specifically it allows the algorithm a possible way to work on both rated an unrated individuals at the same time.
+This approach is more suited for MIMD architectures, which is what galapagos is.
 
 The genetic algorithm used in the Barricelli computer is a continuous genetic algorithm.
 
