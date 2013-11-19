@@ -13,7 +13,6 @@ we got the giant gecko one because we had the dev board for those lying around i
 \todo{why did we pick this one?}
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
-
 The two major components on the system are the SCU and the FPGA.
 They each fill an important role, and work on essential tasks.
 The system need them both to work together, and to accomplish this we need a communication channel.
@@ -59,17 +58,8 @@ RS-323 (colloquially known as a ``serial port'') is a communication standard whi
 Even though serial communication was not required due to presence of USB interface, the decision was made to implement it.
 The serial port serves as a backup for the USB as the chosen microcontroller supports communication over RS-232.
 
-
-
-
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
-When the group talked about selecting memory, there was lots of options.
-The FPGA group needed a memory that could provide fast accesses in order to increase efficiency.
-In addition a memory with large inout/output size was a goal.
-Because of this, the group decided to use SRAM because of its fast access times.
-However, the downside with these memories is that they are small and expensive.
-
-Still we ended up with 8-MBit modules with 16bit input/output size, 10ns write cycle time and 10ns read cycle time.
-A larger size of the memory could probably have been chosen, without any risk of going over the budget.
-However for the task that the FPGA is going to perform the current selection is sufficient for our use.
+The FPGA group wanted memory that would provide fast accesses in combination with a large input/output size in order maximize speed and efficiency.
+SRAM (Static random-access memory) chips were selected selected because of its fast access times.
+Reasonably priced 8 Mbit (512K x 16 bit) modules with $10$ns write and read cycle times were found to be sufficient and selected. 
 
