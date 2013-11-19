@@ -1,5 +1,5 @@
 \section{Input and Output}
-The PCB contains a microcontroller used to manage all input and output between the FPGA and the IO devices shown in figure ~\vref{figure:system-overview}.
+The PCB contains a microcontroller used to manage all input and output between the FPGA and the IO devices shown in Figure ~\vref{figure:system-overview}.
 The microcontroller listens on all IO channels for input, and acts on the input, either forwarding the request to another device or performing memory operations on the FPGA's memory.
 
 \subsection{Initial requirements}
@@ -56,7 +56,7 @@ All code interfacing with the LEDs and buttons are simple code either setting or
 The LEDs are driven by General Purpose IO pins on the SCU, requiring a minimal amount of code in order to get a working output, which is especially handy in the early stages of implementation.
 
 \subsubsection{FPGA}
-There are 41 wires between the FPGA and the SCU in order to facilitate communication (see table~\ref{tab:scu-fpga-link} for a complete list of all the connections).
+There are 41 wires between the FPGA and the SCU in order to facilitate communication (see Table~\ref{tab:scu-fpga-link} for a complete list of all the connections).
 The FPGA has no way of signalling that it wants to output something, so the SCU is responsible for periodically halting the CPU on the FPGA and reading from it's memory.
 
 \subsubsection{J-link}
@@ -68,9 +68,9 @@ The only way of communication with the FPGA is with direct memory access to the 
 All the data is transferred directly over the SCU's GPIO pins, without any form for memory mapping or built-in bus interfaces.
 This is mostly due to the fact that we did not do enough research early in the design process and recognized that we could use something like External Bus Interface to access the memory.
 
-Access to the FPGA's memory is controlled by the signals seen in table~\ref{tab:scu-fpga-link}.
+Access to the FPGA's memory is controlled by the signals seen in Table~\ref{tab:scu-fpga-link}.
 It should be noted that there are two states to access the FPGA's instruction memory, the upper and lower half.
-This is because the instruction memory stores 32 bits per address while the SRAM chips only stores 16 bits per address (see section~\ref{subsec:fpga-instruction-memory} for more details on the instruction memory).
+This is because the instruction memory stores 32 bits per address while the SRAM chips only stores 16 bits per address (see Section~\ref{subsec:fpga-instruction-memory} for more details on the instruction memory).
 
 The SRAM data sheet~\cite{sram-datasheet} specifies that the data signal has to be stable for at least 10ns in order to complete a write.
 This means that it is not necessary to worry about timing when accessing the SRAM since changing the signal more than every 10ns requires a clock speed of 100MHz since we can at most change the output of a single pin every cycle.
