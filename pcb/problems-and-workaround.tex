@@ -18,8 +18,6 @@ A wire was pulled from FPGA\_HEADER78 to the header from the SCU, and this heade
 
 \subsection{ USB port }
 When the PCB came back from production, it was discovered that the USB was not connected to the microcontroller
-according to the recommanded spesifications from the manufacturer of the microcontroller. 
-The problem were that the signals USB\_VBUS and USB\_VREGI were not connected to the VBUS-pin on the USB receptacle. This was fixed by soldering copper wires on the capacitators designated as C18 and C17 to USB-HEADER2 (called VBUS\_ENABLE in the schematics).
+according to the recommended specifications from the manufacturer of the microcontroller. 
+The problem was that the signals USB\_VBUS and USB\_VREGI were not connected to the VBUS-pin on the USB receptacle. This was fixed by soldering copper wires on the capacitators designated as C18 and C17 to USB-HEADER2 (called VBUS\_ENABLE in the schematics).
 According to tests performed on the PCB before and after this work-around, the problem was fixed successfully.
-
-
