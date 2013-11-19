@@ -149,7 +149,7 @@ A sort of evolutionary dead-end, a stage where the solution found is far from op
 The crossover core uses the individuals from the selection to cross the individuals to produce new individuals.
 Because of the initial diversity in the initial population, this will cause the diversity to be large in the beginning.
 However they will eventually converge.
-The goal of the crossover phase is to converge against a solution by continuously creating better a better generation of individuals.
+The goal of the crossover phase is to converge against a solution by continuously creating a better generation of individuals.
 There are several methods for achieving the crossover of individuals, however, the different methods will not be discussed in great detail here.
 The different algorithms are highly dependent on the task at hand.
 However, the different crossover methods implemented in the employed in the Galapagos architecture will be discussed in greater detail in section \vref{fpga:subsection:genetic_pipeline}.
@@ -172,10 +172,10 @@ In fact, only a subset of problems will be supported on Galapagos architecture.
 \subsection{Continuous Genetic Algorithms}
 A new and better strategy is gaining traction in the literature.\TODO{TODO: find a citation for this}.\todo{what literature?}
 Continuous genetic algorithms do away with the concept of discrete generations.
-Rather they continuously select a few individuals, processes and returns them (or their offspring) to the population.
+Rather they continuously select a few individuals, process and return them (or their offspring) to the population.
 Older members of the population eventually disappear, based on some selection scheme, preventing the population from growing infinitely large.
 This erases the generational border, and has been shown to converge faster towards an optimal solution\TODO{TODO:cite our own research here, plus literature}.
-More specifically it allows the algorithm a possible way to work on both rated an unrated individuals at the same time.
+More specifically it allows the algorithm a possible way to work on both rated and unrated individuals at the same time.
 This approach is more suited for MIMD architectures, which is what Galapagos is.
 
 The genetic algorithm used in the Barricelli computer is a continuous genetic algorithm.
