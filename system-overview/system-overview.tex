@@ -8,8 +8,8 @@ This section aims to provide a birds-eye overview of the system archictecture of
 \label{figure:system-overview}
 \end{figure}
 
-The requirements in section \vref{section:requirements} stated that the \Gls{barricelli} should use an \gls{FPGA} and an micro controller as system components.
-The \Gls{barricelli}'s specialized CPU design is implemented and compiled onto an \gls{FPGA}, and a micro controller is used to facilitate Input/Output, control and communications between the \gls{FPGA} and the outside world.
+The requirements in section \vref{section:requirements} stated that the \Gls{barricelli} should use an \gls{FPGA} and an microcontroller as system components.
+The \Gls{barricelli}'s specialized CPU design is implemented and compiled onto an \gls{FPGA}, and a microcontroller is used to facilitate Input/Output, control and communications between the \gls{FPGA} and the outside world.
 A graphical overview illustrating the system architecture can be found in figure \vref{figure:system-overview}.
 
 \section{Components}
@@ -25,9 +25,9 @@ The \gls{FPGA} is connected to its own external \gls{SRAM} memory.
 
 \subsection{\gls{SCU}}
 
-The \gls{SCU}, or System Control Unit, is an Energy Micro EFM32GG990F1024 micro controller which administrates communication between the gls{FPGA} and the outside world.
+The \gls{SCU}, or System Control Unit, is an Energy Micro EFM32GG990F1024 microcontroller which administrates communication between the gls{FPGA} and the outside world.
 It is the \gls{SCU}'s job to react to user input, to program the custom processor implemented on the FPGA and to perform other administrative duties.
-Having a separate micro controller to perform these tasks minimises the complexity of the design implemented on the \gls{FPGA}, which means that more resources can be used to create a performant and clean custom processor design.
+Having a separate microcontroller to perform these tasks minimises the complexity of the design implemented on the \gls{FPGA}, which means that more resources can be used to create a performant and clean custom processor design.
 
 \subsection{I/O}
 
