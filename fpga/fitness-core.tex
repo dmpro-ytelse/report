@@ -9,6 +9,11 @@ An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitnes
 
 \input{fpga/fig/fitness_architecture}.
 
+
+The core is separated into several distingeble stages referred to as the \emph{fetch stage}, \emph{decode stage}, \emph{execution stage}, \emph{memory stage} and \emph{write-back stage}. This stages overlap in time and perform different tasks regarding the execution of instructions. The fetch stage is responsible for fetching a new instruction to the pipeline. The decode stage is responsible for decoding the instruction and set up the different control signals. The execution stage is involved in the actual computation of the instruction. The memory stage is responsible for performing memory related task on behalf of the instruction. The write-back stage is used to write data back into registers.
+
+\todo{Review section}
+ 
 \newpage
 \subsubsection{Data Path} 
 
