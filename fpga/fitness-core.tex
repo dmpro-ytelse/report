@@ -248,7 +248,18 @@ In case of a \emph{READ} operation, the address is put on the address bus. This 
 
 
 When performing a \emph{WRITE} operation this is done in the same manner as with the \emph{READ} operation. The difference lay in the fact that during a memory write, the data to be written is put on the outgoing data bus. The \emph{fitness core} is in wait state at this moment. When the data is finished writing to memory, the \emph{memory data controller} responds with an acknowledgement. The \emph{fitness core} continous with its computation.  
-\todo{kladd!!}A state diagram showing this can be seen in figure (?) \todo{add me}.   
+A state diagram showing this can be seen in figure \ref{fpga:fitness:fitness_memory_ctrl}.  
+
+\todo{Review this section} 
+
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{fpga/fig/fitness_mem_ctrl.png}
+\caption{Fitness memory controller state machine}
+\label{fpga:fitness:fitness_memory_ctrl}
+\end{figure}
+
+
 
 \newpage
 \subsubsection{Fitness Genetic Controller} 
