@@ -37,7 +37,8 @@ The ``Serial Peripheral Interface Bus'' transfer mode (``SPI bus mode'') was cho
 
 
 \subsubsection{Universal Serial Bus (USB)}
-The USB interface was chosen because USB connectors are prevalent on computers, and every team member's laptop had at least one USB connector.
+The USB interface was chosen because the chosen SCU has a built-in USB driver, which reduced the amount of work required to implement the standard considerably.
+USB connectors are prevalent on computers, and every team member's laptop had at least one USB connector
 A micro-USB interface was chosen because it was the smallest USB compliant interface available, which meant the associated hardware would take up less physical space on the PCB than its larger siblings'.
 
 The design also includes circuits to prevent undesirable effects like electrostatic discharge, preventing the signals from picking up unwanted background noise, and crosstalk (disturbance of the signal from signals in other circuits).
