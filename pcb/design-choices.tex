@@ -8,12 +8,16 @@ Higher-numbered Spartan-6 FPGAs have more resources but fewer I/O ports and a hi
 
 A Xilinx Spartan-6 LX45 (specifically, the XC6SLX45-2CSG324I) was chosen because of it having a sufficient number of resources and enough I/O ports while sporting a reasonable price tag.
 
+\todo{someone that's not Odd should read over this}
 
-\subsection{SCU / Microcontroller} \label{pcb:design-choices:ss:scu}
-\todo{which one did we pick?}
-we got the giant gecko one because we had the dev board for those lying around in the lab and also we picked the model with the most memory? \todo{VERIFICATION REQUIRED}.
+\subsection{Microcontroller / System Control Unit (SCU)} \label{pcb:design-choices:ss:scu}
+The EFM32 Giant Gecko 32-bit Microcontroller, , was chosen for the project.
+This microcontroller fulfills the non-functional requirement of using a microcontroller made by Energy Micro\vref{table:non-functional-requirements}.
+In addition there were development boards for the Giant Gecko 32-bit microcontroller available at the lab.
 
-\todo{why did we pick this one?}
+The EFM32GG390 was chosen because it was deemed powerful enough to satisfy the performance requirements and had the highest number of available general purpose I/O (GPIO) pins amongst the microcontrollers with the same kind of package.
+
+\todo{someone that's not Odd should read over this}
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
 The two major components on the system are the SCU and the FPGA.
