@@ -18,7 +18,30 @@ Once one gets a hang of Altium PCB editor it takes surprisingly little time to c
 
 For components with standarized packages, Altium has an IPC compliant footprint wizard that generates footprints for a component given its package type and some package specific measurements available in the component's datasheet.
 
-Note that the pads in the footprints should be slightly larger than the component's pins to make soldering easier.
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm,keepaspectratio]{pcb/pol_cap_size_footprint_vs_specs.png}
+\caption{Polarized capasitor footprint dimentions}
+\label{figure:pol-cap-size-yo}
+\end{center}
+\end{figure}
+
+We encountred one issue while designing footprints.
+The pads of footprint that was designed for polarized capasitor component EEE1HA1R0AR matched the size of components pins (they were in fact even smaller - 4.7mm vs max 5.5mm in specefication). 
+See figure \vref{figure:pol-cap-size-yo}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=5cm,keepaspectratio]{pcb/pol_cap_size_on_board.png}
+\caption{Pads on footprint are smaller than pins of component}
+\label{figure:pol-cap-size-board}
+\end{center}
+\end{figure}
+
+This made soldering nontrivial. See figure \vref{figure:pol-cap-size-board}.
+
+To avoid this complication the pads on footprint should be designed to be longer than the pins.
+That will make the pads protrude under the actual component resulting in much simpler soldering.
 
 \paragraph{USB}
 
@@ -35,4 +58,6 @@ every manufacturer have their own design on the receptacles.
 \todo{kan vi kutte denne?}
 
 \todo{FIND THIS PICTURE: the picture shows the interface of the SD card. the different pins that can be seen on the picture are a part of the standardized SD-protocol that every manufacturer have to follow...}
+
+
 
