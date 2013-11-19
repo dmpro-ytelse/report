@@ -22,7 +22,7 @@ FatFS is a generic FAT file system for microcontrollers, with a generic interfac
 Because of this structure, the system is easily portable.
 To add read and write a FAT system on some disk drive, FatFS needs the following functions:
 
-\begin{table}
+\begin{table}[H]
     \begin{tabular}{| l | l |}
         \hline
         disk\_initialize & Initialize disk drive \\
@@ -47,7 +47,7 @@ The microcontroller has a built in USB controller~\cite{efm32gg990-datasheet} an
 
 \subsubsection{Serial}
 The serial port is meant as a backup solution in case USB doesn't work, with the exact same opportunities, but with an older, simpler interface.
-The micro controller used in the project has a built in UART Receiver/Transmitter\cite{efm32gg990-datasheet} which is easily activated with code from AN0045~\cite{an0045}.
+The microcontroller used in the project has a built in UART Receiver/Transmitter\cite{efm32gg990-datasheet} which is easily activated with code from AN0045~\cite{an0045}.
 
 \subsubsection{LEDs and buttons}
 The most primitive form of IO we have are the onboard LEDs and buttons.
@@ -56,11 +56,11 @@ All code interfacing with the LEDs and buttons are simple code either setting or
 The leds are driven by General Purpose IO pins on the SCU, requiring a minimal amount of code in order to get a working output, which is especially handy in the early stages of implementation.
 
 \subsubsection{FPGA}
-There are 41 lines between the FPGA and the SCU in order to facilitate communication.
-The FPGA has no way of signalling that it wants to output something, so the SCU is responsible for periodically halting the CPU and reading from it's memory.
+There are 41 wires between the FPGA and the SCU in order to facilitate communication (see table~\ref{tab:scu-fpga-link} for a complete list of all the connections).
+The FPGA has no way of signalling that it wants to output something, so the SCU is responsible for periodically halting the CPU on the FPGA and reading from it's memory.
 
 \subsubsection{J-link}
-In order to program and debug the programs on the SCU, we utilize the built-in pins for debugging using J-Link\texttrademark.
+In order to program and debug the programs on the SCU, we utilize the built-in pins for debugging using J-Link\texttrademark as described in AN0043~\cite{an0043}.
 It can also be used as a form of last resort emergency output as it makes it possible to display text that is printed by the program running on the SCU.
 
 \section{FPGA Control}
@@ -111,15 +111,19 @@ The main idea is that every IO device is required to define two functions in ord
 In order to enable sending messages between different IO units, the poll functions return a pointer which may point to any object in memory, which allows other modules to read the data given that they know what type of data the pointer points to.
 
 \section{Design decision}
-\begin{itemize}
-    \item The microcontroller chosen is the same as in the available development kit. As there was no restrictions on power usage,
-          it was decided to use the micro controller most convenient to develop on.
-    \item Early in the process, a discussion arised about how it could be beneficial to run an operating system on the micro controller
-          such that familiar programs could be used on it. A scenario pitched was to have network access, and then be able to talk to the
-          machine remotely using programs such as \textit{SSH} or \textit{telnet}. However, as the Linux version available on the Energy Micro
-          system was deemed not so useful, and the controller misses network support, it was decided that running an OS was unnecessarily much work.
-    \item FPGA Bus, huge
-\end{itemize}
+\subsection{Selection of microcontroller}
+The microcontroller chosen was chosen as it was the microcontroller we had available to test with on the development kit.
+It was also the microcontroller with most available GPIO pins for the package we had to use, which would give us the most possibilities for communication.
+
+\subsection{Operating system}
+Early in the process, a discussion arised about how it could be beneficial to run an operating system on the microcontroller such that familiar programs could be run directly on it.
+A scenario pitched was to have network access, and then be able to talk to the machine remotely using programs such as \textit{SSH} or \textit{telnet}.
+However, the Linux distribution available for the Energy Micro microcontroller was found lacking in the features we wanted, and the microcontroller lacks network support.
+It was therefore decided that running an OS was unnecessary as there were few rewards and little to gain from it.
+
+\subsection{FPGA Communication}
+During the initial design phase, the link between the FPGA and SCU was designed to be as simple as possible.
+The final version was the the 41 wires mapping all the signals needed for directly accessing the SRAM chips.
 
 \section{Issues}
 \subsection{Crystal}
@@ -128,8 +132,19 @@ Unfortunately the crystal that was selected had a clock frequency in the kHz ran
 Luckily the microcontroller has a built-in RC oscillator, so the crystal oscillator was not essential to get code running on the microcontroller.
 
 \subsection{USB Circuitry not working}
-While mapping the PCB curcuitry, only the pins available for GPIO were looked at initially, but this did not include the vbus and vregi pins.
+While mapping the PCB curcuitry, only the pins available for GPIO were included initially, but this did not include the vbus and vregi pins.
 The pins were connected to capacitors, and a quick hack soldering the appropriate lines to the USB header was tried without success.
 
 \subsection{No UART}
-The microcontroller believes that data is being outputted, and there seems to be a signal going out to the RS-232 interface, but there is no data being recieved on the other end.
+The microcontroller believes that data is being outputted and calls the data sent callback function.
+There also seems to be a signal going out to the RS-232 interface, but there is no data being recieved on the other end.
+
+\subsection{Memory access}
+\todo{Diagnostics, possibly not just here/not here at all.}
+Tried:
+\begin{itemize}
+    \item Adding delays
+    \item Reading immediately after write to verify write,
+    \item Mapping control signals to LED on FPGA to verify that they work
+    \item Flashing the instruction memory on the FPGA so we just have to read data memory, not write
+\end{itemize}
