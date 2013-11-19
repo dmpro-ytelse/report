@@ -9,6 +9,11 @@ An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitnes
 
 \input{fpga/fig/fitness_architecture}.
 
+
+The core is separated into several distingeble stages referred to as the \emph{fetch stage}, \emph{decode stage}, \emph{execution stage}, \emph{memory stage} and \emph{write-back stage}. This stages overlap in time and perform different tasks regarding the execution of instructions. The fetch stage is responsible for fetching a new instruction to the pipeline. The decode stage is responsible for decoding the instruction and set up the different control signals. The execution stage is involved in the actual computation of the instruction. The memory stage is responsible for performing memory related task on behalf of the instruction. The write-back stage is used to write data back into registers.
+
+\todo{Review section}
+ 
 \newpage
 \subsubsection{Data Path} 
 
@@ -190,14 +195,20 @@ If \emph{Enable} is not set, then there will be no shift.
 \paragraph{ShifterVariables}
 A ShifterVariable consists of a larger set of shifters. 
 It takes two inputs: One main input \emph{I} with size \emph{N} (default 64) to be shifted, and a \emph{count} input of size \emph{M} that determines how many bits to be shifted. 
-The number of shifters in the ShifterVariable is equal to \emph{M} (default 1), and each shifter may shift the main input by $2^i$ bits, where \emph{i} is a number in the range 0 to M-1. 
-Shifter number \emph{i} will perform shift if bit number \emph{i} in \emph{count} is 1. 
-For example, if the count input is 000110, then 4 of the shifters will not shift, while two shifters will shift input \emph{I} by $2^1 + 2^2$, which is 6.
-The ShifterVariable has also inputs for \emph{Left}, \emph{Arith} and \emph{Enable}.
+\emph{M} should be $log_2$ of \emph{N}. 
+The number of shifters in the ShifterVariable is equal to \emph{M} (default 1), and each shifter \emph{i} may shift the main input by $2^i$ bits, where \emph{i} is a number in the range 0 to M-1. 
+Total shift is $\sum_{i=0}^{M-1} count_i * 2^i$ where $count_i$ is bit number \emph{i} in the \emph{count} input.
+For example, if it is 000110, shift of input \emph{I} is $0*2^5 + 0*2^4 + 0*2^3 + 1*2^2 + 1*2^1 + 0*2^0 = 2^2 + 2^1 = 6$.
+This can be seen in figure \vref{fig_shifter}
+\begin{figure}[H]
+\center
+\includegraphics[width=0.3\textwidth]{fpga/fig/shift.png}
+\caption{Example use of ShifterVariable}
+\label{fig_shifter}
+\end{figure}
+
+The ShifterVariable has also inputs for \emph{Left}, \emph{Arith} and \emph{Enable} for each shifter.
 ShifterVariables are not only used in the ALU, but also in the Crossover Core and Mutation Cores in the Genetics Pipeline.
-
-
-\todo{ Lage grafikk?}
 
 \newpage
 \subsubsection{Forwarding Unit} \label{fpga:fitness:sss:forwarding_unit}

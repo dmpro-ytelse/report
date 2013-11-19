@@ -1,6 +1,6 @@
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{fpga/fig/processor_architecture.png}
-\caption{Processor Architecture}
+\caption{The figure shows the final processor architecture. Most of the figures seen in this picture as for instance "fitness core", are abstractions of more complex logic at lower levels (mostly MSI and LSI components). }
 \label{figure:fpga-architecture}
 \end{figure}
 
@@ -43,11 +43,3 @@ The processor architecture is illustrated in figure \vref{figure:fpga-architectu
 \subsection{The Genetic Pipeline}
 \label{fpga:subsection:genetic_pipeline}
 \input{fpga/genetic-pipeline}
-
-\subsection{Parallelism}
-\todo{awkwardly placed section.. move it somewhere else?}
-The Barricelli is a MIMD computer, which means that it can execute multiple different instruction streams on multiple different data streams simultaneously, in parallel.
-The four\cn fitness cores in the archtecture have each their own program counters and may load different data independantly of eachother.
-They all share the same data and instruction memory, however, which makes the Barricelli a shared memory model MIMD computer.
-Additionally, the genetic pipeline contains multiple specialized cores, which can also execute independant, less general instruction streams on independant data.
-
