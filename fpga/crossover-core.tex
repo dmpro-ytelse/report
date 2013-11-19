@@ -3,10 +3,10 @@ Two inputs are forwarded from the two selections cores as "parents", and two out
 All the bits from both the parents are forwarded in the children, but in some parts the bit-patterns are switched on the children, based a selected crossover function and on a random input from the PRNG.
 Henceforth this is called crossover.
 
-There are three distinct crossover functions that are implented: Split, double-split and XOR.
+There are three distinct crossover functions that are implemented: Split, double-split and XOR.
 
 
-\paragraph{\textit{Split Fucntion}}
+\paragraph{\textit{Split Function}}
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{fpga/fig/crossover_split.png}
 \caption{Crossover split function}
@@ -27,8 +27,8 @@ The function will perform crossover on bits 12-0 in the children.
 \label{fig_crossover_split_mask}
 \end{figure}
 
-The split function was originally implemented by using behavioural descpription, but this caused the synthesizer to create many latches.
-The same problem occured also for the double-split function.
+The split function was originally implemented by using behavioural description, but this caused the synthesizer to create many latches.
+The same problem occurred also for the double-split function.
 In order to avoid this, the function now uses a ShifterVariable, that uses a 32-bit number of 1's as main input, and the random\_number for shifting input.
 This yields an output that consists of 1's until the selected bit number, and 0's on the rest.
 Figure \ref{fig_crossover_split_mask} shows an example where bit number 6 is selected for where to begin crossover. 
@@ -37,12 +37,12 @@ This output is called \emph{mask1}. Notice that \emph{mask1} has had an extra sh
 The ShifterVariable performs shifting with an input of 1's, and in this example bit number 6 would be the last bit with value 1, but it needs to be the first bit with value 0. Therefore, an extra shift is required.
 \emph{Mask2} is set as a negation of \emph{mask1}, so the bits in \emph{mask2} would be 1's where they would be 0's in \emph{mask1}, and vice versa.
 Only bits 6-0 would be 1's in \emph{mask2} in the figure.
-The output on the children are set by combininging the parents and the masks:
+The output on the children are set by combining the parents and the masks:
 \linebreak
 \linebreak child1 $\leftarrow$ (parent1 and mask1) or (parent2 and mask2);
 \linebreak child2 $\leftarrow$ (parent1 and mask2) or (parent2 and mask1);
 
-\paragraph{\textit{Double-split Fucntion}}
+\paragraph{\textit{Double-split Function}}
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{fpga/fig/crossover_doublesplit.png}
 \caption{Crossover double-split function}

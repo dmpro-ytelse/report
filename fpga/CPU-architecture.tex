@@ -8,7 +8,7 @@
 
 The processor architecture designed for the Barricelli computer is a very clean design, and the key to its high performance lies in its simplicity.
 The architecture contains a number of general cores, which in this context are named fitness cores.
-The fitness cores are general purpose cores in the sense that they are programmable and turing complete, but for genetic algorithm applications the cores are intended to calculate fitness scores of individuals.
+The fitness cores are general purpose cores in the sense that they are programmable and Turing complete, but for genetic algorithm applications the cores are intended to calculate fitness scores of individuals.
 
 The number of fitness cores is configurable.
 The reference implementation of the Barricelli computer is configured to have 7 fitness cores.
@@ -43,3 +43,10 @@ The processor architecture is illustrated in figure \vref{figure:fpga-architectu
 \subsection{The Genetic Pipeline}
 \label{fpga:subsection:genetic_pipeline}
 \input{fpga/genetic-pipeline}
+
+\subsection{Parallelism}
+\todo{awkwardly placed section.. move it somewhere else?}
+The Barricelli is a MIMD computer, which means that it can execute multiple different instruction streams on multiple different data streams simultaneously, in parallel.
+The four\cn fitness cores in the architecture have each their own program counters and may load different data independently of each other.
+They all share the same data and instruction memory, however, which makes the Barricelli a shared memory model MIMD computer.
+Additionally, the genetic pipeline contains multiple specialized cores, which can also execute independent, less general instruction streams on independent data.

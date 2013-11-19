@@ -39,7 +39,7 @@ It continues doing this in this fashion until a \emph{READ} or \emph{WRITE} requ
 
 When a \emph{READ} or \emph{WRITE} operation is encountered, the \emph{data controller} starts to carry out the request from the fitness core.
 Performing a memory operation takes at least four cycles, as the processor word size is 64 bits, while the memory bus to the external memory chips are only 16 bits wide.
-Because of this, data needs to be shuffled across the bus 16-bits at a time, which accounts for the four cycle minumum for data operations.
+Because of this, data needs to be shuffled across the bus 16-bits at a time, which accounts for the four cycle minimum for data operations.
 
 For the external memory to be operated correctly by the memory controller, the proper control signals need to be set at the correct times. The signals required differs depending on the type of operation, \emph{READ} or \emph{WRITE}. The timing diagrams can be seen in figure \ref{fpga:fig:timing:dmem:read} and \ref{fpga:fig:timing:dmem:write}, respectively. 
 

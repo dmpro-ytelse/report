@@ -3,7 +3,7 @@ For genetic algorithms, the fitness core is tasked with calculating fitness scor
 
 The design of the fitness core is highly influenced by the classic pipelined \gls{MIPS} core design ~\cite[p.~362]{compOrgDes}.
 The core is designed as a five stage pipeline.
-The contents of the different stages in the pipeline, however, differs from the original \gls{MIPS} architecture, as the CPU architecture has to accomodate for the \gls{ISA} design which combines ideas from multiple exisiting architectures.
+The contents of the different stages in the pipeline, however, differs from the original \gls{MIPS} architecture, as the CPU architecture has to accommodate for the \gls{ISA} design which combines ideas from multiple existing architectures.
 An example of an \gls{ISA} feature which differs from \gls{MIPS} is the embedded branch-less conditionals\footnote{a feature which is shamelessly ripped whole-sale from ARM}.
 An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitness_arch}
 
@@ -141,7 +141,7 @@ This controller is able to perform three types of actions: \emph{load}, \emph{st
 When performing a load, a chromosome is loaded from the unrated pool.
 The store operation is used to store a chromosome and its corresponding fitness value to the rated pool.
 The settings are used to apply settings to the genetic pipeline.
-In order to divide these cases, the galapagos architecture relies on the \emph{gene operation} vector.
+In order to divide these cases, the Galapagos architecture relies on the \emph{gene operation} vector.
 This bit-vector is set depending on the instruction class as seen in table \ref{fpga:tbl:gene_op_code_tbl}.
 
 \input{fpga/tbl/gene_op_code_tbl}
@@ -159,7 +159,7 @@ An overview can be found in table \ref{fpga:tbl:mem_op_code_tbl}
 \paragraph{TO\_REG}
 In the \emph{write-back} stage, there is need to distinguish between several outputs from the \emph{memory stage}.
 The \emph{TO\_REG} signal is responsible for selecting which value that should be written to the register file.
-The selection is aided by a 4-to-1 multiplexor.
+The selection is aided by a 4-to-1 multiplexer.
 The different inputs are: \emph{Gene}, \emph{Data}, and \emph{PC+1}, \emph{Res}, as seen in figure \todo{add reference}.
 However, keep in mind that the \emph{REG\_WRITE} signals must be asserted for the data to be written. 
 
@@ -188,7 +188,7 @@ This is because the multiplication is the slowest of the ALU operations, and the
 This would result in a degradation of the overall performance of the processor, which is not desirable.
 To overcome this limitation, a state machine is designed in the execution stage to halt the pipeline when performing multiplication.
 This effectively makes the multiplication a multi-cycle operation.
-The result of this is that the multiplication operation is able to finish without the rest of the system needing to slow down to accomodate for it, meaning that the maximum clock speed is not limited by the multiplication circuitry.
+The result of this is that the multiplication operation is able to finish without the rest of the system needing to slow down to accommodate for it, meaning that the maximum clock speed is not limited by the multiplication circuitry.
 
 \paragraph{Shifters}
 
@@ -231,7 +231,7 @@ A far better approach is to rely on register forwarding.
 In this approach the aim is to resolve the dependencies by simply forwarding internal resources from one pipeline stage to another, if needed.
 
 The forwarding logic is implemented by comparing register dependencies of the currently executing instruction with the other instructions currently flowing through the pipeline.
-If the forwarding unit detects a data hazard, it will forward the apropriate data to the execution stage so it can be used at once.
+If the forwarding unit detects a data hazard, it will forward the appropriate data to the execution stage so it can be used at once.
 An overview of the control signals and their meaning can be seen in table. \ref{tbl:fpga:forwarding_signals}.
 
 A second, more unconventional forwarding unit is also implemented in the decode stage.
@@ -240,7 +240,7 @@ It forwards data from the write back stage to the decode stage to solve data haz
 Unfortunately, forwarding does not solve all possible data hazards in the processor.
 In the case of a memory load instruction being immediately proceeded by an instruction dependant on the data fetched from memory, a data hazard occurs.
 Since it does not make sense to forward data from memory, this class of data hazards is resulted by stalling.
-The galapagos architecture does not solve this problem in hardware, but rather in software.
+The Galapagos architecture does not solve this problem in hardware, but rather in software.
 The assembler is responsible for inserting \emph{NOP} instructions in case of such hazards.  
 
 \input{fpga/tbl/forwarding_unit_tbl}
@@ -253,7 +253,7 @@ The \emph{condition unit} is responsible for checking the condition code against
 
 \newpage
 \subsubsection{Fitness Memory Controller} 
-In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronise the communication to the main controller.
+In order to communicate with the main data controller, each fitness cores contains a small version of the data controller to synchronize the communication to the main controller.
 This small controller, referred to as the \emph{fitness data memory controller}, is responsible for mediating memory requests between the data memory controller and the fitness memory controller.
 
 To use the data memory bus, the the \emph{fitness memory controller} may send a request signal to the main \emph{Data controller}. 
@@ -265,7 +265,7 @@ Upon receiving the bus, the \emph{fitness memory controller} is able to use it f
 In case of a \emph{READ} operation, the address is put on the address bus. This address corresponds to a memory position on the external memory. When receiving this address, the \emph{data memory controller}, starts fetching the memory word. During this time the fitness memory controller needs to wait. It stays in a wait loop unit the \emph{data memory controller} is finished reading. Note that the bus to external memory is only 16-bits wide. This implies that four read instructions are required to read a 64-bits word. When the \emph{memory data controller} is finished reading data from memory, the data is put on the data bus, and the can be read by the fitness core. Then the fitness core is disconnected from both the data and memory bus and it continuous its execution through the pipeline.
 
 
-When performing a \emph{WRITE} operation this is done in the same manner as with the \emph{READ} operation. The difference lay in the fact that during a memory write, the data to be written is put on the outgoing data bus. The \emph{fitness core} is in wait state at this moment. When the data is finished writing to memory, the \emph{memory data controller} responds with an acknowledgement. The \emph{fitness core} continous with its computation.  
+When performing a \emph{WRITE} operation this is done in the same manner as with the \emph{READ} operation. The difference lay in the fact that during a memory write, the data to be written is put on the outgoing data bus. The \emph{fitness core} is in wait state at this moment. When the data is finished writing to memory, the \emph{memory data controller} responds with an acknowledgement. The \emph{fitness core} continuous with its computation.  
 A state diagram showing this can be seen in figure \ref{fpga:fitness:fitness_memory_ctrl}.  
 
 \todo{Review this section} 

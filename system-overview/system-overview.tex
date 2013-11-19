@@ -1,6 +1,6 @@
 \section{System Architecture}
 
-This section aims to provide a bird's-eye view of the system archictecture of the \Gls{barricelli} computer.
+This section aims to provide a bird's-eye view of the system architecture of the \Gls{barricelli} computer.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{dmpro/Sketch 1 - System Overview.png}
@@ -18,7 +18,7 @@ This section contains a list of the components in figure \vref{figure:system-ove
 
 \subsection{\gls{FPGA}}
 
-The \gls{FPGA} is a Xilinx Spartan6 LX45\cn Field-Programmable Gate Array, which is a microchip which can be programmed to behave like any arbitrary intergrated circuit.
+The \gls{FPGA} is a Xilinx Spartan6 LX45\cn Field-Programmable Gate Array, which is a microchip that can be programmed to behave like any arbitrary intergrated circuit.
 The \gls{FPGA} is programmed to contain an implementation of the custom \Gls{galapagos} Processor Architecture designed for the \Gls{barricelli} computer.
 It is connected to the \gls{SCU} by a 41-bit wide bus, though which the processor can be programmed by users.
 The \gls{FPGA} is connected to its own external \gls{SRAM} memory.
@@ -27,7 +27,7 @@ The \gls{FPGA} is connected to its own external \gls{SRAM} memory.
 
 The \gls{SCU}, or System Control Unit, is an Energy Micro EFM32GG390F1024-BGA112 microcontroller which administrates communication between the gls{FPGA} and the outside world.
 It is the \gls{SCU}'s job to react to user input, to program the custom processor implemented on the FPGA and to perform other administrative duties.
-Having a separate microcontroller to perform these tasks minimises the complexity of the design implemented on the \gls{FPGA}, which means that more resources can be used to create a performant and clean custom processor design.
+Having a separate microcontroller to perform these tasks minimizes the complexity of the design implemented on the \gls{FPGA}, which means that more resources can be used to create a performant and clean custom processor design.
 
 \subsection{I/O}
 
@@ -48,11 +48,11 @@ The serial link is an old standard and a comparatively slow way to transfer data
 \subsubsection{SD}
 
 Secure Digital (SD) is a memory-card format chosen as a secondary backup as communications channel between the developers and the microcontroller.
-Should both the USB and serial ports fail, an SD card could be loaded with the desired instruction and data memory and be read by the microcontroller as if it were a bus.
+Should both the USB and serial ports fail, an SD card could be loaded with the desired instruction and data memory and be read by the microcontroller as if it was a bus.
 
 \subsubsection{LEDs}
 
-The simplest way to get output from the microcontroller is to use LEDs, short for Light-Emmiting Diode.
+The simplest way to get output from the microcontroller is to use LEDs, short for Light-Emitting Diode.
 There are a total of 16 LEDs which can be used to display status from the IO controller, or simply show that the IO controller is working on something.
 
 \subsubsection{Buttons}
@@ -64,7 +64,7 @@ The buttons allow the user to interact with the program running on the SCU witho
 
 The \Gls{galapagos} CPU is connected to two separate external memories, the instruction memory and the data memory.
 This separation means that the \Gls{galapagos} architecture is a Harvard machine.
-This design choice was made because it increases the performance of the machine, since instruction memory and data memory and be accessed independantly, and in parallel. 
+This design choice was made because it increases the performance of the machine, since instruction memory and data memory and be accessed independently, and in parallel. 
 
 \subsubsection{Instruction Memory}
 
