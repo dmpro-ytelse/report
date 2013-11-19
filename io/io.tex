@@ -133,3 +133,13 @@ The pins were connected to capacitors, and a quick hack soldering the appropriat
 
 \subsection{No UART}
 The microcontroller believes that data is being outputted, and there seems to be a signal going out to the RS-232 interface, but there is no data being recieved on the other end.
+
+\subsection{Memory access}
+\todo{Diagnostics, possibly not just here/not here at all.}
+Tried:
+\begin{itemize}
+    \item Adding delays
+    \item Reading immediately after write to verify write,
+    \item Mapping control signals to LED on FPGA to verify that they work
+    \item Flashing the instruction memory on the FPGA so we just have to read data memory, not write
+\end{itemize}
