@@ -7,7 +7,7 @@ Thus, a MIMD computer system consists of several fully independent processing un
 Each core/processor is able to work fully independently and asynchronously with their counterparts.
 Because of this MIMD lends itself quite well to high performance computing through parallelism.
 
-Communication between the different, possibly hetereogeneous independent computing units is either done by message passing, or sharing memory between processors.
+Communication between the different, possibly heterogeneous independent computing units is either done by message passing, or sharing memory between processors.
 Computers that solve communication using message passing might not have any shared memory between the processing units at all.
 Each processing unit instead holds its own private memory.
 This is called a distributed memory model.
@@ -15,7 +15,7 @@ Most MIMD computers implement some hybrid memory solution using both shared memo
 
 A simplified block-level overview of a MIMD computer can be seen in figure \vref{figure:mimd-block-diagram}.
 The computer in the figure uses a shared memory model.
-In the figure, the blocks labeled PU are induvidual processing units.
+In the figure, the blocks labeled PU are individual processing units.
 
 
 \begin{figure}[H]
@@ -32,7 +32,7 @@ In the figure, the blocks labeled PU are induvidual processing units.
 \end{figure}
 
 
-MIMD architecture forms the basis in the great majority all today’s multi-core superscalar processors.
+MIMD architecture forms the basis in the great majority all today’s multi-core super scalar processors.
 This is in contrast to the early uniprocessors, which were based on SISD, or Single Instruction stream, Single Data stream. 
 
 
@@ -45,7 +45,7 @@ A genetic algorithm is a specific type of heuristic search algorithm that is ver
 A hard problem in this context is a problem for which there exists no algorithm for feasibly computing a solution within a reasonable amount of time.
 In practice, this typically means NP-hard problems.
 Classical examples of hard problems for which genetic algorithms can find suitable approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.
-Efficiently finding good approximations to this class of problems is extremely important for many heavy instrustry processes such as planning and scheduling of processes, finding optimal placement and routing of components in microchip manufacturing, and many other business-critical tasks.
+Efficiently finding good approximations to this class of problems is extremely important for many heavy industry processes such as planning and scheduling of processes, finding optimal placement and routing of components in microchip manufacturing, and many other business-critical tasks.
 
 The distinguishing feature of a genetic algorithm compared to other heuristic search algorithms is how it performs its search: it mimics the natural process of evolution to find fit approximations within the search space.
 A genetic algorithm represents possible solutions to a given problem as individuals of a population.
@@ -54,7 +54,7 @@ The idea is that after simulating a number of virtual generations of individuals
 
 \subsection{Concepts and Definitions}
 
-To fully understand the inner workings of the \Gls{barricelli}, it is useful to become aquainted with the basic concepts of genetic algorithms.
+To fully understand the inner workings of the \Gls{barricelli}, it is useful to become acquainted with the basic concepts of genetic algorithms.
 This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
 
 \paragraph{Experiment}
@@ -152,7 +152,7 @@ However they will eventually converge.
 The goal of the crossover phase is to converge against a solution by continuously creating better a better generation of individuals.
 There are several methods for achieving the crossover of individuals, however, the different methods will not be discussed in great detail here.
 The different algorithms are highly dependent on the task at hand.
-However, the different crossover methods implemented in the employed in the galapagos architecture will be discussed in greater detail in section \vref{fpga:subsection:genetic_pipeline}.
+However, the different crossover methods implemented in the employed in the Galapagos architecture will be discussed in greater detail in section \vref{fpga:subsection:genetic_pipeline}.
 
 As a precaution, the individuals are passed through yet another phase: mutation.
 The goal of the mutation is to ensure diversity by randomly mutating the individuals by some probability.
@@ -163,7 +163,7 @@ As with the crossover method, algorithms also exist for performing the mutation.
 Lastly, it is important to mention that there exists a lot of different classes of genetic algorithms.
 They usually employ many different techniques for performing selection, crossover and mutation.
 The point of this project is not covering all of them.
-In fact, only a subset of problems will be supported on galapagos architecture.
+In fact, only a subset of problems will be supported on Galapagos architecture.
 
 
 \todo{someone should read over this}
@@ -176,7 +176,7 @@ Rather they continuously select a few individuals, processes and returns them (o
 Older members of the population eventually disappear, based on some selection scheme, preventing the population from growing infinitely large.
 This erases the generational border, and has been shown to converge faster towards an optimal solution\TODO{TODO:cite our own research here, plus literature}.
 More specifically it allows the algorithm a possible way to work on both rated an unrated individuals at the same time.
-This approach is more suited for MIMD architectures, which is what galapagos is.
+This approach is more suited for MIMD architectures, which is what Galapagos is.
 
 The genetic algorithm used in the Barricelli computer is a continuous genetic algorithm.
 

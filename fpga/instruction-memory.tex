@@ -1,10 +1,10 @@
-The \Gls{barricelli} is a \Gls{harvard machine}. \cn
-The memory is split into instruction and data memory. \todo{is this because it's a harvard machine?}
+The \Gls{Barricelli} is a \Gls{Harvard machine}. \cn
+The memory is split into instruction and data memory. \todo{is this because it's a Harvard machine?}
 This is done to achieve better memory throughput, because both memories can be accessed simultaneously.
 The instruction memory is organized in a two layer memory hierarchy, with slower external memory (\gls{SRAM}) and faster, internal on-chip caches (\gls{BRAM}).
-This separation combines the high instruction thoughput of fast on-board memory wit the comfortably spaceous data storage capabilities of a larger, slower chip external chip.
+This separation combines the high instruction throughput of fast on-board memory wit the comfortably spacious data storage capabilities of a larger, slower chip external chip.
 
-Each fitness core has its own private instruction memory cache which buffers instructions to decrease the number of slow memory accesses needed during runtime.
+Each fitness core has its own private instruction memory cache which buffers instructions to decrease the number of slow memory accesses needed during run-time.
 Access to an instruction cache is handled by a fitness core's dedicated cache controller, which is responsible for locating and transferring instructions from the instruction memory.
 In case of a cache miss, the data-requesting core is halted until the instruction is transferred from memory.
 A pseudo-algorithm describing the cache fetch operation can be found in algorithm \vref{algorithm:cache-operation}.

@@ -6,7 +6,7 @@ Tournament selection is a selection scheme that aims to quickly find an individu
 These goals are healthy goals for a selection algorithm to have when used in a genetic algorithm.
 
 The tournament selection-based selection algorithm is precisely described in algorithm \vref{algorithm:tournament-selection}.
-In laymans terms, it is designed to select a single individual from a random position in the rated pool.
+In layman's terms, it is designed to select a single individual from a random position in the rated pool.
 The current best and the random selected is compared to each other with use of a comparator.
 The best chromosome is stored and used in the next tournament round.
 After some number of tournaments the current best is transferred to the crossover core.
@@ -16,7 +16,7 @@ The selection core is responsible for letting the rest of the genetic pipeline k
 \begin{algorithm}[H]
 \SetAlgoLined
 \DontPrintSemicolon
-\KwData{$ P = $ A pool of rated individuals, $ r = $ number of rounds in tornament (configurable, $ 0 \le r \le 31 $)}
+\KwData{$ P = $ A pool of rated individuals, $ r = $ number of rounds in tournament (configurable, $ 0 \le r \le 31 $)}
 \KwResult{A selected individual}
 \Begin{
     $ k \longleftarrow 0 $\;
