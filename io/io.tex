@@ -111,9 +111,8 @@ The main idea is that every IO device is required to define two functions in ord
 In order to enable sending messages between different IO units, the poll functions return a pointer which may point to any object in memory, which allows other modules to read the data given that they know what type of data the pointer points to.
 
 \section{Design decision}
-\subsection{Selection of microcontroller}
-The microcontroller chosen was chosen as it was the microcontroller we had available to test with on the development kit.
-It was also the microcontroller with most available GPIO pins for the package we had to use, which would give us the most possibilities for communication.
+This section contains a few key design decisions that were made during the process which have had an important impact on the project.
+This section mainly contains design decisions for the software on the SCU, for hardware design decisions see Section~\ref{pcb:design-choices}.
 
 \subsection{Operating system}
 Early in the process, a discussion arose about how it could be beneficial to run an operating system on the microcontroller such that familiar programs could be run directly on it.
