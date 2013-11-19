@@ -1,6 +1,6 @@
 \section{System Architecture}
 
-This section aims to provide a birds-eye overview of the system archictecture of the \Gls{barricelli} computer.
+This section aims to provide a bird's-eye view of the system archictecture of the \Gls{barricelli} computer.
 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{dmpro/Sketch 1 - System Overview.png}
@@ -8,13 +8,13 @@ This section aims to provide a birds-eye overview of the system archictecture of
 \label{figure:system-overview}
 \end{figure}
 
-The requirements in section \vref{section:requirements} stated that the \Gls{barricelli} should use an \gls{FPGA} and an microcontroller as system components.
+The requirements in section \vref{section:requirements} state that the \Gls{barricelli} should use an \gls{FPGA} and a microcontroller as system components.
 The \Gls{barricelli}'s specialized CPU design is implemented and compiled onto an \gls{FPGA}, and a microcontroller is used to facilitate Input/Output, control and communications between the \gls{FPGA} and the outside world.
 A graphical overview illustrating the system architecture can be found in figure \vref{figure:system-overview}.
 
 \section{Components}
 
-This section contains an exhaustive list of the components in figure \vref{figure:system-overview}, documenting their roles in the system architecture.
+This section contains a list of the components in figure \vref{figure:system-overview}, documenting their roles in the system architecture.
 
 \subsection{\gls{FPGA}}
 
@@ -25,7 +25,7 @@ The \gls{FPGA} is connected to its own external \gls{SRAM} memory.
 
 \subsection{\gls{SCU}}
 
-The \gls{SCU}, or System Control Unit, is an Energy Micro EFM32GG990F1024 microcontroller which administrates communication between the gls{FPGA} and the outside world.
+The \gls{SCU}, or System Control Unit, is an Energy Micro EFM32GG390F1024-BGA112 microcontroller which administrates communication between the gls{FPGA} and the outside world.
 It is the \gls{SCU}'s job to react to user input, to program the custom processor implemented on the FPGA and to perform other administrative duties.
 Having a separate microcontroller to perform these tasks minimises the complexity of the design implemented on the \gls{FPGA}, which means that more resources can be used to create a performant and clean custom processor design.
 
@@ -47,7 +47,8 @@ The serial link is an old standard and a comparatively slow way to transfer data
 
 \subsubsection{SD}
 
-\todo{What is it, what does it do in the system?}
+Secure Digital (SD) is a memory-card format chosen as a secondary backup as communications channel between the developers and the microcontroller.
+Should both the USB and serial ports fail, an SD card could be loaded with the desired instruction and data memory and be read by the microcontroller as if it were a bus.
 
 \subsubsection{LEDs}
 
