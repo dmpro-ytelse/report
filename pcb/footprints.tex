@@ -26,9 +26,7 @@ For components with standarized packages, Altium has an IPC compliant footprint 
 \end{center}
 \end{figure}
 
-We encountred one issue while designing footprints.
-The pads of footprint that was designed for polarized capasitor component EEE1HA1R0AR matched the size of components pins (they were in fact even smaller - 4.7mm vs max 5.5mm in specefication). 
-See figure \vref{figure:pol-cap-size-yo}.
+The footprint for the polarized capacitor components were designed to match the component's outline, resulting in a footprint barely being large enough to contain the actual component~\vref{figure:pol-cap-size-yo}.
 
 \begin{figure}
 \begin{center}
@@ -38,26 +36,7 @@ See figure \vref{figure:pol-cap-size-yo}.
 \end{center}
 \end{figure}
 
-This made soldering nontrivial. See figure \vref{figure:pol-cap-size-board}.
+This made soldering nontrivial.
+See \vref{figure:pol-cap-size-board}.
 
-To avoid this complication the pads on footprint should be designed to be longer than the pins.
-That will make the pads protrude under the actual component resulting in much simpler soldering.
-
-\paragraph{USB}
-
-the footprint for the micro-usb was found in the altium libary. 
-
-\todo{kan vi kutte denne?}
-\todo{as we can see in the picture, the usb have 4 pins that it uses. pin 1 is where the signal goes and.....}
-
-\paragraph{SD}
-
-The footprint for the SD-card was designed by the group. The reason for this was that appearently the sd-card interface is not standardized, so that 
-every manufacturer have their own design on the receptacles. 
-
-\todo{kan vi kutte denne?}
-
-\todo{FIND THIS PICTURE: the picture shows the interface of the SD card. the different pins that can be seen on the picture are a part of the standardized SD-protocol that every manufacturer have to follow...}
-
-
-
+To avoid this complication the pads on footprint should be designed to be larger than the pins so that the pads protrude beyond the actual component when it is placed on the PCB, resulting in simpler soldering.
