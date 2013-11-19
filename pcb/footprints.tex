@@ -26,9 +26,7 @@ For components with standarized packages, Altium has an IPC compliant footprint 
 \end{center}
 \end{figure}
 
-We encountred one issue while designing footprints.
-The pads of footprint that was designed for polarized capasitor component EEE1HA1R0AR matched the size of components pins (they were in fact even smaller - 4.7mm vs max 5.5mm in specefication). 
-See figure \vref{figure:pol-cap-size-yo}.
+The footprint for the polarized capacitor components were designed to match the component's outline, resulting in a footprint barely being large enough to contain the actual component~\vref{figure:pol-cap-size-yo}.
 
 \begin{figure}
 \begin{center}
@@ -38,10 +36,10 @@ See figure \vref{figure:pol-cap-size-yo}.
 \end{center}
 \end{figure}
 
-This made soldering nontrivial. See figure \vref{figure:pol-cap-size-board}.
+This made soldering nontrivial.
+See \vref{figure:pol-cap-size-board}.
 
-To avoid this complication the pads on footprint should be designed to be longer than the pins.
-That will make the pads protrude under the actual component resulting in much simpler soldering.
+To avoid this complication the pads on footprint should be designed to be larger than the pins so that the pads protrude beyond the actual component when it is placed on the PCB, resulting in simpler soldering.
 
 \paragraph{USB}
 
