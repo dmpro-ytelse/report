@@ -17,6 +17,14 @@ This error can be corrected by using one of our spare FPGA lines available on he
 A wire was pulled from FPGA\_HEADER78 to the header from the SCU, and this header cable allowed us to run the rest of the bus as planed.
 
 \subsection{ USB port }
+
+\begin{figure}
+\centering
+\includegraphics[width=5cm,keepaspectratio]{pcb/vreghack.jpg}
+\caption{The figure shows the ``hack'' that were made on the PCB in an attempt to fix the USB. Sadly the board were accidentally shortcircuted and died before this the hack could be fully verified to be working}
+\label{figure:vreghack}
+\end{figure}
+
 When the PCB came back from production, it was discovered that the USB was not connected to the microcontroller
 according to the recommended specifications from the manufacturer of the microcontroller. 
 The problem was that the signals USB\_VBUS and USB\_VREGI were not connected to the VBUS-pin on the USB receptacle. This was fixed by soldering copper wires on the capacitators designated as C18 and C17 to USB-HEADER2 (called VBUS\_ENABLE in the schematics).
