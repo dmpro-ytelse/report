@@ -1,17 +1,23 @@
-\section {Footprint}
+\section{Footprints} \label{pcb:footprints}
+This section details how various footprints for components used in the project were obtained.
 
-Here we will short (probably in list form with an introduction) explain how the footprints for the major components were found or deigned.
-This section is most of all here to help future similar projects, and to document our work.
+\subsection{Obtaining a footprint}
+Once a type of component has been decided upon for a project a specific instance of said component must be decided upon.
+In order for said component to fit onto the PCB and properly function, its footprint, must be placed somewhere on the PCB.
+The footprint is a kind of blueprint containing a component's outline and pads.
 
-Getting right footprints is a fairly easy task when working in Altium.
-It is worth checking out whether the footprint is already available somewhere on the manufacturers site.
-If it is available, it can simply be imported into the project and used.
-In case it is not available, Altium makes it really easy to design the footprint.
-The most important thing here is to get the right blueprint.
-All of our components had their blueprints in the manufacturers technical datasheets.
-Some manufacturers favor imperial system and some favor metric system.
-Attention should be payed to units when designing the footprint.
-Once one gets a hang of Altium PCB editor it takes surprisingly little time to create a footprint for a regular component.
+Obtaining a footprint for a component typically involves creating one manually or using a wizard based on the information contained in the component's datasheet.
+Some manufacturers make footprints for their components available on their websites, however they might not be available in a format that is understandable by whatever PCB design suite that is employed in the current project.
+Altium Designer (version 13.3) feature a browsable database of footprints for various components, all of which can be used immediately in any Altium project.
+
+If a component's footprint is not readily available it has to be created manually.
+The most important aspect of this process is to obtain the component's technical datasheet and examine it for a description of the component's package and dimensions.
+This is sometimes labeled as an outline drawing, suggested land pattern or package outline.
+It is important to notice what system the supplied measurements are in, as mixing for example imperial and metric units in a project could lead to unforseen incompatabilities.
+Once one gets a hang of Altium PCB editor it takes surprisingly little time to create a footprint.
+
+For components with standarized packages, Altium has an IPC compliant footprint wizard that generates footprints for a component given its package type and some package specific measurements available in the component's datasheet.
+
 
 We encountred one issue while designing footprints.
 The pads of footprint that was designed for polarized capasitor component EEE1HA1R0AR matched the size of components pins (they were in fact even smaller - 4.7mm vs max 5.5mm in specefication). 
@@ -34,5 +40,5 @@ The footprint for the SD-card was designed by the group. The reason for this was
 every manufacturer have their own design on the receptacles. 
 
 
-\todo{the picture shows the interface of the SD card. the different pins that can be seen on the picture are a part of the standardized SD-protocol that every manufacturer have to follow...}
+\todo{FIND THIS PICTURE: the picture shows the interface of the SD card. the different pins that can be seen on the picture are a part of the standardized SD-protocol that every manufacturer have to follow...}
 
