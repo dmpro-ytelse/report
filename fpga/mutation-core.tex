@@ -7,7 +7,7 @@ The mutation core takes in a forwarded child from the crossover core as input an
 \label{Fig_Mutation}
 \end{figure}
 
-In addition to the the 64-bit child, the mutation core also takes in a random\_number and a chance\_input as inputs. 
+In addition to the the 64-bit child, the mutation core also takes in a random\_number and a chance\_input as inputs. The random\_number is used for performing mutation, like allowing mutations, setting how many mutations will occur, and where, while the chance\_input is used to configure the chance of it to happen, or how often mutations happen on an avarage level. 
 Default size P for chance\_input is 6, and P + 26 for the random\_number is 32. 
 As it can be seen in the abstract example in figure \ref{Fig_Mutation}, all bits that are not mutated are represented by an A, and mutated bits are represented with M. 
 The values in each A or M can be 0 or 1, independent of each other. 
