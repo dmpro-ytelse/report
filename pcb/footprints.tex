@@ -1,7 +1,7 @@
 \section{Footprints} \label{pcb:footprints}
 This section details how various footprints for components used in the project were obtained.
 
-\subsection{Obtaining a footprint}
+\subsection{Obtaining footprints}
 Once a type of component has been decided upon for a project a specific instance of said component must be decided upon.
 In order for said component to fit onto the PCB and properly function, its footprint, must be placed somewhere on the PCB.
 The footprint is a kind of blueprint containing a component's outline and pads.
@@ -12,33 +12,27 @@ Altium Designer (version 13.3) feature a browsable database of footprints for va
 
 If a component's footprint is not readily available it has to be created manually.
 The most important aspect of this process is to obtain the component's technical datasheet and examine it for a description of the component's package and dimensions.
-This is sometimes labeled as an outline drawing, suggested land pattern or package outline.
+This is sometimes labeled as an outline drawing, suggested land pattern (suggested pad size) or package outline.
 It is important to notice what system the supplied measurements are in, as mixing for example imperial and metric units in a project could lead to unforseen incompatabilities.
 Once one gets a hang of Altium PCB editor it takes surprisingly little time to create a footprint.
 
 For components with standarized packages, Altium has an IPC compliant footprint wizard that generates footprints for a component given its package type and some package specific measurements available in the component's datasheet.
 
+Note that the pads in the footprints should be slightly larger than the component's pins to make soldering easier.
 
-We encountred one issue while designing footprints.
-The pads of footprint that was designed for polarized capasitor component EEE1HA1R0AR matched the size of components pins (they were in fact even smaller - 4.7mm vs max 5.5mm in specefication). 
-\todo{insert figure? ref figure? figure pol\_cap\_size\_footprint\_vs\_specs.png}
-This made soldering nontrivial.
-\todo{figure pol\_cap\_size\_on\_board.png}
-To avoid this complication the pads on footprint should be designed to be longer than the pins.
-That will make the pads protrude under the actual component resulting in much simpler soldering.
-
-USB:
+\paragraph{USB}
 
 the footprint for the micro-usb was found in the altium libary. 
 
-
+\todo{kan vi kutte denne?}
 \todo{as we can see in the picture, the usb have 4 pins that it uses. pin 1 is where the signal goes and.....}
 
-SD-CARD:
+\paragraph{SD}
 
 The footprint for the SD-card was designed by the group. The reason for this was that appearently the sd-card interface is not standardized, so that 
 every manufacturer have their own design on the receptacles. 
 
+\todo{kan vi kutte denne?}
 
 \todo{FIND THIS PICTURE: the picture shows the interface of the SD card. the different pins that can be seen on the picture are a part of the standardized SD-protocol that every manufacturer have to follow...}
 
