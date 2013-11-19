@@ -24,7 +24,10 @@ In the figure, the blocks labeled PU are induvidual processing units.
     \caption[
     Block-level overview of a MIMD computer with a shared memory model
     ]{
-    Block-level overview of a MIMD computer with a shared memory model\footnote{http://en.wikipedia.org/wiki/File:MIMD.svg}}
+    Block-level overview of a MIMD computer with a shared memory model.
+    \todo{footnotes inside figures don't work. Find some other way to indicate where the illustration was taken from}
+   % \footnote{http://en.wikipedia.org/wiki/File:MIMD.svg }
+   }
 \end{center}
 \end{figure}
 
@@ -43,9 +46,9 @@ In practice, this typically means NP-hard problems.
 Classical examples of hard problems for which genetic algorithms can find suitible approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.
 Efficiently finding good approximations to this class of problems is extremely important for many heavy instrustry processes such as planning and scheduling of processes, finding optimal placement and routing of components in microchip manufacturing, and many other business-critical tasks.
 
-The distringuising feature of a genetic algorithm compared to other heuristic search algorithms is how it performs its search: it mimics the natural process of evolution to find fit approximations in the search space.
+The distinguishing feature of a genetic algorithm compared to other heuristic search algorithms is how it performs its search: it mimics the natural process of evolution to find fit approximations within the search space.
 A genetic algorithm represents possible solutions to a given problem as individuals of a population.
-The individuals' fitness is calculated by a problem-specific fitness function, and fit individuals are combined together to create new individuals, mimicing the process of natural selection.
+The individuals' fitness is calculated by a problem-specific fitness function, and fit individuals are combined together to create new individuals, mimicking the process of natural selection.
 The idea is that after simulating a number of virtual generations of individuals, the fittest individual will have survived, and provides a good approximation to the solution.
 
 \subsection{Concepts and Definitions}
@@ -64,7 +67,7 @@ The fitness value of an individual is an evaluation of how close it is to the th
 
 \paragraph{Selection}
 Probabilistic selection of rated individuals allowed to reproduce.
-The probability of picking a certain individual is normally proportional to its fitness rating.
+The probability of picking a certain individual is typically proportional to its fitness rating.
 
 \paragraph{Crossover}
 Reproduction method involving combining individuals in some way to form a new individual (problem specific). 
@@ -86,17 +89,17 @@ Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a ge
     $ k \longleftarrow 0 $\;
     $ P_k \longleftarrow $ a population of $ n $ randomly-generated individuals\;
     Compute $fitness(i)$ for each $ i \in P_k $\;
-    \While{$ max(fitness(i) \in P_k) < threshold and k < maxIterations $}{
+    \While{$ max(fitness(i), i \in P_k) <  threshold $ AND $k < maxIterations $}{
         Selection:\;
         Select $ (1 - x_i) \times n $ members of $ P_k $ and insert them into $ P_{k + 1} $\;
 
         Crossover:\;
-        Select $ x_i \times n $ members of $ P_k $, pair them up, produce offspring, insert offspring into $ P_k $\;
+	Select $ x_i \times n $ members of $ P_k $, pair them up, produce offspring, insert offspring into $ P_{k+1} $\;
 
 
         Mutation:\;
         Mutate $ \mu \times n $ members of $ P_{k + 1} $\;
-        Compute $ fitness(i) $ for each $ i \in P_k $\;
+	Compute $ fitness(i) $ for each $ i \in P_{k+1} $\;
         $k \longleftarrow k + 1 $
     }
     \Return{the fittest individual in $ P_k $}
@@ -106,7 +109,6 @@ Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a ge
 \end{algorithm}
 \end{figure}
 
-\todo{tidy}
 
 \subsection{Generational Genetic Algorithms}
 
@@ -131,16 +133,34 @@ If however none of the individuals end up with a fitness value above the thresho
 The solution is found during several phases though a selection, crossover and a mutation phase. 
 These phases are used to evolve the population through several generations until an appropriate solution is found. 
 
-The selection core aim to chose individuals for reproduction based on their fitness score.The selection is constructed in such that higher fitness score equals higher probability of being chosen. This does not necessary mean that only the fittest individuals are allowed to reproduce. An important concept of the genetic algorithm is to achieve diversity while exploring the different solutions. Diversity is important to prevent the algorithm from reaching what is known as a local maximum. E.g stage where it is unable to evolve any further even though the solution found is far from being optimal.
+The selection core aims to choose individuals for reproduction based on their fitness score.
+The selection is performed in such a way that the probability of an individual being chosen scales with its fitness score.
+This does not necessary mean that only the fittest individuals are allowed to reproduce.
+An important concept of the genetic algorithm is to achieve diversity while exploring the different solutions.
+Diversity is important to prevent the algorithm from reaching what is known as a local maximum:
+A sort of evolutionary dead-end, a stage where the solution found is far from optimal but discovering a more optimal one would require several generations of devolving (selecting individuals with non-max fitness from the current population's descendents).
 
-The crossover core uses the individuals from the selection to cross the individuals to produce new individuals. Because of the initial diversity in the initial population, this will cause the diversity to be large in the beginning. However this will settle in further generations. The goal of the crossover phase is to converge against a solution by continuos creating better a better generation of individuals. There are several methods for achieving the crossover of individuals, however, the different methods will not be discussed in great detail here. The different algorithms are highly dependent on the task at hand. However, the different crossover methods implemented in the employed in the galapagos architecture will be discussed in greater detail in section \vref{fpga:subsection:genetic_pipeline}.
+The crossover core uses the individuals from the selection to cross the individuals to produce new individuals.
+Because of the initial diversity in the initial population, this will cause the diversity to be large in the beginning.
+However they will eventually converge.
+The goal of the crossover phase is to converge against a solution by continuously creating better a better generation of individuals.
+There are several methods for achieving the crossover of individuals, however, the different methods will not be discussed in great detail here.
+The different algorithms are highly dependent on the task at hand.
+However, the different crossover methods implemented in the employed in the galapagos architecture will be discussed in greater detail in section \vref{fpga:subsection:genetic_pipeline}.
 
-However as an precaution, the individuals are passed through yet another phase, mutation. The goal of the mutation state is ensure diversity by mutating the individuals by some probability. The mutation process is usually a simple one by just modifying some of the bits in the individual. As with the crossover method, algorithms also exist for performing the mutation. 
+As a precaution, the individuals are passed through yet another phase: mutation.
+The goal of the mutation is to ensure diversity by randomly mutating the individuals by some probability.
+The mutation process is usually a simple one that just modifies some of the bits in the individual.
+As with the crossover method, algorithms also exist for performing the mutation.
 
-Lastly, it is important to mention that there exist a lot of different classes of genetic algorithms. They usually use employ many different techniques for performing selection, crossover and mutation. The point of this project is not covering all of them. Actually, only a subset of problems will be supported on galapagos architecture. 
+
+Lastly, it is important to mention that there exists a lot of different classes of genetic algorithms.
+They usually employ many different techniques for performing selection, crossover and mutation.
+The point of this project is not covering all of them.
+In fact, only a subset of problems will be supported on galapagos architecture.
 
 
-\todo{Fix this section}
+\todo{someone should read over this}
 
 
 \subsection{Continuous Genetic Algorithms}
