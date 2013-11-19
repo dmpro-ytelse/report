@@ -106,6 +106,13 @@ This is visible in figure \todo{reference figure}.
 
 
 \paragraph{STORE\_SOURCE}
+For the \emph{ST} instruction, the register address of the data to be stored is located in the \emph{Rd} field of the instruction.  Normally, the register file would use the \emph{Rs} and \emph{Rt} part of the instruction as inputs to the register file. In the special case of a \emph{ST} instruction the register file must read the \emph{Rd} register instead of \emph{Rt}. This is accomplished by asserting the \emph{MEM_WRITE} signal, which causes a multiplexor to chose the \emph{Rd} portion of the instruction instead of the \emph{Rt} as input to the register file. 
+
+This will output the content of the correct data from the register file. This ensures that the\emph{Rt} signal seen in \ref{fpga:fig:fitness:fitness_arch} contains the content of the \emph{Rd} register. This is actually the data that is written to memory.
+
+\todo{Review this section}
+
+
 
 \todo{this}
 
