@@ -1,5 +1,5 @@
 A key component in any genetic algorithm is a decent source of (pseudo-)random numbers.
-Genetic algorithms require diversity in the individuals to prevent reaching a local maximum, as discussed in section (?) \todo{add me}. 
+Genetic algorithms require diversity in the individuals to prevent reaching a local maximum, as discussed in section \ref{background:generational_genetic_algorithms}. 
 To achieve this, the architecture need to support a way to produce random numbers for the genetic pipeline.   
 
 The Barricelli computer has a hardware pseudo-random number generator module built into its genetics accelerator.
@@ -9,7 +9,7 @@ Having high performance as a design goal\cn, it was desirable to design a pseudo
 
 The pseudo-random number generator uses a linear shift feedback-based taps algorithm to efficiently generate random numbers.
 
-The design is inspired by \todo{cite this: http://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/1999f/Drivers\_Ed/lfsr.html}.
+The design is inspired by the implementation made by Raymond Sung, Andrew Sung, Patrick Chan, and Jason Mah \footnote{http://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/1999f/Drivers\_Ed/lfsr.html}. 
 
 This algorithm is shown in algorithm \vref{algorithm:prng}.
 

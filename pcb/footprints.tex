@@ -19,24 +19,55 @@ Once one gets a hang of Altium PCB editor it takes surprisingly little time to c
 For components with standarized packages, Altium has an IPC compliant footprint wizard that generates footprints for a component given its package type and some package specific measurements available in the component's datasheet.
 
 \begin{figure}
-\begin{center}
+\centering
 \includegraphics[width=10cm,keepaspectratio]{pcb/pol_cap_size_footprint_vs_specs.png}
 \caption{Polarized capasitor footprint dimentions}
 \label{figure:pol-cap-size-yo}
-\end{center}
 \end{figure}
 
 The footprint for the polarized capacitor components were designed to match the component's outline, resulting in a footprint barely being large enough to contain the actual component~\vref{figure:pol-cap-size-yo}.
 
 \begin{figure}
-\begin{center}
+\centering
 \includegraphics[width=5cm,keepaspectratio]{pcb/pol_cap_size_on_board.png}
 \caption{Pads on footprint are smaller than pins of component}
 \label{figure:pol-cap-size-board}
-\end{center}
 \end{figure}
 
 This made soldering nontrivial.
 See \vref{figure:pol-cap-size-board}.
 
 To avoid this complication the pads on footprint should be designed to be larger than the pins so that the pads protrude beyond the actual component when it is placed on the PCB, resulting in simpler soldering.
+
+ \begin{table}[H]
+ \begin{center}
+ \begin{tabular}{| l | l | l |}
+ \hline
+ Component & Footprint source\\
+ \hline
+ Headers & Available in Altiums Miscellaneous Connectors \\
+ FPGA & Available at manufacturer's website \\
+ Serial port connector & Available in Altiums Miscellaneous Connectors \\
+ Serial port driver & Available in Altium Content Vault \\
+ Microcontroller & Available in Altium Content Vault \\
+ Power connector &  Available in Altiums Miscellaneous Connectors\\
+ Memory chip & Created with Altium \\
+ Leds &  Available at manufacturer's website\\
+ Crystal &  Created with Altium \\
+ micro USB connector &  \\
+ SD card receptacle & Created with Altium \\
+ Switches & Created with Altium \\
+ Transient voltage suppressor &  \\
+ ESD suppressors & \\
+ Noise suppressor &  \\
+ Ferrite Chip Beads &  \\
+ \hline
+ \end{tabular}
+ \caption{Footprints}
+ \label{table:footprints-available-and-not}
+ \end{center}
+ \end{table}
+
+\todo{finish the table  Transient voltage suppressor  ESD suppressors Noise suppressor Ferrite Chip Beads}
+
+The overview over components that we used and the way footprint for each of them was acquired is presented in a table. See \vref{table:footprints-available-and-not}
