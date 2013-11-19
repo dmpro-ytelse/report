@@ -7,7 +7,7 @@ Thus, a MIMD computer system consists of several fully independent processing un
 Each core/processor is able to work fully independently and asynchronously with their counterparts.
 Because of this MIMD lends itself quite well to high performance computing through parallelism.
 
-Communication between the different, possibly hetereogeneous independant computing units is either done by message passing, or sharing memory between processors.
+Communication between the different, possibly hetereogeneous independent computing units is either done by message passing, or sharing memory between processors.
 Computers that solve communication using message passing might not have any shared memory between the processing units at all.
 Each processing unit instead holds its own private memory.
 This is called a distributed memory model.
@@ -41,10 +41,10 @@ Examples of well-known MIMD computing platforms today include Intel's Larrabee p
 \section{Genetic Algorithms}
 \label{ga-algorithms}
 
-A genetic algorithm is a specific type of heuristic search algorithm that is very useful for finding approximate solutions to hard optimization and search problems.
+A genetic algorithm is a specific type of heuristic search algorithm that is very useful for finding approximate solutions for hard optimization and search problems.
 A hard problem in this context is a problem for which there exists no algorithm for feasibly computing a solution within a reasonable amount of time.
 In practice, this typically means NP-hard problems.
-Classical examples of hard problems for which genetic algorithms can find suitible approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.
+Classical examples of hard problems for which genetic algorithms can find suitable approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.
 Efficiently finding good approximations to this class of problems is extremely important for many heavy instrustry processes such as planning and scheduling of processes, finding optimal placement and routing of components in microchip manufacturing, and many other business-critical tasks.
 
 The distinguishing feature of a genetic algorithm compared to other heuristic search algorithms is how it performs its search: it mimics the natural process of evolution to find fit approximations within the search space.
@@ -57,24 +57,30 @@ The idea is that after simulating a number of virtual generations of individuals
 To fully understand the inner workings of the \Gls{barricelli}, it is useful to become aquainted with the basic concepts of genetic algorithms.
 This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
 
+\paragraph{Experiment}
+An attempt at solving a problem using a genetic algorithm.
+
 \paragraph{Individual}
-An individual is one possible solution to a given problem.
+One possible solution (good or bad) to a given problem.
 
 \paragraph{Population}
-A population is the group of all current individuals in a given experiment.
+The group of individuals in a given experiment.
 
 \paragraph{Fitness}
-The fitness value of an individual is an evaluation of how close it is to the theoretically perfect individual. It is calculated by an objective rating function.
+An evaluation of how close an individual is to the theoretically perfect individual.
+It is calculated by an objective rating function.
 
 \paragraph{Selection}
 Probabilistic selection of rated individuals allowed to reproduce.
 The probability of picking a certain individual is typically proportional to its fitness rating.
 
 \paragraph{Crossover}
-Reproduction method involving combining individuals in some way to form a new individual (problem specific). 
+The combination of individuals (parents) in some way to form a new individual (child).
+Also called reproduction.
 
 \paragraph{Mutation}
-Mutation of an individual. It is either random or based on specific rules (problem specific). 
+Mutation of an individual.
+It is either random or based on problem-specific rules. 
 
 \subsection{Pseudo-code for a General Genetic Algorithm}
 
