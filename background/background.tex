@@ -56,24 +56,30 @@ The idea is that after simulating a number of virtual generations of individuals
 To fully understand the inner workings of the \Gls{barricelli}, it is useful to become aquainted with the basic concepts of genetic algorithms.
 This subsection of the document defines some genetic algorithm concepts that are used elsewhere in the report.
 
+\paragraph{Experiment}
+An attempt at solving a problem using a genetic algorithm.
+
 \paragraph{Individual}
-An individual is one possible solution to a given problem.
+One possible solution (good or bad) to a given problem.
 
 \paragraph{Population}
-A population is the group of all current individuals in a given experiment.
+The group of individuals in a given experiment.
 
 \paragraph{Fitness}
-The fitness value of an individual is an evaluation of how close it is to the theoretically perfect individual. It is calculated by an objective rating function.
+An evaluation of how close an individual is to the theoretically perfect individual.
+It is calculated by an objective rating function.
 
 \paragraph{Selection}
 Probabilistic selection of rated individuals allowed to reproduce.
 The probability of picking a certain individual is typically proportional to its fitness rating.
 
 \paragraph{Crossover}
-Reproduction method involving combining individuals in some way to form a new individual (problem specific). 
+The combination of individuals (parents) in some way to form a new individual (child).
+Also called reproduction.
 
 \paragraph{Mutation}
-Mutation of an individual. It is either random or based on specific rules (problem specific). 
+Mutation of an individual.
+It is either random or based on problem-specific rules. 
 
 \subsection{Pseudo-code for a General Genetic Algorithm}
 
