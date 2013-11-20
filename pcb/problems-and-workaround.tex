@@ -16,9 +16,17 @@ Because of an error made during the routing of the board, the header pin for FPG
 This error can be corrected by using one of our spare FPGA lines available on headers.
 A wire was pulled from FPGA\_HEADER78 to the header from the SCU, and this header cable allowed us to run the rest of the bus as planed.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm,keepaspectratio]{pcb/enable_hack.jpg}
+\caption{For aesthetic appeal we 3D printed a bridge for the wire to run in}
+\label{figure:vreghack}
+\end{figure}
+
 \subsection{ USB port }
+
 \label{subsec:pcb:problem:usb}
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=10cm,keepaspectratio]{pcb/vreghack.jpg}
 \caption{The figure shows the ``hack'' that were made on the PCB in an attempt to fix the USB. Sadly the board were accidentally shortcircuted and died before this the hack could be fully verified to be working}
@@ -29,3 +37,7 @@ When the PCB came back from production, it was discovered that the USB was not c
 according to the recommended specifications from the manufacturer of the microcontroller. 
 The problem was that the signals USB\_VBUS and USB\_VREGI were not connected to the VBUS-pin on the USB receptacle. This was fixed by soldering copper wires on the capacitors designated as C18 and C17 to USB-HEADER2 (called VBUS\_ENABLE in the schematics).
 According to tests performed on the PCB before and after this work-around, the problem was fixed successfully.
+
+\todo{write about the oscillator?}
+
+\todo{write about the crystal -- this has been mentioned in another section already so just copy paste based on that}
