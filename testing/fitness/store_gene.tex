@@ -7,18 +7,18 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:   &  The program in listing \todo{create listing}, consisting mainly of 
+    How to test:   &  The program in listing \ref{testing:listing:store-gene}, consisting mainly of 
                        STORE GENE instructions. These are loaded into a test bench, and 
-                       simulated with ISim. The content of the rated pool is verified. 
-                       \todo{How ?}\\
+                       simulated with ISim. The content of the rated pool is verified. This is verified by performing a memory dump of the rated pool.
+                      \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Pass criteria: &  The gene and its corresponding fitness value is stored to the position specified by the distribution counter.  \\
+    Pass criteria: &  The memory dump contains an individual corresponding to the value 1 and with the corresponding fitness value of 2. These values are easily spotted when the initial values of the pool are randomly generated.     \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    Results: success &  \\
+    Results: & The store of the fitness and gene is confirmed by the memory dump.   \\
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   

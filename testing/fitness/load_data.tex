@@ -7,20 +7,20 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:   & The program in listing \todo{create listing}, consisting  of $LOAD$ and $STORE$
-                     instructions. These are loaded into a test bench, and simulated with 
-                     ISim. \\
+    How to test:   & The program in listing \ref{testing:listing:load}, consisting  of a $LOAD$ and $STORE$
+                     instruction. These are loaded into a test bench, and simulated with 
+                     ISim. The content of register r1 is verified. \\
                      
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Pass criteria: &  The stored values is loaded from memory and stored in registers. 
+    Pass criteria: &  The stored values is loaded from memory and stored in register r1. 
                       The values in the register corresponds to the data written and loaded 
-                      from memory. \\
+                      from memory, which is 1.\\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    Results: &  Success!\\
+    Results: &  Register r1 is loaded with the value 1. \\
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   
