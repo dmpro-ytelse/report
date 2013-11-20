@@ -24,10 +24,7 @@ In the figure, the blocks labeled PU are individual processing units.
     \label{figure:mimd-block-diagram}
     \caption[
     Block-level overview of a MIMD computer with a shared memory model
-    ]{
-    Block-level overview of a MIMD computer with a shared memory model.
-   http://en.wikipedia.org/wiki/File:MIMD.svg 
-   }
+    ]{Block-level overview of a MIMD computer with a shared memory model. Reproduced from \url{http://en.wikipedia.org/wiki/File:MIMD.svg}.}
 \end{center}
 \end{figure}
 
@@ -41,11 +38,18 @@ Examples of well-known MIMD computing platforms today include Intel's Larrabee p
 \section{Genetic Algorithms}
 \label{ga-algorithms}
 
+Searching is a well known problem in computer science, because it can be used to solve many other problems.
+It is possible to search through a collection of solutions to a problem, rather than finding the correct one by traditional means.
+This collection is known as the \Gls{search space}.
+It is generally easier to verify that a given solution to a hard problem is correct than finding the solution.
+A heuristic search tries to make the search more intelligent than looking at each parameter and comparing it to the other.
+
 A genetic algorithm is a specific type of heuristic search algorithm that is very useful for finding approximate solutions for hard optimization and search problems.
 A hard problem in this context is a problem for which there exists no algorithm for feasibly computing a solution within a reasonable amount of time.
 In practice, this typically means NP-hard problems.
 Classical examples of hard problems for which genetic algorithms can find suitable approximations include the Satisfiability Problem, the Traveling Salesman Problem and the Binary Knapsack Problem, to name a few.
 Efficiently finding good approximations to this class of problems is extremely important for many heavy industry processes such as planning and scheduling of processes, finding optimal placement and routing of components in microchip manufacturing, and many other business-critical tasks.
+
 
 The distinguishing feature of a genetic algorithm compared to other heuristic search algorithms is how it performs its search: it mimics the natural process of evolution to find fit approximations within the search space.
 A genetic algorithm represents possible solutions to a given problem as individuals of a population.
@@ -118,7 +122,11 @@ Algorithm \vref{algorithm:pseudo-code-for-ga} shows example pseudo code for a ge
 
 
 \subsection{Generational Genetic Algorithms} \label{background:generational_genetic_algorithms}
-Traditionally, genetic algorithms are implemented with discrete generations \TODO{TODO: cite hromcovic or something}. That means that an entire population of individuals are rated and combined to create a completely new population, and the old population is discarded. The generational genetic algorithm can be seen as performing five steps:
+Traditionally, genetic algorithms are implemented with discrete generations \cite{hromkovic}
+This means that after a loop in the genetic algorithm, a completely new generation has been created by crossover and mutation.
+The original population is replaced with the new one, and the algorithm continues only with the new population.
+
+Generational genetic algorithms can be seen as performing these steps:
 
 
 \begin{enumerate}
@@ -127,6 +135,7 @@ Traditionally, genetic algorithms are implemented with discrete generations \TOD
     \item Selection
     \item Crossover
     \item Mutation  
+    \item Loop back to step 2 with a newly created population.
 \end{enumerate}
 
 The initial population is normally made from randomly generated individuals.
@@ -139,14 +148,14 @@ If however none of the individuals end up with a fitness value above the thresho
 The solution is found during several phases though a selection, crossover and a mutation phase. 
 These phases are used to evolve the population through several generations until an appropriate solution is found. 
 
-The selection core aims to choose individuals for reproduction based on their fitness score.
-The selection is performed in such a way that the probability of an individual being chosen scales with its fitness score.
-This does not necessary mean that only the fittest individuals are allowed to reproduce.
+The selection step aims to choose individuals for reproduction based on their fitness score, meaning that a higher score gives a higher propability of being chosen.
+However, this does not necessary mean that only the fittest individuals are allowed to reproduce.
 An important concept of the genetic algorithm is to achieve diversity while exploring the different solutions.
-Diversity is important to prevent the algorithm from reaching what is known as a local maximum:
+Diversity is important to prevent the algorithm from reaching what is known as a local maximum, a result that has a comparative high fitness score for the immediate region in the \gls{search space}.
+
 A sort of evolutionary dead-end, a stage where the solution found is far from optimal but discovering a more optimal one would require several generations of devolving (selecting individuals with non-max fitness from the current population's descendents).
 
-The crossover core uses the individuals from the selection to cross the individuals to produce new individuals.
+In the crossover phase individuals from the selection are crossed to produce new individuals.
 Because of the initial diversity in the initial population, this will cause the diversity to be large in the beginning.
 However they will eventually converge.
 The goal of the crossover phase is to converge against a solution by continuously creating a better generation of individuals.
@@ -166,18 +175,15 @@ The point of this project is not covering all of them.
 In fact, only a subset of problems will be supported on Galapagos architecture.
 
 
-\todo{someone should read over this}
 
-
-\subsection{Continuous Genetic Algorithms}
-A new and better strategy is gaining traction in the literature.\TODO{TODO: find a citation for this}.\todo{what literature?}
-Continuous genetic algorithms do away with the concept of discrete generations.
+\subsection{Steady State Genetic Algorithms}
+Steady state genetic algorithms do away with the concept of discrete generations.
 Rather they continuously select a few individuals, process and return them (or their offspring) to the population.
 Older members of the population eventually disappear, based on some selection scheme, preventing the population from growing infinitely large.
-This erases the generational border, and has been shown to converge faster towards an optimal solution\TODO{TODO:cite our own research here, plus literature}.
-More specifically it allows the algorithm a possible way to work on both rated and unrated individuals at the same time.
-This approach is more suited for MIMD architectures, which is what Galapagos is.
+This erases the generational border, and has been shown to converge faster towards an optimal solution.
+More specifically it allows the algorithm a possible way to work on both rated and unrated individuals at the same time.\cite{steady-state}
+This approach is more suited for MIMD architectures, such as the architecture demonstrated in this project.
 
-The genetic algorithm used in the Barricelli computer is a continuous genetic algorithm.
+As steady state algorithms are faster and fitting for MIMD, it was chosen as the main algorithmic goal for the project.
 
 

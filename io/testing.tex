@@ -1,5 +1,12 @@
 \subsection{IO device tests}
 \test
+{Buttons \& LEDs}{
+    \item{Upload a program reading the state of all buttons and turning off the LEDs corresponding to the buttons pressed down while leaving the rest of the LEDs on}
+    \item{Try pressing the different buttons}
+}{All LEDs light up initially and turn off when the corresponding button is pressed.}
+{All LEDs light up initially and turn off when the corresponding button is pressed.}
+
+\test
 {Debug connection test}{
     \item{Connect the debug pins to the appropriate pins on the energy micro development kit}
     \item{Turn the debug to OUT}
@@ -9,16 +16,15 @@
 
 \test
 {SD Card test}{
-    \item{Edit the code from AN0030 to use correct pins}
+    \item{Edit the code from AN0030~\cite{an0030} to use correct pins}
     \item{Compile the code, upload and run it, with SD Card connected}
     \item{Confirm data on SD Card}
 }{File with string ``EFM32 ...the world's most energy friendly microcontrollers !'' is added to the SD Card.}
 {The file is not present.}
-\todo{Is this really our result?}
 
 \test
 {USB test}{
-    \item{Compile the code from AN0065~\ref{an0065}}
+    \item{Compile the code from AN0065~\cite{an0065}}
     \item{Upload and run it}
     \item{Run the supplied host PC program while connected to the PCB through USB}
 }{The host programs runs successfully}
@@ -26,28 +32,24 @@
 
 \test
 {Serial test}{
-    \item{Compile the code from AN0045~\ref{an0045}}
+    \item{Compile the code from AN0045~\cite{an0045}}
     \item{Upload and run it}
     \item{Connect the host PC to the PCB and run terminal emulator of choice}
 }{"Energy Micro RS-232 - Please press a key" appears in the terminal}
-{No output from program}
-
-\todo{Buttons \& LEDs? Aleready done, set LEDs 0-7 active if Buttons 0-7 are pressed}
+{No output in terminal}
 
 \subsection{FPGA bus}
-\todo{The setup of the busses}
 \test
 {SRAM test}{
-    \item{Write a value to an address}
+    \item{Write a value to a range of addresses}
     \item{Read the same address and compare with the value written}
 }{The values are identical}
-{}
+{Most of the values are identical, with some addresses reporting the wrong value}
 
 \test
 {Running a program}{
-    \item{Write data to memory address}
-    \item{Write simple program to change memory value}
-    \item{Let the CPU run for at least \todo{Make up number here} cycles/seconds}
-    \item{Read data}
-}{The value is as expected}
-{}
+    \item{Upload a program to fill the memory with fibonacci numbers}
+    \item{Let the CPU run for a while to ensure that somehting has been written to memory.}
+    \item{Read memory and check whether the fibonacci numbers are stored, the first on adress 0, the next on the next address and so on.}
+}{A sequence of fibonacci numbers in the memory.}
+{Seemingly random data read from the memory}

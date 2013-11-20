@@ -10,3 +10,6 @@
 [submodule "GAS-programs"]
 	path = GAS-programs
 	url = git@github.com:dmpro-ytelse/GAS-programs.git
+[submodule "continuous-ga-test"]
+	path = continuous-ga-test
+	url = git@github.com:dmpro-ytelse/continuous-ga-test.git

@@ -123,30 +123,31 @@ It was therefore decided that running an OS was unnecessary as there were few re
 \subsection{FPGA Communication}
 During the initial design phase, the link between the FPGA and SCU was designed to be as simple as possible.
 The final version was the the 41 wires mapping all the signals needed for directly accessing the SRAM chips.
-\todo{Make up some reasons here, should probably defend not using EBI}
+
+In retrospect, using the built-in \gls{EBI} on the microcontroller would have made the job of accessing the FPGA's memory easier, letting the microcontroller map the contents of the different chips automatically to different memory regions.
+The main reason for not designing with EBI in mind was lack of knowledge of what it could offer in terms of ease of development.
+Another reason for not looking more into it was the fact that since we had a large enough bus, the code for communicating with the SRAM chips was quite simple, with the microcontroller not being fast enough that timing should be an issue.
 
 \section{Issues}
 \subsection{Crystal}
 In the design phase it was decided to go with just a single high frequency crystal oscillator.
-Unfortunately the crystal that was selected had a clock frequency in the kHz range, instead of the MHz range, which was what was intended.
+Unfortunately the crystal that was selected had a clock frequency in the kHz range, instead of the MHz range, which was what was required to drive the high frequency crystal port.
 Luckily the microcontroller has a built-in RC oscillator, so the crystal oscillator was not essential to get code running on the microcontroller.
+A higher I/O throughput could have been achieved with the increased frequency the crystal oscillator would have given, but adding a high frequency crystal would have required a new PCB card.
 
-\subsection{USB Circuitry not working}
-While mapping the PCB circuitry, only the pins available for GPIO were included initially, but this did not include the vbus and vregi pins.
-The pins were connected to capacitors, and a quick hack soldering the appropriate lines to the USB header was tried without success.
-
-\subsection{No UART}
-The microcontroller believes that data is being outputted and calls the data sent callback function.
-There also seems to be a signal going out to the RS-232 interface, but there is no data being received on the other end.
+\subsection{I/O units failing}
+As written in Section~\ref{subsec:pcb:problem:usb}, we never got USB working on one of our PCB boards.
+While falling back to UART, the code running on the microcontroller seemed to be pushing data out to the UART circuitry, but there did not seem to be any signal going out through the cable.
+Before managing to find a solution, yet another PCB board failed and it was decided to rely on the debug link to send data to the computer as the deadline approached.
 
 \todo{no SD card}
 
-\subsection{Memory access}
-\todo{Diagnostics, possibly not just here/not here at all.}
-Tried:
+\subsection{FPGA Memory access issues}
+\todo{6AM?}
 \begin{itemize}
     \item Adding delays
     \item Reading immediately after write to verify write,
     \item Mapping control signals to LED on FPGA to verify that they work
     \item Flashing the instruction memory on the FPGA so we just have to read data memory, not write
+    \item Logic analyzer
 \end{itemize}

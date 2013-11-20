@@ -1,5 +1,23 @@
 This section section describes the results of different measurements, calculations and tests that were run on the Barricelli computer.
-It also documents the different demonstration programs that showcase and illustrate Barricelli's purpose through practical use.
+It also documents the different demonstration programs that showcase and illustrate Barricelli's purpose through practical use, as well as research done in the design of Barricelli.
+
+\section{Research}
+
+\subsection{Steady State Genetic Algorithm}
+A big question in the design of the architecture, was how to implement the genetic algorithm.
+As \vref{fr7} states, the instruction set should include instructions to speed up genetic operations.
+To fulfill this requirment, the algorithm would have to be directly integrated with the computer.
+
+In the research, some papers were found that discussed Steady State Genetic Algorithms.\cite{vlsi-ga}
+As these were described as being advantageous on a MIMD architecture, there was interest in further research.
+However, few citations were found on how steady state algorithms performancewise related to traditional genetic algorithms.
+This section documents an original research on Steady State, where both a generational and a steady state solver was implemented in Python, and used to solve a problem.
+
+\subsubsection{Problem}
+\lstinputlisting[language=Python, caption={Genetic problem}]{continuous-ga-test/problems.py} \label{problems-ga}
+
+\subsubsection{Solvers}
+\lstinputlisting[language=Python, caption={Generational and steady state solvers}]{continuous-ga-test/solvers.py} \label{solvers-ga}
 
 \section{Measurements}
 

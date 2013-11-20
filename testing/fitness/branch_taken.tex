@@ -7,7 +7,7 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:   &  The program in listing \todo{create listing}, is loaded into a test bench.
+    How to test:   &  The program in listing \ref{testing:listing:branch-taken}, is loaded into a test bench.
                       This simple program consists of a simple loop performing some arithmetic
                       operations that store values to registers. The execution of the
                       program is simulated with ISim to verify the result \\
@@ -15,14 +15,15 @@
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
     Pass criteria: &  The branch is taken. The instructions located in the $fetch stage$, 
-                       $decode stage$, and $execute stage$ are flushed. The results in registers
-                       should be X, X, and X in registers X, X and X, respectively. \\
+                       $decode stage$, and $execute stage$ are flushed. The result in register r1 equals 1. 
+                       The r1 register is not incremented. \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    Results: &  Registers X, X, and X is contained in the registers. The instructions in $fetch
+    Results: &  Register r1 contains the value 1. The instructions in $fetch
                 stage$, $decode stage$ and $execute stage$ does not perform any  
-                changes to the register file. \\
+                changes to the register file. Thus the value in register r1 continuous to contain the
+                value 1.  \\
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   

@@ -6,18 +6,17 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:   & The program in listing \todo{Create listing}, consisting of mainly of
+    How to test:   & The program in listing \ref{testing:listing:store}, consisting of mainly of
                     STORE instructions. These are loaded into a test bench, and simulated with
                     ISim. The memory dump is read after the simulation. \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Pass criteria: & The memory dump reflects the stored with the instructions. E.g 
-  the memory dump contains x, x , x , x at positions y, y, y, y\\
+    Pass criteria: & The memory dump shows that value 1 was stored to address zero. \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    Results: &  Success!\\
+    Results: &  The value of address zero is 1. \\
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   
