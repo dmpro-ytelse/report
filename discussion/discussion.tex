@@ -3,7 +3,7 @@
 The Barricelli computer is designed to be a device for high performance parallel computing.
 Throughout the design process, choices have been made that further this goal.
 
-The computer architechture is capable of executing multiple independent instruction streams working on multiple different independent data streams, which means that parallelism can be exploited to a large degree to achieve a high computational throughput.
+The computer architecture is capable of executing multiple independent instruction streams working on multiple different independent data streams, which means that parallelism can be exploited to a large degree to achieve a high computational throughput.
 A heterogenic collection of cores, some general, and some working as specialized accelerators, combines the allround-ness and usability of general computing with the at times extreme performance boosts given by specialized workers.
 
 The general cores have been designed to exploit instruction-level parallelism, iwth features such as pipelining, hazard detection and correction using forwarding, and branch prediction.
@@ -26,7 +26,8 @@ As the number of fitness cores increases, the number of accelerators should also
 
 \subsection{Average Instructions per Cycle}
 
-In optimal condititons, i.e. the pipeline is filled, and no register spilling occurs, the processor can execute $ n $ instructions per cycle, where $ n $ is the number of processors.
+In optimal condititons, i.e.
+the pipeline is filled, and no register spilling occurs, the processor can execute $ n $ instructions per cycle, where $ n $ is the number of processors.
 In the designed protoype of Barricelli, this means that the maximum instructions per second is $ 7 cores * 50Mhz = 350 000 000 $, or 350 Mega-instructions per second.
 
 \section{Energy Efficiency}
@@ -36,12 +37,13 @@ In this section theory related to MIMD architectures and how to further improve 
 This also covers the discussions inside the group about the design of the architecture in the planning phase of the project.
 \subsection{SPMD and concurrency}
 One of the first discussions that came up in the group after the assignment were given was if the processor cores should
-be able to synchronize themselves. By doing this, the processor cores would be able to execute code that is not completely independent in parallel in an elegant way.
+be able to synchronize themselves.
+By doing this, the processor cores would be able to execute code that is not completely independent in parallel in an elegant way.
 However this also raises some issues as for instance data hazards.
 
 
 \subsection{Concurrency} 
-
+\todo{fill out this section or remove it}
 
 
 
@@ -49,19 +51,47 @@ However this also raises some issues as for instance data hazards.
 \subsection{using CISC or RISC ISAs}
 CISC and RISC instruction set architectures are two very different ways of thinking when it comes to creating instruction sets.
 While in the last years, RISC ISAs have been the most dominant instruction set architecture, we can also see that CISC architectures
-are on their way back into the markets. Some of the reasons for this is that increasing parallelism is gaining lesser performance increases.
+are on their way back into the markets.
+Some of the reasons for this is that increasing parallelism is gaining lesser performance increases.
 
 \subsubsection{micro operations: a bridge between Complex and reduced instruction sets}
-The use of micro operations is based on the principle that you want to convert a complex instruction into a set of smaller micro operations. This
-may simplify the design of for instance a super scalar processor because dependencies between the converted micro instructions would already be known. 
+The use of micro operations is based on the principle that you want to convert a complex instruction into a set of smaller micro operations.
+This
+may simplify the design of for instance a super scalar processor because dependencies between the converted micro instructions would already be known.
+
 
 \subsection{Memory management policies}
 
-The Galapagos architecture operates with several types of shared memory: \emph{instruction memory}, \emph{data memory}, \emph{instruction caches}, \emph{rated pool} and \emph{unrated pool}. These types of memories  can further be divided into two groups: memory and genetic related. These two groups are connected to separate data and address buses. The access to these buses are handled by a request-acknowledgement protocol. The responsible of this protocol is to control the access to the shared memories and their respective buses. The protocol is based in the ideas of round-robin scheduling. The request lines are continuously polled by the controllers in a round-robin fashion. The reason for choosing this algorithm is because it is considered to be fair. Since each request line is checked in turn, the algorithm is considered starvation free. A requesting core will eventually get its request handled by the controllers. 
+The Galapagos architecture operates with several types of shared memory: \emph{instruction memory}, \emph{data memory}, \emph{instruction caches}, \emph{rated pool} and \emph{unrated pool}.
+These types of memories  can further be divided into two groups: memory and genetic related.
+These two groups are connected to separate data and address buses.
+The access to these buses are handled by a request-acknowledgement protocol.
+The responsible of this protocol is to control the access to the shared memories and their respective buses.
+The protocol is based in the ideas of round-robin scheduling.
+The request lines are continuously polled by the controllers in a round-robin fashion.
+The reason for choosing this algorithm is because it is considered to be fair.
+Since each request line is checked in turn, the algorithm is considered starvation free.
+A requesting core will eventually get its request handled by the controllers.
 
-Since all the cores access the same memories this solution will, however, turn out to be quite slow. Note that every core is in fact competing for the access to memory. For memory intensive problems this bottleneck will be quite visible. Every time cores wishes to perform simultaneously some memory access only one of them will be granted access. For instance, consider a system with five cores. If these cores have a relatively frequent memory access pattern it pretty self explanatory that this will cause the the different cores being idle most of the time. This will imply that the memory scheme in the galapagos architecture does not scale very well. This implies that the more cores that are present the less performance would be achieved. 
 
-A possible solution for this problem would have been keeping separate data caches for each core. Then the cores could have been using the data located in the caches instead of accessing the memory so frequently. When first accessing the memory, the core could have loaded several data elements instead of just one word for each request. This would surely been an improvement for the memory system employed in the baracelli currently. This would, however, been very difficult to achieve, and is not in the scoop of this assignment. Private data caches would require implementing cache coherence algorithms for keeping the caches consistent. This is considered very difficult. 
+Since all the cores access the same memories this solution will, however, turn out to be quite slow.
+Note that every core is in fact competing for the access to memory.
+For memory intensive problems this bottleneck will be quite visible.
+Every time cores wishes to perform simultaneously some memory access only one of them will be granted access.
+For instance, consider a system with five cores.
+If these cores have a relatively frequent memory access pattern it pretty self explanatory that this will cause the the different cores being idle most of the time.
+This will imply that the memory scheme in the galapagos architecture does not scale very well.
+This implies that the more cores that are present the less performance would be achieved.
+
+
+A possible solution for this problem would have been keeping separate data caches for each core.
+Then the cores could have been using the data located in the caches instead of accessing the memory so frequently.
+When first accessing the memory, the core could have loaded several data elements instead of just one word for each request.
+This would surely been an improvement for the memory system employed in the baracelli currently.
+This would, however, been very difficult to achieve, and is not in the scoop of this assignment.
+Private data caches would require implementing cache coherence algorithms for keeping the caches consistent.
+This is considered very difficult.
+
 
 \todo{Ideas ? }
 
@@ -71,9 +101,25 @@ A possible solution for this problem would have been keeping separate data cache
 
 
 \subsubsection{Cache Coherency}
-MIMD architecture use a shared memory models. This imposes a problem when using caches, and memory in general. When more core updates on the same values on the same memory positions; memory collisions occur. These problems can be fixed by enforcing that only one core is able to access the memory at any given time. A far more difficult problem is the problem of cache coherence. Cache coherency issues occurs when several cores have private caches containing the same data, and some core changes the data. Then the data in the caches is not consistent among the cores. In order for the data to be consistent, in this example, is for each core having the same data. Note that same data in this context mean data from the same memory location. 
+MIMD architecture use a shared memory models.
+This imposes a problem when using caches, and memory in general.
+When more core updates on the same values on the same memory positions; memory collisions occur.
+These problems can be fixed by enforcing that only one core is able to access the memory at any given time.
+A far more difficult problem is the problem of cache coherence.
+Cache coherency issues occurs when several cores have private caches containing the same data, and some core changes the data.
+Then the data in the caches is not consistent among the cores.
+In order for the data to be consistent, in this example, is for each core having the same data.
+Note that same data in this context mean data from the same memory location.
 
-The Galapagos architecture does not support private data caches. This design choice relieves the processor designer of implementing advanced cache coherency algorithms in hardware. Instead of private data caches the Galapagos architectures employ shared pools for rated and un-rated chromosomes. These are connected to a bus and the connected through the \emph{genetic controller}. The controller is configured to only allow one core perform its operation on one of the pools at any given time. This implies that read and write operations are atomic. As a direct consequence cache coherency issues are not possible in the architecture. 
+
+The Galapagos architecture does not support private data caches.
+This design choice relieves the processor designer of implementing advanced cache coherency algorithms in hardware.
+Instead of private data caches the Galapagos architectures employ shared pools for rated and un-rated chromosomes.
+These are connected to a bus and the connected through the \emph{genetic controller}.
+The controller is configured to only allow one core perform its operation on one of the pools at any given time.
+This implies that read and write operations are atomic.
+As a direct consequence cache coherency issues are not possible in the architecture.
+
 \todo{fix}
 
 
@@ -81,7 +127,8 @@ The Galapagos architecture does not support private data caches. This design cho
 
 
 
-All the others just have to wait. If this scenario 
+All the others just have to wait.
+If this scenario 
 
 
 
