@@ -1,29 +1,23 @@
 \section {Design Process}
 
-Here the design process is introduced.
-
-\subsection{System design} \label{pcb:process:ss:system_design}
-
-Here we will talk about how the system itself is designed on a logical level.
-
-\todo{are these ideas todos, or have they been written about?}
-
-some write ideas:
---had to make several footprint ourselves:SD card
---no back ground knowledge at all
---hard to verify/test design
-
 \subsection{PCB design and routing} \label{pcb:process:ss:pcb_design_and_soldering}
 
 Here we will talk about how the design was transferred to the PCB, what problems were discovered in this process and how they were solved.
 
-In the planning phase, the group estimated that the design of the PCB and the routing process using the auto-router, would take about 3-4 days. However in reality it took much longer then estimated. The reason for this was that several
-problems were encountered during the design phase and routing of the PCB. After the first auto-routing run, it was discovered that the auto-router violated several design constraints for the board. It was then tried to reroute the board several times
-with different options in an attempt to fix the problem. Since the auto routing process took about six hours on the lab computers, the group decided to use more powerful private computers to do the routing. This reduced the time it takes for auto-routing from about 6 hours to 1.
+In the planning phase, the group estimated that the design of the PCB and the routing process using the auto-router, would take about 3-4 days.
+However in reality it took much longer than estimated.
+The reason for this was that several problems were encountered during the design phase and routing of the PCB.
+After the first auto-routing run, it was discovered that the auto-router had violated several design constraints for the board.
+It was then tried to reroute the board several times with different options in an attempt to fix the problem.
+Since the auto routing process took about six hours on the lab computers, the group decided to use more powerful private computers to perform the routing.
+This reduced the time it takes for auto-routing from about 6 hours to 1.
 
-After some attempts on the auto-router, the group decided to manually route the last signals in addition to fix the constraint violations. This was a time consuming process, but during this, several serious design flaws were uncovered which would have costed
-more time due to the need to produce new boards. Among the errors that were discovered, was that the footprint for the microcontroller was wrong. Several of the capacitors were also unconnected, or just connected in a wrong way. This means that even though the manual routing of the PCB took longer,
-the discovery of the design flaws probably saved us some time in total.
+After some attempts with the auto-router, the group decided to manually route the last signals in order to fix the constraint violations.
+This was a time consuming process, but during this, several serious design flaws were uncovered which would have cost more time due to the need to produce new boards.
+Among the errors that were discovered, was that the footprint for the microcontroller was wrong: the diameter of the ball pads on the footprint were larger than its data sheet recommended they be.
+Several of the capacitors were also unconnected, or just connected in a wrong way.
+This means that even though the manual routing of the PCB took longer, the discovery of the design flaws probably saved us some time in total.
+
 \subsection{Soldering} \label{pcb:process:ss:soldering}
 
 Here we will talk about the soldering process and how we worked with that.
