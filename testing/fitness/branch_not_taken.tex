@@ -7,19 +7,19 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:   &  The program in listing \todo{create listing}, is loaded into a test bench. 
+    How to test:   &  The program in listing \ref{testing:listing:branch-not-taken}, is loaded into a test bench. 
                        The simple program consists of conditionals that evaluate to false. The
                        execution of the program is simulated with ISim, and the results are
                        verified. \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Pass criteria: & Execution of the program does not store any data to the registers.
-    The instructions are flushed.\\
+    Pass criteria: & The conditional jump is not taken. The values of r1 should be incremented
+    until reaching the value of 4.\\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    Results: &   No data is stored to registers. Instruction are invalidated.\\
+    Results: &   Register r1 contains 4 after end of simulation.\\
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   \end{tabular}

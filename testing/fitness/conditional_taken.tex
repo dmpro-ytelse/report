@@ -7,19 +7,20 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:  & The program in listing \todo{create listing}, is loaded into test bench. The 
-                    simple program consists of a set with simple conditional instructions that
+    How to test:  & The program in listing \ref{testing:listing:conditional-executed}, is loaded into test bench.     The 
+                    simple program consists an \emph{ADDI} and  an conditional \emph{ADDI} instruction that
                     always evaluate to true. The execution of the program is simulated with ISim, 
-                    and the result is verified. 
+                    and the result is verified. More specifically, the content of register r1 are verified. 
     \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Pass criteria: & The instructions propagates normally through the pipeline. The different instruction are executed and their results are written to the register file. \\
+    Pass criteria: & The first \emph{ADDI} results in the r1 to be incremented with 1. The second
+    instruction, the conditional, increments the value of r1 to 2. \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    Results: &  \\
+    Results: &  The contents of register r1 is 2. This proves that the conditional instruction was executed. \\
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   

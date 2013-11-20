@@ -7,18 +7,18 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:   &  The program in listing \todo{create listing}, is loaded into a test bench. 
+    How to test:   &  The program in listing \ref{testing:listing:conditional-not_executed}, is loaded into a test bench. 
                        The simple program consists of a set of simple conditional instructions that         
                        always evaluate to false. The execution of the program is observed in 
-                       ISim,and the results are verified. \\
+                       ISim,and the results are verified. The content of register r1 is observed.\\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    Pass criteria: & No instructions are executed. The state of the registers remain unchanged.\\
+    Pass criteria: & The second instruction, the conditional \emph{ADDI}, is not executed. The content of register r1 is 1.  \\
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
     
-    Results: & No results are written.  \\
+    Results: & The content of register r1 is 1. The conditional \emph{ADDI} instruction is not executed. .  \\
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   
