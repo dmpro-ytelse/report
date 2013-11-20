@@ -143,11 +143,15 @@ Before managing to find a solution, yet another PCB board failed and it was deci
 \todo{no SD card}
 
 \subsection{FPGA Memory access issues}
-\todo{6AM?}
-\begin{itemize}
-    \item Adding delays
-    \item Reading immediately after write to verify write,
-    \item Mapping control signals to LED on FPGA to verify that they work
-    \item Flashing the instruction memory on the FPGA so we just have to read data memory, not write
-    \item Logic analyzer
-\end{itemize}
+At first, communicating with the memory on the FPGA seemed fine.
+However, it soon became obvious that we were not able to reliably read or write to the memory.
+Writing to and then subsequently reading the entire memory showed that we were either not able to successfully write to and/or reading the entire memory.
+
+The first thing that was tried to fix this was to increase all the delays on reads and writes, to allow signals to stabilise, but this showed little improvement.
+Checking the signals sent with a logic analyzer showed that the memory should have enough time to update before the write signal was disabled.
+
+The write routine was also updated to write the memory and then immediately reading the same adress to verify that the correct data had been written, redoing it if it hadn't.
+This did not fix out problems, as reading the memory later gave different results.
+
+In order to verify that reading the memory did not work, the FPGA was flashed with a program already in it's memory.
+Reading the entire memory showed that while we managed to correctly read many of the addresses, some still gave wrong data.
