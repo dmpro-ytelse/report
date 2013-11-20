@@ -10,14 +10,14 @@ That is, the system's PCB design looks sound on paper and the processor has been
 However we were unable to deliver a functioning physically integrated version of the system because the ones we produced were eventually bricked for various reasons.
 Even so, we still fulfilled all our functional and non-functional requirements because as it turns out none of these require a working, physically integrated\footnote{with all the components soldered on} system.
 
-Our goal of constructing a general MIMD computer capable of solving hard problems using genetic algorithms was met.\todo{this should probably be elaborated on}
+Our goal of constructing a general MIMD computer capable of solving hard problems using genetic algorithms was met.
 
 It is capable of receiving instructions and data from external entities through the debug pins.
 The USB, SD and serial ports were not successfully tested due to the problems with the PCB.
 
-\todo{fpga: maximized performance?}
+We implemented performance increasing techniques that would not overly complicate the design.
 
-\todo{fpga: mention the instruction set}
+The Galapagos instruction set includes instructions to load and store genes from and to a genetics pool, which have eased the task of working with genetic algorithms with the instruction set.
 
 
 Soldering all the required components -- including the Xilinx FPGA and ``Energy Micro'' (now Silicon Labs) microcontroller --  onto the system took approximately eight hours.
