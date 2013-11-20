@@ -17,8 +17,6 @@ This tool enabled tests to be written using easy-to-use self-evaluating tests th
 The goal of these unit tests is to ensure that the building block components work as expected when reacting to specified input.
 
 Screenshots of simulations of these tests can be found in Appendix \ref{appendix:test-bench-documentation}.
-\todo{ Make sure screenshots of as many tests as possible are available. If not, then we probably have to do references from the following tables}
-\todo{we need to stash results somewhere}.
 
 \subsubsection{Fitness Core Components}
 
@@ -28,7 +26,6 @@ Screenshots of simulations of these tests can be found in Appendix \ref{appendix
 
 \subsubsection{Genetic Pipeline Components}
 \paragraph{Selection Core}
-\todo{ Insert text and tables for components used in Genetics Pipeline}
 
 \input{testing/components/geneticpipeline/selection_core}
 
@@ -58,8 +55,6 @@ The goal of these tests are to verify that the different subcomponents interface
 
 The toplevel simulation test bench of the Barricelli computer, which simulates the entire FPGA as a black box interfacing against the external components, supports pre-loading entire programs into a mocked instruction memory component.
 The \Gls{galapagos assembler} supports outputting assembled programs compiled to one of these mock memory components, meaning that testing new programs in a simulated environment is an easy and fun process.
-
-\todo{the title of the test should be above the table in which its results are displayed, not just as the caption (rendered below) of the table}
 
 A formal description of the system tests performed at this level can be found in tables
 \ref{testing:fitness:pipeline_test},
@@ -111,14 +106,13 @@ When this test was conducted on the first board that were soldered, it came out 
 \subsection{The Pseudo-Random Number Generator}
 
 
-The pseudo-random number generator designed for the Barricelli has been tested extensively with a pseudo-random number generator test suite called DieHarder\cn.
+The pseudo-random number generator designed for the Barricelli has been tested extensively with a pseudo-random number generator test suite called DieHarder\cite{dieharder}.
 DieHarder is a test suite which measures the ``goodness'' of a pseudo-random number generator based a number of criteria.
-\todo{ what are these criteria?}
 
-The algorithm was implemented in python and tested against the DieHarder integration suite\cn.
+The algorithm was implemented in python and tested against the DieHarder integration suite.
 
 The shift-based algorithm used in the pseudo-random number generator scores quite poorly in the DieHarder tests when every single bit of the output is used.
-However, by only using every 7th number\cn, the algorithm ranks quite well.
+However, by only using every 7th number, the algorithm ranks quite well.
 A condensed DieHarder test result overview can be found in Table \vref{table:dieharder-results}.
 The descriptions in the table are modified from the descriptions in the output of the DieHarder test suite.
 
