@@ -36,7 +36,23 @@ may simplify the design of for instance a super scalar processor because depende
 
 \subsection{Memory management policies}
 
-The Galapagos architecture operates with several types of shared memory: \emph{instruction memory}, \emph{data memory}, \emph{instruction caches}, \emph{rated pool} and \emph{unrated pool}. These types of memories  can further be divided into two groups: memory and genetic related. These two groups are connected to separate data and address buses. The access to these buses are handled by a request-acknowledgement protocol. The responsible of this protocol is to control the access to the shared memories and their respective buses. The protocol is based in the ideas of round-robin scheduling. The request lines are continuously polled by the controllers in a round-robin fashion. The reason for choosing this algorithm is because it is considered to be fair. Since each request line is checked in turn, the algorithm is considered starvation free. A requesting core will eventally get its request handled by the controllers. 
+The Galapagos architecture operates with several types of shared memory: \emph{instruction memory}, \emph{data memory}, \emph{instruction caches}, \emph{rated pool} and \emph{unrated pool}. These types of memories  can further be divided into two groups: memory and genetic related. These two groups are connected to separate data and address buses. The access to these buses are handled by a request-acknowledgement protocol. The responsible of this protocol is to control the access to the shared memories and their respective buses. The protocol is based in the ideas of round-robin scheduling. The request lines are continuously polled by the controllers in a round-robin fashion. The reason for choosing this algorithm is because it is considered to be fair. Since each request line is checked in turn, the algorithm is considered starvation free. A requesting core will eventually get its request handled by the controllers. 
+
+Since all the cores access the same memories this solution will, however, turn out to be quite slow. Note that every core is in fact competing for the access to memory. For memory intensive problems this bottleneck will be quite visible. Every time cores wishes to perform simultaneously some memory access only one of them will be granted access. For instance, consider a system with five cores. If these cores have a relatively frequent memory access pattern it pretty self explanatory that this will cause the the different cores being idle most of the time. This will imply that the memory scheme in the galapagos architecture does not scale very well. This implies that the more cores that are present the less performance would be achieved. 
+
+A possible solution for this problem would have been keeping separate data caches for each core. Then the cores could have been using the data located in the caches instead of accessing the memory so frequently. When first accessing the memory, the core could have loaded several data elements instead of just one word for each request. This would surely been an improvement for the memory system employed in the baracelli currently. This would, however, been very difficult to achieve, and is not in the scoop of this assignment. Private data caches would require implementing cache coherence algorithms for keeping the caches consistent. This is considered very difficult. 
+
+\todo{Ideas ? }
+
+
+\todo {Find nice example} 
+
+
+
+
+
+
+All the others just have to wait. If this scenario 
 
 
 
