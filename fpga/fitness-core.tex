@@ -10,9 +10,14 @@ An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitnes
 \input{fpga/fig/fitness_architecture}
 
 
-The core is separated into several distinguable stages referred to as the \emph{fetch stage}, \emph{decode stage}, \emph{execution stage}, \emph{memory stage} and \emph{write-back stage}. These stages overlap in time and perform different tasks regarding the execution of instructions. The fetch stage is responsible for fetching a new instruction to the pipeline. The decode stage is responsible for decoding the instruction and set up the different control signals. The execution stage is involved in the actual computation of the instruction. The memory stage is responsible for performing memory related task on behalf of the instruction. The write-back stage is used to write data back into registers.
+The core is separated into several distinguishable stages referred to as the \emph{fetch stage}, \emph{decode stage}, \emph{execution stage}, \emph{memory stage} and \emph{write-back stage}.
+These stages overlap in time and perform different tasks regarding the execution of instructions.
+The fetch stage is responsible for fetching a new instruction to the pipeline.
+The decode stage is responsible for decoding the instruction and set up the different control signals.
+The execution stage is involved in the actual computation of the instruction.
+The memory stage is responsible for performing memory related task on behalf of the instruction.
+The write-back stage is used to write data back into registers.
 
-\todo{Review section}
  
 \newpage
 \subsubsection{Data Path} 
@@ -102,7 +107,6 @@ Normally, the register file would use the \emph{Rs} and \emph{Rt} part of the in
 In the special case of \emph{RI} instructions the register file must read the Rd instead of Rs.
 This is accomplished by asserting the \emph{REG\_SOURCE} signal, which causes a multiplexer to choose the \emph{Rd} portion of the instruction instead of the \emph{Rs} as input to the register file.
 This will output the content of the correct data from the register file.
-This is visible in figure \todo{reference figure}.
 
 
 \paragraph{STORE\_SOURCE}
@@ -110,11 +114,6 @@ For the \emph{ST} instruction, the register address of the data to be stored is 
 
 This will output the content of the correct data from the register file. This ensures that the \emph{Rt} signal seen in \ref{fpga:fig:fitness:fitness_arch} contains the content of the \emph{Rd} register. This is actually the data that is written to memory.
 
-\todo{Review this section}
-
-
-
-\todo{this}
 
 \paragraph{JUMP}
 The JMP instruction uses the address in the immediate field of the instruction to load a new value into the \emph{program counter} register.
@@ -160,7 +159,7 @@ An overview can be found in table \ref{fpga:tbl:mem_op_code_tbl}
 In the \emph{write-back} stage, there is need to distinguish between several outputs from the \emph{memory stage}.
 The \emph{TO\_REG} signal is responsible for selecting which value that should be written to the register file.
 The selection is aided by a 4-to-1 multiplexer.
-The different inputs are: \emph{Gene}, \emph{Data}, and \emph{PC+1}, \emph{Res}, as seen in figure \todo{add reference}.
+The different inputs are: \emph{Gene}, \emph{Data}, and \emph{PC+1}, \emph{Res}, as seen in figure.
 However, keep in mind that the \emph{REG\_WRITE} signals must be asserted for the data to be written. 
 
 The \emph{TO\_REG} bit-vector are set according to table \ref{fpga:tbl:to_reg_multiplexor_output_tbl}
@@ -268,7 +267,6 @@ In case of a \emph{READ} operation, the address is put on the address bus. This 
 When performing a \emph{WRITE} operation this is done in the same manner as with the \emph{READ} operation. The difference lay in the fact that during a memory write, the data to be written is put on the outgoing data bus. The \emph{fitness core} is in wait state at this moment. When the data is finished writing to memory, the \emph{memory data controller} responds with an acknowledgement. The \emph{fitness core} continuous with its computation.  
 A state diagram showing this can be seen in figure \ref{fpga:fitness:fitness_memory_ctrl}.  
 
-\todo{Review this section} 
 
 
 \begin{figure}[H]
