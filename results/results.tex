@@ -99,20 +99,14 @@ The algorithm quickly finds a decent approximation of the target color, but find
 
 \subsection{Genetic Algorithm: Binary Knapsack Problem}
 
-\todo{Explain the binary knapsack program}
-The binary knapsack problem is an optimization problem that is considered NP-hard. The algorithm aims to find the best resource allocation given a set of items and their weight. The solution of the problem can be seen as putting a set of elements in an knapsack. The goal is to find the best possible combinations of elements to put in the knapsack. E.g  a set of elements that yield the best resource allocation. This is achieved by putting the different combination through an evolutionary process. For each possible solution is considered by calculating the fitness value. 
-
-\todo{Someone finish this please}  
-
-
-
-
-
+The knapsack problem is an optimization problem that is considered NP-hard.
+The problem to solve is given a set of items with a weight and a value and a knapsack that can hold a specific weight, what combination of items that can fit in the sack has the highest value.
+If there can be at most one of each item in the knapsack, we have what is known as the binary knapsack problem.
 
 \subsubsection{Individual representation}
 
-An individual represents a \todo{...}.
-The individual is coded to a 64-bit data word like in figure \vref{figure:binary-knapsack-bytefield}.
+An individual represents a combination of items.
+The individual is coded to a 64-bit data word like in Figure \vref{figure:binary-knapsack-bytefield}.
 
 \begin{figure}[H]
     \begin{center}
@@ -126,24 +120,45 @@ The individual is coded to a 64-bit data word like in figure \vref{figure:binary
 \end{figure}
 
 \subsubsection{Fitness Function}
+The fitness for an individual is calculated using Algorithm \ref{algorithm:binary-knapsack-fitness-function}.
+The fitness falls between 0 for invalid sacks (that contain too much weight) to a theoretical maximum of the sum of the value of all the items.
 
-The fitness for an individual is calculated using equation \vref{equation:binary-knapsack-fitness-function}.
-The fitness a any given individual falls in the range \todo{a range}.
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{A bit array with one bit representing whether each item is included or not}
+\KwResult{How fit the individual is}
+\Begin{
+    $ weight \longleftarrow 0$\;
+    $ value \longleftarrow 0$\;
+    \For {item in ItemSet} {
+        \If {item in genome} {
+            $ weight \longleftarrow weight + item.weight$\;
+            $ value \longleftarrow value + item.value$\;
 
-\begin{eqnarray}
-\nonumber 
-fitness & = & \\
-        &   & \todo{a fitness function}
-\label{equation:color-search-fitness-function}
-\end{eqnarray}
+            \If {$weight > maxWeight$} {
+                $ value \longleftarrow 0$\;
+                $ break $\;
+            }
+        }
+    }
+    \;
+    \Return{$ value $}
+}
+\caption{The fitness function for the binary knapsack problem}
+\label{algorithm:binary-knapsack-fitness-function}
+\end{algorithm}
 
 \subsubsection{Results}
 
-\todo{results}
+This problem has not been run on the actual hardware, only simulated up to a few milliseconds.
+The simulation seemed fine, and we got increasing fitness values, but the problem space is huge, so we probably need to run the algorithm for quite some time before coverging to a ideal/near-ideal solution.
+\todo{Is this still true?}
+\todo{Pics or it didn't happen?}
 
-\subsection{Blinkenlights}
-
-Blinkenlights is a program that demonstrates the use of the input and output of the \Gls{barricelli} driven by the \Gls{SCU}.
-Blinkenlights blinks the 16 output LEDs of the computer and can react to button presses.
-
-\todo{somebody needs to write this program.}
+%\subsection{Blinkenlights}
+%
+%Blinkenlights is a program that demonstrates the use of the input and output of the \Gls{barricelli} driven by the \Gls{SCU}.
+%Blinkenlights blinks the 16 output LEDs of the computer and can react to button presses.
+%
+\todo{Blinkenlights? I vote no}

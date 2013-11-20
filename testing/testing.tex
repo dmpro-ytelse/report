@@ -21,19 +21,23 @@ Screenshots of simulations of these tests can be found in Appendix \ref{appendix
 \todo{we need to stash results somewhere}.
 
 \subsubsection{Fitness Core Components}
-\todo{ Insert text and tables for components used in Fitness Core}
+
+\input{testing/components/fitness/alu}
+
+
 
 \subsubsection{Genetic Pipeline Components}
 \todo{ Insert text and tables for components used in Genetics Pipeline}
 \paragraph{Selection Core}
-\paragraph{Genetic Pipeline Controller?}
-\paragraph{Unrated pool?}
-\paragraph{Rated pool?}
+\input{testing/components/geneticpipeline/selection_core}
 
+\paragraph{Crossover core}
 \input{testing/components/geneticpipeline/crossover_split.tex}
 \input{testing/components/geneticpipeline/crossover_doublesplit.tex}
 \input{testing/components/geneticpipeline/crossover_xor.tex}
 \input{testing/components/geneticpipeline/crossover_core_toplevel.tex}
+
+\paragraph{Mutation core}
 \input{testing/components/geneticpipeline/mutation_core.tex}
 
 

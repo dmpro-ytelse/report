@@ -5,12 +5,12 @@ The design of the fitness core is highly influenced by the classic pipelined \gl
 The core is designed as a five stage pipeline.
 The contents of the different stages in the pipeline, however, differs from the original \gls{MIPS} architecture, as the CPU architecture has to accommodate for the \gls{ISA} design which combines ideas from multiple existing architectures.
 An example of an \gls{ISA} feature which differs from \gls{MIPS} is the embedded branch-less conditionals\footnote{a feature which is shamelessly ripped whole-sale from ARM}.
-An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitness_arch}
+An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitness_arch}.
 
-\input{fpga/fig/fitness_architecture}.
+\input{fpga/fig/fitness_architecture}
 
 
-The core is separated into several distingeble stages referred to as the \emph{fetch stage}, \emph{decode stage}, \emph{execution stage}, \emph{memory stage} and \emph{write-back stage}. This stages overlap in time and perform different tasks regarding the execution of instructions. The fetch stage is responsible for fetching a new instruction to the pipeline. The decode stage is responsible for decoding the instruction and set up the different control signals. The execution stage is involved in the actual computation of the instruction. The memory stage is responsible for performing memory related task on behalf of the instruction. The write-back stage is used to write data back into registers.
+The core is separated into several distinguable stages referred to as the \emph{fetch stage}, \emph{decode stage}, \emph{execution stage}, \emph{memory stage} and \emph{write-back stage}. These stages overlap in time and perform different tasks regarding the execution of instructions. The fetch stage is responsible for fetching a new instruction to the pipeline. The decode stage is responsible for decoding the instruction and set up the different control signals. The execution stage is involved in the actual computation of the instruction. The memory stage is responsible for performing memory related task on behalf of the instruction. The write-back stage is used to write data back into registers.
 
 \todo{Review section}
  
@@ -18,12 +18,12 @@ The core is separated into several distingeble stages referred to as the \emph{f
 \subsubsection{Data Path} 
 
 The data path is simple.
-The instruction is the same length for all the instructions.
+All instructions have the same length.
 This makes it easier to fetch the instruction in the first stage and decode it in the second.
 Also, the ISA only supports three different instructions classes with the register mappings located on the same positions.
 This allows the register file to be read on the same time as the control unit determines the correct control signals for that particular instruction.
 This allows for a shorter pipeline.
-Were the the instruction format asymmetric, the instruction would have to split the register file and decode stage in two stages.
+If the instruction format was asymmetric, the instruction would have to split the register file and decode stage in two stages.
 A bigger pipeline would imply higher risk for pipeline hazards, and a more complicated hazard detection and correction schemes. 
 
 The Barricelli computer is a load/store machine.
@@ -56,7 +56,7 @@ More advanced features like instruction rescheduling have not been implemented.
 The control unit is the ``puppet master'' of the processor, so to speak.
 Residing in the instruction decode stage, it is responsible for configuring all the different components for the current CPU operation so that the desired computation will emerge from the flow of data.
 The control unit achieves this by setting the relevant control signals of the relevant components to the values associated with the current instruction.
-Note that different instructions classes requires different use of the data path.
+Note that different instruction classes requires different use of the data path.
 Thus, combinations the control signals must accommodate the different instructions formats. The different instructions classes and their corresponding control signals can be seen in table \ref{fpga:fitness:control_unit_out_tbl}. 
 
 The control unit sets up the components based on the \emph{FUNCTION CODE} and the \emph{OPERATION CODE} of the instruction.
@@ -108,7 +108,7 @@ This is visible in figure \todo{reference figure}.
 \paragraph{STORE\_SOURCE}
 For the \emph{ST} instruction, the register address of the data to be stored is located in the \emph{Rd} field of the instruction.  Normally, the register file would use the \emph{Rs} and \emph{Rt} part of the instruction as inputs to the register file. In the special case of a \emph{ST} instruction the register file must read the \emph{Rd} register instead of \emph{Rt}. This is accomplished by asserting the \emph{MEM\_WRITE} signal, which causes a multiplexor to chose the \emph{Rd} portion of the instruction instead of the \emph{Rt} as input to the register file. 
 
-This will output the content of the correct data from the register file. This ensures that the\emph{Rt} signal seen in \ref{fpga:fig:fitness:fitness_arch} contains the content of the \emph{Rd} register. This is actually the data that is written to memory.
+This will output the content of the correct data from the register file. This ensures that the \emph{Rt} signal seen in \ref{fpga:fig:fitness:fitness_arch} contains the content of the \emph{Rd} register. This is actually the data that is written to memory.
 
 \todo{Review this section}
 
