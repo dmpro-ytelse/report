@@ -38,6 +38,7 @@ according to the recommended specifications from the manufacturer of the microco
 The problem was that the signals USB\_VBUS and USB\_VREGI were not connected to the VBUS-pin on the USB receptacle. This was fixed by soldering copper wires on the capacitors designated as C18 and C17 to USB-HEADER2 (called VBUS\_ENABLE in the schematics).
 According to tests performed on the PCB before and after this work-around, the problem was fixed successfully.
 
-\todo{write about the oscillator?}
+\subsection{Oscillator} 
+Measuring the pins between the oscillator and FPGA shows that the oscillator does output a signal, however the FPGA does not seem to receive it.
+No workaround or fix was found.
 
-\todo{write about the crystal -- this has been mentioned in another section already so just copy paste based on that}
