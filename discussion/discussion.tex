@@ -1,13 +1,36 @@
 \section{Performance}
-\subsection{performance measurements and benchmarking}
-\subsection{average instructions per cycle}
-\subsection{performance comparison}
 
-\todo{this}
+The Barricelli computer is designed to be a device for high performance parallel computing.
+Throughout the design process, choices have been made that further this goal.
+
+The computer architechture is capable of executing multiple independent instruction streams working on multiple different independent data streams, which means that parallelism can be exploited to a large degree to achieve a high computational throughput.
+A heterogenic collection of cores, some general, and some working as specialized accelerators, combines the allround-ness and usability of general computing with the at times extreme performance boosts given by specialized workers.
+
+The general cores have been designed to exploit instruction-level parallelism, iwth features such as pipelining, hazard detection and correction using forwarding, and branch prediction.
+
+The intelligent off-line assembler also helps off-load some of the hazard detection work from the processor, which lets the processor spend more of its valuable time computing.
+
+Since the computer uses a shared memory bus though a single memory controller, it is an obvious scalability limitor.
+For the instruction memory, this is somewhat mitigated by the inclusion of instruction caches, but there is still room for improvement.
+To improve the memory performance, memory could be organized in a more hierarchical fashion, with multiple cache levels.
+
+\subsection{Performance Measurements and Benchmarking}
+
+With the specified prototype of the Barricelli computer presented in this report, looking at the results from the performance measurements in Chapter \vref{chapter:tests}, the optimal number of parallel fitness cores is 7.
+Up to 7 processors, the performance scales beautifully, with calculated total performance scaling linearly with the number of cores.
+After 7 cores, the relative performance of each core drops.
+It is not easy to see exactly why this happens, but it is quite probably related to resource usage of the FPGA.
+
+As the number of fitness cores increases, the more pressure it puts on the genetics accelerator.
+As the number of fitness cores increases, the number of accelerators should also increase.
+
+\subsection{Average Instructions per Cycle}
+
+In optimal condititons, i.e. the pipeline is filled, and no register spilling occurs, the processor can execute $ n $ instructions per cycle, where $ n $ is the number of processors.
+In the designed protoype of Barricelli, this means that the maximum instructions per second is $ 7 cores * 50Mhz = 350 000 000 $, or 350 Mega-instructions per second.
 
 \section{Energy Efficiency}
 
-\todo{this}
 \section{theory}
 In this section theory related to MIMD architectures and how to further improve their performances are discussed.
 This also covers the discussions inside the group about the design of the architecture in the planning phase of the project.
