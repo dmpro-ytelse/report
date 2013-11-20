@@ -16,11 +16,9 @@ One of the first discussions that came up in the group after the assignment were
 be able to synchronize themselves. By doing this, the processor cores would be able to execute code that is not completely independent in parallel in an elegant way.
 However this also raises some issues as for instance data hazards.
 
-\subsubsection{Coherency}
-MIMD architecture use a shared memory models. This imposes a problem when using caches, and memory in general. When more core updates on the same values on the same memory positions; memory collisions occur. These problems can be fixed by enforcing that only one core is able to access the memory at any given time. A far more difficult problem is the problem of cache coherence. Cache coherency issues occurs when several cores have private caches containing the same data, and some core changes the data. Then the data in the caches is not consistent among the cores. In order for the data to be consistent, in this example, is for each core having the same data. Note that same data in this context mean data from the same memory location. 
 
-The Galapagos architecture does not support private data caches. This design choice relieves the processor designer of implementing advanced cache coherency algorithms in hardware. Instead of private data caches the Galapagos architectures employ shared pools for rated and un-rated chromosomes. These are connected to a bus and the connected through the \emph{genetic controller}. The controller is configured to only allow one core perform its operation on one of the pools at any given time. This implies that read and write operations are atomic. As a direct consequence cache coherency issues are not possible in the architecture. 
-\todo{fix}
+\subsection{Concurrency} 
+
 
 
 
@@ -45,7 +43,15 @@ A possible solution for this problem would have been keeping separate data cache
 \todo{Ideas ? }
 
 
+
 \todo {Find nice example} 
+
+
+\subsubsection{Cache Coherency}
+MIMD architecture use a shared memory models. This imposes a problem when using caches, and memory in general. When more core updates on the same values on the same memory positions; memory collisions occur. These problems can be fixed by enforcing that only one core is able to access the memory at any given time. A far more difficult problem is the problem of cache coherence. Cache coherency issues occurs when several cores have private caches containing the same data, and some core changes the data. Then the data in the caches is not consistent among the cores. In order for the data to be consistent, in this example, is for each core having the same data. Note that same data in this context mean data from the same memory location. 
+
+The Galapagos architecture does not support private data caches. This design choice relieves the processor designer of implementing advanced cache coherency algorithms in hardware. Instead of private data caches the Galapagos architectures employ shared pools for rated and un-rated chromosomes. These are connected to a bus and the connected through the \emph{genetic controller}. The controller is configured to only allow one core perform its operation on one of the pools at any given time. This implies that read and write operations are atomic. As a direct consequence cache coherency issues are not possible in the architecture. 
+\todo{fix}
 
 
 
