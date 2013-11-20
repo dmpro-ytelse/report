@@ -59,10 +59,10 @@ For the external memory to be operated correctly by the memory controller, the p
   \label{fpga:fig:timing:dmem:write}
 \end{figure}
 
-According to these timing diagrams the required number of cycles required are 5 cycles for a read operation, and 11 cycles for a write operation. To carry out these demands by the memory chips. A state machine is implemented in the \emph{data memory controller}. This state machine is responsible for controlling that the different signals are set according to the diagrams. For more detailed view of the \emph{Data memory controller} the reader is advised to study the state machine diagram in figure \ref{fpga:fig:mem:data_memory_ctrl_state_machine} and the accompanying data path in figure \ref{fpga:fig:mem:data_memory_ctrl}
-
-\todo{Review this}
-
+As is immediately apparent in figures \vref{fpga:fig:timing:dmem:read} and \vref{fpga:fig:timing:dmem:write}, the number of cycles required for load and store operations are are 5 and 13 cycles, respectively.
+A state machine is implemented in the \emph{data memory controller} to handle interfacing with the external memory chips.
+This state machine is responsible for controlling that the different signals are set according to the diagrams.
+For more detailed view of the \emph{Data memory controller}, the reader is advised to study the state machine diagram in figure \ref{fpga:fig:mem:data_memory_ctrl_state_machine} and the accompanying data path in figure \ref{fpga:fig:mem:data_memory_ctrl}.
 
 \begin{figure}[H]
   \centering
