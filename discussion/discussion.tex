@@ -30,31 +30,29 @@ In optimal condititons, i.e.
 the pipeline is filled, and no register spilling occurs, the processor can execute $ n $ instructions per cycle, where $ n $ is the number of processors.
 In the designed protoype of Barricelli, this means that the maximum instructions per second is $ 7 cores * 50Mhz = 350 000 000 $, or 350 Mega-instructions per second.
 
-\section{Energy Efficiency}
-
-\section{theory}
+\section{Theory}
 In this section theory related to MIMD architectures and how to further improve their performances are discussed.
 This also covers the discussions inside the group about the design of the architecture in the planning phase of the project.
-\subsection{SPMD and concurrency}
+\subsection{SPMD and Concurrency}
 One of the first discussions that came up in the group after the assignment were given was if the processor cores should
 be able to synchronize themselves.
 By doing this, the processor cores would be able to execute code that is not completely independent in parallel in an elegant way.
 However this also raises some issues as for instance data hazards.
 
 
-\subsection{using CISC or RISC ISAs}
+\subsection{Using CISC or RISC ISAs}
 CISC and RISC instruction set architectures are two very different ways of thinking when it comes to creating instruction sets.
 While in the last years, RISC ISAs have been the most dominant instruction set architecture, we can also see that CISC architectures
 are on their way back into the markets.
 Some of the reasons for this is that increasing parallelism is gaining lesser performance increases.
 
-\subsubsection{micro operations: a bridge between Complex and reduced instruction sets}
+\subsubsection{Micro Operations: a Bridge Between Complex and Reduced Instruction Sets}
 The use of micro operations is based on the principle that you want to convert a complex instruction into a set of smaller micro operations.
 This
 may simplify the design of for instance a super scalar processor because dependencies between the converted micro instructions would already be known.
 
 
-\subsection{Memory management policies}
+\subsection{Memory Management Policies}
 
 The Galapagos architecture operates with several types of shared memory: \emph{instruction memory}, \emph{data memory}, \emph{instruction caches}, \emph{rated pool} and \emph{unrated pool}.
 These types of memories  can further be divided into two groups: memory and genetic related.
