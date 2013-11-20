@@ -108,7 +108,56 @@ The graphics are selected screenshots taken in ISim.
 \section{Component Tests}
 
 \subsection{Fitness Core}
-\todo{ MUST...WRITE...SOMETHING?!}
+In order to test the fitness cores a set of small assembly programs were created. These programs aims to test various cases in the galapagos architecture. The tests are included here for reference.
+
+\paragraph{RRR-RRI Instructions}
+Simple program testing the use of RRI and RRR instructions
+
+
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/rrr-rri.gas}\label{testing:listing:rrr-rri}
+
+
+\paragraph{Store instruction}
+Demonstrating the store instruction
+
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/store.gas}\label{testing:store}
+
+\paragraph{Load instruction}
+Demonstrating the load instruction instruction
+
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/load.gas}\label{testing:listing:load}
+
+\paragraph{Conditional execute}
+Demonstrating code with conditionals that evaluate to true. 
+
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/conditional-executed.gas}\label{testing:listing:conditional_execute}
+
+\paragraph{Conditional non-execute}
+Demonstrating code with conditionals that evaluate to false. 
+
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/conditional-not-executed.gas}\label{testing:listing:conditional_not_executed}
+
+\paragraph{Branch taken}
+Demonstrating an conditional branch where the conditional is evaluated to true.  
+
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/branch-taken.gas}\label{testing:listing:branch_taken}
+
+\paragraph{Branch not-taken}
+Demonstrating an conditional branch where the conditional is evaluated to false.  
+
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/branch-not-taken.gas}\label{testing:listing:branch_not_taken}
+
+\paragraph{Store gene}
+Demonstrate the use of the store gene instruction. 
+
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/store-gene.gas}\label{testing:listing:store_gene}
+
+\paragraph{Load gene}
+Demonstrate the use of the load gene instruction. 
+\lstinputlisting[language={[x86masm]Assembler}]{testing/gas-listings/load-gene.gas}\label{testing:listing:load_gene}
+
+
+
 
 \subsection{Genetic Pipeline}
 
