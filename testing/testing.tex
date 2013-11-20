@@ -135,6 +135,82 @@ The algorithm was implemented in python and tested against the DieHarder integra
 
 The shift-based algorithm used in the pseudo-random number generator scores quite poorly in the DieHarder tests when every single bit of the output is used.
 However, by only using every 7th number\cn, the algorithm ranks quite well.
+A condensed DieHarder test result overview can be found in Table \vref{table:dieharder-results}.
+The descriptions in the table are modified from the descriptions in the output of the DieHarder test suite.
+
+\begin{table}[H]
+    \begin{tabular}{| l | l |}
+    
+    \hline
+    Test Name & Pass? \\
+    \hline
+    DieHard "Birthdays Test" & FAILED \\
+    \hline
+    Diehard Overlapping 5-Permutations Test & FAILED \\
+    \hline
+    Diehard 32x32 Binary Rank Test & FAILED \\
+    \hline
+    Diehard 6x8 Binary Rank Test & FAILED \\
+    \hline
+    Diehard Bitstream Test. & FAILED \\
+    \hline
+    Diehard Overlapping Pairs Sparse Occupance (OPSO) & FAILED \\
+    \hline
+    Diehard Overlapping Quadruples Sparce Occupancy (OQSO) Test & FAILED \\
+    \hline
+    Diehard DNA Test & FAILED \\
+    \hline
+    Diehard Count the 1s (stream) (modified) Test & FAILED \\
+    \hline
+    Diehard Count the 1s Test (byte) (modified) & FAILED \\
+    \hline
+    Diehard Parking Lot Test (modified) & FAILED \\
+    \hline
+    Diehard Minimum Distance (2d Circle) Test & FAILED \\
+    \hline
+    Diehard 3d Sphere (Minimum Distance) Test & FAILED \\
+    \hline
+    Diehard Squeeze Test & FAILED \\
+    \hline
+    Diehard Sums Test & WEAK \\
+    \hline
+    Diehard Runs Test & FAILED \\
+    \hline
+    Diehard Craps Test & FAILED \\
+    \hline
+    Marsaglia and Tsang GCD Test & FAILED \\
+    \hline
+    STS Monobit Test & WEAK \\
+    \hline
+    STS Runs Test & PASSED \\
+    \hline
+    STS Serial Test & WEAK \\
+    \hline
+    RGB Bit Distribution Test & FAILED/WEAK \\
+    \hline
+    the generalized minimum distance test & FAILED \\
+    \hline
+    RGB Permutations Test & PASSED \\
+    \hline
+    RGB Lagged Sums Test & PASSED \\
+    \hline
+    The Kolmogorov-Smirnov Test Test & WEAK \\
+    \hline
+    DAB Byte Distribution Test & PASSED \\
+    \hline
+    DCT (Frequency Analysis) Test & FAILED \\
+    \hline
+    DAB Fill Tree Test & FAILED \\
+    \hline
+    DAB Fill Tree 2 Test & FAILED \\
+    \hline
+    DAB Monobit 2 Test & FAILED \\
+    \hline
+  \end{tabular}
+  \caption{DieHarder test results of the PRNG}
+  \label{testing:prng:1-time}
+\end{table}
+
 
 Finally, some genetics algorithms convergence tests were run, also simulated in python, using the different pseudo-random algorithm candidates as a random number source in the experiments.
 Based on the results from these experiments, it is safe to conclude that, while Barricelli's pseudo-random number generator algorithm may not be best-in-class for producing convincing randomness, it is definitely good enough for problem solving using genetic algorithms, and most certainly quicker than other more ``proper'' algorithms.
