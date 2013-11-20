@@ -114,7 +114,6 @@ For the \emph{ST} instruction, the register address of the data to be stored is 
 
 This will output the content of the correct data from the register file. This ensures that the \emph{Rt} signal seen in \ref{fpga:fig:fitness:fitness_arch} contains the content of the \emph{Rd} register. This is actually the data that is written to memory.
 
-
 \paragraph{JUMP}
 The JMP instruction uses the address in the immediate field of the instruction to load a new value into the \emph{program counter} register.
 The jump signal selects between the jump address and the incremented program counter when deciding a new value for the program counter at each cycle.
@@ -282,8 +281,7 @@ A state diagram showing this can be seen in figure \ref{fpga:fitness:fitness_mem
 
 Analogously to the fitness core, the genetics pipeline also has a separate mediating memory controller.
 This controller is referred to as the \emph{fitness genetic controller}.
-It is more complex than its sibling in the fitness core, since it interfaces with the genetics data controller, which arbitrates two independent memory stores. This controller is very similar the \emph{fitness data controller}. The difference lays in the fact that two values are transferred in case of \emph{WRITE} operations. The protocol itself is mostly similar. The a state diagram showing the inner workings of this controller can be seen in figure \ref{fpga:fitness:fitness_genetic_ctrl}. 
-
+It is more complex than its sibling in the fitness core, since it interfaces with the genetics data controller, which arbitrates two independent memory stores. This controller is very similar the \emph{fitness data controller}. The difference lays in the fact that two values are transferred in case of a \emph{WRITE} operation. Note that both the fitness values needs to store both the fitness value and gene. The protocol is, however, still very similar the \emph{fitness memory controller}. The state machine can be seen in figure \ref{fpga:fitness:fitness_genetic_ctrl}. 
 
 
 
