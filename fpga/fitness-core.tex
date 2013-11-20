@@ -275,8 +275,7 @@ A state diagram showing this can be seen in figure \ref{fpga:fitness:fitness_mem
 
 Analogously to the fitness core, the genetics pipeline also has a separate mediating memory controller.
 This controller is referred to as the \emph{fitness genetic controller}.
-It is more complex than its sibling in the fitness core, since it interfaces with the genetics data controller, which arbitrates two independent memory stores. This controller is very similar the \emph{fitness data controller}. The difference lays in the fact that two values are transferred in case of \emph{WRITE} operations. The protocol itself is mostly similar. The a state diagram showing the inner workings of this controller can be seen in figure \ref{fpga:fitness:fitness_genetic_ctrl}. 
-
+It is more complex than its sibling in the fitness core, since it interfaces with the genetics data controller, which arbitrates two independent memory stores. This controller is very similar the \emph{fitness data controller}. The difference lays in the fact that two values are transferred in case of a \emph{WRITE} operation. Note that both the fitness values needs to store both the fitness value and gene. The protocol is, however, still very similar the \emph{fitness memory controller}. The state machine can be seen in figure \ref{fpga:fitness:fitness_genetic_ctrl}. 
 
 
 
