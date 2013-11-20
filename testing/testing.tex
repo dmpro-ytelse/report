@@ -5,7 +5,7 @@ This section documents and explains the rationale behind the different types of 
 
 Barricelli's processor has been tested at four different levels: \gls{VHDL}-based unit test simulations of the different subcomponents,  \gls{VHDL}-based integration test simulations of each processing unit, \gls{VHDL}-based system test simulations of the entire system interfacing against a mock SCU and mock memory, and finally physical integration tests of the processor programmed onto the FPGA of the Barricelli.
 
-\todo{what about timing simulations?}
+
 
 \subsection{\gls{VHDL}-based Subcomponent Unit Test Simulations}
 
@@ -27,17 +27,22 @@ Screenshots of simulations of these tests can be found in Appendix \ref{appendix
 
 
 \subsubsection{Genetic Pipeline Components}
-\todo{ Insert text and tables for components used in Genetics Pipeline}
 \paragraph{Selection Core}
+\todo{ Insert text and tables for components used in Genetics Pipeline}
+
 \input{testing/components/geneticpipeline/selection_core}
 
+\newpage
 \paragraph{Crossover core}
+.
 \input{testing/components/geneticpipeline/crossover_split.tex}
 \input{testing/components/geneticpipeline/crossover_doublesplit.tex}
 \input{testing/components/geneticpipeline/crossover_xor.tex}
 \input{testing/components/geneticpipeline/crossover_core_toplevel.tex}
 
+\newpage
 \paragraph{Mutation core}
+.
 \input{testing/components/geneticpipeline/mutation_core.tex}
 
 
@@ -49,13 +54,6 @@ Screenshots of simulations of these tests can be found in Appendix \ref{appendix
 Each processing unit, which each consists of several interconnected subcomponents, has been simulated for integration testing.
 The goal of these tests are to verify that the different subcomponents interface correctly with each other, and that the behaviour of the supercomponent is as expected.
 
-\subsubsection{Testing the Fitness Core}
-
-\todo{about tb\_fitness\_core.vhd}
-
-\subsubsection{Testing the Genetics Pipeline}
-
-\todo{about tb\_genetics\_pipeline.vhd}
 
 \subsection{\gls{VHDL}-based System test Simulations}
 \label{section:testing:fpga:system-tests}
@@ -114,12 +112,6 @@ SD card were connected right, and outputting the right signals.
 
 \section{Testing IO}
 \input{io/testing}
-
-\section{Testing Additional Components}
-
-\subsection{Galapagos Assembler}
-
-\todo{galapagos-as has a test-suite, write about it}
 
 \section{Additional Tests}
 
@@ -214,8 +206,4 @@ The descriptions in the table are modified from the descriptions in the output o
 Finally, some genetics algorithms convergence tests were run, also simulated in python, using the different pseudo-random algorithm candidates as a random number source in the experiments.
 Based on the results from these experiments, it is safe to conclude that, while Barricelli's pseudo-random number generator algorithm may not be best-in-class for producing convincing randomness, it is definitely good enough for problem solving using genetic algorithms, and most certainly quicker than other more ``proper'' algorithms.
 
-\todo{ dig up some numbers, show some graphs}
 
-
-
-\todo{The continuous ga test}
