@@ -11,8 +11,6 @@ An overview of the data path can be seen in figure \vref{fpga:fig:fitness:fitnes
 
 
 The core is separated into several distinguable stages referred to as the \emph{fetch stage}, \emph{decode stage}, \emph{execution stage}, \emph{memory stage} and \emph{write-back stage}. These stages overlap in time and perform different tasks regarding the execution of instructions. The fetch stage is responsible for fetching a new instruction to the pipeline. The decode stage is responsible for decoding the instruction and set up the different control signals. The execution stage is involved in the actual computation of the instruction. The memory stage is responsible for performing memory related task on behalf of the instruction. The write-back stage is used to write data back into registers.
-
-\todo{Review section}
  
 \newpage
 \subsubsection{Data Path} 
@@ -102,19 +100,12 @@ Normally, the register file would use the \emph{Rs} and \emph{Rt} part of the in
 In the special case of \emph{RI} instructions the register file must read the Rd instead of Rs.
 This is accomplished by asserting the \emph{REG\_SOURCE} signal, which causes a multiplexer to choose the \emph{Rd} portion of the instruction instead of the \emph{Rs} as input to the register file.
 This will output the content of the correct data from the register file.
-This is visible in figure \todo{reference figure}.
 
 
 \paragraph{STORE\_SOURCE}
 For the \emph{ST} instruction, the register address of the data to be stored is located in the \emph{Rd} field of the instruction.  Normally, the register file would use the \emph{Rs} and \emph{Rt} part of the instruction as inputs to the register file. In the special case of a \emph{ST} instruction the register file must read the \emph{Rd} register instead of \emph{Rt}. This is accomplished by asserting the \emph{MEM\_WRITE} signal, which causes a multiplexor to chose the \emph{Rd} portion of the instruction instead of the \emph{Rt} as input to the register file. 
 
 This will output the content of the correct data from the register file. This ensures that the \emph{Rt} signal seen in \ref{fpga:fig:fitness:fitness_arch} contains the content of the \emph{Rd} register. This is actually the data that is written to memory.
-
-\todo{Review this section}
-
-
-
-\todo{this}
 
 \paragraph{JUMP}
 The JMP instruction uses the address in the immediate field of the instruction to load a new value into the \emph{program counter} register.
