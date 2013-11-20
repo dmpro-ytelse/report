@@ -8,16 +8,12 @@ Higher-numbered Spartan-6 FPGAs have more resources but fewer I/O ports and a hi
 
 A Xilinx Spartan-6 LX45 (specifically, the XC6SLX45-2CSG324I) was chosen because of it having a sufficient number of resources and enough I/O ports while sporting a reasonable price tag.
 
-\todo{someone that's not Odd should read over this. Fedor has read this, seems okay}
-
 \subsection{Microcontroller / System Control Unit (SCU)} \label{pcb:design-choices:ss:scu}
 The EFM32 Giant Gecko 32-bit Microcontroller, was chosen for the project.
 This microcontroller fulfills the non-functional requirement of using a microcontroller made by Energy Micro\vref{table:non-functional-requirements}.
 In addition there were development boards for the Giant Gecko 32-bit microcontroller available at the lab.
 
 The EFM32GG390F1024-BGA112 was chosen because it was deemed powerful enough to satisfy the performance requirements and had the highest number of available general purpose I/O (GPIO) pins amongst the microcontrollers with the same kind of package.
-
-\todo{someone that's not Odd should read over this. Fedor has read this, seems okay}
 
 \subsection{Communication} \label{pcb:design-choices:ss:internal_communication}
 The two major components on the system are the SCU and the FPGA.
@@ -56,10 +52,6 @@ In Barricelli's case, the microcontroller functions as a self-powered slave.
 The device that is connected through the USB interface in order to communicate with the microcontroller functions as the master.
 
 The circuit design was copied from the microcontroller's developer's application notes~\cite[Figure 2.2]{an0046}.
-
-\todo{skal vi skrive at vi kopierte designet, eller include bildet vi referer til og si hvor vi fant det?}
-%insert picture from http://www.silabs.com/Support\%20Documents/TechnicalDocs/AN0046.pdf
-% cite page 5 ?
 
 \subsubsection{Ethernet}
 Ethernet support was not added to the system in favor of USB the chosen microcontroller did not have built-in support for Ethernet.
