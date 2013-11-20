@@ -1,0 +1,6 @@
+/* store data test */
+
+addi r1, r0, 1
+st r1, r0, 0
+
+/* value in memory at address zero should be 1 */
