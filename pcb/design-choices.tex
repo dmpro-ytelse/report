@@ -11,7 +11,7 @@ A Xilinx Spartan-6 LX45 (specifically, the XC6SLX45-2CSG324I) was chosen because
 
 \subsection{Microcontroller / System Control Unit (SCU)} \label{pcb:design-choices:ss:scu}
 The EFM32 Giant Gecko 32-bit Microcontroller, was chosen for the project.
-This microcontroller fulfills the non-functional requirement of using a microcontroller made by Silicon Labs (Energy Micro\vref{table:non-functional-requirements}).
+This microcontroller fullfills the non-functional requirement of using a microcontroller made by Silicon Labs (Energy Micro\vref{table:non-functional-requirements}).
 In addition there were development boards for the Giant Gecko 32-bit microcontroller available at the lab.
 
 The EFM32GG390F1024-BGA112 was chosen because it was deemed powerful enough to satisfy the performance requirements and had the highest number of available general purpose I/O (GPIO) pins amongst the microcontrollers with the same kind of package.
@@ -39,7 +39,7 @@ The ``Serial Peripheral Interface Bus'' transfer mode (``SPI bus mode'') was cho
 
 \subsubsection{Universal Serial Bus (USB)}
 The USB interface was chosen because the chosen SCU has a built-in USB driver, which reduced the amount of work required to implement the standard considerably.
-USB connectors are prevalent on computers, and every team member's laptop had at least one USB connector
+USB connectors are prevalent on computers, and every team member's laptop had at least one USB connector.
 A micro-USB interface was chosen because it was the smallest USB compliant interface available, which meant the associated hardware would take up less physical space on the PCB than its larger siblings'.
 
 The design also includes circuits to prevent undesirable effects like electrostatic discharge, preventing the signals from picking up unwanted background noise, and crosstalk (disturbance of the signal from signals in other circuits).
@@ -65,7 +65,7 @@ The serial port serves as a backup for the USB as the chosen microcontroller sup
 
 \subsection{Memory} \label{pcb:design-choices:ss:memory}
 The FPGA group wanted memory that would provide fast accesses in combination with a large input/output capacity in order maximize speed and efficiency.
-SRAM (Static random-access memory) chips were selected selected because of its fast access times.
+SRAM (Static random-access memory) chips were selected because of its fast access times.
 Reasonably priced 8 Mbit (512K x 16 bit) modules with $10$ns write and read cycle times were found to be suitable and selected. 
 
 \subsection{Crystal}
