@@ -36,16 +36,15 @@ may simplify the design of for instance a super scalar processor because depende
 
 \subsection{Memory management policies}
 
-The Galapagos architecture operates with several types of shared memory: \emph{instruction memory}, \emph{data memory}, \emph{instruction caches}, \emph{rated pool} and \emph{unrated pool}. These types of memories  can further be divided into two groups: memory and genetic related. These two groups are connected to separate data and address buses. The access to these buses are handled by a request-acknowledgement protocol. The responsible of this protocol is to control the access to the shared memories and their respective buses. The protocol is based in the ideas of round-robin scheduling. 
+The Galapagos architecture operates with several types of shared memory: \emph{instruction memory}, \emph{data memory}, \emph{instruction caches}, \emph{rated pool} and \emph{unrated pool}. These types of memories  can further be divided into two groups: memory and genetic related. These two groups are connected to separate data and address buses. The access to these buses are handled by a request-acknowledgement protocol. The responsible of this protocol is to control the access to the shared memories and their respective buses. The protocol is based in the ideas of round-robin scheduling. The request lines are continuously polled by the controllers in a round-robin fashion. The reason for choosing this algorithm is because it is considered to be fair. Since each request line is checked in turn, the algorithm is considered starvation free. A requesting core will eventally get its request handled by the controllers. 
+
+
 
 \todo{Continue on this section later...}
 
 
 
 
-
- If not, the requesting core is halted is halted until the memory becomes available.
-The request lines are continuously polled by the controllers in a round-robin fashion. The algorithm are choosen since it is considered to be fare. Each core is eventually granted the bus with this algorithm. When considering the different bus arbitration algorithms the the goal should always be a algorithm that prevent starvation.  
 
 
 \section{\todo{probably more stuff}}
