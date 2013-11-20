@@ -6,16 +6,30 @@
 
     \noalign{\smallskip}\hline\noalign{\smallskip}
 
-    How to test:   &   \\
+    How to test:   &  Connect the selection core to a BRAM block filled with 
+                      fitness values and induviduals, and a PRNG. Then set the
+                      counter to N and the enable signal high. Finally, wait for
+                      the done signal to become high.
+                      \\
                       
     \noalign{\smallskip}\hline\noalign{\smallskip}
-
-    Pass criteria: &    
-                        \\
+                      
+    Pass criteria:  & The selection core shuld read N random fitness values from the BRAM.
+                      When it reads the first value or a value greater than the currently
+                      stored value or the first value it should store the individual
+                      at the next address. After it has compared N values, it should set
+                      done high and output the fittest individual.
+                      \\
+                      
     \noalign{\smallskip}\hline\noalign{\smallskip}
-    
-    Results: &      
-                    \\
+                      
+    Results: &        Successful.
+                      The selection core compares exactly N fitness values and only
+                      stores the individual if the fitness value is greater than that
+                      of the previously best. Finally it sets done high and outputs
+                      the fittest.
+                      \\
+                      
    \noalign{\smallskip}\hline\noalign{\smallskip}
   
   

@@ -14,10 +14,51 @@ However, few citations were found on how steady state algorithms performancewise
 This section documents an original research on Steady State, where both a generational and a steady state solver was implemented in Python, and used to solve a problem.
 
 \subsubsection{Problem}
-\lstinputlisting[language=Python, caption={Genetic problem}]{continuous-ga-test/problems.py} \label{problems-ga}
+\lstinputlisting[language=Python, caption={Genetic problem}, label={lst:problem}]{continuous-ga-test/problems.py} 
+
+The problem, implemented in listing \ref{lst:problem}, is to maximize a bit string, that is to make let have every bit be 1.
+Implemented are functions for selection, crossover, mutation, creation and calculating fitness.
+I. e. what is needed for a genetic search.
 
 \subsubsection{Solvers}
-\lstinputlisting[language=Python, caption={Generational and steady state solvers}]{continuous-ga-test/solvers.py} \label{solvers-ga}
+\lstinputlisting[language=Python, caption={Generational solver}, label={lst:gensolver}, firstline=3, lastline=59]{continuous-ga-test/solvers.py} 
+
+\lstinputlisting[language=Python, caption={Steady state solver}, label={lst:steadsolver}, firstline=62, lastline=108]{continuous-ga-test/solvers.py} 
+
+In listing \ref{lst:gensolver}, there is implemented a generational version of a genetic algorithm, while in listing \ref{lst:steadsolver} there is a steady state version.
+The main difference of these two solvers is how the new individuals are added to the population.
+In the generational, the new individuals are inserted for the worst individuals in the old population, maintaining the population size by keeping the best of the old population if there is not enough new individuals.
+The steady state version just replaces a random selected individual of the current population with the new one.
+
+\subsubsection{Result}
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{ | c | c | }
+    \hline
+    Generational    & Steady State \\
+    \hline
+    210             & 10899 \\
+    243             & 27714 \\
+    238             & 2336  \\
+    134             & 4210  \\
+    223             & 2048  \\
+    143             & 4365  \\
+    285             & 1526  \\
+    244             & 8733  \\
+    141             & 21515 \\
+    180             & 3119  \\
+    \hline
+\end{tabular}
+\end{center}
+\caption{Results of ten runs of the genetic programs}
+\label{tbl:genresults}
+\end{table}
+After 10 runs, the generational implementation had average number of generations equal 204.1, while the steady state has a comparative result of 86.5.
+The result of the steady state seems much higher than the generational, as it doesn't count generation in the same way.
+To get comparable results, the work of the steady state algorithm should be divided by the population size, in this case 100.
+
+As can be seen from table \ref{tbl:genresults}, the number of generations varies a lot more in the steady state, but as the average was significantly lower than generational, the conclusion was that steady state was better, and chosen for the project.
+
 
 \section{Measurements}
 
