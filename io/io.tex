@@ -136,11 +136,13 @@ Luckily the microcontroller has a built-in RC oscillator, so the crystal oscilla
 A higher I/O throughput could have been achieved with the increased frequency the crystal oscillator would have given, but adding a high frequency crystal would have required a new PCB card.
 
 \subsection{I/O units failing}
-As written in Section~\ref{subsec:pcb:problem:usb}, we never got USB working on one of our PCB boards.
+As written in Section~\ref{subsec:pcb:problem:usb}, the USB never got working on one of the PCB boards.
 While falling back to UART, the code running on the microcontroller seemed to be pushing data out to the UART circuitry, but there did not seem to be any signal going out through the cable.
 Before managing to find a solution, yet another PCB board failed and it was decided to rely on the debug link to send data to the computer as the deadline approached.
 
-\todo{no SD card}
+The SD card was never finished, as the FatFS example code for Micro SD never ran with the SD cards on the PCB. 
+When further testing was to be done, the PCB failed, and as with the UART, it was decided that the debug link would suffice.
+
 
 \subsection{FPGA Memory access issues}
 At first, communicating with the memory on the FPGA seemed fine.
