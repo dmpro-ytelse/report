@@ -128,16 +128,14 @@ The final version was the the 41 wires mapping all the signals needed for direct
 \section{Issues}
 \subsection{Crystal}
 In the design phase it was decided to go with just a single high frequency crystal oscillator.
-Unfortunately the crystal that was selected had a clock frequency in the kHz range, instead of the MHz range, which was what was intended.
+Unfortunately the crystal that was selected had a clock frequency in the kHz range, instead of the MHz range, which was what was required to drive the high frequency crystal port.
 Luckily the microcontroller has a built-in RC oscillator, so the crystal oscillator was not essential to get code running on the microcontroller.
+A higher I/O throughput could have been achieved with the increased frequency the crystal oscillator would have given, but adding a high frequency crystal would have required a new PCB card.
 
-\subsection{USB Circuitry not working}
-While mapping the PCB circuitry, only the pins available for GPIO were included initially, but this did not include the vbus and vregi pins.
-The pins were connected to capacitors, and a quick hack soldering the appropriate lines to the USB header was tried without success.
-
-\subsection{No UART}
-The microcontroller believes that data is being outputted and calls the data sent callback function.
-There also seems to be a signal going out to the RS-232 interface, but there is no data being received on the other end.
+\subsection{I/O units failing}
+As written in Section~\ref{subsec:pcb:problem:usb}, we never got USB working on one of our PCB boards.
+While falling back to UART, the code running on the microcontroller seemed to be pushing data out to the UART circuitry, but there did not seem to be any signal going out through the cable.
+Before managing to find a solution, yet another PCB board failed and it was decided to rely on the debug link to send data to the computer as the deadline approached.
 
 \todo{no SD card}
 

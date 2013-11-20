@@ -1,0 +1,21 @@
+/* basic RRI test */
+
+addi r1, r0, 0xBA
+slli r1, r1, 8
+addi r1, r0, 0x12
+slli r1, r1, 8
+addi r1, r0, 0x12
+slli r1, r1, 8
+addi r1, r0, 0x1C
+slli r1, r1, 8
+addi r1, r0, 0xEC
+slli r1, r1, 8
+addi r1, r0, 0xC1
+
+/* r1 should now contain 0xBA1212ICECC1 */
+
+/* basic RRR test */
+
+add r2, r1, r0
+
+/* r2 should now contain 0xBA1212ICECC1 */
