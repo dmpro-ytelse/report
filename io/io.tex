@@ -123,7 +123,10 @@ It was therefore decided that running an OS was unnecessary as there were few re
 \subsection{FPGA Communication}
 During the initial design phase, the link between the FPGA and SCU was designed to be as simple as possible.
 The final version was the the 41 wires mapping all the signals needed for directly accessing the SRAM chips.
-\todo{Make up some reasons here, should probably defend not using EBI}
+
+In retrospect, using the built-in \gls{EBI} on the microcontroller would have made the job of accessing the FPGA's memory easier, letting the microcontroller map the contents of the different chips automatically to different memory regions.
+The main reason for not designing with EBI in mind was lack of knowledge of what it could offer in terms of ease of development.
+Another reason for not looking more into it was the fact that since we had a large enough bus, the code for communicating with the SRAM chips was quite simple, with the microcontroller not being fast enough that timing should be an issue.
 
 \section{Issues}
 \subsection{Crystal}
