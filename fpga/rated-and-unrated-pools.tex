@@ -1,4 +1,4 @@
-In the beginning and the end of the genetics accelerator pipeline lies the rated and the unrated pools, respectively.
+In the beginning and the end of the genetics accelerator pipeline lie the rated and the unrated pools, respectively.
 The rated and unrated pools are caches of genetics individuals that waiting to either 1) get selected and be sent through the pipeline, 2) die, or 3) get picked up by a fitness core for fitness ranking.
 The rated pool contains individuals stored with a fitness score, and are the individuals that have just been inserted into the accelerator by a fitness core.
 The unrated pool contains individuals that have no fitness score calculated.
@@ -23,7 +23,7 @@ The combination of these signals refer to the operation the fitness core request
 The controllers continuously perform simple round-robin request handling schemes in order to grant bus access to the next requesting fitness cores, and to the genetic pipeline.
 The logic for the \gls{rated controller} is implemented as a state machine, while the \gls{unrated controller}'s simple structure allows it not have one at all.
 
-As the timing diagrams in figure \vref{fpga:fig:timing:genetic:rated_genetic_proc} and \vref{fpga:fig:timing:genetic:unrated_genetic_proc} show, both controllers are highly optimized for speed. The single occasion where the bus is unused is the cycle in which the \ref{genetic controller} tells the \gls{rated controller} that it no longer requires access.
+As the timing diagrams in figure \vref{fpga:fig:timing:genetic:rated_genetic_proc} and \vref{fpga:fig:timing:genetic:unrated_genetic_proc} show, both controllers are highly optimized for speed. The single occasion where the bus is unused is the cycle in which the \gls{genetic controller} tells the \gls{rated controller} that it no longer requires access.
 
 \begin{figure}[H]
   \centering
