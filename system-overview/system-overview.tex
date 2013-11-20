@@ -73,7 +73,7 @@ The buttons allow the user to interact with the program running on the SCU witho
 
 The \Gls{galapagos} CPU is connected to two separate external memories, the instruction memory and the data memory.
 This separation means that the \Gls{galapagos} architecture is a Harvard machine.
-This design choice was made because it increases the performance of the machine, since instruction memory and data memory and be accessed independently, and in parallel. 
+This design choice was made because it increases the performance of the machine, since instruction memory and data memory can be accessed independently, and in parallel. 
 
 \subsubsection{Instruction Memory}
 
@@ -84,5 +84,5 @@ The instruction memory is shared by all the processing units in the \gls{FPGA}.
 \subsubsection{Data Memory}
 
 The Data Memory, labeled as ``DATA MEM'' in figure \vref{figure:system-overview}, is the memory that holds processing data for the processors in the \gls{FPGA}.
-The memory can be read and read by both the processing units in the \gls{FPGA}, and the \gls{SCU}.
+The memory can be read by both the processing units in the \gls{FPGA}, and the \gls{SCU}.
 The data memory is shared by all the processing units in the \gls{FPGA}.
